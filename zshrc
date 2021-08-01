@@ -1,6 +1,5 @@
 BIN_DIR="$HOME/.local/bin/"
- export http_proxy=http://127.0.0.1:2087;export https_proxy=http://127.0.0.1:2087;
- export PATH="$PATH:$HOME/Code/flutter/bin";
+export PATH="$PATH:$HOME/Code/flutter/bin";
 # Install antigen.zsh if not exist
 ANTIGEN="${BIN_DIR}antigen.zsh"
 if [ ! -f "$ANTIGEN" ]; then
@@ -52,8 +51,6 @@ alias gp='git push'
 
 alias em='emacsclient -t -a ""'
 alias sem='sudo emacsclient -t -a ""'
-
-
 
 export ANDROID_HOME=/usr/local/share/android-sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
