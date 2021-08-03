@@ -1,4 +1,5 @@
 (straight-use-package 'evil)
+(setq evil-want-C-u-scroll t)
 (evil-mode 1)
 
 (straight-use-package 'evil-escape)
