@@ -13,12 +13,18 @@
 (straight-use-package 'company-box)
 (add-hook 'company-mode-hook 'company-box-mode)
 
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-k") #'yas-expand))
+
 ;; yasnippet
 (straight-use-package 'yasnippet)
 
 (with-eval-after-load "yasnippet"
   (let ((inhibit-message t))
-    (yas-reload-all)))
+    (yas-reload-all))
+
+  (evil-define-key 'insert 'yas-minor-mode-map (kbd "C-k") #'yas-expand)
+  )
 
 ;; ===== Keybindings =====
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
