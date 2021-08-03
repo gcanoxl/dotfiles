@@ -3,7 +3,9 @@
 
 (add-hook 'dart-mode 'lsp)
 
-(setq lsp-dart-sdk-dir "/usr/local/"
-      lsp-dart-flutter-sdk-dir "/usr/local")
+(defvar gcanoxl/flutter-sdk-dir "/usr/local/Caskroom/flutter/2.2.3/flutter/")
+
+(setq lsp-dart-sdk-dir gcanoxl/flutter-sdk-dir
+      lsp-dart-flutter-sdk-dir gcanoxl/flutter-sdk-dir)
 
 (provide 'init-flutter)
