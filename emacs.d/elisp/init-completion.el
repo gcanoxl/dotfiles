@@ -17,4 +17,7 @@
 (setq company-minimum-prefix-length 1
       company-idle-delay 0)
 
+(straight-use-package 'company-box)
+(add-hook 'company-mode-hook 'company-box-mode)
+
 (provide 'init-completion)
