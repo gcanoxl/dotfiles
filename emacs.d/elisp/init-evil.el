@@ -6,17 +6,13 @@
 (setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-delay 0.2)
 
-(straight-use-package 'evil-leader)
-(global-evil-leader-mode 1)
-(evil-leader/set-leader "<SPC>")
+;; Leader
+(evil-set-leader 'normal (kbd "<SPC>"))
+;; Localleader
+(evil-set-leader 'normal (kbd ",") t)
 
 ;; ===== Keybindings =====
-(evil-leader/set-key
-  "<SPC>" 'execute-extended-command
-  "ff" 'find-file
-  "fw" 'save-buffer
-  "bb" 'switch-to-buffer
-  )
-
+(evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>qq") 'exit-emacs)
 
 (provide 'init-evil)

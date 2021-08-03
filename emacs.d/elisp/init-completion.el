@@ -4,13 +4,6 @@
       helm-buffers-fuzzy-matching t
       helm-M-x-fuzzy-match t)
 
-(evil-leader/set-key
-  "<SPC>" 'helm-M-x
-  "ff" 'helm-find-files
-  "fr" 'helm-recentf
-  "bb" 'helm-buffers-list
-  )
-
 ;; Company
 (straight-use-package 'company)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -19,5 +12,11 @@
 
 (straight-use-package 'company-box)
 (add-hook 'company-mode-hook 'company-box-mode)
+
+;; ===== Keybindings =====
+(evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-m-x)
+(evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>fr") 'helm-recentf)
+(evil-define-key 'normal 'global (kbd "<leader>bb") 'switch-to-buffer)
 
 (provide 'init-completion)
