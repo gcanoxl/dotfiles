@@ -13,6 +13,9 @@
 (straight-use-package 'company-box)
 (add-hook 'company-mode-hook 'company-box-mode)
 
+;; yasnippet
+(straight-use-package 'yasnippet)
+
 ;; ===== Keybindings =====
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
