@@ -4,5 +4,6 @@
 
 (require 'init-evil)
 (require 'init-completion)
+(require 'init-git)
 (require 'init-lsp)
 (require 'init-flutter)
