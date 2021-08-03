@@ -13,6 +13,6 @@
 
 ;; ===== Keybindings =====
 (evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
-(evil-define-key 'normal 'global (kbd "<leader>qq") 'exit-emacs)
+(evil-define-key 'normal 'global (kbd "<leader>qq") 'save-buffers-kill-terminal)
 
 (provide 'init-evil)
