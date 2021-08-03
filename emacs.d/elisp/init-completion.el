@@ -14,9 +14,9 @@
 (add-hook 'company-mode-hook 'company-box-mode)
 
 ;; ===== Keybindings =====
-(evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-m-x)
-(evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-file)
+(evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
+(evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'helm-recentf)
-(evil-define-key 'normal 'global (kbd "<leader>bb") 'switch-to-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>bb") 'helm-buffers-list)
 
 (provide 'init-completion)
