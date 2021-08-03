@@ -16,6 +16,10 @@
 ;; yasnippet
 (straight-use-package 'yasnippet)
 
+(with-eval-after-load "yasnippet"
+  (let ((inhibit-message t))
+    (yas-reload-all)))
+
 ;; ===== Keybindings =====
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
