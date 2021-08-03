@@ -8,4 +8,6 @@
 (setq lsp-dart-sdk-dir gcanoxl/flutter-sdk-dir
       lsp-dart-flutter-sdk-dir gcanoxl/flutter-sdk-dir)
 
+(setq lsp-dart-dap-flutter-hot-reload-on-save t)
+
 (provide 'init-flutter)
