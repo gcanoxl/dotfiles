@@ -18,15 +18,14 @@
 
 ;; yasnippet
 (straight-use-package 'yasnippet)
+(add-hook 'prog-mode-hook 'yas-minor-mode)
 
 (with-eval-after-load "yasnippet"
   (let ((inhibit-message t))
     (yas-reload-all))
+  (evil-define-key 'insert 'yas-minor-mode-map (kbd "C-k") #'yas-expand))
 
-  (evil-define-key 'insert 'yas-minor-mode-map (kbd "C-k") #'yas-expand)
-  )
-
-;; ===== Keybindings =====
+;; ==================== Keybindings ====================
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'helm-recentf)

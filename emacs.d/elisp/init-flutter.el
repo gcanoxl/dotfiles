@@ -11,6 +11,5 @@
 
 ;; Hooks
 (add-hook 'dart-mode-hook 'lsp)
-(add-hook 'dart-mode-hook 'yas-minor-mode)
 
 (provide 'init-flutter)
