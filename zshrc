@@ -1,5 +1,4 @@
 BIN_DIR="$HOME/.local/bin/"
-export PATH="$PATH:$HOME/Code/flutter/bin";
 # Install antigen.zsh if not exist
 ANTIGEN="${BIN_DIR}antigen.zsh"
 if [ ! -f "$ANTIGEN" ]; then
