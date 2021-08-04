@@ -6,8 +6,8 @@
 class ${1:Name} extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    $0
     // TODO: implement build
     throw UnimplementedError();
-    $0
   }
 }
