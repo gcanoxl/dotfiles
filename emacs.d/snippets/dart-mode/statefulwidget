@@ -11,6 +11,8 @@ class ${1:Name} extends StatefulWidget {
 class _$1State extends State<$1> {
   @override
   Widget build(BuildContext context) {
-    return $0;
+    // TODO: implement build
+    throw UnimplementedError();
+    $0
   }
 }
