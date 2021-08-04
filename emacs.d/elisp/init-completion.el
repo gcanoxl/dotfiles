@@ -36,5 +36,8 @@
 (straight-use-package 'projectile)
 (straight-use-package 'helm-projectile)
 (evil-define-key 'normal 'global (kbd "<leader>pf") #'helm-projectile-find-file)
+(add-hook 'after-init-hook 'projectile-mode)
+(add-hook 'projectile-mode-hook 'helm-projectile-on)
+(setq helm-projectile-fuzzy-match t)
 
 (provide 'init-completion)

@@ -7,3 +7,4 @@
 (require 'init-git)
 (require 'init-lsp)
 (require 'init-flutter)
+(require 'init-other-langs)
