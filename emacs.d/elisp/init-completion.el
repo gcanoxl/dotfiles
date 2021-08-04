@@ -14,7 +14,9 @@
 (add-hook 'company-mode-hook 'company-box-mode)
 
 (with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-k") #'yas-expand))
+  (define-key company-active-map (kbd "C-k") #'yas-expand)
+  (define-key company-active-map [tab] #'yas-next-field)
+  (define-key company-active-map (kbd "TAB") #'yas-next-field))
 
 ;; yasnippet
 (straight-use-package 'yasnippet)

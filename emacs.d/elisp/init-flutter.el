@@ -11,5 +11,6 @@
 
 ;; Hooks
 (add-hook 'dart-mode-hook 'lsp)
+(add-hook 'dart-mode-hook 'electric-pair-mode)
 
 (provide 'init-flutter)
