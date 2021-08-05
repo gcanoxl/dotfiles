@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Function 
+# key: df
+# --
+def ${1:func_name}($2):
+    ${3:pass}
