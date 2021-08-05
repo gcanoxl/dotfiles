@@ -8,3 +8,4 @@ emacs.d/straight/
 emacs.d/var/
 emacs.d/transient
 emacs.d/projectile*
+emacs.d/parinfer-rust/

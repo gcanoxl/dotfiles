@@ -6,6 +6,4 @@
 (require 'init-completion)
 (require 'init-git)
 (require 'init-lsp)
-(require 'init-python)
-(require 'init-flutter)
-(require 'init-other-langs)
+(require 'init-langs)

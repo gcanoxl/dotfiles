@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Function 
+# name: Function
 # key: df
 # --
 def ${1:func_name}($2):
