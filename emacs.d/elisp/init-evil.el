@@ -12,7 +12,7 @@
 ;; Localleader
 (evil-set-leader 'normal (kbd ",") t)
 
-;; ===== Keybindings =====
+;; ==================== Keybindings ====================
 (evil-define-key 'normal 'global (kbd "<leader>fw") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>qq") 'save-buffers-kill-terminal)
 
