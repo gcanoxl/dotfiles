@@ -19,7 +19,9 @@
 
 ;; counsel-projectile
 (straight-use-package 'counsel-projectile)
-;; (evil-define-key 'normal 'global (kbd "<leader>pf") #')
+(evil-define-key 'normal 'global (kbd "<leader>pp") #'counsel-projectile-switch-project)
+(evil-define-key 'normal 'global (kbd "<leader>pf") #'counsel-projectile-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>pb") #'counsel-projectile-switch-to-buffer)
 
 ;; ==================== Company ====================
 (straight-use-package 'company)
