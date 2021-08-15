@@ -4,7 +4,7 @@
 (setq ivy-re-builders-alist
     '((t . ivy--regex-fuzzy)))
 
-(add-hook 'after-init-hook '(lambda () (ivy-mode)))
+(add-hook 'after-init-hook #'ivy-mode)
 
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'counsel-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'counsel-find-file)
@@ -16,6 +16,7 @@
 
 ;; lsp-ivy
 (straight-use-package 'lsp-ivy)
+(evil-define-key 'normal 'lsp-mode-map (kbd "C-o") 'lsp-ivy-workspace-symbol)
 
 ;; counsel-projectile
 (straight-use-package 'counsel-projectile)

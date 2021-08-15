@@ -10,7 +10,9 @@
   delete-old-versions t
   kept-new-versions 6
   kept-old-versions 2
-  version-control t)
+  version-control t
+  ;; don't ask me when quit
+  confirm-kill-processes nil)
  
 
 (fset 'yes-or-no-p 'y-or-n-p)
