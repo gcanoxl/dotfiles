@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: From Import
+# key: fi
+# --
+from $1 import $2

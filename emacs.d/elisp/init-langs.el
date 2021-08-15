@@ -14,7 +14,7 @@
 
 (setq lsp-dart-dap-flutter-hot-reload-on-save t)
 
-(add-hook 'dart-mode-hook 'lsp)
+(add-hook 'dart-mode-hook 'lsp-deferred)
 (add-hook 'dart-mode-hook 'electric-pair-mode)
 
 ;; ==================== Emacs Lisp ====================
