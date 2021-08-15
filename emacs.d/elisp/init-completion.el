@@ -1,13 +1,25 @@
-;; ==================== Helm ====================
-(straight-use-package 'helm)
+;; ==================== Ivy ====================
+(straight-use-package 'counsel)
 
-(setq helm-recentf-fuzzy-match t
-      helm-buffers-fuzzy-matching t
-      helm-M-x-fuzzy-match t)
-(evil-define-key 'normal 'global (kbd "<leader><SPC>") 'helm-M-x)
-(evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
-(evil-define-key 'normal 'global (kbd "<leader>fr") 'helm-recentf)
-(evil-define-key 'normal 'global (kbd "<leader>bb") 'helm-buffers-list)
+(setq ivy-re-builders-alist
+    '((t . ivy--regex-fuzzy)))
+
+(add-hook 'after-init-hook '(lambda () (ivy-mode)))
+
+(evil-define-key 'normal 'global (kbd "<leader><SPC>") 'counsel-M-x)
+(evil-define-key 'normal 'global (kbd "<leader>ff") 'counsel-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>fr") 'counsel-recentf)
+(evil-define-key 'normal 'global (kbd "<leader>bb") 'counsel-switch-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>hf") 'counsel-describe-function)
+(evil-define-key 'normal 'global (kbd "<leader>hv") 'counsel-describe-variable)
+(evil-define-key 'normal 'global (kbd "<leader>ho") 'counsel-describe-symbol)
+
+;; lsp-ivy
+(straight-use-package 'lsp-ivy)
+
+;; counsel-projectile
+(straight-use-package 'counsel-projectile)
+;; (evil-define-key 'normal 'global (kbd "<leader>pf") #')
 
 ;; ==================== Company ====================
 (straight-use-package 'company)
@@ -34,10 +46,6 @@
 
 ;; ==================== Projectile ====================
 (straight-use-package 'projectile)
-(straight-use-package 'helm-projectile)
-(evil-define-key 'normal 'global (kbd "<leader>pf") #'helm-projectile-find-file)
 (add-hook 'after-init-hook 'projectile-mode)
-(add-hook 'projectile-mode-hook 'helm-projectile-on)
-(setq helm-projectile-fuzzy-match t)
 
 (provide 'init-completion)

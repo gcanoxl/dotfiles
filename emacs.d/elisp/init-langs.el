@@ -1,6 +1,6 @@
 ;; ==================== Python ====================
 (straight-use-package 'lsp-pyright)
-(evil-define-key 'normal 'python-mode-map (kbd "<localleader>r") 'recompile)
+(add-hook 'python-mode-hook 'lsp-deferred)
 
 ;; ==================== Dart & Flutter ====================
 (straight-use-package 'dart-mode)
