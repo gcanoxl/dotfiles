@@ -5,4 +5,11 @@
 (setq read-process-output-max (* 1024 1024)
       lsp-signature-auto-activate nil)
 
+;; ==================== KeyBindings ====================
+(evil-define-key 'normal 'lsp-mode-map (kbd "<leader>sr") 'lsp-rename)
+;; flycheck
+(evil-define-key 'normal 'flycheck-mode-map (kbd "<leader>el") 'flycheck-list-errors)
+(evil-define-key 'normal 'flycheck-mode-map (kbd "<leader>ep") 'flycheck-previous-error)
+(evil-define-key 'normal 'flycheck-mode-map (kbd "<leader>en") 'flycheck-next-error)
+
 (provide 'init-lsp)
