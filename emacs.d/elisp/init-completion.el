@@ -16,7 +16,7 @@
 
 ;; lsp-ivy
 (straight-use-package 'lsp-ivy)
-(evil-define-key 'normal 'lsp-mode-map (kbd "C-o") 'lsp-ivy-workspace-symbol)
+(evil-define-key 'normal 'lsp-mode-map (kbd "<leader>so") 'lsp-ivy-workspace-symbol)
 
 ;; counsel-projectile
 (straight-use-package 'counsel-projectile)

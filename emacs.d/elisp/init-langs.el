@@ -1,6 +1,8 @@
 ;; ==================== Python ====================
 (straight-use-package 'lsp-pyright)
-(add-hook 'python-mode-hook 'lsp-deferred)
+(add-hook 'python-mode-hook '(lambda ()
+                                     (require 'lsp-pyright)
+                                     (lsp)))
 
 ;; ==================== Dart & Flutter ====================
 (straight-use-package 'dart-mode)
