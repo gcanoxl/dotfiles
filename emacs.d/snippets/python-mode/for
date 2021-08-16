@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: For Loop
+# key: fr
+# --
+for $1 in $2:
+    $0

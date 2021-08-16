@@ -3,6 +3,7 @@
 (add-hook 'python-mode-hook '(lambda ()
                                      (require 'lsp-pyright)
                                      (lsp)))
+(setq python-shell-interpreter "ipython")
 
 ;; ==================== Dart & Flutter ====================
 (straight-use-package 'dart-mode)

@@ -45,7 +45,9 @@
 (with-eval-after-load "yasnippet"
   (let ((inhibit-message t))
     (yas-reload-all))
-  (evil-define-key 'insert 'yas-minor-mode-map (kbd "C-k") #'yas-expand))
+  (evil-define-key 'insert 'yas-minor-mode-map (kbd "C-k") #'yas-expand)
+  (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yn") 'yas/new-snippet)
+  (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yv") 'yas/visit-snippet-file))
 
 ;; ==================== Projectile ====================
 (straight-use-package 'projectile)

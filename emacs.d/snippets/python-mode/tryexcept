@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Try Except
+# key: te
+# --
+try:
+    ${1:STATEMENT}
+except ${2:Exception}:
+    $0
