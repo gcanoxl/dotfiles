@@ -12,8 +12,9 @@
   kept-old-versions 2
   version-control t
   ;; don't ask me when quit
-  confirm-kill-processes nil)
- 
+  confirm-kill-processes nil
+  ;; turn bell off
+  ring-bell-function 'ignore)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
