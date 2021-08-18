@@ -4,16 +4,20 @@
 
 (evil-define-key 'normal 'global (kbd "f") 'avy-goto-char)
 (evil-define-key 'normal 'global (kbd "F") 'avy-goto-char-2)
-(evil-define-key 'normal 'global (kbd "g") 'avy-goto-line)
 
 ;; ==================== Ivy ====================
 (straight-use-package 'counsel)
 
+;; TODO: customize the builder to improve the sorting.
 (setq ivy-re-builders-alist
-    '((t . ivy--regex-fuzzy)))
+      '((swiper . ivy--regex-plus)
+	(t . ivy--regex-fuzzy)))
+
+(setq ivy-initial-inputs-alist nil)
 
 (add-hook 'after-init-hook #'ivy-mode)
 
+(evil-define-key 'normal 'global (kbd "/") 'swiper)
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'counsel-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'counsel-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'counsel-recentf)
