@@ -1,3 +1,11 @@
+;; ==================== Avy ====================
+(straight-use-package 'avy)
+(add-hook 'after-init-hook #'avy-setup-default)
+
+(evil-define-key 'normal 'global (kbd "f") 'avy-goto-char)
+(evil-define-key 'normal 'global (kbd "F") 'avy-goto-char-2)
+(evil-define-key 'normal 'global (kbd "g") 'avy-goto-line)
+
 ;; ==================== Ivy ====================
 (straight-use-package 'counsel)
 
@@ -23,6 +31,10 @@
 (evil-define-key 'normal 'global (kbd "<leader>pp") 'counsel-projectile-switch-project)
 (evil-define-key 'normal 'global (kbd "<leader>pf") 'counsel-projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>pb") 'counsel-projectile-switch-to-buffer)
+
+;; smex
+;; improve the sorting of candidates in ivy
+(straight-use-package 'smex)
 
 ;; ==================== Company ====================
 (straight-use-package 'company)
