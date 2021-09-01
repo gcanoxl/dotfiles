@@ -51,9 +51,4 @@ alias gp='git push'
 alias em='emacsclient -t -a ""'
 alias sem='sudo emacsclient -t -a ""'
 
-export ANDROID_HOME=/usr/local/share/android-sdk
-export ANDROID_SDK_ROOT=$ANDROID_HOME
-export ANDROID_AVD_HOME=$ANDROID_HOME
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+alias newenv='virtualenv --no-site-packages'

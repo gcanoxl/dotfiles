@@ -9,7 +9,6 @@
 (evil-define-key 'normal 'python-mode-map (kbd "<localleader>r") 'python-shell-send-file)
 (evil-define-key 'normal 'python-mode-map (kbd "<localleader>s") 'run-python)
 
-
 ;; ==================== Dart & Flutter ====================
 (straight-use-package 'dart-mode)
 (straight-use-package 'lsp-dart)
