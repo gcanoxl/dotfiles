@@ -50,5 +50,3 @@ alias gp='git push'
 
 alias em='emacsclient -t -a ""'
 alias sem='sudo emacsclient -t -a ""'
-
-alias newenv='virtualenv --no-site-packages'
