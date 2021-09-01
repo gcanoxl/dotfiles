@@ -11,6 +11,7 @@
   kept-new-versions 6
   kept-old-versions 2
   version-control t
+  auto-save-default nil
   ;; don't ask me when quit
   confirm-kill-processes nil
   ;; turn bell off
