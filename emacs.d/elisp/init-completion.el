@@ -10,8 +10,8 @@
 
 ;; TODO: customize the builder to improve the sorting.
 (setq ivy-re-builders-alist
-      '((swiper . ivy--regex-plus)
-	(t . ivy--regex-fuzzy)))
+      '((swiper . ivy--regex-plus)))
+	;;(t . ivy--regex-fuzzy)))
 
 (setq ivy-initial-inputs-alist nil)
 

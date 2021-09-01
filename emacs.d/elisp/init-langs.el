@@ -3,7 +3,12 @@
 (add-hook 'python-mode-hook '(lambda ()
                                      (require 'lsp-pyright)
                                      (lsp)))
+
+;; run
 (setq python-shell-interpreter "ipython")
+(evil-define-key 'normal 'python-mode-map (kbd "<localleader>r") 'python-shell-send-file)
+(evil-define-key 'normal 'python-mode-map (kbd "<localleader>s") 'run-python)
+
 
 ;; ==================== Dart & Flutter ====================
 (straight-use-package 'dart-mode)

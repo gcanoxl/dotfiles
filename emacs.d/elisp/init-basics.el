@@ -31,6 +31,7 @@
 
 ;; Theme
 (straight-use-package 'dracula-theme)
-(load-theme 'dracula t)
+(straight-use-package 'spacemacs-theme)
+(load-theme 'spacemacs-light t)
 
 (provide 'init-basics)
