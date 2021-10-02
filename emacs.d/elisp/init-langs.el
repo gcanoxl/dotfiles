@@ -39,4 +39,19 @@
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 (add-hook 'yaml-mode-hook 'flycheck-mode)
 
+;; ==================== WEB ====================
+;; web-mode
+(straight-use-package 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.htm?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+
+;; emmet-mode
+(straight-use-package 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+
+;; rjsx-mode
+(straight-use-package 'rjsx-mode)
+
 (provide 'init-langs)
