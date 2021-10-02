@@ -53,5 +53,6 @@
 
 ;; rjsx-mode
 (straight-use-package 'rjsx-mode)
+(add-hook 'rjsx-mode-hook 'lsp-deferred)
 
 (provide 'init-langs)
