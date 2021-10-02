@@ -54,5 +54,7 @@
 ;; rjsx-mode
 (straight-use-package 'rjsx-mode)
 (add-hook 'rjsx-mode-hook 'lsp-deferred)
+(add-hook 'rjsx-mode-hook 'emmet-mode)
+(add-hook 'rjsx-mode-hook 'electric-pair-mode)
 
 (provide 'init-langs)

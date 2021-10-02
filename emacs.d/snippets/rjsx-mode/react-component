@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: React Component
+# key: rcom
+# --
+class $1 extends React.Component {
+    constructor(props) {
+        super(props);
+        $2
+    }
+    render () {
+        $3
+    }
+}
+$0
