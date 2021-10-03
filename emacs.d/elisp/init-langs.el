@@ -4,6 +4,8 @@
                                      (require 'lsp-pyright)
                                      (lsp)))
 
+(setq lsp-pyright-extra-paths ["/usr/local/lib/python3.9/site-packages"])
+
 ;; run
 (setq python-shell-interpreter "ipython")
 (evil-define-key 'normal 'python-mode-map (kbd "<localleader>r") 'python-shell-send-file)
@@ -53,6 +55,9 @@
 
 ;; rjsx-mode
 (straight-use-package 'rjsx-mode)
+(setq js-indent-level 2)
+
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . rjsx-mode))
 (add-hook 'rjsx-mode-hook 'lsp-deferred)
 (add-hook 'rjsx-mode-hook 'emmet-mode)
 (add-hook 'rjsx-mode-hook 'electric-pair-mode)
