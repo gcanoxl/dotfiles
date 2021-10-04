@@ -21,10 +21,12 @@
 (evil-define-key 'normal 'global (kbd "<leader><SPC>") 'counsel-M-x)
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'counsel-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>fr") 'counsel-recentf)
-(evil-define-key 'normal 'global (kbd "<leader>bb") 'counsel-switch-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>hf") 'counsel-describe-function)
 (evil-define-key 'normal 'global (kbd "<leader>hv") 'counsel-describe-variable)
 (evil-define-key 'normal 'global (kbd "<leader>ho") 'counsel-describe-symbol)
+;; Buffer
+(evil-define-key 'normal 'global (kbd "<leader>bb") 'counsel-switch-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer)
 
 ;; lsp-ivy
 (straight-use-package 'lsp-ivy)
