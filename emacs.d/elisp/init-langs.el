@@ -77,6 +77,13 @@
 
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>r") 'gcanoxl/go-run-single-file)
 
+;; Go Test
+(defun gcanoxl/go-test()
+  (interactive)
+  (save-buffer)
+  (compile "go test"))
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>t") 'gcanoxl/go-test)
+
 ;; Keybindings
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>ia") 'go-import-add)
 
