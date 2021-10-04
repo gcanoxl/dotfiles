@@ -4,6 +4,7 @@
   read-answer-short t
   frame-title-format "Cano's Emacs - %b"
   custom-file (expand-file-name "custom.el" user-emacs-directory)
+  tab-width 4
   ;; backup
   backup-directory-alist `(("." . "~/.backups"))
   backup-by-copying t

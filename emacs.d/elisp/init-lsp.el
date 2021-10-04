@@ -3,7 +3,10 @@
 (straight-use-package 'flycheck)
 
 (setq read-process-output-max (* 1024 1024)
-      lsp-signature-auto-activate nil)
+    lsp-signature-auto-activate nil)
+
+(add-hook 'before-save-hook #'lsp-format-buffer)
+(add-hook 'before-save-hook #'lsp-organize-imports)
 
 ;; ==================== KeyBindings ====================
 (evil-define-key 'normal 'lsp-mode-map (kbd "<leader>sr") 'lsp-rename)

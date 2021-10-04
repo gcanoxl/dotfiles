@@ -62,4 +62,11 @@
 (add-hook 'rjsx-mode-hook 'emmet-mode)
 (add-hook 'rjsx-mode-hook 'electric-pair-mode)
 
+;; ==================== Golang ====================
+(straight-use-package 'go-mode)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+
+(add-hook 'go-mode-hook 'electric-pair-mode)
+(add-hook 'go-mode-hook 'lsp-deferred)
+
 (provide 'init-langs)
