@@ -69,4 +69,15 @@
 (add-hook 'go-mode-hook 'electric-pair-mode)
 (add-hook 'go-mode-hook 'lsp-deferred)
 
+;; Single file run
+(defun gcanoxl/go-run-single-file ()
+  (interactive)
+  (save-buffer)
+  (compile (concat "go run " (buffer-file-name))))
+
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>r") 'gcanoxl/go-run-single-file)
+
+;; Keybindings
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>ia") 'go-import-add)
+
 (provide 'init-langs)
