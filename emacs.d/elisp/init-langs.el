@@ -1,3 +1,7 @@
+;; ==================== Basic ====================
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(evil-define-key 'normal 'prog-mode-map (kbd "<tab>") 'hs-toggle-hiding)
+
 ;; ==================== Python ====================
 (straight-use-package 'lsp-pyright)
 (add-hook 'python-mode-hook '(lambda ()

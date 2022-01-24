@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: implement 
+# key: imp
+# --
+func ($1) $2($3)$4 {
+	$0
+}
+

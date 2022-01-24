@@ -16,7 +16,9 @@
   ;; don't ask me when quit
   confirm-kill-processes nil
   ;; turn bell off
-  ring-bell-function 'ignore)
+  ring-bell-function 'ignore
+  ;; compilation window
+  compilation-window-height 12)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

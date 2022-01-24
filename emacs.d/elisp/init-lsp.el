@@ -10,6 +10,9 @@
 
 ;; ==================== KeyBindings ====================
 (evil-define-key 'normal 'lsp-mode-map (kbd "<leader>sr") 'lsp-rename)
+(evil-define-key 'normal 'lsp-mode-map (kbd "<leader>sgg") 'lsp-find-definition)
+(evil-define-key 'normal 'lsp-mode-map (kbd "<leader>sl") 'lsp-treemacs-symbols)
+
 ;; flycheck
 (evil-define-key 'normal 'flycheck-mode-map (kbd "<leader>el") 'flycheck-list-errors)
 (evil-define-key 'normal 'flycheck-mode-map (kbd "<leader>ep") 'flycheck-previous-error)
