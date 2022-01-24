@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: table driven test
+# key: tdt
+# --
+cases := []struct {
+	${1:want}
+	${2:got}
+}{
+	{$3},
+}
+
+for _, c := range cases {
+	t.Run(testName(c.time), func(t *testing.T) {
+		$4
+	})
+}
+$0

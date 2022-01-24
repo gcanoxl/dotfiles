@@ -2,7 +2,7 @@
 # name: if got != want
 # key: ifgw
 # --
-if got != want {
-	${1:t.Errorf("got %${2} want %${3}", got, want)}
+if ${1:got} != ${2:want} {
+	${3:t.Errorf("got %${4:v} want %${5:v}", $1, $2)}
 }
 $0
