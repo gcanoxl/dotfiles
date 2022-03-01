@@ -50,6 +50,8 @@
 (straight-use-package 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.htm?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; template languages
+(add-to-list 'auto-mode-alist '("\\.gohtml?\\'" . web-mode))
 
 (setq web-mode-markup-indent-offset 2)
 
@@ -87,6 +89,10 @@
   (save-buffer)
   (compile "go test"))
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>t") 'gcanoxl/go-test)
+
+;; Impl
+(straight-use-package 'go-impl)
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>im") 'go-impl)
 
 ;; Keybindings
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>ia") 'go-import-add)

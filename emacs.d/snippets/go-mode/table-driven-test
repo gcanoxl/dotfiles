@@ -10,8 +10,8 @@ cases := []struct {
 }
 
 for _, c := range cases {
-	t.Run(testName(c.time), func(t *testing.T) {
-		$4
+	t.Run($4, func(t *testing.T) {
+		$5
 	})
 }
 $0
