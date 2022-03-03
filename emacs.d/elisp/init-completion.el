@@ -67,8 +67,4 @@
   (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yn") 'yas/new-snippet)
   (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yv") 'yas/visit-snippet-file))
 
-;; ==================== Projectile ====================
-(straight-use-package 'projectile)
-(add-hook 'after-init-hook 'projectile-mode)
-
 (provide 'init-completion)

@@ -8,3 +8,4 @@
 (require 'init-lsp)
 (require 'init-langs)
 (require 'init-org)
+(require 'init-projects)

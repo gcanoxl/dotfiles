@@ -75,21 +75,6 @@
 (add-hook 'go-mode-hook 'electric-pair-mode)
 (add-hook 'go-mode-hook 'lsp-deferred)
 
-;; Single file run
-(defun gcanoxl/go-run-single-file ()
-  (interactive)
-  (save-buffer)
-  (compile (concat "go run " (buffer-file-name))))
-
-(evil-define-key 'normal 'go-mode-map (kbd "<localleader>r") 'gcanoxl/go-run-single-file)
-
-;; Go Test
-(defun gcanoxl/go-test()
-  (interactive)
-  (save-buffer)
-  (compile "go test"))
-(evil-define-key 'normal 'go-mode-map (kbd "<localleader>t") 'gcanoxl/go-test)
-
 ;; Impl
 (straight-use-package 'go-impl)
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>im") 'go-impl)
