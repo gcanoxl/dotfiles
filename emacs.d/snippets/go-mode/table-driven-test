@@ -3,15 +3,13 @@
 # key: tdt
 # --
 cases := []struct {
-	${1:want}
-	${2:got}
+	$1
 }{
-	{$3},
+	$2
 }
 
 for _, c := range cases {
-	t.Run($4, func(t *testing.T) {
-		$5
+	t.Run($3, func(t *testing.T) {
+		$0
 	})
 }
-$0
