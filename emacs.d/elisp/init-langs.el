@@ -81,5 +81,7 @@
 
 ;; Keybindings
 (evil-define-key 'normal 'go-mode-map (kbd "<localleader>ia") 'go-import-add)
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>jo") 'godef-jump-other-window)
+(evil-define-key 'normal 'go-mode-map (kbd "<localleader>dk") 'godoc-at-point)
 
 (provide 'init-langs)
