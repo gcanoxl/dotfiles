@@ -67,4 +67,8 @@
   (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yn") 'yas/new-snippet)
   (evil-define-key 'normal 'yas-minor-mode-map (kbd "<leader>yv") 'yas/visit-snippet-file))
 
+;; ==================== Which-Key ====================
+(straight-use-package 'which-key)
+(which-key-mode)
+
 (provide 'init-completion)
