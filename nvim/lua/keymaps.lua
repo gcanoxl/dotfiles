@@ -2,13 +2,22 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 local opts = {noremap = true, silent = true}
-local inoremap = function(key, result)
-	vim.api.nvim_set_keymap('i', key, result, opts)
-end
-local nnoremap = function(key, result)
-	vim.api.nvim_set_keymap('n', key, result, opts)
-end
 
-inoremap('jk', '<ESC>')
-nnoremap('<leader>fw', ':write<CR>')
-nnoremap('<leader>fq', ':wq<CR>')
+local nomap = {
+	i = function(key, result)
+		vim.api.nvim_set_keymap('i', key, result, opts)
+	end, 
+
+	n = function(key, result)
+		vim.api.nvim_set_keymap('n', key, result, opts)
+	end,
+
+	ln = function(key, result)
+		vim.api.nvim_set_keymap('n', '<leader>'..key, result, opts)
+	end
+}
+nomap.i('jk', '<ESC>')
+nomap.ln('fw', ':write<CR>')
+nomap.ln('qq', ':quitall<CR>')
+
+return nomap
