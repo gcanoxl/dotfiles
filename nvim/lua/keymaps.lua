@@ -17,6 +17,7 @@ local nomap = {
 	end
 }
 nomap.i('jk', '<ESC>')
+nomap.ln('<leader>', ':')
 nomap.ln('fw', ':write<CR>')
 nomap.ln('qq', ':quitall<CR>')
 

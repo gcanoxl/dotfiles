@@ -9,7 +9,10 @@ end
 local packer = require'packer'
 
 packer.init({
-	autoremove = true, 
+	ensure_dependencies = true,
+
+	autoremove = true,
+	auto_clean = true,
 
 	display = {
 		open_fn = function()
@@ -24,6 +27,7 @@ packer.use 'wbthomason/packer.nvim'
 -- keymaps
 local nomap = require'keymaps'
 nomap.ln('pi', ':PackerInstall<CR>')
+nomap.ln('pf', ':PackerStatus<CR>')
 nomap.ln('ps', ':PackerSync<CR>')
 nomap.ln('pc', ':PackerClean<CR>')
 

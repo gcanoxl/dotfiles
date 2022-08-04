@@ -1,3 +1,5 @@
 require'options'
 require'keymaps'
 require'GUI'
+require'files'
+require'completion'
