@@ -6,7 +6,7 @@ local opts = {noremap = true, silent = true}
 local nomap = {
 	i = function(key, result)
 		vim.api.nvim_set_keymap('i', key, result, opts)
-	end, 
+	end,
 
 	n = function(key, result)
 		vim.api.nvim_set_keymap('n', key, result, opts)
@@ -17,7 +17,6 @@ local nomap = {
 	end
 }
 nomap.i('jk', '<ESC>')
-nomap.ln('<leader>', ':')
 nomap.ln('fw', ':write<CR>')
 nomap.ln('qq', ':quitall<CR>')
 

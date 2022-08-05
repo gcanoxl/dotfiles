@@ -1,6 +1,6 @@
 -- tree-sitter
 require'plugins' {
-	'nvim-treesitter/nvim-treesitter', 
+	'nvim-treesitter/nvim-treesitter',
 	run = ':TSUpdate'
 }
 
@@ -12,6 +12,7 @@ require'plugins' {
 
 -- keymaps
 local nomap = require'keymaps'
+nomap.ln('<leader>', ':Telescope commands<CR>')
 nomap.ln('ff', ':Telescope find_files<CR>')
 nomap.ln('ss', ':Telescope live_grep<CR>')
 nomap.ln('bb', ':Telescope buffers<CR>')

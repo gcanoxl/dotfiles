@@ -8,4 +8,3 @@ require'plugins' {
 
 local nomap = require('keymaps')
 nomap.n('f', ':HopChar1<CR>')
-nomap.n('/', ':HopPattern<CR>')

@@ -11,7 +11,8 @@ local options = {
 	relativenumber = false,
 	wrap = true,
 	cursorline = true,
-	cursorcolumn = false
+	cursorcolumn = false,
+	timeoutlen = 4000
 }
 
 for k, v in pairs(options) do
