@@ -29,6 +29,7 @@ local nomap = require'keymaps'
 nomap.ln('pi', ':PackerInstall<CR>')
 nomap.ln('pf', ':PackerStatus<CR>')
 nomap.ln('ps', ':PackerSync<CR>')
-nomap.ln('pc', ':PackerClean<CR>')
+nomap.ln('pc', ':PackerCompile<CR>')
+nomap.ln('pl', ':PackerClean<CR>')
 
 return packer.use
