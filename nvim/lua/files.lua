@@ -12,4 +12,4 @@ require("nvim-tree").setup()
 
 -- keymaps
 local nomap = require'keymaps'
-nomap.ln('fl', ':NvimTreeFocus<CR>')
+nomap.lnc('fl', ':NvimTreeFocus')

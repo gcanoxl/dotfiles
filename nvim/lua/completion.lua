@@ -12,8 +12,8 @@ require'plugins' {
 
 -- keymaps
 local nomap = require'keymaps'
-nomap.ln('<leader>', ':Telescope commands<CR>')
-nomap.ln('ff', ':Telescope find_files<CR>')
-nomap.ln('ss', ':Telescope live_grep<CR>')
-nomap.ln('bb', ':Telescope buffers<CR>')
-nomap.ln('hh', ':Telescope help_tags<CR>')
+nomap.lnc('<leader>', 'Telescope commands')
+nomap.lnc('ff', 'Telescope find_files')
+nomap.lnc('ss', 'Telescope live_grep')
+nomap.lnc('bb', 'Telescope buffers')
+nomap.lnc('hh', 'Telescope help_tags')

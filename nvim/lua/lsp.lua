@@ -1,4 +1,4 @@
-require'plugins' {
+require 'plugins' {
 	"williamboman/mason.nvim",
 	"neovim/nvim-lspconfig",
 
@@ -9,7 +9,17 @@ require'plugins' {
 	'L3MON4D3/LuaSnip',
 	'saadparwaiz1/cmp_luasnip',
 
-	'onsails/lspkind.nvim'
+	-- improve gui
+	'onsails/lspkind.nvim',
+	"glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+			local saga = require("lspsaga")
+			saga.init_lsp_saga({
+				rename_in_select = false,
+				borer_style = "rounded",
+			})
+    end,
 }
 
 -- mason
@@ -29,7 +39,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {'sumneko_lua'}
+local servers = { 'sumneko_lua' }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
@@ -75,10 +85,10 @@ cmp.setup({
 
 		['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({
 			behavior = cmp.SelectBehavior.Select
-		}), {'i'}),
+		}), { 'i' }),
 		['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({
 			behavior = cmp.SelectBehavior.Select
-		}), {'i'}),
+		}), { 'i' }),
 		['<C-c>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -100,5 +110,11 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' }
 	})
 })
+
+-- keymaps
+local nomap = require'keymaps'
+nomap.lnc('sf', 'Lspsaga lsp_finder')
+nomap.lnc('sr', 'Lspsaga rename')
+
 
 return lspconfig
