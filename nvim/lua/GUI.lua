@@ -15,3 +15,7 @@ use 'folke/tokyonight.nvim'
 
 vim.g.tokyonight_style = "storm"
 vim.cmd[[colorscheme tokyonight]]
+
+-- bufferline
+use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+require("bufferline").setup{}
