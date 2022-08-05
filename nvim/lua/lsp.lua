@@ -1,4 +1,3 @@
--- lsp
 require'plugins' {
 	"williamboman/mason.nvim",
 	"neovim/nvim-lspconfig",
@@ -8,13 +7,18 @@ require'plugins' {
 	'hrsh7th/cmp-cmdline',
 
 	'L3MON4D3/LuaSnip',
-	'saadparwaiz1/cmp_luasnip'
+	'saadparwaiz1/cmp_luasnip',
+
+	'onsails/lspkind.nvim'
 }
 
 -- mason
 require("mason").setup({
 	ui = {
-		 border = "rounded",
+		border = "rounded",
+	},
+	keymaps = {
+		toggle_package_expand = "<TAB>",
 	}
 })
 
@@ -33,12 +37,34 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
+-- lua remove annoying warnings
+lspconfig.sumneko_lua.setup {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { 'vim' }
+			}
+		}
+	}
+}
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
+local lspkind = require('lspkind')
 cmp.setup({
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = 'symbol_text', -- show only symbol annotations
+			maxwidth = 50,
+		})
+	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -46,9 +72,13 @@ cmp.setup({
 	},
 	-- keymaps
 	mapping = cmp.mapping.preset.insert({
-		['<C-p>'] = cmp.mapping.scroll_docs(-1),
-		['<C-n>'] = cmp.mapping.scroll_docs(1),
-		['<C-Space>'] = cmp.mapping.complete(),
+
+		['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({
+			behavior = cmp.SelectBehavior.Select
+		}), {'i'}),
+		['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({
+			behavior = cmp.SelectBehavior.Select
+		}), {'i'}),
 		['<C-c>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -71,3 +101,4 @@ cmp.setup.cmdline(':', {
 	})
 })
 
+return lspconfig
