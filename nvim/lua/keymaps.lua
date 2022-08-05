@@ -12,6 +12,10 @@ local nomap = {
 		vim.api.nvim_set_keymap('n', key, result, opts)
 	end,
 
+	nc = function(key, result)
+		vim.api.nvim_set_keymap('n', key, '<CMD>'..result..'<CR>', opts)
+	end,
+
 	ln = function(key, result)
 		vim.api.nvim_set_keymap('n', '<leader>'..key, result, opts)
 	end,

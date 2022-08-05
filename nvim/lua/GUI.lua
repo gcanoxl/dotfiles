@@ -6,7 +6,6 @@ use {
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 }
 
-
 require('lualine').setup({})
 
 -- colorschemes
@@ -21,8 +20,8 @@ use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-de
 require("bufferline").setup{}
 
 local nomap = require'keymaps'
-nomap.n('<D-tab>', 'BufferLineCycleNext')
-nomap.n('<M-1>', '<CMD>BufferLineCycleNext 1<CR>')
+nomap.nc(']', 'BufferLineCycleNext')
+nomap.nc('[', 'BufferLineCycleNext')
 nomap.lnc('1', 'BufferLineGoToBuffer 1')
 nomap.lnc('2', 'BufferLineGoToBuffer 2')
 nomap.lnc('3', 'BufferLineGoToBuffer 3')
