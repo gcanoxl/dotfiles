@@ -4,3 +4,4 @@ require'plugins' {
 
 local nomap = require'keymaps'
 nomap.lnc('gg', 'Git')
+nomap.lnc('gp', 'Git push')
