@@ -1,15 +1,20 @@
-local use = require 'plugins'
-
-use {
-	'kyazdani42/nvim-tree.lua',
+require 'plugins' {
+	"nvim-neo-tree/neo-tree.nvim",
+	branch = "v2.x",
 	requires = {
-		'kyazdani42/nvim-web-devicons', -- optional, for file icons
+		"nvim-lua/plenary.nvim",
+		"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+		"MunifTanjim/nui.nvim",
 	},
-	tag = 'nightly' -- optional, updated every week. (see issue #1193)
 }
 
-require("nvim-tree").setup()
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+require('neo-tree').setup({
+	window = {
+		width = 24
+	}
+})
 
 -- keymaps
 local nomap = require 'keymaps'
-nomap.lnc('fl', ':NvimTreeFocus')
+nomap.lnc('fl', ':Neotree')

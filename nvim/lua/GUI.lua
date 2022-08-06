@@ -41,7 +41,7 @@ require("bufferline").setup {
 		numbers = "ordinal",
 		offsets = {
 			{
-				filetype = "NvimTree",
+				filetype = "neo-tree",
 				text_align = "left"
 			}
 		}
@@ -50,6 +50,9 @@ require("bufferline").setup {
 
 -- keymaps
 nomap.nc('<C-w>c', 'bdelete')
+-- TODO: use better bd plugin
+-- TODO: test bd plugin
+-- TODO: add x keymap
 
 nomap.lnc('1', 'BufferLineGoToBuffer 1')
 nomap.lnc('2', 'BufferLineGoToBuffer 2')
