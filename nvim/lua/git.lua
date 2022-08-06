@@ -1,7 +1,7 @@
 require 'plugins' {
-	'tpope/vim-fugitive'
+	'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim'
 }
 
+require('neogit').setup()
 local nomap = require 'keymaps'
-nomap.lnc('gg', 'Git')
-nomap.lnc('gp', 'Git push')
+nomap.lnc('gg', 'Neogit')
