@@ -1,5 +1,7 @@
 -- VV client
+local guiKeySupport = 0
 if vim.g.vv == 1 then
+	guiKeySupport = 1
 	vim.cmd[[VVset bold=1]]
 	vim.cmd[[VVset fullscreen=0]]
 	vim.cmd[[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
@@ -31,5 +33,30 @@ vim.cmd[[colorscheme tokyonight]]
 use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 require("bufferline").setup{}
 
---local nomap = require'keymaps'
--- TODO: add cmd+number and C-tab C-S-tab keymaps
+-- keymaps
+local nomap = require'keymaps'
+nomap.lnc('1', 'BufferLineGoToBuffer 1')
+nomap.lnc('2', 'BufferLineGoToBuffer 2')
+nomap.lnc('3', 'BufferLineGoToBuffer 3')
+nomap.lnc('4', 'BufferLineGoToBuffer 4')
+nomap.lnc('5', 'BufferLineGoToBuffer 5')
+nomap.lnc('6', 'BufferLineGoToBuffer 6')
+nomap.lnc('7', 'BufferLineGoToBuffer 7')
+nomap.lnc('8', 'BufferLineGoToBuffer 8')
+nomap.lnc('9', 'BufferLineGoToBuffer 9')
+nomap.lnc('0', 'BufferLineGoToBuffer 10')
+
+if guiKeySupport == 1 then
+	nomap.nc('<D-1>', 'BufferLineGoToBuffer 1')
+	nomap.nc('<D-2>', 'BufferLineGoToBuffer 2')
+	nomap.nc('<D-3>', 'BufferLineGoToBuffer 3')
+	nomap.nc('<D-4>', 'BufferLineGoToBuffer 4')
+	nomap.nc('<D-5>', 'BufferLineGoToBuffer 5')
+	nomap.nc('<D-6>', 'BufferLineGoToBuffer 6')
+	nomap.nc('<D-7>', 'BufferLineGoToBuffer 7')
+	nomap.nc('<D-8>', 'BufferLineGoToBuffer 8')
+	nomap.nc('<D-9>', 'BufferLineGoToBuffer 9')
+	nomap.nc('<D-0>', 'BufferLineGoToBuffer 10')
+end
+
+-- TODO: C-tab C-S-tab keymaps

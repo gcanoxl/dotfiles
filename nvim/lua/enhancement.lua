@@ -14,6 +14,3 @@ require'plugins' {
 }
 require("toggleterm").setup()
 nomap.lnc('``', 'ToggleTerm')
-
---TODO: add time measuring plugin
---TODO: lazy loading
