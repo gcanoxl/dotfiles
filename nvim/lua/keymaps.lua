@@ -34,6 +34,7 @@ local nomap = {
 }
 nomap.i('jk', '<ESC>')
 nomap.lnc('fw', 'write')
+nomap.nc('<D-s>', 'write')
 nomap.lnc('qq', 'quitall')
 
 return nomap
