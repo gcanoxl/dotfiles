@@ -14,6 +14,7 @@ require'plugins' {
 local nomap = require'keymaps'
 nomap.nc('<C-c>', 'Telescope buffers')
 nomap.lnc('<leader>', 'Telescope commands')
+nomap.lnc('bb', 'Telescope buffers')
 nomap.lnc('ff', 'Telescope find_files')
 nomap.lnc('fr', 'Telescope oldfiles')
 nomap.lnc('ss', 'Telescope live_grep')
@@ -33,4 +34,5 @@ require'plugins' {
 	"akinsho/toggleterm.nvim", tag = 'v2.*'
 }
 require("toggleterm").setup()
-nomap.lnc('``', 'ToggleTerm')
+nomap.nc('!', 'ToggleTerm')
+

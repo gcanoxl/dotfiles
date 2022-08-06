@@ -14,8 +14,8 @@ local use = require'plugins'
 -- status line
 --[[
 --use {
-	'nvim-lualine/lualine.nvim',
-	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+'nvim-lualine/lualine.nvim',
+requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 }
 require('lualine').setup({})
 ]]--
@@ -35,7 +35,14 @@ vim.cmd[[colorscheme tokyonight]]
 use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 require("bufferline").setup{
 	options = {
-		numbers = "ordinal"
+		numbers = "ordinal",
+		offsets = {
+			{
+				filetype = "NvimTree",
+				text = "File Explorer",
+				text_align = "left"
+			}
+		}
 	}
 }
 
