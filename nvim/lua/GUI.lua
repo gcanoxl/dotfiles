@@ -2,14 +2,14 @@
 local guiKeySupport = 0
 if vim.g.vv == 1 then
 	guiKeySupport = 1
-	vim.cmd[[VVset bold=1]]
-	vim.cmd[[VVset fullscreen=0]]
-	vim.cmd[[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
-	vim.cmd[[VVset fontsize=18]]
+	vim.cmd [[VVset bold=1]]
+	vim.cmd [[VVset fullscreen=0]]
+	vim.cmd [[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
+	vim.cmd [[VVset fontsize=18]]
 end
 
--- 
-local use = require'plugins'
+--
+local use = require 'plugins'
 
 -- status line
 --[[
@@ -18,7 +18,7 @@ local use = require'plugins'
 requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 }
 require('lualine').setup({})
-]]--
+]] --
 use 'feline-nvim/feline.nvim'
 require('feline').setup()
 
@@ -27,13 +27,13 @@ use 'dr4vs/neon.nvim'
 use 'folke/tokyonight.nvim'
 
 vim.g.tokyonight_style = "storm"
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd [[colorscheme tokyonight]]
 
 -- bufferline
 -- TODO: add {} quote auto pair
 -- TODO: add auto format
-use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
-require("bufferline").setup{
+use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
+require("bufferline").setup {
 	options = {
 		numbers = "ordinal",
 		offsets = {
@@ -47,7 +47,7 @@ require("bufferline").setup{
 }
 
 -- keymaps
-local nomap = require'keymaps'
+local nomap = require 'keymaps'
 nomap.nc('<C-w>c', 'bdelete')
 
 nomap.lnc('1', 'BufferLineGoToBuffer 1')

@@ -1,4 +1,5 @@
 require 'plugins' {
+
 	"williamboman/mason.nvim",
 	"neovim/nvim-lspconfig",
 
@@ -12,14 +13,14 @@ require 'plugins' {
 	-- improve gui
 	'onsails/lspkind.nvim',
 	"glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-			local saga = require("lspsaga")
-			saga.init_lsp_saga({
-				rename_in_select = false,
-				borer_style = "rounded",
-			})
-    end,
+	branch = "main",
+	config = function()
+		local saga = require("lspsaga")
+		saga.init_lsp_saga({
+			rename_in_select = false,
+			borer_style = "rounded",
+		})
+	end,
 }
 
 -- mason
@@ -47,6 +48,14 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
+-- auto format on save
+vim.cmd [[
+augroup formatOnSave
+    autocmd!
+    autocmd BufWritePre *.lua :lua vim.lsp.buf.formatting()
+augroup END
+]]
+
 -- lua remove annoying warnings
 lspconfig.sumneko_lua.setup {
 	settings = {
@@ -57,6 +66,7 @@ lspconfig.sumneko_lua.setup {
 		}
 	}
 }
+
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -112,7 +122,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- keymaps
-local nomap = require'keymaps'
+local nomap = require 'keymaps'
 nomap.lnc('sf', 'Lspsaga lsp_finder')
 nomap.lnc('sr', 'Lspsaga rename')
 

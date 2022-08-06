@@ -1,17 +1,17 @@
 -- tree-sitter
-require'plugins' {
+require 'plugins' {
 	'nvim-treesitter/nvim-treesitter',
 	run = ':TSUpdate'
 }
 
 -- telescope
-require'plugins' {
+require 'plugins' {
 	'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	requires = { {'nvim-lua/plenary.nvim'} }
+	requires = { { 'nvim-lua/plenary.nvim' } }
 }
 
 -- keymaps
-local nomap = require'keymaps'
+local nomap = require 'keymaps'
 nomap.nc('<C-c>', 'Telescope buffers')
 nomap.lnc('<leader>', 'Telescope commands')
 nomap.lnc('bb', 'Telescope buffers')
@@ -21,7 +21,7 @@ nomap.lnc('ss', 'Telescope live_grep')
 nomap.lnc('hh', 'Telescope help_tags')
 
 -- todolist
-require'plugins' {
+require 'plugins' {
 	"folke/todo-comments.nvim",
 	requires = "nvim-lua/plenary.nvim",
 }
@@ -30,9 +30,8 @@ nomap.lnc('ts', 'TodoTelescope')
 nomap.lnc('tt', 'TodoQuickFix')
 
 -- terminal
-require'plugins' {
+require 'plugins' {
 	"akinsho/toggleterm.nvim", tag = 'v2.*'
 }
 require("toggleterm").setup()
 nomap.nc('!', 'ToggleTerm')
-

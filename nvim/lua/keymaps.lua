@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
 local nomap = {
 	i = function(key, result)
@@ -13,15 +13,15 @@ local nomap = {
 	end,
 
 	nc = function(key, result)
-		vim.api.nvim_set_keymap('n', key, '<CMD>'..result..'<CR>', opts)
+		vim.api.nvim_set_keymap('n', key, '<CMD>' .. result .. '<CR>', opts)
 	end,
 
 	ln = function(key, result)
-		vim.api.nvim_set_keymap('n', '<leader>'..key, result, opts)
+		vim.api.nvim_set_keymap('n', '<leader>' .. key, result, opts)
 	end,
 
 	lnc = function(key, result)
-		vim.api.nvim_set_keymap('n', '<LEADER>'..key, '<CMD>'..result..'<CR>', opts)
+		vim.api.nvim_set_keymap('n', '<LEADER>' .. key, '<CMD>' .. result .. '<CR>', opts)
 	end,
 
 	v = function(key, result)
@@ -29,7 +29,7 @@ local nomap = {
 	end,
 
 	vc = function(key, result)
-		vim.api.nvim_set_keymap('v', key, '<CMD>'..result..'<CR>', opts)
+		vim.api.nvim_set_keymap('v', key, '<CMD>' .. result .. '<CR>', opts)
 	end
 }
 nomap.i('jk', '<ESC>')
