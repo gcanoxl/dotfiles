@@ -7,8 +7,10 @@ require 'plugins' {
 -- telescope
 require 'plugins' {
 	'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	requires = { { 'nvim-lua/plenary.nvim' } }
+	requires = { { 'nvim-lua/plenary.nvim' } },
+	'nvim-telescope/telescope-ui-select.nvim'
 }
+require("telescope").load_extension("ui-select")
 
 -- keymaps
 local nomap = require 'keymaps'
