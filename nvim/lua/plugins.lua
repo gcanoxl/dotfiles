@@ -11,9 +11,6 @@ local packer = require 'packer'
 packer.init({
 	ensure_dependencies = true,
 
-	autoremove = true,
-	auto_clean = true,
-
 	display = {
 		keybindings = { -- Keybindings for the display window
 			toggle_info = '<TAB>',
