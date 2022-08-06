@@ -1,3 +1,13 @@
+-- VV client
+if vim.g.vv == 1 then
+	print(1)
+	vim.cmd[[VVset bold=1]]
+	vim.cmd[[VVset fullscreen=0]]
+	vim.cmd[[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
+	vim.cmd[[VVset fontsize=18]]
+end
+
+-- 
 local use = require'plugins'
 
 -- status line
