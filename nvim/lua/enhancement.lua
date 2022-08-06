@@ -1,3 +1,9 @@
+local nomap = require 'keymaps'
+
+-- better buffer delete
+require 'plugins' 'famiu/bufdelete.nvim'
+nomap.nc('<C-w>c', 'lua require"bufdelete".bufdelete(0, false)')
+
 -- tree-sitter
 require 'plugins' {
 	'nvim-treesitter/nvim-treesitter',
@@ -16,7 +22,6 @@ require 'plugins' {
 require("telescope").load_extension("ui-select")
 
 -- keymaps
-local nomap = require 'keymaps'
 nomap.nc('<C-f>', 'Telescope buffers')
 nomap.lnc('<leader>', 'Telescope commands')
 nomap.lnc('bb', 'Telescope buffers')

@@ -10,23 +10,17 @@ if vim.g.vv == 1 then
 	vim.cmd [[VVset fullscreen=0]]
 	vim.cmd [[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
 	vim.cmd [[VVset fontsize=18]]
-	nomap.lnc('tf', 'VVset invfullscreen')
-	--FIX:after quitting fullscreen, the window size is wrong
 end
 
 --
 local use = require 'plugins'
 
--- status line
---[[
---use {
-'nvim-lualine/lualine.nvim',
-requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+use {
+	'feline-nvim/feline.nvim',
+	config = function()
+		require('feline').setup()
+	end
 }
-require('lualine').setup({})
-]] --
-use 'feline-nvim/feline.nvim'
-require('feline').setup()
 
 -- colorschemes
 use 'dr4vs/neon.nvim'
@@ -50,11 +44,6 @@ require("bufferline").setup {
 }
 
 -- keymaps
-nomap.nc('<C-w>c', 'bdelete')
--- TODO: use better bd plugin
--- TODO: test bd plugin
--- TODO: add x keymap
-
 nomap.lnc('1', 'BufferLineGoToBuffer 1')
 nomap.lnc('2', 'BufferLineGoToBuffer 2')
 nomap.lnc('3', 'BufferLineGoToBuffer 3')
