@@ -1,6 +1,5 @@
 -- VV client
 if vim.g.vv == 1 then
-	print(1)
 	vim.cmd[[VVset bold=1]]
 	vim.cmd[[VVset fullscreen=0]]
 	vim.cmd[[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
@@ -11,12 +10,15 @@ end
 local use = require'plugins'
 
 -- status line
-use {
+--[[
+--use {
 	'nvim-lualine/lualine.nvim',
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 }
-
 require('lualine').setup({})
+]]--
+use 'feline-nvim/feline.nvim'
+require('feline').setup()
 
 -- colorschemes
 use 'dr4vs/neon.nvim'
