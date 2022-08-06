@@ -35,3 +35,9 @@ require 'plugins' {
 }
 require("toggleterm").setup()
 nomap.nc('!', 'ToggleTerm')
+
+-- autopairs
+require 'plugins' {
+	"windwp/nvim-autopairs",
+}
+require 'nvim-autopairs'.setup()

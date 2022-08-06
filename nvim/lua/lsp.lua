@@ -125,5 +125,4 @@ local nomap = require 'keymaps'
 nomap.lnc('sf', 'Lspsaga lsp_finder')
 nomap.lnc('sr', 'Lspsaga rename')
 
-
 return lspconfig

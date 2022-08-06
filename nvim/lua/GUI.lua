@@ -30,8 +30,6 @@ vim.g.tokyonight_style = "storm"
 vim.cmd [[colorscheme tokyonight]]
 
 -- bufferline
--- TODO: add {} quote auto pair
--- TODO: add auto format
 use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
 require("bufferline").setup {
 	options = {
@@ -39,7 +37,6 @@ require("bufferline").setup {
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = "File Explorer",
 				text_align = "left"
 			}
 		}
