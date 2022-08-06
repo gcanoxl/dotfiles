@@ -1,5 +1,4 @@
 require 'plugins' {
-
 	"williamboman/mason.nvim",
 	"neovim/nvim-lspconfig",
 
@@ -52,7 +51,7 @@ end
 vim.cmd [[
 augroup formatOnSave
     autocmd!
-    autocmd BufWritePre *.lua :lua vim.lsp.buf.formatting()
+    autocmd BufWritePre *.lua :lua vim.lsp.buf.formatting_sync()
 augroup END
 ]]
 
