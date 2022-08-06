@@ -61,8 +61,8 @@ nomap.lnc('7', 'BufferLineGoToBuffer 7')
 nomap.lnc('8', 'BufferLineGoToBuffer 8')
 nomap.lnc('9', 'BufferLineGoToBuffer 9')
 nomap.lnc('0', 'BufferLineGoToBuffer 10')
-nomap.nc('<C-]>', 'BufferLineCycleNext')
-nomap.nc('<C-[>', 'BufferLineCyclePrev')
+nomap.nc('}', 'BufferLineCycleNext')
+nomap.nc('{', 'BufferLineCyclePrev')
 
 if guiKeySupport == 1 then
 	nomap.nc('<D-1>', 'BufferLineGoToBuffer 1')

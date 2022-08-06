@@ -14,7 +14,7 @@ require("telescope").load_extension("ui-select")
 
 -- keymaps
 local nomap = require 'keymaps'
-nomap.nc('<C-c>', 'Telescope buffers')
+nomap.nc('<C-f>', 'Telescope buffers')
 nomap.lnc('<leader>', 'Telescope commands')
 nomap.lnc('bb', 'Telescope buffers')
 nomap.lnc('ff', 'Telescope find_files')
