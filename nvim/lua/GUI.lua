@@ -19,16 +19,5 @@ vim.cmd[[colorscheme tokyonight]]
 use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 require("bufferline").setup{}
 
-local nomap = require'keymaps'
-nomap.nc(']', 'BufferLineCycleNext')
-nomap.nc('[', 'BufferLineCycleNext')
-nomap.lnc('1', 'BufferLineGoToBuffer 1')
-nomap.lnc('2', 'BufferLineGoToBuffer 2')
-nomap.lnc('3', 'BufferLineGoToBuffer 3')
-nomap.lnc('4', 'BufferLineGoToBuffer 4')
-nomap.lnc('5', 'BufferLineGoToBuffer 5')
-nomap.lnc('6', 'BufferLineGoToBuffer 6')
-nomap.lnc('7', 'BufferLineGoToBuffer 7')
-nomap.lnc('8', 'BufferLineGoToBuffer 8')
-nomap.lnc('9', 'BufferLineGoToBuffer 9')
-nomap.lnc('0', 'BufferLineGoToBuffer 10')
+--local nomap = require'keymaps'
+-- TODO: add cmd+number and C-tab C-S-tab keymaps
