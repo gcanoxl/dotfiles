@@ -12,4 +12,5 @@ require 'plugins' 'Shatur/neovim-session-manager'
 require('session_manager').setup({})
 nomap.lnc('pR', 'SessionManager load_last_session')
 nomap.lnc('pf', 'SessionManager load_session')
+nomap.lnc('ps', 'SessionManager save_current_session')
 nomap.lnc('pd', 'SessionManager delete_session')
