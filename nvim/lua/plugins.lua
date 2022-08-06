@@ -24,4 +24,10 @@ packer.init({
 
 packer.use 'wbthomason/packer.nvim'
 
+local nomap = require 'keymaps'
+nomap.lnc('pi', 'PackerInstall')
+nomap.lnc('pc', 'PackerClean')
+nomap.lnc('pu', 'PackerSync')
+nomap.lnc('pl', 'PackerStatus')
+
 return packer.use
