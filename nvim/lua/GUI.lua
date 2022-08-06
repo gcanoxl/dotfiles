@@ -30,11 +30,19 @@ vim.g.tokyonight_style = "storm"
 vim.cmd[[colorscheme tokyonight]]
 
 -- bufferline
+-- TODO: add {} quote auto pair
+-- TODO: add auto format
 use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
-require("bufferline").setup{}
+require("bufferline").setup{
+	options = {
+		numbers = "ordinal"
+	}
+}
 
 -- keymaps
 local nomap = require'keymaps'
+nomap.nc('<C-w>c', 'bdelete')
+
 nomap.lnc('1', 'BufferLineGoToBuffer 1')
 nomap.lnc('2', 'BufferLineGoToBuffer 2')
 nomap.lnc('3', 'BufferLineGoToBuffer 3')
