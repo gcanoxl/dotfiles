@@ -39,7 +39,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'sumneko_lua' }
+local servers = { 'sumneko_lua', 'vimls' }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
@@ -74,6 +74,9 @@ local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 local lspkind = require('lspkind')
 cmp.setup({
+	completion = {
+		completeopt = 'menu,menuone,noinsert'
+	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
@@ -122,7 +125,7 @@ cmp.setup.cmdline(':', {
 
 -- keymaps
 local nomap = require 'keymaps'
-nomap.lnc('sf', 'Lspsaga lsp_finder')
+nomap.nc('<C-k>', 'Lspsaga hover_doc')
 nomap.lnc('sr', 'Lspsaga rename')
 
 return lspconfig
