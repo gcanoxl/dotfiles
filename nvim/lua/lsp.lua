@@ -66,9 +66,16 @@ lspconfig.sumneko_lua.setup {
 	}
 }
 
+local nomap = require 'keymaps'
 
 -- luasnip setup
 local luasnip = require 'luasnip'
+vim.api.nvim_set_keymap('i', '<Tab>',
+	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
+	{ silent = true, expr = true })
+nomap.ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+nomap.sc('<Tab>', [[lua require'luasnip'.jump(1)]])
+nomap.sc('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

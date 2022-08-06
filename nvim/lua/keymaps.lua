@@ -8,6 +8,10 @@ local nomap = {
 		vim.api.nvim_set_keymap('i', key, result, opts)
 	end,
 
+	ic = function(key, result)
+		vim.api.nvim_set_keymap('i', key, '<CMD>' .. result .. '<CR>', opts)
+	end,
+
 	n = function(key, result)
 		vim.api.nvim_set_keymap('n', key, result, opts)
 	end,
@@ -30,7 +34,15 @@ local nomap = {
 
 	vc = function(key, result)
 		vim.api.nvim_set_keymap('v', key, '<CMD>' .. result .. '<CR>', opts)
-	end
+	end,
+
+	s = function(key, result)
+		vim.api.nvim_set_keymap('s', key, result, opts)
+	end,
+
+	sc = function(key, result)
+		vim.api.nvim_set_keymap('s', key, '<CMD>' .. result .. '<CR>', opts)
+	end,
 }
 nomap.i('jk', '<ESC>')
 nomap.lnc('fw', 'write')

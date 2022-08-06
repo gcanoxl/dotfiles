@@ -1,3 +1,4 @@
+-- TODO: add aerial for symbols and telescope finder
 -- tree-sitter
 require 'plugins' {
 	'nvim-treesitter/nvim-treesitter',

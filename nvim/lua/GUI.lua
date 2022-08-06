@@ -11,6 +11,7 @@ if vim.g.vv == 1 then
 	vim.cmd [[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
 	vim.cmd [[VVset fontsize=18]]
 	nomap.lnc('tf', 'VVset invfullscreen')
+	--FIX:after quitting fullscreen, the window size is wrong
 end
 
 --
