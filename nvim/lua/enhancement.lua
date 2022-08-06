@@ -1,8 +1,10 @@
--- TODO: add aerial for symbols and telescope finder
 -- tree-sitter
 require 'plugins' {
 	'nvim-treesitter/nvim-treesitter',
 	run = ':TSUpdate'
+}
+require 'nvim-treesitter.configs'.setup {
+	ensure_installed = { "lua", "vim" },
 }
 
 -- telescope
