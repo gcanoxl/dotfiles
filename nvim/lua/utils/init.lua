@@ -1,9 +1,5 @@
 _G.geem = {}
 
-geem.maps = {}
-geem.configs = {}
-geem.plugins = {}
-
 function geem.initialize_packer()
 	local packer_avail, _ = pcall(require, 'packer')
 	if not packer_avail then

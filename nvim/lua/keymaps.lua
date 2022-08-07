@@ -1,53 +1,33 @@
 -- TODO: refactor this file
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
 
-local opts = { noremap = true, silent = true }
+local map_table = { n = {}, i = {}, v = {}, s = {} }
 
-local nomap = {
-	i = function(key, result)
-		vim.api.nvim_set_keymap('i', key, result, opts)
-	end,
+local function map_n(key, cmd, desc)
+	map_table.n[key] = { cmd = cmd, desc = desc }
+end
 
-	ic = function(key, result)
-		vim.api.nvim_set_keymap('i', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+local function map_n_command(key, command, desc)
+	map_n(key, '<CMD>' .. command .. '<CR>', desc)
+end
 
-	n = function(key, result)
-		vim.api.nvim_set_keymap('n', key, result, opts)
-	end,
+local function map_n_command_leader(key, command, desc)
+	map_n_command('<LEADER>' .. key, command, desc)
+end
 
-	nc = function(key, result)
-		vim.api.nvim_set_keymap('n', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+local function map_i(key, cmd, desc)
+	map_table.i[key] = { cmd = cmd, desc = desc }
+end
 
-	ln = function(key, result)
-		vim.api.nvim_set_keymap('n', '<leader>' .. key, result, opts)
-	end,
+--keymaps
 
-	lnc = function(key, result)
-		vim.api.nvim_set_keymap('n', '<LEADER>' .. key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+map_i('jk', '<ESC>', 'Quit Insert Mode')
+map_n_command_leader('fw', 'write', 'Save File')
+map_n_command('<D-s>', 'write', 'Save File')
+map_n_command_leader('qq', 'quit', "Quit")
 
-	v = function(key, result)
-		vim.api.nvim_set_keymap('v', key, result, opts)
-	end,
-
-	vc = function(key, result)
-		vim.api.nvim_set_keymap('v', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
-
-	s = function(key, result)
-		vim.api.nvim_set_keymap('s', key, result, opts)
-	end,
-
-	sc = function(key, result)
-		vim.api.nvim_set_keymap('s', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
-}
-nomap.i('jk', '<ESC>')
-nomap.lnc('fw', 'write')
-nomap.nc('<D-s>', 'write')
-nomap.lnc('qq', 'quitall')
-
-return nomap
+-- auto mapping
+for mode, maps in pairs(map_table) do
+	for keymap, options in pairs(maps) do
+		-- TODO: implement mapping
+	end
+end
