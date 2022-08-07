@@ -1,3 +1,4 @@
+-- TODO: delete this file after refactor
 require 'plugins' {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v2.x",

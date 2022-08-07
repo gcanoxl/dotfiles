@@ -1,3 +1,4 @@
+-- TODO: refactor this file
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 

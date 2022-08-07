@@ -1,3 +1,4 @@
+-- TODO: delete this file after refactor
 -- git
 require 'plugins' {
 	'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim',

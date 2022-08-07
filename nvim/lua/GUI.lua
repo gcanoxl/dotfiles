@@ -1,3 +1,4 @@
+-- TODO: delete this file after refactor
 local nomap = require 'keymaps'
 
 -- VV client

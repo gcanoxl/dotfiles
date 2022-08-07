@@ -1,3 +1,4 @@
+-- TODO: delete this file after refactor
 require 'plugins' {
 	"williamboman/mason.nvim",
 	"neovim/nvim-lspconfig",
