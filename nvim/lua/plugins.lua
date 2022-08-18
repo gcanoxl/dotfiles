@@ -5,6 +5,8 @@ local geem_plugins = {
 	-- Colorschemes
 	'dr4vs/neon.nvim',
 	'folke/tokyonight.nvim',
+	'sainnhe/sonokai',
+	'shaunsingh/nord.nvim',
 
 	-- Icons
 	'kyazdani42/nvim-web-devicons',
@@ -115,7 +117,13 @@ local geem_plugins = {
 	-- Terminal
 	{
 		"akinsho/toggleterm.nvim", tag = 'v2.*',
-		config = function() require("toggleterm").setup() end
+		config = function() require("toggleterm").setup({
+				direction = 'float',
+				float_opts = {
+					border = 'rounded'
+				}
+			})
+		end
 	},
 
 	-- Auto pairs

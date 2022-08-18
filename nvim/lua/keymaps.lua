@@ -53,6 +53,7 @@ geem.map_ncl('ff', 'Telescope find_files')
 geem.map_ncl('fr', 'Telescope oldfiles')
 geem.map_ncl('ss', 'Telescope live_grep')
 geem.map_ncl('hh', 'Telescope help_tags')
+geem.map_ncl('tc', 'Telescope colorscheme')
 
 -- TodoList
 geem.map_ncl('ts', 'TodoTelescope')
