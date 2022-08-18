@@ -12,6 +12,14 @@ local geem_plugins = {
 	-- Lua Fucntions
 	"nvim-lua/plenary.nvim",
 
+	-- Keymaps Hinter
+	{
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup {}
+		end
+	},
+
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
@@ -23,7 +31,6 @@ local geem_plugins = {
 		'akinsho/bufferline.nvim', tag = "v2.*",
 		config = function() require 'plugins.bufferline' end
 	},
-
 
 	-- Fuzzy Finder
 	{
@@ -39,7 +46,8 @@ local geem_plugins = {
 
 	-- Mouse Movement
 	{
-		'phaazon/hop.nvim', branch = 'v2'
+		'phaazon/hop.nvim', branch = 'v2',
+		config = function() require 'hop'.setup() end
 	},
 
 	-- Git Client
@@ -51,7 +59,7 @@ local geem_plugins = {
 	-- Session Manager
 	{
 		'Shatur/neovim-session-manager',
-		config = function() require('session_manager').setup() end
+		config = function() require('session_manager').setup({}) end
 	},
 
 	-- Syntax Highlighting
@@ -62,7 +70,10 @@ local geem_plugins = {
 	},
 
 	-- Lsp Config
-	"neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
+		config = function() require('plugins.lsp') end
+	},
 
 	-- Lsp Manager
 	{
@@ -76,7 +87,6 @@ local geem_plugins = {
 	-- Snippet Engine
 	{
 		'L3MON4D3/LuaSnip',
-		config = function() require 'plugins.luasnip' end
 	},
 
 	-- Completion Engine
@@ -98,11 +108,7 @@ local geem_plugins = {
 	},
 
 	-- Better Buffer Closing
-	{
-		'famiu/bufdelete.nvim',
-		config = function() require('bufdelete').setup() end
-	},
-
+	'famiu/bufdelete.nvim',
 
 	-- Todo List
 	{

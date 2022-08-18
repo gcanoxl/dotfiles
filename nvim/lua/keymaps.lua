@@ -1,26 +1,22 @@
 -- leader
 vim.g.mapleader = ' '
 
---keymaps
-
 -- General
-geem.map_i('jk', '<ESC>', 'Quit Insert Mode')
-geem.map_ncl('fw', 'write', 'Save File')
-geem.map_ncl('qq', 'quit', "Quit")
+geem.map_i('jk', '<ESC>')
+geem.map_ncl('fw', 'write')
+geem.map_ncl('qq', 'quitall')
 
 -- Packer
-geem.map_ncl('pi', 'PackerInstall', 'Package Install')
-geem.map_ncl('pc', 'PackerCompile', 'Package Compile')
-geem.map_ncl('pC', 'PackerClean', 'Package Clean')
-geem.map_ncl('pu', 'PackerSync', 'Package Update')
-geem.map_ncl('pl', 'PackerStatus', 'Package Status')
+geem.map_ncl('pi', 'PackerInstall')
+geem.map_ncl('pc', 'PackerCompile')
+geem.map_ncl('pC', 'PackerClean')
+geem.map_ncl('pu', 'PackerSync')
+geem.map_ncl('pl', 'PackerStatus')
 
 -- Hop
-geem.map_ncl('f', 'HopChar1')
+geem.map_nc('f', 'HopChar1')
 
 -- BufferLine
--- TODO: install which key
--- TODO: add descriptions
 geem.map_ncl('1', 'BufferLineGoToBuffer 1')
 geem.map_ncl('2', 'BufferLineGoToBuffer 2')
 geem.map_ncl('3', 'BufferLineGoToBuffer 3')

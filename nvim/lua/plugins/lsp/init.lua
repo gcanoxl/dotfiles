@@ -4,7 +4,7 @@ if not status_ok then return end
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'sumneko_lua', 'vimls' }
 
-local capabilities = require 'config.lsp.handlers'
+local capabilities = require 'plugins.lsp.handlers'
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {

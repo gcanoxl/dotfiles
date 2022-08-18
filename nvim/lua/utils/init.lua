@@ -23,39 +23,39 @@ function geem.initialize_packer()
 end
 
 -- mapping
-function geem.map_n(key, cmd, desc)
-	geem.map_table.n[key] = { cmd = cmd, desc = desc }
+function geem.map_n(key, cmd)
+	geem.map_table.n[key] = { cmd = cmd }
 end
 
-function geem.map_i(key, cmd, desc)
-	geem.map_table.i[key] = { cmd = cmd, desc = desc }
+function geem.map_i(key, cmd)
+	geem.map_table.i[key] = { cmd = cmd }
 end
 
-function geem.map_s(key, cmd, desc)
-	geem.map_table.s[key] = { cmd = cmd, desc = desc }
+function geem.map_s(key, cmd)
+	geem.map_table.s[key] = { cmd = cmd }
 end
 
-function geem.map_nc(key, command, desc)
-	geem.map_n(key, '<CMD>' .. command .. '<CR>', desc)
+function geem.map_nc(key, command)
+	geem.map_n(key, '<CMD>' .. command .. '<CR>')
 end
 
-function geem.map_ic(key, command, desc)
-	geem.map_i(key, '<CMD>' .. command .. '<CR>', desc)
+function geem.map_ic(key, command)
+	geem.map_i(key, '<CMD>' .. command .. '<CR>')
 end
 
-function geem.map_sc(key, command, desc)
-	geem.map_s(key, '<CMD>' .. command .. '<CR>', desc)
+function geem.map_sc(key, command)
+	geem.map_s(key, '<CMD>' .. command .. '<CR>')
 end
 
-function geem.map_ncl(key, command, desc)
-	geem.map_nc('<LEADER>' .. key, command, desc)
+function geem.map_ncl(key, command)
+	geem.map_nc('<LEADER>' .. key, command)
 end
 
 function geem.map_mappings()
 	for mode, maps in pairs(geem.map_table) do
 		for keymap, options in pairs(maps) do
 			vim.api.nvim_set_keymap(mode, keymap, options.cmd,
-				{ noremap = true, silent = true })
+				{ noremap = true, silent = true, nowait = true })
 		end
 	end
 end
