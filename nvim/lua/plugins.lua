@@ -6,22 +6,29 @@ local geem_plugins = {
 	'dr4vs/neon.nvim',
 	'folke/tokyonight.nvim',
 
+	-- Dependencies
+	'kyazdani42/nvim-web-devicons',
+	"nvim-lua/plenary.nvim",
+	"MunifTanjim/nui.nvim",
+
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
-		config = function()
-			require('feline').setup()
-		end
+		config = function() require('feline').setup() end
 	},
 
 	-- Buffer Line
-	{ 'akinsho/bufferline.nvim',
-		tag = "v2.*",
-		requires = 'kyazdani42/nvim-web-devicons',
-		config = function()
-			require 'plugins.bufferline'
-		end
+	{
+		'akinsho/bufferline.nvim', tag = "v2.*",
+		config = function() require 'plugins.bufferline' end
+	},
+
+	-- Neo Tree
+	{
+		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
+		config = function() require 'plugins.neo-tree' end
 	}
+
 }
 
 geem.initialize_packer()

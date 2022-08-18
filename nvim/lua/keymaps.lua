@@ -15,6 +15,7 @@ geem.map_ncl('pu', 'PackerSync', 'Package Update')
 geem.map_ncl('pl', 'PackerStatus', 'Package Status')
 
 -- Buffer Line
+-- TODO: add descriptions
 geem.map_ncl('1', 'BufferLineGoToBuffer 1')
 geem.map_ncl('2', 'BufferLineGoToBuffer 2')
 geem.map_ncl('3', 'BufferLineGoToBuffer 3')
@@ -27,6 +28,9 @@ geem.map_ncl('9', 'BufferLineGoToBuffer 9')
 geem.map_ncl('0', 'BufferLineGoToBuffer 10')
 geem.map_nc('}', 'BufferLineCycleNext')
 geem.map_nc('{', 'BufferLineCyclePrev')
+
+-- Neo Tree
+geem.map_ncl('fl', 'Neotree', 'File Explorer')
 
 -- auto mapping
 for mode, maps in pairs(geem.map_table) do
