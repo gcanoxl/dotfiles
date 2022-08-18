@@ -1,6 +1,6 @@
 require 'options'
 require 'utils'
-require 'plugin'
+require 'plugins'
 
 --------
 
