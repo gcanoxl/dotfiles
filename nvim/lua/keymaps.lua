@@ -19,6 +19,7 @@ geem.map_ncl('pl', 'PackerStatus', 'Package Status')
 geem.map_ncl('f', 'HopChar1')
 
 -- Buffer Line
+-- TODO: install which key
 -- TODO: add descriptions
 geem.map_ncl('1', 'BufferLineGoToBuffer 1')
 geem.map_ncl('2', 'BufferLineGoToBuffer 2')
@@ -36,10 +37,11 @@ geem.map_nc('{', 'BufferLineCyclePrev')
 -- Neo Tree
 geem.map_ncl('fl', 'Neotree', 'File Explorer')
 
--- auto mapping
-for mode, maps in pairs(geem.map_table) do
-	for keymap, options in pairs(maps) do
-		vim.api.nvim_set_keymap(mode, keymap, options.cmd,
-			{ noremap = true, silent = true })
-	end
-end
+
+-- Luasnip
+geem.map_ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+geem.map_sc('<Tab>', [[lua require'luasnip'.jump(1)]])
+geem.map_sc('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+
+-- END
+geem.map_mappings()

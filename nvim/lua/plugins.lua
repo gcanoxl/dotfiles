@@ -1,16 +1,16 @@
 local geem_plugins = {
-	-- manage itself
+	-- Plugin manger
 	'wbthomason/packer.nvim',
 
 	-- Colorschemes
 	'dr4vs/neon.nvim',
 	'folke/tokyonight.nvim',
 
-	-- Dependencies
-	-- TODO: furthr detailed descriptions
+	-- Icons
 	'kyazdani42/nvim-web-devicons',
+
+	-- Lua Fucntions
 	"nvim-lua/plenary.nvim",
-	"MunifTanjim/nui.nvim",
 
 	-- Status Line
 	{
@@ -24,15 +24,53 @@ local geem_plugins = {
 		config = function() require 'plugins.bufferline' end
 	},
 
-	-- Neo Tree
+	-- File Explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
+		requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
 		config = function() require 'plugins.neo-tree' end
 	},
 
-	-- Hop
+	-- Mouse Movement
 	{
 		'phaazon/hop.nvim', branch = 'v2'
+	},
+
+
+	-- Lsp Config
+	"neovim/nvim-lspconfig",
+
+	-- Lsp Manager
+	{
+		"williamboman/mason.nvim",
+		config = function() require 'plugins.mason' end
+	},
+
+	-- Lsp Icons
+	'onsails/lspkind.nvim',
+
+	-- Snippet Engine
+	{
+		'L3MON4D3/LuaSnip',
+		config = function() require 'plugins.luasnip' end
+	},
+
+	-- Completion Engine
+	{
+		'hrsh7th/nvim-cmp',
+		config = function() require 'plugins.cmp' end
+	},
+
+	-- Lsp Completion Source
+	{
+		'hrsh7th/cmp-nvim-lsp',
+		after = 'nvim-cmp'
+	},
+
+	-- Snippet Completion Source
+	{
+		'saadparwaiz1/cmp_luasnip',
+		after = 'nvim-cmp'
 	}
 
 }
