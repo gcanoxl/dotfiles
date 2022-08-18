@@ -51,6 +51,14 @@ local geem_plugins = {
 		config = function() require 'hop'.setup() end
 	},
 
+	-- Better Commenting
+	{
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	},
+
 	-- Git Client
 	{
 		'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim',
