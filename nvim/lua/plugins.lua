@@ -12,14 +12,6 @@ local geem_plugins = {
 	-- Lua Fucntions
 	"nvim-lua/plenary.nvim",
 
-	-- Keymaps Hinter
-	{
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup {}
-		end
-	},
-
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
