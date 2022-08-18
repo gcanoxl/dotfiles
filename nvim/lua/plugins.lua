@@ -78,7 +78,7 @@ local geem_plugins = {
 	-- Lsp Manager
 	{
 		"williamboman/mason.nvim",
-		config = function() require 'plugins.mason' end
+		config = function() require('plugins.mason') end
 	},
 
 	-- Lsp Icons
@@ -87,6 +87,7 @@ local geem_plugins = {
 	-- Snippet Engine
 	{
 		'L3MON4D3/LuaSnip',
+		config = function() require('plugins.luasnip') end
 	},
 
 	-- Completion Engine

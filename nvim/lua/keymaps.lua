@@ -31,12 +31,7 @@ geem.map_nc('}', 'BufferLineCycleNext')
 geem.map_nc('{', 'BufferLineCyclePrev')
 
 -- Neo Tree
-geem.map_ncl('fl', 'Neotree', 'File Explorer')
-
--- Luasnip
-geem.map_ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
-geem.map_sc('<Tab>', [[lua require'luasnip'.jump(1)]])
-geem.map_sc('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+geem.map_ncl('fl', 'Neotree')
 
 -- Neogit
 geem.map_ncl('gg', 'Neogit')
