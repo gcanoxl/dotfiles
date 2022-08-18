@@ -33,7 +33,7 @@ local geem_plugins = {
 	-- File Explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
-		requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
+		requires = { "MunifTanjim/nui.nvim" },
 		config = function() require 'plugins.neo-tree' end
 	},
 
