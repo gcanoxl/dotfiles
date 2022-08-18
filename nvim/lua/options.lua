@@ -18,3 +18,9 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
+
+-- TODO: create a preferences.lua file
+-- TODO: find a proper place for the two lines
+--
+vim.g.tokyonight_style = "storm"
+vim.cmd [[colorscheme tokyonight]]

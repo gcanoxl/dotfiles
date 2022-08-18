@@ -1,53 +1,74 @@
--- TODO: refactor this file
+-- leader
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
 
-local opts = { noremap = true, silent = true }
+--keymaps
 
-local nomap = {
-	i = function(key, result)
-		vim.api.nvim_set_keymap('i', key, result, opts)
-	end,
+-- General
+geem.map_i('jk', '<ESC>', 'Quit Insert Mode')
+geem.map_ncl('fw', 'write', 'Save File')
+geem.map_ncl('qq', 'quit', "Quit")
 
-	ic = function(key, result)
-		vim.api.nvim_set_keymap('i', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+-- Packer
+geem.map_ncl('pi', 'PackerInstall', 'Package Install')
+geem.map_ncl('pc', 'PackerCompile', 'Package Compile')
+geem.map_ncl('pC', 'PackerClean', 'Package Clean')
+geem.map_ncl('pu', 'PackerSync', 'Package Update')
+geem.map_ncl('pl', 'PackerStatus', 'Package Status')
 
-	n = function(key, result)
-		vim.api.nvim_set_keymap('n', key, result, opts)
-	end,
+-- Hop
+geem.map_ncl('f', 'HopChar1')
 
-	nc = function(key, result)
-		vim.api.nvim_set_keymap('n', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+-- BufferLine
+-- TODO: install which key
+-- TODO: add descriptions
+geem.map_ncl('1', 'BufferLineGoToBuffer 1')
+geem.map_ncl('2', 'BufferLineGoToBuffer 2')
+geem.map_ncl('3', 'BufferLineGoToBuffer 3')
+geem.map_ncl('4', 'BufferLineGoToBuffer 4')
+geem.map_ncl('5', 'BufferLineGoToBuffer 5')
+geem.map_ncl('6', 'BufferLineGoToBuffer 6')
+geem.map_ncl('7', 'BufferLineGoToBuffer 7')
+geem.map_ncl('8', 'BufferLineGoToBuffer 8')
+geem.map_ncl('9', 'BufferLineGoToBuffer 9')
+geem.map_ncl('0', 'BufferLineGoToBuffer 10')
+geem.map_nc('}', 'BufferLineCycleNext')
+geem.map_nc('{', 'BufferLineCyclePrev')
 
-	ln = function(key, result)
-		vim.api.nvim_set_keymap('n', '<leader>' .. key, result, opts)
-	end,
+-- Neo Tree
+geem.map_ncl('fl', 'Neotree', 'File Explorer')
 
-	lnc = function(key, result)
-		vim.api.nvim_set_keymap('n', '<LEADER>' .. key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+-- Luasnip
+geem.map_ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+geem.map_sc('<Tab>', [[lua require'luasnip'.jump(1)]])
+geem.map_sc('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
 
-	v = function(key, result)
-		vim.api.nvim_set_keymap('v', key, result, opts)
-	end,
+-- Neogit
+geem.map_ncl('gg', 'Neogit')
 
-	vc = function(key, result)
-		vim.api.nvim_set_keymap('v', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
+-- SessionManager
+geem.map_ncl('pR', 'SessionManager load_last_session')
+geem.map_ncl('pf', 'SessionManager load_session')
+geem.map_ncl('ps', 'SessionManager save_current_session')
+geem.map_ncl('pd', 'SessionManager delete_session')
 
-	s = function(key, result)
-		vim.api.nvim_set_keymap('s', key, result, opts)
-	end,
+-- Bufdelete
+geem.map_nc('<C-w>c', 'lua require"bufdelete".bufdelete(0, false)')
 
-	sc = function(key, result)
-		vim.api.nvim_set_keymap('s', key, '<CMD>' .. result .. '<CR>', opts)
-	end,
-}
-nomap.i('jk', '<ESC>')
-nomap.lnc('fw', 'write')
-nomap.nc('<D-s>', 'write')
-nomap.lnc('qq', 'quitall')
+-- Telescope
+geem.map_nc('<C-f>', 'Telescope buffers')
+geem.map_ncl('<leader>', 'Telescope commands')
+geem.map_ncl('bb', 'Telescope buffers')
+geem.map_ncl('ff', 'Telescope find_files')
+geem.map_ncl('fr', 'Telescope oldfiles')
+geem.map_ncl('ss', 'Telescope live_grep')
+geem.map_ncl('hh', 'Telescope help_tags')
 
-return nomap
+-- TodoList
+geem.map_ncl('ts', 'TodoTelescope')
+geem.map_ncl('tt', 'TodoQuickFix')
+
+-- Terminal
+geem.map_nc('!', 'ToggleTerm')
+
+-- END
+geem.map_mappings()
