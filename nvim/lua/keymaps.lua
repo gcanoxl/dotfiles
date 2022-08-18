@@ -10,9 +10,13 @@ geem.map_ncl('qq', 'quit', "Quit")
 
 -- Packer
 geem.map_ncl('pi', 'PackerInstall', 'Package Install')
-geem.map_ncl('pc', 'PackerClean', 'Package Clean')
+geem.map_ncl('pc', 'PackerCompile', 'Package Compile')
+geem.map_ncl('pC', 'PackerClean', 'Package Clean')
 geem.map_ncl('pu', 'PackerSync', 'Package Update')
 geem.map_ncl('pl', 'PackerStatus', 'Package Status')
+
+-- Hop
+geem.map_ncl('f', 'HopChar1')
 
 -- Buffer Line
 -- TODO: add descriptions

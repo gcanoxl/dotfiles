@@ -7,6 +7,7 @@ local geem_plugins = {
 	'folke/tokyonight.nvim',
 
 	-- Dependencies
+	-- TODO: furthr detailed descriptions
 	'kyazdani42/nvim-web-devicons',
 	"nvim-lua/plenary.nvim",
 	"MunifTanjim/nui.nvim",
@@ -27,6 +28,11 @@ local geem_plugins = {
 	{
 		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
 		config = function() require 'plugins.neo-tree' end
+	},
+
+	-- Hop
+	{
+		'phaazon/hop.nvim', branch = 'v2'
 	}
 
 }
