@@ -54,9 +54,7 @@ local geem_plugins = {
 	-- Better Commenting
 	{
 		'numToStr/Comment.nvim',
-		config = function()
-			require('Comment').setup()
-		end
+		config = function() require('Comment').setup() end
 	},
 
 	-- Git Client
