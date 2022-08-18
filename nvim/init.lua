@@ -10,11 +10,11 @@ require 'utils.dev'
 
 --
 require 'plugins'
+require 'keymaps'
 
 --------
 
 
-require 'keymaps'
 -- require 'GUI'
 -- require 'files'
 -- require 'editing'

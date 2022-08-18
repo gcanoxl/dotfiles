@@ -1,28 +1,20 @@
 local map_table = { n = {}, i = {}, v = {}, s = {} }
 
-local function map_n(key, cmd, desc)
-	map_table.n[key] = { cmd = cmd, desc = desc }
-end
-
-local function map_n_command(key, command, desc)
-	map_n(key, '<CMD>' .. command .. '<CR>', desc)
-end
-
-local function map_n_command_leader(key, command, desc)
-	map_n_command('<LEADER>' .. key, command, desc)
-end
-
-local function map_i(key, cmd, desc)
-	map_table.i[key] = { cmd = cmd, desc = desc }
-end
-
 -- leader
 vim.g.mapleader = ' '
 
 --keymaps
-map_i('jk', '<ESC>', 'Quit Insert Mode')
-map_n_command_leader('fw', 'write', 'Save File')
-map_n_command_leader('qq', 'quit', "Quit")
+
+-- General
+geem.map_i('jk', '<ESC>', 'Quit Insert Mode')
+geem.map_ncl('fw', 'write', 'Save File')
+geem.map_ncl('qq', 'quit', "Quit")
+
+-- Packer
+geem.map_ncl('pi', 'PackerInstall', 'Package Install')
+geem.map_ncl('pc', 'PackerClean', 'Package Clean')
+geem.map_ncl('pu', 'PackerSync', 'Package Update')
+geem.map_ncl('pl', 'PackerStatus', 'Package Status')
 
 -- auto mapping
 for mode, maps in pairs(map_table) do

@@ -1,20 +1,6 @@
 -- TODO: delete this file after refactor
-local nomap = require 'keymaps'
 
--- VV client
-local guiKeySupport = 0
-if vim.g.vv == 1 then
-	guiKeySupport = 1
-	vim.cmd [[VVset width=100%]]
-	vim.cmd [[VVset height=100%]]
-	vim.cmd [[VVset bold=1]]
-	vim.cmd [[VVset fullscreen=0]]
-	vim.cmd [[VVset fontfamily=Courier,\ Hack\ Nerd\ Font]]
-	vim.cmd [[VVset fontsize=18]]
-end
-
---
-local use = require 'plugins'
+-- FIX: this is the line
 
 use {
 	'feline-nvim/feline.nvim',
