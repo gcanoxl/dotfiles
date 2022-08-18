@@ -2,7 +2,26 @@ local geem_plugins = {
 	-- manage itself
 	'wbthomason/packer.nvim',
 
-	--
+	-- Colorschemes
+	'dr4vs/neon.nvim',
+	'folke/tokyonight.nvim',
+
+	-- Status Line
+	{
+		'feline-nvim/feline.nvim',
+		config = function()
+			require('feline').setup()
+		end
+	},
+
+	-- Buffer Line
+	{ 'akinsho/bufferline.nvim',
+		tag = "v2.*",
+		requires = 'kyazdani42/nvim-web-devicons',
+		config = function()
+			require 'plugins.bufferline'
+		end
+	}
 }
 
 geem.initialize_packer()
@@ -15,6 +34,7 @@ if status_ok then
 				use(plugin)
 			end
 		end,
+		-- Packer's config
 		config = {
 			ensure_dependencies = true,
 

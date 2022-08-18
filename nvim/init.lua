@@ -6,9 +6,6 @@ require 'plugins'
 require 'keymaps'
 
 --------
-
-
---require 'GUI'
 -- require 'files'
 -- require 'editing'
 -- require 'lsp'
