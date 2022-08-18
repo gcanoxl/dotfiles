@@ -24,6 +24,12 @@ local geem_plugins = {
 		config = function() require 'plugins.bufferline' end
 	},
 
+
+	-- Fuzzy Finder
+	{
+		'nvim-telescope/telescope.nvim', tag = '0.1.0',
+	},
+
 	-- File Explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
@@ -46,6 +52,13 @@ local geem_plugins = {
 	{
 		'Shatur/neovim-session-manager',
 		config = function() require('session_manager').setup() end
+	},
+
+	-- Syntax Highlighting
+	{
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate',
+		config = function() require('plugins.treesitter') end
 	},
 
 	-- Lsp Config
@@ -82,8 +95,34 @@ local geem_plugins = {
 	{
 		'saadparwaiz1/cmp_luasnip',
 		after = 'nvim-cmp'
-	}
+	},
 
+	-- Better Buffer Closing
+	{
+		'famiu/bufdelete.nvim',
+		config = function() require('bufdelete').setup() end
+	},
+
+
+	-- Todo List
+	{
+		"folke/todo-comments.nvim",
+		config = function() require('todo-comments').setup() end
+	},
+
+	-- Terminal
+	{
+		"akinsho/toggleterm.nvim", tag = 'v2.*',
+		config = function() require("toggleterm").setup() end
+	},
+
+	-- Auto pairs
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require('nvim-autopairs').setup()
+		end
+	},
 }
 
 geem.initialize_packer()

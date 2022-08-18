@@ -37,7 +37,6 @@ geem.map_nc('{', 'BufferLineCyclePrev')
 -- Neo Tree
 geem.map_ncl('fl', 'Neotree', 'File Explorer')
 
-
 -- Luasnip
 geem.map_ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
 geem.map_sc('<Tab>', [[lua require'luasnip'.jump(1)]])
@@ -51,6 +50,25 @@ geem.map_ncl('pR', 'SessionManager load_last_session')
 geem.map_ncl('pf', 'SessionManager load_session')
 geem.map_ncl('ps', 'SessionManager save_current_session')
 geem.map_ncl('pd', 'SessionManager delete_session')
+
+-- Bufdelete
+geem.map_nc('<C-w>c', 'lua require"bufdelete".bufdelete(0, false)')
+
+-- Telescope
+geem.map_nc('<C-f>', 'Telescope buffers')
+geem.map_ncl('<leader>', 'Telescope commands')
+geem.map_ncl('bb', 'Telescope buffers')
+geem.map_ncl('ff', 'Telescope find_files')
+geem.map_ncl('fr', 'Telescope oldfiles')
+geem.map_ncl('ss', 'Telescope live_grep')
+geem.map_ncl('hh', 'Telescope help_tags')
+
+-- TodoList
+geem.map_ncl('ts', 'TodoTelescope')
+geem.map_ncl('tt', 'TodoQuickFix')
+
+-- Terminal
+geem.map_nc('!', 'ToggleTerm')
 
 -- END
 geem.map_mappings()
