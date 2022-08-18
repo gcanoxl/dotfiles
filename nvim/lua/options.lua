@@ -18,6 +18,3 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
-
-vim.g.tokyonight_style = "storm"
-vim.cmd [[colorscheme tokyonight]]
