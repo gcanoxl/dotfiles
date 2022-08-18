@@ -17,7 +17,11 @@ local geem_plugins = {
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
-		config = function() require('feline').setup() end
+		config = function()
+			require('feline').setup({
+				disable = { filetypes = { "^neo%-tree$" } },
+			})
+		end
 	},
 
 	-- Buffer Line

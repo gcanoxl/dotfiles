@@ -4,5 +4,5 @@ geem.initialize_packer()
 require 'plugins'
 require 'keymaps'
 
-vim.g.tokyonight_style = "storm"
-vim.cmd [[colorscheme nord]]
+-- vim.g.tokyonight_style = ""
+vim.cmd [[colorscheme sonokai]]
