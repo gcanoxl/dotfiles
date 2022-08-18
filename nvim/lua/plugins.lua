@@ -36,6 +36,17 @@ local geem_plugins = {
 		'phaazon/hop.nvim', branch = 'v2'
 	},
 
+	-- Git Client
+	{
+		'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim',
+		config = function() require('neogit').setup() end
+	},
+
+	-- Session Manager
+	{
+		'Shatur/neovim-session-manager',
+		config = function() require('session_manager').setup() end
+	},
 
 	-- Lsp Config
 	"neovim/nvim-lspconfig",

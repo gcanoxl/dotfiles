@@ -18,7 +18,7 @@ geem.map_ncl('pl', 'PackerStatus', 'Package Status')
 -- Hop
 geem.map_ncl('f', 'HopChar1')
 
--- Buffer Line
+-- BufferLine
 -- TODO: install which key
 -- TODO: add descriptions
 geem.map_ncl('1', 'BufferLineGoToBuffer 1')
@@ -42,6 +42,15 @@ geem.map_ncl('fl', 'Neotree', 'File Explorer')
 geem.map_ic('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
 geem.map_sc('<Tab>', [[lua require'luasnip'.jump(1)]])
 geem.map_sc('<S-Tab>', [[lua require'luasnip'.jump(-1)]])
+
+-- Neogit
+geem.map_ncl('gg', 'Neogit')
+
+-- SessionManager
+geem.map_ncl('pR', 'SessionManager load_last_session')
+geem.map_ncl('pf', 'SessionManager load_session')
+geem.map_ncl('ps', 'SessionManager save_current_session')
+geem.map_ncl('pd', 'SessionManager delete_session')
 
 -- END
 geem.map_mappings()

@@ -6,6 +6,4 @@ require 'plugins'
 require 'keymaps'
 
 --------
--- require 'lsp'
--- require 'projects'
 -- require 'enhancement'
