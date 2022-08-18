@@ -22,5 +22,5 @@ end
 -- TODO: create a preferences.lua file
 -- TODO: find a proper place for the two lines
 --
--- vim.g.tokyonight_style = "storm"
--- vim.cmd [[colorscheme tokyonight]]
+vim.g.tokyonight_style = "storm"
+vim.cmd [[colorscheme tokyonight]]
