@@ -6,3 +6,6 @@ require 'keymaps'
 
 -- vim.g.tokyonight_style = ""
 vim.cmd [[colorscheme sonokai]]
+
+-- configurations for GUI clients
+require 'gui'
