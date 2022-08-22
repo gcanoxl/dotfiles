@@ -94,6 +94,12 @@ local geem_plugins = {
 	-- Lsp Icons
 	'onsails/lspkind.nvim',
 
+	-- Lsp Signature
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function() require "lsp_signature".setup({}) end
+	},
+
 	-- Snippet Engine
 	{
 		'L3MON4D3/LuaSnip',
