@@ -1,5 +1,9 @@
 local avali, _ = pcall(require, 'luasnip')
-if not avali then return end
+local loader_avail, loader = pcall(require, "luasnip/loaders/from_vscode")
+if not (avali and loader_avail) then return end
+
+-- load snippets
+loader.lazy_load()
 
 vim.api.nvim_set_keymap('i', '<Tab>',
 	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],

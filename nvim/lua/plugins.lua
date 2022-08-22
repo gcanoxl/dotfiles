@@ -100,6 +100,10 @@ local geem_plugins = {
 		config = function() require('plugins.luasnip') end
 	},
 
+	-- Snippet Collection
+	-- TODO: learn how to add my own snippets so that delete others
+	"rafamadriz/friendly-snippets",
+
 	-- Completion Engine
 	{
 		'hrsh7th/nvim-cmp',
