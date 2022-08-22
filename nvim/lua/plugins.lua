@@ -133,12 +133,18 @@ local geem_plugins = {
 		end
 	},
 
-	-- Auto pairs
+	-- Auto Pairs
 	{
 		"windwp/nvim-autopairs",
 		config = function()
 			require('nvim-autopairs').setup()
 		end
+	},
+
+	-- Go Support
+	{
+		'ray-x/go.nvim',
+		config = function() require('go').setup() end
 	},
 }
 
