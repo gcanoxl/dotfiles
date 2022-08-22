@@ -163,6 +163,8 @@ if status_ok then
 			end
 		end,
 		-- Packer's config
+		-- TODO: change compilered file so that
+		-- TODO: delete the line in gitignore file
 		config = {
 			ensure_dependencies = true,
 
