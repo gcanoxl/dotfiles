@@ -4,8 +4,8 @@ geem.initialize_packer()
 require 'plugins'
 require 'keymaps'
 
--- vim.g.tokyonight_style = ""
-vim.cmd [[colorscheme sonokai]]
+vim.g.tokyonight_style = "storm"
+vim.cmd [[colorscheme tokyonight]]
 
 -- configurations for GUI clients
 require 'gui'
