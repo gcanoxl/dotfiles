@@ -107,16 +107,10 @@ local geem_plugins = {
 	},
 
 	-- Lsp Completion Source
-	{
-		'hrsh7th/cmp-nvim-lsp',
-		after = 'nvim-cmp'
-	},
+	'hrsh7th/cmp-nvim-lsp',
 
 	-- Snippet Completion Source
-	{
-		'saadparwaiz1/cmp_luasnip',
-		after = 'nvim-cmp'
-	},
+	'saadparwaiz1/cmp_luasnip',
 
 	-- Better Buffer Closing
 	'famiu/bufdelete.nvim',
