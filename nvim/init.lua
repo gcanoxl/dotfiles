@@ -8,4 +8,6 @@ vim.g.tokyonight_style = "storm"
 vim.cmd [[colorscheme tokyonight]]
 
 -- configurations for GUI clients
-require 'gui'
+if vim.g.neovide then
+	require 'gui'
+end
