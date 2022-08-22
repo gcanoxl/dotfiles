@@ -19,7 +19,7 @@ vim.diagnostic.config({
 })
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'sumneko_lua', 'vimls', 'pyright' }
+local servers = { 'sumneko_lua', 'vimls', 'pyright', 'gopls' }
 
 local capabilities = require 'plugins.lsp.handlers'
 
