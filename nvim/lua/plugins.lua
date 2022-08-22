@@ -76,6 +76,9 @@ local geem_plugins = {
 		config = function() require('plugins.treesitter') end
 	},
 
+	-- Text Objects based on treesitter
+	'nvim-treesitter/nvim-treesitter-textobjects',
+
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",
