@@ -8,7 +8,6 @@ RefreshGuiFont = function()
 end
 
 ResizeGuiFont = function(delta)
-	print(1)
 	vim.g.gui_font_size = vim.g.gui_font_size + delta
 	RefreshGuiFont()
 end
