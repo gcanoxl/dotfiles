@@ -107,7 +107,6 @@ local geem_plugins = {
 	},
 
 	-- Snippet Collection
-	-- TODO: learn how to add my own snippets so that delete others
 	"rafamadriz/friendly-snippets",
 
 	-- Completion Engine
