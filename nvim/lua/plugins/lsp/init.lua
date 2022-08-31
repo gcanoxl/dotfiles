@@ -27,6 +27,8 @@ local capabilities = require 'plugins.lsp.handlers'
 local on_attach = function(_, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', '<localleader>r', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '<localleader>dp', vim.diagnostic.goto_prev, bufopts)
+	vim.keymap.set('n', '<localleader>dn', vim.diagnostic.goto_next, bufopts)
 end
 
 for _, server in ipairs(servers) do
