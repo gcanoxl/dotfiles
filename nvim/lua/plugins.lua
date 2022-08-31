@@ -14,6 +14,9 @@ local geem_plugins = {
 	-- Lua Fucntions
 	"nvim-lua/plenary.nvim",
 
+	-- Prettier UI
+	'stevearc/dressing.nvim',
+
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
