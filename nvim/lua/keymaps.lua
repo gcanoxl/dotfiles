@@ -1,5 +1,6 @@
 -- leader
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 -- General
 geem.map_i('jk', '<ESC>')

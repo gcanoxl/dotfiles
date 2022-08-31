@@ -23,11 +23,18 @@ local servers = { 'sumneko_lua', 'vimls', 'pyright', 'gopls' }
 
 local capabilities = require 'plugins.lsp.handlers'
 
+-- on_attach function
+local on_attach = function(_, bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set('n', '<localleader>r', vim.lsp.buf.rename, bufopts)
+end
+
 for _, server in ipairs(servers) do
 	local server_config_path = 'plugins.lsp.server-settings.' .. server
 	local settings_avail, server_settings = pcall(require, server_config_path)
 	local settings = {
-		capabilities = capabilities
+		capabilities = capabilities,
+		on_attach = on_attach
 	}
 	if settings_avail then
 		for k, v in pairs(server_settings) do
