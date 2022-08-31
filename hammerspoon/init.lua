@@ -1,3 +1,5 @@
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "W", function()
-	hs.alert.show("Hello World!")
-end)
+-- Configuration Reloading
+hs.loadSpoon("ReloadConfiguration")
+spoon.ReloadConfiguration:start()
+
+-- TODO: toggle fullscreen

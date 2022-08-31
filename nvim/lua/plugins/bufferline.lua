@@ -10,5 +10,6 @@ bufferline.setup {
 				text_align = "left"
 			}
 		}
-	}
+	},
+	highlights = require("catppuccin.groups.integrations.bufferline").get(),
 }
