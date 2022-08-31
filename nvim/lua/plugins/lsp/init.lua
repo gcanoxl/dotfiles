@@ -23,10 +23,19 @@ local servers = { 'sumneko_lua', 'vimls', 'pyright', 'gopls' }
 
 local capabilities = require 'plugins.lsp.handlers'
 
-for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup {
-		capabilities = capabilities,
+for _, server in ipairs(servers) do
+	local server_config_path = 'plugins.lsp.server-settings.' .. server
+	local settings_avail, server_settings = pcall(require, server_config_path)
+	local settings = {
+		capabilities = capabilities
 	}
+	if settings_avail then
+		for k, v in pairs(server_settings) do
+			settings[k] = v
+		end
+	end
+
+	lspconfig[server].setup(settings)
 end
 
 -- auto format on save
@@ -36,14 +45,3 @@ augroup formatOnSave
     autocmd BufWritePre *.lua :lua vim.lsp.buf.formatting_sync()
 augroup END
 ]]
-
--- lua remove annoying warnings
-lspconfig.sumneko_lua.setup {
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { 'vim', 'hs' }
-			}
-		}
-	}
-}
