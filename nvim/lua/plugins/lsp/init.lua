@@ -29,6 +29,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<localleader>r', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', '<localleader>dp', vim.diagnostic.goto_prev, bufopts)
 	vim.keymap.set('n', '<localleader>dn', vim.diagnostic.goto_next, bufopts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, bufopts)
 end
 
 for _, server in ipairs(servers) do
