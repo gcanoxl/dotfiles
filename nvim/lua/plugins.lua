@@ -3,10 +3,10 @@ local geem_plugins = {
 	'wbthomason/packer.nvim',
 
 	-- Colorschemes
-	'dr4vs/neon.nvim',
-	'folke/tokyonight.nvim',
-	'sainnhe/sonokai',
-	'shaunsingh/nord.nvim',
+	{
+		"catppuccin/nvim", as = "catppuccin",
+		config = function() require('plugins.colorschemes.catppuccin') end
+	},
 
 	-- Icons
 	'kyazdani42/nvim-web-devicons',
@@ -20,11 +20,7 @@ local geem_plugins = {
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
-		config = function()
-			require('feline').setup({
-				disable = { filetypes = { "^neo%-tree$" } },
-			})
-		end
+		config = function() require 'plugins.feline' end
 	},
 
 	-- Buffer Line

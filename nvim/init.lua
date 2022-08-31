@@ -4,8 +4,8 @@ geem.initialize_packer()
 require 'plugins'
 require 'keymaps'
 
-vim.g.tokyonight_style = "storm"
-vim.cmd [[colorscheme tokyonight]]
+vim.g.catppuccin_flavour = "frappe"
+vim.cmd [[colorscheme catppuccin]]
 
 -- configurations for GUI clients
 if vim.g.neovide then
