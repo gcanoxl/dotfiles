@@ -40,7 +40,4 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, bufopts)
 end
 
-return {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
+return on_attach, capabilities
