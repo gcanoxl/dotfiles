@@ -2,6 +2,9 @@ local telescope_avali, telescope = pcall(require, 'telescope')
 if not telescope_avali then return end
 
 require("telescope").setup {
+	defaults = {
+		winblend = 20
+	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {}
