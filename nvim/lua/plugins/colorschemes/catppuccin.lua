@@ -5,10 +5,11 @@ catppuccin.setup({
 	integrations = {
 		neogit = false,
 		hop = true,
+		telescope = true,
 		neotree = {
 			enabled = true,
-			show_root = true, -- makes the root folder not transparent
-			transparent_panel = false, -- make the panel transparent
+			show_root = true,
+			transparent_panel = false,
 		}
 	}
 })
