@@ -12,9 +12,16 @@ local options = {
 	wrap = true,
 	cursorline = true,
 	cursorcolumn = false,
-	timeoutlen = 4000
+	timeoutlen = 4000,
+	winblend = 6
 }
 
+-- TODO: understand why interger turns out to be a table
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
+
+vim.g.preference = {
+	border = 'rounded',
+	winblend = 4
+}

@@ -129,13 +129,15 @@ local geem_plugins = {
 		config = function() require('todo-comments').setup() end
 	},
 
+	-- TODO: search and quickfixlist
 	-- Terminal
 	{
 		"akinsho/toggleterm.nvim", tag = 'v2.*',
 		config = function() require("toggleterm").setup({
 				direction = 'float',
 				float_opts = {
-					border = 'rounded'
+					border = vim.g.preference.border,
+					winblend = vim.g.preference.winblend
 				}
 			})
 		end
@@ -177,7 +179,7 @@ if status_ok then
 					toggle_info = '<TAB>',
 				},
 				open_fn = function()
-					return require('packer.util').float({ border = 'rounded' })
+					return require('packer.util').float({ border = vim.g.preference.border })
 				end
 			}
 		}

@@ -3,7 +3,7 @@ if not status_ok then return end
 
 mason.setup({
 	ui = {
-		border = "rounded",
+		border = vim.g.preference.border,
 	},
 	keymaps = {
 		toggle_package_expand = "<TAB>",

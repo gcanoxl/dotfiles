@@ -17,7 +17,7 @@ vim.diagnostic.config({
 	signs = { active = signs },
 	update_in_insert = true,
 	float = {
-		border = "rounded",
+		border = vim.g.preference.border,
 	}
 })
 
