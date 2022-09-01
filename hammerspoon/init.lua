@@ -3,9 +3,8 @@ hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
 
 -- toggle fullscreene
-hs.hotkey.bind({ 'cmd' }, 'return', function()
+hs.hotkey.bind({ 'cmd', 'ctrl' }, 'return', function()
 	local window = hs.window.focusedWindow()
-	window:setFullscreen(not window:isFullscreen())
+	window:toggleFullScreen()
 end)
-
 -- TODO: auto subscribling
