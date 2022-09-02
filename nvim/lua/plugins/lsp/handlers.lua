@@ -6,11 +6,15 @@ end
 -- on_attach function
 local on_attach = function(_, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', '<localleader>r', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<localleader>dp', vim.diagnostic.goto_prev, bufopts)
-	vim.keymap.set('n', '<localleader>dn', vim.diagnostic.goto_next, bufopts)
+	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', 'dp', vim.diagnostic.goto_prev, bufopts)
+	vim.keymap.set('n', 'dn', vim.diagnostic.goto_next, bufopts)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', '<localleader>ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', 'ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 end
 
 -- handlers
