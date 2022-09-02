@@ -10,9 +10,8 @@ mason.setup({
 	},
 })
 
-local status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
-print(status_ok)
-if status_ok then
+local lsp_config_status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if lsp_config_status_ok then
 	mason_lspconfig.setup({
 		automatic_installation = true,
 	})
