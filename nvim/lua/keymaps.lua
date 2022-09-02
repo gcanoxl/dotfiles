@@ -4,7 +4,7 @@ vim.g.maplocalleader = ','
 
 -- General
 geem.map_i('jk', '<ESC>')
-geem.map_ncl('fw', 'write')
+geem.map_ncl('fw', 'wa')
 geem.map_ncl('qq', 'quitall')
 
 -- Packer
