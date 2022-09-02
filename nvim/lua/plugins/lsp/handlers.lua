@@ -15,6 +15,8 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+	vim.api.nvim_buf_set_keymap(0, 'n', 'go', ':Telescope lsp_dynamic_workspace_symbols<CR>',
+		{ noremap = true, silent = true })
 end
 
 -- handlers
