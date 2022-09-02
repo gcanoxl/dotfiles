@@ -78,16 +78,17 @@ local geem_plugins = {
 	-- Text Objects based on treesitter
 	'nvim-treesitter/nvim-treesitter-textobjects',
 
+	-- Lsp Manager
+	"williamboman/mason-lspconfig.nvim",
+	{
+		"williamboman/mason.nvim",
+		config = function() require('plugins.mason') end
+	},
+
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",
 		config = function() require('plugins.lsp') end
-	},
-
-	-- Lsp Manager
-	{
-		"williamboman/mason.nvim",
-		config = function() require('plugins.mason') end
 	},
 
 	-- Lsp Icons
