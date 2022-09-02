@@ -154,6 +154,7 @@ local geem_plugins = {
 	-- Go Support
 	{
 		'ray-x/go.nvim',
+		ft = { 'go' },
 		config = function() require('plugins.go') end
 	},
 }
