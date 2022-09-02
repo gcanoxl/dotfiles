@@ -44,7 +44,7 @@ geem.map_ncl('ps', 'SessionManager save_current_session')
 geem.map_ncl('pd', 'SessionManager delete_session')
 
 -- Bufdelete
-geem.map_nc('<C-w>c', 'lua require"bufdelete".bufdelete(0, false)')
+-- TODO: discover the difference between tab and window
 
 -- Telescope
 geem.map_nc('<C-f>', 'Telescope buffers')

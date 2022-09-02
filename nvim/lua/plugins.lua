@@ -171,11 +171,9 @@ if status_ok then
 			end
 		end,
 		-- Packer's config
-		-- TODO: change compilered file so that
-		-- TODO: delete the line in gitignore file
 		config = {
 			ensure_dependencies = true,
-
+			max_jobs = 8,
 			display = {
 				keybindings = { -- Keybindings for the display window
 					toggle_info = '<TAB>',
