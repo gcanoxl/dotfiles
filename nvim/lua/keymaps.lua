@@ -64,5 +64,12 @@ geem.map_ncl('tt', 'TodoQuickFix')
 -- Terminal
 geem.map_nc('!', 'ToggleTerm')
 
+-- LuaSnip
+vim.api.nvim_set_keymap('i', '<Tab>',
+	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
+	{ silent = true, expr = true })
+geem.map_ic("<S-Tab>", "lua require'luasnip'.jump(-1)")
+geem.map_sc("<Tab>", "lua require'luasnip'.jump(1)")
+geem.map_sc("<S-Tab>", "lua require'luasnip'.jump(-1)")
 -- END
 geem.map_mappings()
