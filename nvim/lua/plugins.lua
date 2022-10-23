@@ -100,14 +100,11 @@ local geem_plugins = {
 		config = function() require "lsp_signature".setup({}) end
 	},
 
-	-- Snippet Engine
+	-- <D-s>nippet Engine
 	{
 		'L3MON4D3/LuaSnip',
 		config = function() require('plugins.luasnip') end
 	},
-
-	-- Snippet Collection
-	"rafamadriz/friendly-snippets",
 
 	-- Completion Engine
 	{

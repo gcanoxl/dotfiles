@@ -16,7 +16,6 @@ local options = {
 	winblend = 6
 }
 
--- TODO: understand why interger turns out to be a table
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
