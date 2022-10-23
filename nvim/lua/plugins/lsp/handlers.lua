@@ -25,7 +25,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 	{ border = vim.g.preference.border })
 
 -- capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_lsp.update_capabilities(capabilities)
+local capabilities = cmp_lsp.default_capabilities()
 
 return on_attach, capabilities
