@@ -22,7 +22,7 @@ vim.diagnostic.config({
 })
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'sumneko_lua', 'vimls', 'pyright', 'gopls' }
+local servers = { 'sumneko_lua', 'vimls', 'pyright', 'gopls', 'dartls' }
 
 local on_attach, capabilities = require 'plugins.lsp.handlers'
 
@@ -41,11 +41,3 @@ for _, server in ipairs(servers) do
 
 	lspconfig[server].setup(settings)
 end
-
--- auto format on save
-vim.cmd [[
-augroup formatOnSave
-    autocmd!
-    autocmd BufWritePre *.lua :lua vim.lsp.buf.formatting_sync()
-augroup END
-]]

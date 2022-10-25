@@ -3,8 +3,13 @@ if not cmp_lsp_status_ok then
 	return
 end
 
+local lsp_format_avail, lsp_format = pcall(require, 'lsp-format')
+if lsp_format_avail then
+	lsp_format.setup {}
+end
+
 -- on_attach function
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', 'dp', vim.diagnostic.goto_prev, bufopts)
@@ -17,6 +22,11 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.api.nvim_buf_set_keymap(0, 'n', 'go', ':Telescope lsp_dynamic_workspace_symbols<CR>',
 		{ noremap = true, silent = true })
+
+	-- auto format
+	if lsp_format_avail then
+		lsp_format.on_attach(client)
+	end
 end
 
 -- handlers

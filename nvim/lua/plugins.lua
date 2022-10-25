@@ -85,6 +85,9 @@ local geem_plugins = {
 		config = function() require('plugins.mason') end
 	},
 
+	-- Lsp Auto Format
+	"lukas-reineke/lsp-format.nvim",
+
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",
@@ -155,6 +158,13 @@ local geem_plugins = {
 		ft = { 'go' },
 		config = function() require('plugins.go') end
 	},
+
+	{
+		'akinsho/flutter-tools.nvim',
+		config = function()
+			require("flutter-tools").setup {}
+		end
+	}
 }
 
 geem.initialize_packer()
