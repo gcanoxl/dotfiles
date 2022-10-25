@@ -42,14 +42,13 @@ geem.map_ncl('ps', 'SessionManager save_current_session')
 geem.map_ncl('pd', 'SessionManager delete_session')
 
 -- Bufdelete
--- TODO: discover the difference between tab and window
 geem.map_nc('<C-c>', 'lua require("bufdelete").bufdelete(0, false)')
 
 -- Telescope
-geem.map_nc('<C-f>', 'Telescope buffers')
+geem.map_nc('<C-b>', 'Telescope buffers')
 geem.map_ncl('<leader>', 'Telescope commands')
 -- geem.map_ncl('bb', 'Telescope buffers')
-geem.map_ncl('ff', 'Telescope find_files')
+geem.map_nc('<C-f>', 'Telescope find_files')
 geem.map_ncl('fr', 'Telescope oldfiles')
 geem.map_ncl('ss', 'Telescope live_grep')
 geem.map_ncl('hh', 'Telescope help_tags')

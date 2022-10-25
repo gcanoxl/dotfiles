@@ -24,6 +24,3 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set({ 'n', 'i' }, "<D-=>", function() ResizeGuiFont(1) end, opts)
 vim.keymap.set({ 'n', 'i' }, "<D-->", function() ResizeGuiFont(-1) end, opts)
 vim.keymap.set({ 'n', 'i' }, "<D-0>", ResetGuiFont, opts)
-
--- TODO: add C-v in insert and command mode
--- TODO: add D-s for save
