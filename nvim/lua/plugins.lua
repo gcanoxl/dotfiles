@@ -30,6 +30,12 @@ local geem_plugins = {
 		config = function() require 'plugins.feline' end
 	},
 
+	-- Tab Line
+	{
+		'nanozuki/tabby.nvim',
+		config = function() require 'plugins.tabby' end
+	},
+
 	-- Buffer Line
 	{
 		'akinsho/bufferline.nvim', tag = "v2.*",

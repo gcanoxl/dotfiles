@@ -37,7 +37,7 @@ geem.map_nc('{', 'BufferLineCyclePrev')
 geem.map_ncl('fl', 'Neotree')
 
 -- Neogit
-geem.map_ncl('gg', 'Neogit')
+geem.map_ncl('gg', "lua require('neogit').open()")
 
 -- SessionManager
 geem.map_ncl('pR', 'SessionManager load_last_session')
@@ -52,7 +52,7 @@ geem.map_nc('<C-c>', 'lua require("bufdelete").bufdelete(0, false)')
 -- Telescope
 geem.map_nc('<C-f>', 'Telescope buffers')
 geem.map_ncl('<leader>', 'Telescope commands')
-geem.map_ncl('bb', 'Telescope buffers')
+-- geem.map_ncl('bb', 'Telescope buffers')
 geem.map_ncl('ff', 'Telescope find_files')
 geem.map_ncl('fr', 'Telescope oldfiles')
 geem.map_ncl('ss', 'Telescope live_grep')
