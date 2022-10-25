@@ -19,19 +19,14 @@ geem.map_nc('f', 'HopChar1')
 geem.map_nc('F', 'HopLine')
 geem.map_vc('F', 'HopLine')
 
--- BufferLine
-geem.map_ncl('1', 'BufferLineGoToBuffer 1')
-geem.map_ncl('2', 'BufferLineGoToBuffer 2')
-geem.map_ncl('3', 'BufferLineGoToBuffer 3')
-geem.map_ncl('4', 'BufferLineGoToBuffer 4')
-geem.map_ncl('5', 'BufferLineGoToBuffer 5')
-geem.map_ncl('6', 'BufferLineGoToBuffer 6')
-geem.map_ncl('7', 'BufferLineGoToBuffer 7')
-geem.map_ncl('8', 'BufferLineGoToBuffer 8')
-geem.map_ncl('9', 'BufferLineGoToBuffer 9')
-geem.map_ncl('0', 'BufferLineGoToBuffer 10')
-geem.map_nc('}', 'BufferLineCycleNext')
-geem.map_nc('{', 'BufferLineCyclePrev')
+-- Tabby
+geem.map_nc('tn', 'tabnew')
+geem.map_nc('tc', 'tabclose')
+geem.map_nc('to', 'tabonly')
+geem.map_nc('}', 'tabn')
+geem.map_nc('{', 'tabp')
+geem.map_nc('t<', '-tabmove')
+geem.map_nc('t>', '+tabmove')
 
 -- Neo Tree
 geem.map_ncl('fl', 'Neotree')
