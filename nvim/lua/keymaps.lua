@@ -20,15 +20,6 @@ geem.map_nc('f', 'HopChar1')
 geem.map_nc('F', 'HopLine')
 geem.map_vc('F', 'HopLine')
 
--- Tabby
-geem.map_nc('tn', 'tabnew')
-geem.map_nc('tc', 'tabclose')
-geem.map_nc('to', 'tabonly')
-geem.map_nc('}', 'tabn')
-geem.map_nc('{', 'tabp')
-geem.map_nc('t<', '-tabmove')
-geem.map_nc('t>', '+tabmove')
-
 -- Neo Tree
 geem.map_ncl('fl', 'Neotree')
 
