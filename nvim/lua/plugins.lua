@@ -26,6 +26,7 @@ local geem_plugins = {
 	-- Buffer Line
 	{
 		'akinsho/bufferline.nvim', tag = "v2.*",
+		after = "catppuccin",
 		config = function() require 'plugins.bufferline' end
 	},
 
