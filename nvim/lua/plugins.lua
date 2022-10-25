@@ -8,6 +8,13 @@ local geem_plugins = {
 		config = function() require('plugins.colorschemes.catppuccin') end
 	},
 
+	{
+		"EdenEast/nightfox.nvim",
+		config = function()
+			require('plugins.colorschemes.nightfox')
+		end
+	},
+
 	-- Icons
 	'kyazdani42/nvim-web-devicons',
 
