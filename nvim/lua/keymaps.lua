@@ -16,6 +16,8 @@ geem.map_ncl('pl', 'PackerStatus')
 
 -- Hop
 geem.map_nc('f', 'HopChar1')
+geem.map_nc('F', 'HopLine')
+geem.map_vc('F', 'HopLine')
 
 -- BufferLine
 geem.map_ncl('1', 'BufferLineGoToBuffer 1')

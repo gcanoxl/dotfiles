@@ -35,6 +35,10 @@ function geem.map_s(key, cmd)
 	geem.map_table.s[key] = { cmd = cmd }
 end
 
+function geem.map_v(key, cmd)
+	geem.map_table.v[key] = { cmd = cmd }
+end
+
 function geem.map_nc(key, command)
 	geem.map_n(key, '<CMD>' .. command .. '<CR>')
 end
@@ -45,6 +49,10 @@ end
 
 function geem.map_sc(key, command)
 	geem.map_s(key, '<CMD>' .. command .. '<CR>')
+end
+
+function geem.map_vc(key, command)
+	geem.map_v(key, '<CMD>' .. command .. '<CR>')
 end
 
 function geem.map_ncl(key, command)
