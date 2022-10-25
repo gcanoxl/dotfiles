@@ -6,6 +6,7 @@ vim.g.maplocalleader = ','
 geem.map_i('jk', '<ESC>')
 geem.map_ncl('fw', 'wa')
 geem.map_ncl('qq', 'quitall')
+geem.map_ncl('nh', 'noh')
 
 -- Packer
 geem.map_ncl('pi', 'PackerInstall')
