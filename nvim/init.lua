@@ -4,8 +4,7 @@ geem.initialize_packer()
 require 'plugins'
 require 'keymaps'
 
-vim.g.catppuccin_flavour = "frappe"
-vim.cmd [[colorscheme catppuccin]]
+vim.api.nvim_command [[colorscheme catppuccin]]
 
 -- configurations for GUI clients
 if vim.g.neovide then
