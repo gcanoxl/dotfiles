@@ -161,9 +161,7 @@ local geem_plugins = {
 
 	{
 		'akinsho/flutter-tools.nvim',
-		config = function()
-			require("flutter-tools").setup {}
-		end
+		config = function() require('plugins.flutter') end
 	}
 }
 
