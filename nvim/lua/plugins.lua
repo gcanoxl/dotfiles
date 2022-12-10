@@ -66,7 +66,10 @@ local geem_plugins = {
 	-- Session Manager
 	{
 		'Shatur/neovim-session-manager',
-		config = function() require('session_manager').setup({}) end
+		config = function() require('session_manager').setup({
+				autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+			})
+		end
 	},
 
 	-- Syntax Highlighting
