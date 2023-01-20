@@ -3,6 +3,8 @@ if not flutter_ok then
 	return
 end
 
+local on_attach, capabilities = require 'plugins.lsp.handlers'
+
 flutter.setup {
 	decorations = {
 		statusline = {
@@ -15,5 +17,9 @@ flutter.setup {
 	},
 	dev_log = {
 		enabled = false,
+	},
+	lsp = {
+		on_attach = on_attach,
+		capabilities = capabilities,
 	},
 }
