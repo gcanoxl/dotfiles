@@ -22,6 +22,8 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.api.nvim_buf_set_keymap(0, 'n', 'go', ':Telescope lsp_dynamic_workspace_symbols<CR>',
 		{ noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(0, 'n', 'gl', ':Telescope lsp_document_symbols<CR>',
+		{ noremap = true, silent = true })
 
 	-- auto format
 	if lsp_format_avail then

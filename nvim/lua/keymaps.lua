@@ -38,12 +38,13 @@ geem.map_nc('<C-c>', 'lua require("bufdelete").bufdelete(0, false)')
 -- Telescope
 geem.map_nc('<C-b>', 'Telescope buffers')
 geem.map_ncl('<leader>', 'Telescope commands')
--- geem.map_ncl('bb', 'Telescope buffers')
+geem.map_ncl('<localleader>', 'Telescope')
 geem.map_nc('<C-f>', 'Telescope find_files')
 geem.map_ncl('fr', 'Telescope oldfiles')
 geem.map_ncl('ss', 'Telescope live_grep')
 geem.map_ncl('hh', 'Telescope help_tags')
 geem.map_ncl('tc', 'Telescope colorscheme')
+geem.map_ncl('kk', 'Telescope keymaps')
 
 -- TodoList
 geem.map_ncl('ts', 'TodoTelescope')
