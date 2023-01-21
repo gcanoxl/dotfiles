@@ -24,6 +24,11 @@ local geem_plugins = {
 	-- Prettier UI
 	'stevearc/dressing.nvim',
 
+	-- Smart Splits
+	{
+		'mrjones2014/smart-splits.nvim'
+	},
+
 	-- Status Line
 	{
 		'feline-nvim/feline.nvim',
