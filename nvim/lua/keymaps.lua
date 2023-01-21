@@ -72,5 +72,8 @@ vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
 vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
 vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
 
+-- TODO: move away this keymap
+geem.map_nc('<localleader><localleader>', 'Telescope flutter commands')
+
 -- END
 geem.map_mappings()
