@@ -107,7 +107,7 @@ local geem_plugins = {
 		config = function() require "lsp_signature".setup({}) end
 	},
 
-	-- <D-s>nippet Engine
+	-- nippet Engine
 	{
 		'L3MON4D3/LuaSnip',
 		config = function() require('plugins.luasnip') end
