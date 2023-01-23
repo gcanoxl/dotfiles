@@ -139,7 +139,6 @@ local geem_plugins = {
 		config = function() require('todo-comments').setup() end
 	},
 
-	-- TODO: search and quickfixlist
 	-- Terminal
 	{
 		"akinsho/toggleterm.nvim", tag = 'v2.*',
