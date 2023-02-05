@@ -24,6 +24,13 @@ local geem_plugins = {
 	-- Prettier UI
 	'stevearc/dressing.nvim',
 
+	-- Error List
+	{
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons",
+		config = function() require 'plugins.trouble' end
+	},
+
 	-- Smart Splits
 	{
 		'mrjones2014/smart-splits.nvim'
