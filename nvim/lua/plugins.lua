@@ -5,18 +5,12 @@ local geem_plugins = {
 	-- Colorschemes
 	{
 		"catppuccin/nvim", as = "catppuccin",
-		config = function() require('plugins.colorschemes.catppuccin') end
-	},
-
-	{
-		"EdenEast/nightfox.nvim",
 		config = function()
-			require('plugins.colorschemes.nightfox')
+			require('plugins.colorschemes.catppuccin')
 		end
 	},
-
+	"EdenEast/nightfox.nvim",
 	'folke/tokyonight.nvim',
-	'tiagovla/tokyodark.nvim',
 
 	-- Code Runner
 	{ 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim',
