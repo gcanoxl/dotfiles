@@ -4,9 +4,9 @@ if not status_ok then return end
 -- define icons
 local signs = {
 	{ name = "DiagnosticSignError", text = "" },
-	{ name = "DiagnosticSignWarn", text = "" },
-	{ name = "DiagnosticSignHint", text = "" },
-	{ name = "DiagnosticSignInfo", text = "" },
+	{ name = "DiagnosticSignWarn",  text = "" },
+	{ name = "DiagnosticSignHint",  text = "" },
+	{ name = "DiagnosticSignInfo",  text = "" },
 }
 for _, sign in ipairs(signs) do
 	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
@@ -22,7 +22,7 @@ vim.diagnostic.config({
 })
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'sumneko_lua', 'vimls', 'pylsp', 'gopls' }
+local servers = { 'lua_ls', 'vimls', 'pylsp', 'gopls' }
 
 local on_attach, capabilities = require 'plugins.lsp.handlers'
 
