@@ -45,8 +45,11 @@ local geem_plugins = {
 
 	-- Status Line
 	{
-		'feline-nvim/feline.nvim',
-		config = function() require 'plugins.feline' end
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function()
+			require('lualine').setup()
+		end
 	},
 
 	-- Fuzzy Finder
