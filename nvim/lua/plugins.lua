@@ -14,6 +14,9 @@ local geem_plugins = {
 			require('plugins.colorschemes.nightfox')
 		end
 	},
+	-- Code Runner
+	{ 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim',
+		config = function() require('plugins.code-runner') end },
 
 	-- Icons
 	'kyazdani42/nvim-web-devicons',
@@ -78,7 +81,8 @@ local geem_plugins = {
 	-- Session Manager
 	{
 		'Shatur/neovim-session-manager',
-		config = function() require('session_manager').setup({
+		config = function()
+			require('session_manager').setup({
 				autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
 			})
 		end
@@ -149,7 +153,8 @@ local geem_plugins = {
 	-- Terminal
 	{
 		"akinsho/toggleterm.nvim", tag = 'v2.*',
-		config = function() require("toggleterm").setup({
+		config = function()
+			require("toggleterm").setup({
 				direction = 'float',
 				float_opts = {
 					border = vim.g.preference.border,
