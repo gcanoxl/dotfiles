@@ -14,6 +14,10 @@ local geem_plugins = {
 			require('plugins.colorschemes.nightfox')
 		end
 	},
+
+	'folke/tokyonight.nvim',
+	'tiagovla/tokyodark.nvim',
+
 	-- Code Runner
 	{ 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim',
 		config = function() require('plugins.code-runner') end },
