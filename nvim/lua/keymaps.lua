@@ -38,12 +38,11 @@ vim.keymap.set('s', "<Tab>", geem.cmd("lua require'luasnip'.jump(1)"))
 vim.keymap.set('s', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 
 
--- ========================================
--- |       which-key registration         |
--- ========================================
 local wk = require("which-key")
 
--- Keymaps with <Leader>
+-- ========================================
+-- |        Keymaps with <Leader>         |
+-- ========================================
 wk.register(
 	{
 		['<leader>'] = { geem.cmd('Telescope commands'), 'Commands' },
@@ -77,7 +76,9 @@ wk.register(
 			d = { geem.cmd("SessionManager delete_session"), "Delete Session" },
 		},
 	},
-	{ prefix = "<leader>", })
+	{ prefix = "<leader>", }
+)
+
 
 -- TODO: move away this keymap
 -- geem.map_nc('<localleader><localleader>', 'Telescope flutter commands')

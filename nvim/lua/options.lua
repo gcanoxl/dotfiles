@@ -12,7 +12,8 @@ local options = {
 	wrap = true,
 	cursorline = true,
 	cursorcolumn = false,
-	timeoutlen = 4000,
+	timeout = true,
+	timeoutlen = 400,
 	winblend = 6
 }
 

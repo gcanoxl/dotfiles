@@ -10,18 +10,10 @@ local geem_plugins = {
 	'folke/tokyonight.nvim',
 
 	-- Keymap Reminder
-	-- TODO: set it up properly
-	-- TODO: remap all keymaps for better logic
 	{
 		"folke/which-key.nvim",
 		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("which-key").setup({})
 		end,
 	},
 
@@ -190,6 +182,7 @@ local geem_plugins = {
 
 	{
 		'akinsho/flutter-tools.nvim',
+		ft = { 'dart' },
 		config = function() require('plugins.flutter') end
 	}
 }
