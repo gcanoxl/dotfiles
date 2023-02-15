@@ -20,3 +20,14 @@ end
 function geem.cmd(cmd)
 	return "<cmd>" .. cmd .. "<cr>"
 end
+
+function geem.map_on_filetype(filetype, maps)
+	vim.api.nvim_create_autocmd('FileType', {
+		pattern = filetype,
+		group = vim.api.nvim_create_augroup('mapping' .. filetype, { clear = true }),
+		callback = function()
+			local buf = vim.api.nvim_get_current_buf()
+			require('which-key').register(maps, { prefix = "<localleader>", buffer = buf })
+		end
+	})
+end
