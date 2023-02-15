@@ -40,7 +40,7 @@ alias bl='brew list'
 alias bU='brew update && brew upgrade'
 
 alias gs='git status'
-alias gc='git checkout'
+alias gc='git clone'
 alias gcb='git checkout -b'
 alias ga='git add'
 alias gal='git add .'
