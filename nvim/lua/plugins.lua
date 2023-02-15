@@ -176,6 +176,7 @@ local geem_plugins = {
 	-- Go Support
 	{
 		'ray-x/go.nvim',
+		requires = { 'ray-x/guihua.lua' },
 		ft = { 'go' },
 		config = function() require('plugins.go') end
 	},
