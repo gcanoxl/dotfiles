@@ -1,5 +1,6 @@
 -- configuration reloading
 hs.loadSpoon("ReloadConfiguration")
+---@diagnostic disable-next-line: undefined-global
 spoon.ReloadConfiguration:start()
 
 -- toggle fullscreene

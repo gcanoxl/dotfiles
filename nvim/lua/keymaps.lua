@@ -74,6 +74,14 @@ wk.register(
 			s = { geem.cmd("SessionManager save_current_session"), "Save Session" },
 			d = { geem.cmd("SessionManager delete_session"), "Delete Session" },
 		},
+		-- LSP
+		l = {
+			name = "LSP",
+			e = {
+				name = "Error",
+				e = { geem.cmd("Trouble"), "Error List" }
+			}
+		}
 	},
 	{ prefix = "<leader>", }
 )

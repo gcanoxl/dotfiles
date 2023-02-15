@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 return {
 	s("func", {
 		t "func ", i(1),

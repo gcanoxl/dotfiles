@@ -1,8 +1,7 @@
-local geem_plugins = {
+local plugins = {
 	-- Colorschemes
 	{
-		"catppuccin/nvim", name = "catppuccin",
-		lazy = true,
+		"catppuccin/nvim", name = "catppuccin", lazy = true,
 		config = function() require('plugins.colorschemes.catppuccin') end
 	},
 	{ "EdenEast/nightfox.nvim", lazy = true },
@@ -191,4 +190,4 @@ local geem_plugins = {
 }
 
 geem.initialize_lazy()
-require('lazy').setup(geem_plugins, {})
+require('lazy').setup(plugins, {})
