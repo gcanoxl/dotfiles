@@ -1,7 +1,4 @@
 local geem_plugins = {
-	-- Plugin manger
-	'wbthomason/packer.nvim',
-
 	-- Colorschemes
 	{
 		"catppuccin/nvim", name = "catppuccin",
@@ -12,12 +9,25 @@ local geem_plugins = {
 	"EdenEast/nightfox.nvim",
 	'folke/tokyonight.nvim',
 
+	-- Keymap Reminder
+	-- TODO: set it up properly
+	-- TODO: remap all keymaps for better logic
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
+
 	-- Code Runner
 	{ 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim',
 		config = function() require('plugins.code-runner') end },
-
-	-- Lua Fucntions
-	"nvim-lua/plenary.nvim",
 
 	-- Prettier UI
 	'stevearc/dressing.nvim',

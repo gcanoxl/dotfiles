@@ -2,4 +2,4 @@
 emacs.d/*
 !emacs.d/elisp
 !emacs.d/snippets
-nvim/plugin/
+nvim/lazy-lock.json
