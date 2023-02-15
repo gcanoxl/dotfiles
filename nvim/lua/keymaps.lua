@@ -2,58 +2,21 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- General
-geem.map_i('jk', '<ESC>')
-geem.map_ncl('fw', 'wa')
-geem.map_ncl('qq', 'quitall')
-geem.map_ncl('nh', 'noh')
+vim.keymap.set('i', 'jk', '<esc>')
 
 -- Hop
-geem.map_nc('f', 'HopChar1')
-geem.map_nc('F', 'HopLine')
-geem.map_vc('F', 'HopLine')
+vim.keymap.set('n', 'f', geem.cmd('HopChar1'))
+vim.keymap.set('n', 'F', geem.cmd('HopLine'))
 
--- Neo Tree
-geem.map_ncl('fl', 'Neotree')
+-- Buffers
+vim.keymap.set('n', '<C-c>', geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
+vim.keymap.set('n', '<C-b>', geem.cmd('Telescope buffers'))
 
--- Neogit
-geem.map_ncl('gg', "lua require('neogit').open()")
-
--- SessionManager
-geem.map_ncl('pR', 'SessionManager load_last_session')
-geem.map_ncl('pf', 'SessionManager load_session')
-geem.map_ncl('ps', 'SessionManager save_current_session')
-geem.map_ncl('pd', 'SessionManager delete_session')
-
--- Bufdelete
-geem.map_nc('<C-c>', 'lua require("bufdelete").bufdelete(0, false)')
-
--- Telescope
-geem.map_nc('<C-b>', 'Telescope buffers')
-geem.map_ncl('<leader>', 'Telescope commands')
-geem.map_ncl('<localleader>', 'Telescope')
-geem.map_nc('<C-f>', 'Telescope find_files')
-geem.map_ncl('fr', 'Telescope oldfiles')
-geem.map_ncl('jl', 'Telescope jumplist')
-geem.map_ncl('ss', 'Telescope live_grep')
-geem.map_ncl('hh', 'Telescope help_tags')
-geem.map_ncl('tc', 'Telescope colorscheme')
-geem.map_ncl('kk', 'Telescope keymaps')
-
--- TodoList
-geem.map_ncl('ts', 'TodoTelescope')
-geem.map_ncl('tt', 'TodoQuickFix')
+-- File
+vim.keymap.set('n', '<C-f>', geem.cmd('Telescope find_files'))
 
 -- Terminal
-geem.map_nc('!', 'ToggleTerm')
-
--- LuaSnip
-vim.api.nvim_set_keymap('i', '<Tab>',
-	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
-	{ silent = true, expr = true })
-geem.map_ic("<S-Tab>", "lua require'luasnip'.jump(-1)")
-geem.map_sc("<Tab>", "lua require'luasnip'.jump(1)")
-geem.map_sc("<S-Tab>", "lua require'luasnip'.jump(-1)")
+vim.keymap.set('n', '!', geem.cmd('ToggleTerm'))
 
 -- Smart Splits
 vim.keymap.set('n', '<C-w>h', require('smart-splits').resize_left)
@@ -66,8 +29,55 @@ vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
 vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
 vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
 
--- TODO: move away this keymap
-geem.map_nc('<localleader><localleader>', 'Telescope flutter commands')
+-- LuaSnip
+vim.api.nvim_set_keymap('i', '<Tab>',
+	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
+	{ silent = true, expr = true })
+vim.keymap.set('i', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set('s', "<Tab>", geem.cmd("lua require'luasnip'.jump(1)"))
+vim.keymap.set('s', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 
--- END
-geem.map_mappings()
+
+-- ========================================
+-- |       which-key registration         |
+-- ========================================
+local wk = require("which-key")
+
+-- Keymaps with <Leader>
+wk.register(
+	{
+		['<leader>'] = { geem.cmd('Telescope commands'), 'Commands' },
+		-- Application
+		a = {
+			name = "Application",
+			q = { geem.cmd("quitall"), "Quit" },
+			n = { geem.cmd("noh"), "Stop Highlight" },
+			j = { geem.cmd("Telescope jumplist"), "Jumplist" },
+			s = { geem.cmd("Telescope live_grep"), 'Search' },
+			h = { geem.cmd("Telescope help_tags"), 'Help' },
+			c = { geem.cmd("Telescope colorscheme"), 'Colorscheme' },
+			k = { geem.cmd("Telescope keymaps"), "Keymaps" },
+			t = { geem.cmd("TodoTelescope"), "Todo List" }
+		},
+		-- File
+		f = {
+			name = "File",
+			w = { geem.cmd("wa"), "Save File" },
+			l = { geem.cmd("Neotree"), "File Explore" },
+			r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
+		},
+		-- Git
+		g = { function() require('neogit').open() end, "Git" },
+		-- Project
+		p = {
+			name = "Project",
+			r = { geem.cmd("SessionManager load_last_session"), "Load Last Session" },
+			f = { geem.cmd("SessionManager load_session"), "Find Session" },
+			s = { geem.cmd("SessionManager save_current_session"), "Save Session" },
+			d = { geem.cmd("SessionManager delete_session"), "Delete Session" },
+		},
+	},
+	{ prefix = "<leader>", })
+
+-- TODO: move away this keymap
+-- geem.map_nc('<localleader><localleader>', 'Telescope flutter commands')
