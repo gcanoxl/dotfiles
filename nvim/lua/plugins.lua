@@ -184,7 +184,5 @@ local geem_plugins = {
 	}
 }
 
-local lazy_ok, lazy = geem.initialize_lazy()
-if lazy_ok then
-	lazy.setup(geem_plugins, {})
-end
+geem.initialize_lazy()
+require('lazy').setup(geem_plugins, {})
