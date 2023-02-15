@@ -4,7 +4,7 @@ local geem_plugins = {
 
 	-- Colorschemes
 	{
-		"catppuccin/nvim", as = "catppuccin",
+		"catppuccin/nvim", name = "catppuccin",
 		config = function()
 			require('plugins.colorschemes.catppuccin')
 		end
@@ -13,11 +13,8 @@ local geem_plugins = {
 	'folke/tokyonight.nvim',
 
 	-- Code Runner
-	{ 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim',
+	{ 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim',
 		config = function() require('plugins.code-runner') end },
-
-	-- Icons
-	'kyazdani42/nvim-web-devicons',
 
 	-- Lua Fucntions
 	"nvim-lua/plenary.nvim",
@@ -28,7 +25,7 @@ local geem_plugins = {
 	-- Error List
 	{
 		"folke/trouble.nvim",
-		requires = "nvim-tree/nvim-web-devicons",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function() require 'plugins.trouble' end
 	},
 
@@ -40,7 +37,7 @@ local geem_plugins = {
 	-- Status Line
 	{
 		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
 		config = function()
 			require('lualine').setup()
 		end
@@ -57,7 +54,7 @@ local geem_plugins = {
 	-- File Explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
-		requires = { "MunifTanjim/nui.nvim" },
+		dependencies = { "MunifTanjim/nui.nvim" },
 		config = function() require 'plugins.neo-tree' end
 	},
 
@@ -75,7 +72,7 @@ local geem_plugins = {
 
 	-- Git Client
 	{
-		'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim',
+		'TimUntersberger/neogit', dependencies = 'nvim-lua/plenary.nvim',
 		config = function() require('neogit').setup() end
 	},
 
@@ -92,7 +89,7 @@ local geem_plugins = {
 	-- Syntax Highlighting
 	{
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
+		build = ':TSUpdate',
 		config = function() require('plugins.treesitter') end
 	},
 
@@ -153,7 +150,7 @@ local geem_plugins = {
 
 	-- Terminal
 	{
-		"akinsho/toggleterm.nvim", tag = 'v2.*',
+		"akinsho/toggleterm.nvim", version = 'v2.*',
 		config = function()
 			require("toggleterm").setup({
 				direction = 'float',
@@ -176,7 +173,7 @@ local geem_plugins = {
 	-- Go Support
 	{
 		'ray-x/go.nvim',
-		requires = { 'ray-x/guihua.lua' },
+		dependencies = { 'ray-x/guihua.lua' },
 		ft = { 'go' },
 		config = function() require('plugins.go') end
 	},
@@ -187,28 +184,7 @@ local geem_plugins = {
 	}
 }
 
-geem.initialize_packer()
-
-local status_ok, packer = pcall(require, 'packer')
-if status_ok then
-	packer.startup({
-		function(use)
-			for _, plugin in ipairs(geem_plugins) do
-				use(plugin)
-			end
-		end,
-		-- Packer's config
-		config = {
-			ensure_dependencies = true,
-			max_jobs = 8,
-			display = {
-				keybindings = { -- Keybindings for the display window
-					toggle_info = '<TAB>',
-				},
-				open_fn = function()
-					return require('packer.util').float({ border = vim.g.preference.border })
-				end
-			}
-		}
-	})
+local lazy_ok, lazy = geem.initialize_lazy()
+if lazy_ok then
+	lazy.setup(geem_plugins, {})
 end

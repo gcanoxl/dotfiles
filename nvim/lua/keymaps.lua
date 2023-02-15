@@ -8,13 +8,6 @@ geem.map_ncl('fw', 'wa')
 geem.map_ncl('qq', 'quitall')
 geem.map_ncl('nh', 'noh')
 
--- Packer
-geem.map_ncl('pi', 'PackerInstall')
-geem.map_ncl('pc', 'PackerCompile')
-geem.map_ncl('pC', 'PackerClean')
-geem.map_ncl('pu', 'PackerSync')
-geem.map_ncl('pl', 'PackerStatus')
-
 -- Hop
 geem.map_nc('f', 'HopChar1')
 geem.map_nc('F', 'HopLine')

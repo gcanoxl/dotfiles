@@ -2,24 +2,24 @@ _G.geem = {}
 
 geem.map_table = { n = {}, i = {}, v = {}, s = {} }
 
-function geem.initialize_packer()
-	local packer_avail, _ = pcall(require, 'packer')
-	if not packer_avail then
-		local packer_path = vim.fn.stdpath('data') ..
-				'/site/pack/packer/start/packer.nvim'
-		vim.fn.delete(packer_path, 'rf')
+function geem.initialize_lazy()
+	local lazy_avail, lazy = pcall(require, "lazy")
+	if not lazy_avail then
+		local lazy_path = vim.fn.stdpath('data') ..
+				"/lazy/lazy.nvim"
+		vim.fn.delete(lazy_path, 'rf')
 		vim.fn.system({
-			'git',
-			'clone',
-			'--depth',
-			'1',
-			'https://github.com/wbthomason/packer.nvim',
-			packer_path
+			"git",
+			"clone",
+			"--filter=blob:none",
+			"https://github.com/folke/lazy.nvim.git",
+			"--branch=stable", -- latest stable release
+			lazy_path,
 		})
-		vim.cmd "packadd packer.nvim"
-		packer_avail, _ = pcall(require, "packer")
+		vim.opt.rtp:prepend(lazy_path)
+		lazy_avail, lazy = pcall(require, "lazy")
 	end
-	return packer_avail
+	return lazy_avail, lazy
 end
 
 -- mapping
