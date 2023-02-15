@@ -77,11 +77,9 @@ wk.register(
 		-- LSP
 		l = {
 			name = "LSP",
-			e = {
-				name = "Error",
-				e = { geem.cmd("Trouble"), "Error List" }
-			}
-		}
+			e = { geem.cmd("TroubleToggle workspace_diagnostics"), "Error" },
+			E = { geem.cmd("TroubleToggle document_diagnostics"), "Document Error" },
+		},
 	},
 	{ prefix = "<leader>", }
 )
