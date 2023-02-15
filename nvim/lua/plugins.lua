@@ -2,12 +2,11 @@ local geem_plugins = {
 	-- Colorschemes
 	{
 		"catppuccin/nvim", name = "catppuccin",
-		config = function()
-			require('plugins.colorschemes.catppuccin')
-		end
+		lazy = true,
+		config = function() require('plugins.colorschemes.catppuccin') end
 	},
-	"EdenEast/nightfox.nvim",
-	'folke/tokyonight.nvim',
+	{ "EdenEast/nightfox.nvim", lazy = true },
+	{ 'folke/tokyonight.nvim',  lazy = true },
 
 	-- Keymap Reminder
 	{
