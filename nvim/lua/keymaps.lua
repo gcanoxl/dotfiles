@@ -37,7 +37,6 @@ vim.keymap.set('i', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 vim.keymap.set('s', "<Tab>", geem.cmd("lua require'luasnip'.jump(1)"))
 vim.keymap.set('s', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 
-
 local wk = require("which-key")
 
 -- ========================================
@@ -79,6 +78,13 @@ wk.register(
 	{ prefix = "<leader>", }
 )
 
+-- Go Special Keymaps
+geem.map_on_filetype('go', {
 
--- TODO: move away this keymap
--- geem.map_nc('<localleader><localleader>', 'Telescope flutter commands')
+})
+
+-- Dart Special Keymaps
+geem.map_on_filetype('dart', {
+	['<localleader>'] = { geem.cmd('Telescope flutter commands'), "Flutter Commands" },
+	['e'] = { geem.cmd('FlutterEmulators'), 'Flutter Emulators' }
+})

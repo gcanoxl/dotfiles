@@ -41,7 +41,7 @@ local geem_plugins = {
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
 		config = function()
-			require('lualine').setup()
+			require('lualine').setup({})
 		end
 	},
 
@@ -111,7 +111,11 @@ local geem_plugins = {
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",
-		config = function() require('plugins.lsp') end
+		dependencies = { "folke/neodev.nvim" }, -- for better config devlopment
+		config = function()
+			require('neodev').setup({})
+			require('plugins.lsp')
+		end
 	},
 
 	-- Lsp Icons
