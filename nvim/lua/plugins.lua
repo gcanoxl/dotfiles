@@ -190,4 +190,8 @@ local plugins = {
 }
 
 geem.initialize_lazy()
-require('lazy').setup(plugins, {})
+require('lazy').setup(plugins, {
+	dev = {
+		path = "~/Projects"
+	}
+})

@@ -13,7 +13,7 @@ local options = {
 	cursorline = true,
 	cursorcolumn = false,
 	timeout = true,
-	timeoutlen = 400,
+	timeoutlen = 800,
 	winblend = 6
 }
 
