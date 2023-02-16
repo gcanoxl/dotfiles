@@ -74,6 +74,8 @@ wk.register(
 			s = { geem.cmd("SessionManager save_current_session"), "Save Session" },
 			d = { geem.cmd("SessionManager delete_session"), "Delete Session" },
 		},
+		-- Package Management
+		P = { geem.cmd("Lazy"), "Package Management" },
 		-- LSP
 		l = {
 			name = "LSP",
@@ -92,5 +94,6 @@ geem.map_on_filetype('go', {
 -- Dart Special Keymaps
 geem.map_on_filetype('dart', {
 	['<localleader>'] = { geem.cmd('Telescope flutter commands'), "Flutter Commands" },
-	['e'] = { geem.cmd('FlutterEmulators'), 'Flutter Emulators' }
+	e = { geem.cmd('FlutterEmulators'), 'Emulators' },
+	w = { geem.cmd('FlutterOutlineToggle'), 'Toggle Widget Outline' },
 })
