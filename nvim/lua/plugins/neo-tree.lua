@@ -8,5 +8,8 @@ neotree.setup({
 		mappings = {
 			["<tab>"] = "open",
 		}
-	}
+	},
+	filesystem = {
+		use_libuv_file_watcher = true,
+	},
 })
