@@ -1,11 +1,11 @@
 local plugins = {
 	-- Colorschemes
 	{
-		"catppuccin/nvim", name = "catppuccin", lazy = true,
+		"catppuccin/nvim", name = "catppuccin",
 		config = function() require('plugins.colorschemes.catppuccin') end
 	},
-	{ "EdenEast/nightfox.nvim", lazy = true },
-	{ 'folke/tokyonight.nvim',  lazy = true },
+	{ "EdenEast/nightfox.nvim" },
+	{ 'folke/tokyonight.nvim' },
 
 	-- Keymap Reminder
 	{

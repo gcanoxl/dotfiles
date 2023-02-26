@@ -89,6 +89,11 @@ wk.register(
 -- Go Special Keymaps
 geem.map_on_filetype('go', {
 	a = { geem.cmd('GoAlt'), 'Alt' }
+	,
+	t = {
+		name = "Test",
+		t = { geem.cmd("GoTest"), 'GoTest' }
+	}
 })
 
 -- Dart Special Keymaps
