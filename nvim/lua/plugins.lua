@@ -7,6 +7,19 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	-- Emoji Finder
+	{
+		'xiyaowong/telescope-emoji.nvim',
+		config = function() require("telescope").load_extension("emoji") end
+	},
+
+	-- Markdown Preview
+	{
+		'toppair/peek.nvim', build = 'deno task --quiet build:fast',
+		ft = { "markdown" },
+		config = function() require('plugins.peek') end
+	},
+
 	-- Keymap Reminder
 	{
 		"folke/which-key.nvim",

@@ -18,6 +18,9 @@ vim.keymap.set('n', '<C-f>', geem.cmd('Telescope find_files'))
 -- Terminal
 vim.keymap.set('n', '!', geem.cmd('ToggleTerm'))
 
+-- Emoji
+vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
+
 -- Smart Splits
 vim.keymap.set('n', '<C-w>h', require('smart-splits').resize_left)
 vim.keymap.set('n', '<C-w>j', require('smart-splits').resize_down)
@@ -55,7 +58,8 @@ wk.register(
 			h = { geem.cmd("Telescope help_tags"), 'Help' },
 			c = { geem.cmd("Telescope colorscheme"), 'Colorscheme' },
 			k = { geem.cmd("Telescope keymaps"), "Keymaps" },
-			t = { geem.cmd("TodoTelescope"), "Todo List" }
+			t = { geem.cmd("TodoTelescope"), "Todo List" },
+			e = { geem.cmd('Telescope emoji'), 'Emoji' },
 		},
 		-- File
 		f = {
