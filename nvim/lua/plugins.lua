@@ -7,6 +7,12 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	-- Winbar
+	{
+		"SmiteshP/nvim-navic",
+		dependencies = "neovim/nvim-lspconfig",
+	},
+
 	-- Emoji Finder
 	{
 		'xiyaowong/telescope-emoji.nvim',
@@ -51,9 +57,7 @@ local plugins = {
 	{
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-		config = function()
-			require('lualine').setup({})
-		end
+		config = function() require('plugins.statusline') end
 	},
 
 	-- Fuzzy Finder

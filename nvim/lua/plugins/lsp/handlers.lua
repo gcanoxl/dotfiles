@@ -8,6 +8,8 @@ if lsp_format_avail then
 	lsp_format.setup {}
 end
 
+local navic_avail, navic = pcall(require, 'nvim-navic')
+
 -- on_attach function
 local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -28,6 +30,11 @@ local on_attach = function(client, bufnr)
 	-- auto format
 	if lsp_format_avail then
 		lsp_format.on_attach(client)
+	end
+
+	-- navic
+	if navic_avail then
+		navic.attach(client, bufnr)
 	end
 end
 
