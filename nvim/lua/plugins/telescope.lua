@@ -16,6 +16,11 @@ telescope.setup {
 				-- TODO: restore the original mode
 			end,
 		}
+	},
+	pickers = {
+		colorscheme = {
+			enable_preview = true
+		}
 	}
 }
 require("telescope").load_extension("ui-select")
