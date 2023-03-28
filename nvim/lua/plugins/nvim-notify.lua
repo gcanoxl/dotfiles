@@ -6,6 +6,7 @@ end
 notify.setup({
 	top_down = false,
 	max_width = 80,
+	background_colour = "#000000",
 })
 
 vim.notify = notify
