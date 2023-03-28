@@ -10,8 +10,11 @@ end
 
 local navic_avail, navic = pcall(require, 'nvim-navic')
 
+local wk_ok, wk = pcall(require, 'which-key')
+
 -- on_attach function
 local on_attach = function(client, bufnr)
+	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', 'dp', vim.diagnostic.goto_prev, bufopts)
@@ -26,6 +29,16 @@ local on_attach = function(client, bufnr)
 		{ noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(0, 'n', 'gl', ':Telescope lsp_document_symbols<CR>',
 		{ noremap = true, silent = true })
+
+	-- register keymaps using which-key
+	if wk_ok then
+		wk.register({
+			l = {
+				name = "LSP",
+				o = { geem.cmd("Lspsaga outline"), "Outline" },
+			}
+		}, { prefix = "<leader>", buffer = bufnr, })
+	end
 
 	-- auto format
 	if lsp_format_avail then
