@@ -60,6 +60,7 @@ wk.register(
 			k = { geem.cmd("Telescope keymaps"), "Keymaps" },
 			t = { geem.cmd("TodoTelescope"), "Todo List" },
 			e = { geem.cmd('Telescope emoji'), 'Emoji' },
+			m = { geem.cmd('Telescope notify'), 'Messages' }
 		},
 		-- File
 		f = {

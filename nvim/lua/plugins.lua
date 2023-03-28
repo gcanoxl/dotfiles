@@ -7,6 +7,10 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	{
+		'rcarriga/nvim-notify', config = function() require('plugins.nvim-notify') end
+	},
+
 	-- Winbar
 	{
 		"SmiteshP/nvim-navic",
