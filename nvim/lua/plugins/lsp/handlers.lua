@@ -8,8 +8,6 @@ if lsp_format_avail then
 	lsp_format.setup {}
 end
 
-local navic_avail, navic = pcall(require, 'nvim-navic')
-
 local wk_ok, wk = pcall(require, 'which-key')
 
 -- on_attach function
@@ -19,7 +17,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', 'dp', vim.diagnostic.goto_prev, bufopts)
 	vim.keymap.set('n', 'dn', vim.diagnostic.goto_next, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'K', geem.cmd('Lspsaga hover_doc'), bufopts)
 	vim.keymap.set('n', 'ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
@@ -35,7 +33,8 @@ local on_attach = function(client, bufnr)
 		wk.register({
 			l = {
 				name = "LSP",
-				o = { geem.cmd("Lspsaga outline"), "Outline" },
+				o = { geem.cmd("SymbolsOutline"), 'outline' },
+				O = { geem.cmd("Lspsaga outline"), "symbols" },
 			}
 		}, { prefix = "<leader>", buffer = bufnr, })
 	end
@@ -43,11 +42,6 @@ local on_attach = function(client, bufnr)
 	-- auto format
 	if lsp_format_avail then
 		lsp_format.on_attach(client)
-	end
-
-	-- navic
-	if navic_avail then
-		navic.attach(client, bufnr)
 	end
 end
 
