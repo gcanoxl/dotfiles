@@ -81,12 +81,6 @@ wk.register(
 		},
 		-- Package Management
 		P = { geem.cmd("Lazy"), "Package Management" },
-		-- LSP
-		l = {
-			name = "LSP",
-			e = { geem.cmd("TroubleToggle workspace_diagnostics"), "Error" },
-			E = { geem.cmd("TroubleToggle document_diagnostics"), "Document Error" },
-		},
 	},
 	{ prefix = "<leader>", }
 )

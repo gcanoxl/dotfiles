@@ -7,14 +7,9 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	-- Notify
 	{
 		'rcarriga/nvim-notify', config = function() require('plugins.nvim-notify') end
-	},
-
-	-- Winbar
-	{
-		"SmiteshP/nvim-navic",
-		dependencies = "neovim/nvim-lspconfig",
 	},
 
 	-- Emoji Finder
@@ -61,7 +56,7 @@ local plugins = {
 	{
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-		config = function() require('plugins.statusline') end
+		config = function() require('lualine').setup({}) end
 	},
 
 	-- Fuzzy Finder
@@ -116,6 +111,17 @@ local plugins = {
 
 	-- Text Objects based on treesitter
 	'nvim-treesitter/nvim-treesitter-textobjects',
+
+	-- Lsp UI
+	{
+		"glepnir/lspsaga.nvim",
+		event = "LspAttach",
+		config = function() require('plugins.nvim-lspsaga') end,
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "nvim-treesitter/nvim-treesitter" }
+		}
+	},
 
 	-- Lsp Manager
 	"williamboman/mason-lspconfig.nvim",

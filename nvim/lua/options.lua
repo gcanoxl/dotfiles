@@ -14,7 +14,8 @@ local options = {
 	cursorcolumn = false,
 	timeout = true,
 	timeoutlen = 800,
-	winblend = 6
+	winblend = 6,
+	cmdheight = 0,
 }
 
 for k, v in pairs(options) do
