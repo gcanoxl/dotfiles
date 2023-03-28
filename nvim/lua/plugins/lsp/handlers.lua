@@ -15,14 +15,13 @@ local on_attach = function(client, bufnr)
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', 'dp', vim.diagnostic.goto_prev, bufopts)
-	vim.keymap.set('n', 'dn', vim.diagnostic.goto_next, bufopts)
+	vim.keymap.set('n', 'dp', geem.cmd('Lspsaga diagnostic_jump_prev'), bufopts)
+	vim.keymap.set('n', 'dn', geem.cmd('Lspsaga diagnostic_jump_next'), bufopts)
 	vim.keymap.set('n', 'K', geem.cmd('Lspsaga hover_doc'), bufopts)
 	vim.keymap.set('n', 'ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.api.nvim_buf_set_keymap(0, 'n', 'go', ':Telescope lsp_dynamic_workspace_symbols<CR>',
 		{ noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(0, 'n', 'gl', ':Telescope lsp_document_symbols<CR>',
@@ -33,7 +32,24 @@ local on_attach = function(client, bufnr)
 		wk.register({
 			l = {
 				name = "LSP",
+				n = { vim.lsp.buf.rename, "Rename" },
 				o = { geem.cmd("Lspsaga outline"), "Symbol Outline" },
+				k = { geem.cmd("Lspsaga hover_doc"), "Hover Doc" },
+				K = { geem.cmd("Lspsaga hover_doc ++keep"), "Persistent Hover Doc" },
+				a = { vim.lsp.buf.code_action, "Code Action" },
+				d = {
+					name = "Diagnostic",
+					p = { geem.cmd('Lspsaga diagnostic_jump_prev'), 'Previous' },
+					n = { geem.cmd('Lspsaga diagnostic_jump_next'), 'Next' },
+				},
+				g = {
+					name = "Goto",
+					d = { vim.lsp.buf.definition, "Definition" },
+					D = { vim.lsp.buf.type_definition, "Type Definition" },
+					i = { vim.lsp.buf.implementation, "Implementation" },
+					o = { geem.cmd('Telescope lsp_dynamic_workspace_symbols'), 'Workspace Symbols' },
+					l = { geem.cmd('Telescope lsp_document_symbols'), 'Document Symbols' },
+				}
 			}
 		}, { prefix = "<leader>", buffer = bufnr, })
 	end
