@@ -33,8 +33,7 @@ local on_attach = function(client, bufnr)
 		wk.register({
 			l = {
 				name = "LSP",
-				o = { geem.cmd("SymbolsOutline"), 'outline' },
-				O = { geem.cmd("Lspsaga outline"), "symbols" },
+				o = { geem.cmd("Lspsaga outline"), "Symbol Outline" },
 			}
 		}, { prefix = "<leader>", buffer = bufnr, })
 	end

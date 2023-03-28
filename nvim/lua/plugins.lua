@@ -7,12 +7,6 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
-	-- Symbol Outline
-	{
-		'simrat39/symbols-outline.nvim',
-		config = function() require("symbols-outline").setup() end
-	},
-
 	-- Notify
 	{
 		'rcarriga/nvim-notify', config = function() require('plugins.nvim-notify') end
