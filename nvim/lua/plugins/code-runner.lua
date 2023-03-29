@@ -9,6 +9,7 @@ code_runner.setup({
 	},
 	filetype = {
 		python = "python3 -u",
-		c = "gcc $fileName && ./a.out"
+		c = "gcc $fileName && ./a.out",
+		dart = "dart $fileName"
 	}
 })
