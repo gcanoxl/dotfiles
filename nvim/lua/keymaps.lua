@@ -70,7 +70,7 @@ wk.register(
 			r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
 		},
 		-- Git
-		g = { function() require('neogit').open() end, "Git" },
+		g = { require('neogit').open, "Git" },
 		-- Project
 		p = {
 			name = "Project",
@@ -81,6 +81,13 @@ wk.register(
 		},
 		-- Package Management
 		P = { geem.cmd("Lazy"), "Package Management" },
+		-- Debug
+		d = {
+			name = "Debug",
+			b = { require('dap').toggle_breakpoint, "Toggle Breakpoint" },
+			c = { require('dap').continue, "Start or Continue" },
+			u = { require('dapui').open, "Dap UI" },
+		}
 	},
 	{ prefix = "<leader>", }
 )
