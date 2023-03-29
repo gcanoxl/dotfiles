@@ -112,6 +112,13 @@ local plugins = {
 	-- Text Objects based on treesitter
 	'nvim-treesitter/nvim-treesitter-textobjects',
 
+	-- Dap
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = "mfussenegger/nvim-dap",
+		config = function() require('plugins.nvim-dap') end
+	},
+
 	-- Lsp UI
 	{
 		"glepnir/lspsaga.nvim",
