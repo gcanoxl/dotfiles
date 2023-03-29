@@ -101,3 +101,8 @@ geem.map_on_filetype('dart', {
 	e = { geem.cmd('FlutterEmulators'), 'Emulators' },
 	w = { geem.cmd('FlutterOutlineToggle'), 'Toggle Widget Outline' },
 })
+
+-- Lua Special Keymaps
+geem.map_on_filetype('lua', {
+	['s'] = { geem.cmd('source %'), 'Source' }
+})
