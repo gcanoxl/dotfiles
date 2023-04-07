@@ -5,4 +5,7 @@ end
 
 lspsaga.setup({
 	request_timeout = 8000,
+	lightbulb = {
+		enable = false,
+	},
 })
