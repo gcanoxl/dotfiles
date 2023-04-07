@@ -22,10 +22,10 @@ vim.keymap.set('n', '!', geem.cmd('ToggleTerm'))
 vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
 
 -- Smart Splits
-vim.keymap.set('n', '<C-w>h', require('smart-splits').resize_left)
-vim.keymap.set('n', '<C-w>j', require('smart-splits').resize_down)
-vim.keymap.set('n', '<C-w>k', require('smart-splits').resize_up)
-vim.keymap.set('n', '<C-w>l', require('smart-splits').resize_right)
+vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
+vim.keymap.set('n', '<C-S-j>', require('smart-splits').resize_down)
+vim.keymap.set('n', '<C-S-k>', require('smart-splits').resize_up)
+vim.keymap.set('n', '<C-S-l>', require('smart-splits').resize_right)
 -- moving between splits
 vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
 vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
@@ -86,7 +86,7 @@ wk.register(
 			name = "Debug",
 			b = { require('dap').toggle_breakpoint, "Toggle Breakpoint" },
 			c = { require('dap').continue, "Start or Continue" },
-			u = { require('dapui').toggle, "Dap UI" },
+			u = { require('dapui').toggle, "Toggle Dap UI" },
 			n = { require('dap').step_over, "Step Over" },
 			i = { require('dap').step_into, "Step Into" },
 			o = { require('dap').step_out, "Step Out" },
@@ -111,6 +111,7 @@ geem.map_on_filetype('dart', {
 	['<localleader>'] = { geem.cmd('Telescope flutter commands'), "Flutter Commands" },
 	e = { geem.cmd('FlutterEmulators'), 'Emulators' },
 	w = { geem.cmd('FlutterOutlineToggle'), 'Toggle Widget Outline' },
+	r = { geem.cmd('FlutterRun'), 'Run Flutter' },
 })
 
 -- Lua Special Keymaps
