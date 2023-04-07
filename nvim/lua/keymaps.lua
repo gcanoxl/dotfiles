@@ -86,7 +86,7 @@ wk.register(
 			name = "Debug",
 			b = { require('dap').toggle_breakpoint, "Toggle Breakpoint" },
 			c = { require('dap').continue, "Start or Continue" },
-			u = { require('dapui').open, "Dap UI" },
+			u = { require('dapui').toggle, "Dap UI" },
 			n = { require('dap').step_over, "Step Over" },
 			i = { require('dap').step_into, "Step Into" },
 			o = { require('dap').step_out, "Step Out" },
