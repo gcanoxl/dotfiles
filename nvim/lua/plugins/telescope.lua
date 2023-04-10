@@ -11,9 +11,7 @@ telescope.setup {
 		},
 		emoji = {
 			action = function(emoji)
-				-- insert emoji when picked
 				vim.api.nvim_put({ emoji.value }, 'c', false, true)
-				-- TODO: restore the original mode
 			end,
 		}
 	},

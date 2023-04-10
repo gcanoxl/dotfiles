@@ -16,6 +16,10 @@ local options = {
 	timeoutlen = 800,
 	winblend = 6,
 	cmdheight = 0,
+	-- folding
+	foldmethod = "expr",
+	foldexpr = "nvim_treesitter#foldexpr()",
+	foldenable = true,
 }
 
 for k, v in pairs(options) do

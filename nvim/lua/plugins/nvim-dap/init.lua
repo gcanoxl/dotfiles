@@ -13,6 +13,10 @@ if not dapui_ok then
 	return
 end
 dapui.setup({
+	mappings = {
+		expand = { "<tab>" },
+		open = { "<enter>" },
+	},
 	layouts = {
 		{
 			-- You can change the order of elements in the sidebar
