@@ -10,15 +10,15 @@ dap.adapters.dart = {
 	args = { "debug_adapter" }
 }
 dap.configurations.dart = {
-	{
-		type = "dart",
-		request = "launch",
-		name = "Launch Flutter Program",
-		-- The nvim-dap plugin populates this variable with the filename of the current buffer
-		program = "${file}",
-		-- The nvim-dap plugin populates this variable with the editor's current working directory
-		cwd = "${workspaceFolder}",
-		-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
-		toolArgs = { "-d", "51199BE2" }
-	}
+	-- {
+	-- 	type = "dart",
+	-- 	request = "launch",
+	-- 	name = "Launch Flutter Program",
+	-- 	-- The nvim-dap plugin populates this variable with the filename of the current buffer
+	-- 	program = "./lib/main.dart",
+	-- 	-- The nvim-dap plugin populates this variable with the editor's current working directory
+	-- 	cwd = "${workspaceFolder}",
+	-- 	-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
+	-- 	toolArgs = { "-d", "51199BE2" }
+	-- }
 }
