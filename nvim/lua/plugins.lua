@@ -7,6 +7,12 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	-- Symbol Outline
+	{
+		'stevearc/aerial.nvim',
+		config = function() require('aerial').setup() end
+	},
+
 	-- Notify
 	{
 		'rcarriga/nvim-notify', config = function() require('plugins.nvim-notify') end
