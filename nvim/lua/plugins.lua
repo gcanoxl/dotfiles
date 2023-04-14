@@ -10,7 +10,7 @@ local plugins = {
 	-- Symbol Outline
 	{
 		'stevearc/aerial.nvim',
-		config = function() require('aerial').setup() end
+		config = function() require('plugins.nvim-aerial') end
 	},
 
 	-- Notify
