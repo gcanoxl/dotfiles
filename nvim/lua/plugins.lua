@@ -151,18 +151,6 @@ local plugins = {
 		config = function() require('plugins.luasnip') end
 	},
 
-	-- Completion Engine
-	{
-		'hrsh7th/nvim-cmp',
-		config = function() require 'plugins.cmp' end
-	},
-
-	-- Lsp Completion Source
-	'hrsh7th/cmp-nvim-lsp',
-
-	-- Snippet Completion Source
-	'saadparwaiz1/cmp_luasnip',
-
 	-- Better Buffer Closing
 	'famiu/bufdelete.nvim',
 
