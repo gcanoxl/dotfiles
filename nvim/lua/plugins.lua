@@ -42,14 +42,6 @@ local plugins = {
 		config = function() require('lualine').setup({}) end
 	},
 
-	-- Fuzzy Finder
-	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		config = function() require('plugins.telescope') end
-	},
-
-	'nvim-telescope/telescope-ui-select.nvim',
-
 	-- Mouse Movement
 	{
 		'phaazon/hop.nvim', branch = 'v2',
