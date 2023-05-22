@@ -1,3 +1,7 @@
+-- leader
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+
 local options = {
 	clipboard = 'unnamedplus',
 	termguicolors = true,

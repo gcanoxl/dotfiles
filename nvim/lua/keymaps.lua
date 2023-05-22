@@ -1,7 +1,4 @@
--- leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
-
+-- Remap jk to <ESC>
 vim.keymap.set('i', 'jk', '<esc>')
 
 -- Hop
