@@ -7,6 +7,9 @@ local plugins = {
 	{ "EdenEast/nightfox.nvim" },
 	{ 'folke/tokyonight.nvim' },
 
+	-- Luapad
+	{ 'rafcamlet/nvim-luapad' },
+
 	-- Symbol Outline
 	{
 		'stevearc/aerial.nvim',
