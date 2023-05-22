@@ -8,7 +8,7 @@ local plugins = {
 	{ 'folke/tokyonight.nvim' },
 
 	-- Luapad
-	{ 'rafcamlet/nvim-luapad' },
+	'rafcamlet/nvim-luapad',
 
 	-- Symbol Outline
 	{
@@ -41,10 +41,6 @@ local plugins = {
 			require("which-key").setup({})
 		end,
 	},
-
-	-- Code Runner
-	{ 'CRAG666/code_runner.nvim', dependencies = 'nvim-lua/plenary.nvim',
-		config = function() require('plugins.code-runner') end },
 
 	-- Prettier UI
 	'stevearc/dressing.nvim',
