@@ -182,14 +182,6 @@ local plugins = {
 		end
 	},
 
-	-- Go Support
-	{
-		'ray-x/go.nvim',
-		dependencies = { 'ray-x/guihua.lua' },
-		ft = { 'go' },
-		config = function() require('plugins.go') end
-	},
-
 	{ import = "new-plugins" }
 }
 
