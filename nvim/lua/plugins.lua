@@ -76,13 +76,6 @@ local plugins = {
 
 	'nvim-telescope/telescope-ui-select.nvim',
 
-	-- File Explorer
-	{
-		"nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = function() require 'plugins.neo-tree' end
-	},
-
 	-- Mouse Movement
 	{
 		'phaazon/hop.nvim', branch = 'v2',
@@ -239,7 +232,9 @@ local plugins = {
 		'akinsho/flutter-tools.nvim',
 		ft = { 'dart' },
 		config = function() require('plugins.flutter') end
-	}
+	},
+
+	{ import = "new-plugins" }
 }
 
 geem.initialize_lazy()
