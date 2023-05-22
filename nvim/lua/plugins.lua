@@ -190,12 +190,6 @@ local plugins = {
 		config = function() require('plugins.go') end
 	},
 
-	{
-		'akinsho/flutter-tools.nvim',
-		ft = { 'dart' },
-		config = function() require('plugins.flutter') end
-	},
-
 	{ import = "new-plugins" }
 }
 
