@@ -1,12 +1,4 @@
 local plugins = {
-	-- Colorschemes
-	{
-		"catppuccin/nvim", name = "catppuccin",
-		config = function() require('plugins.colorschemes.catppuccin') end
-	},
-	{ "EdenEast/nightfox.nvim" },
-	{ 'folke/tokyonight.nvim' },
-
 	-- Luapad
 	'rafcamlet/nvim-luapad',
 
