@@ -19,7 +19,7 @@ return {
 							program = "./lib/main.dart",
 							cwd = "${workspaceFolder}",
 							-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
-							toolArgs = { "-d", "51199BE2" }
+							toolArgs = { "-d", "M2012" }
 						}
 					}
 				end,

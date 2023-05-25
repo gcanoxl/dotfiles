@@ -3,7 +3,6 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = true,
 		config = function()
 			require('catppuccin').setup({
 				flavour = "frappe",
@@ -22,15 +21,8 @@ return {
 	},
 
 	-- nightfox
-	{
-		"EdenEast/nightfox.nvim",
-		lazy = true,
-
-	},
+	"EdenEast/nightfox.nvim",
 
 	-- tokyonight
-	{
-		'folke/tokyonight.nvim',
-		lazy = true,
-	},
+	'folke/tokyonight.nvim',
 }
