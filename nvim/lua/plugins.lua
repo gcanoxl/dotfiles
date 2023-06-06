@@ -60,12 +60,6 @@ local plugins = {
 		config = function() require('neogit').setup() end
 	},
 
-	-- Git Signs
-	{
-		'lewis6991/gitsigns.nvim',
-		config = function() require('gitsigns').setup() end
-	},
-
 	-- Session Manager
 	{
 		'Shatur/neovim-session-manager',
