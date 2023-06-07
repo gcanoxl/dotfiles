@@ -3,11 +3,6 @@ if not cmp_lsp_status_ok then
 	return
 end
 
-local lsp_format_avail, lsp_format = pcall(require, 'lsp-format')
-if lsp_format_avail then
-	lsp_format.setup {}
-end
-
 local wk_ok, wk = pcall(require, 'which-key')
 
 -- on_attach function
@@ -38,6 +33,8 @@ local on_attach = function(client, bufnr)
 				k = { geem.cmd("Lspsaga hover_doc"), "Hover Doc" },
 				K = { geem.cmd("Lspsaga hover_doc ++keep"), "Persistent Hover Doc" },
 				a = { vim.lsp.buf.code_action, "Code Action" },
+				f = { geem.cmd("Lspsaga lsp_finder"), "Finder" },
+				F = { function() vim.lsp.buf.format({ async = false }) end, "Format" },
 				d = {
 					name = "Diagnostic",
 					p = { geem.cmd('Lspsaga diagnostic_jump_prev'), 'Previous' },
@@ -55,10 +52,13 @@ local on_attach = function(client, bufnr)
 		}, { prefix = "<leader>", buffer = bufnr, })
 	end
 
-	-- auto format
-	if lsp_format_avail then
-		lsp_format.on_attach(client)
-	end
+	-- creating an autocommand applying format on save
+	vim.api.nvim_create_autocmd('BufWrite', {
+		-- TODO: deciding if it should be grouped
+		callback = function()
+			vim.lsp.buf.format({ async = false })
+		end
+	})
 end
 
 -- handlers
