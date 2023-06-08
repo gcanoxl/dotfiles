@@ -91,6 +91,7 @@ wk.register(
 			i = { require('dap').step_into, "Step Into" },
 			o = { require('dap').step_out, "Step Out" },
 			q = { require('dap').terminate, "Terminate" },
+			l = { require('dap.repl').clear, "Clear REPL" },
 		}
 	},
 	{ prefix = "<leader>", }

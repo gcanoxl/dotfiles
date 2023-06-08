@@ -6,7 +6,7 @@ end
 local wk_ok, wk = pcall(require, 'which-key')
 
 -- on_attach function
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'rn', vim.lsp.buf.rename, bufopts)
