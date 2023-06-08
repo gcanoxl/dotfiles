@@ -119,3 +119,8 @@ geem.map_on_filetype('dart', {
 geem.map_on_filetype('lua', {
 	['s'] = { geem.cmd('source %'), 'Source' }
 })
+
+-- Python Special Keymaps
+geem.map_on_filetype('python', {
+	['r'] = { geem.cmd('RunCode'), 'Run' }
+})
