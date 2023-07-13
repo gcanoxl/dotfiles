@@ -2,6 +2,12 @@ local plugins = {
 	-- Luapad
 	'rafcamlet/nvim-luapad',
 
+	-- For inputing Chinese
+	{
+		'ivanesmantovich/xkbswitch.nvim',
+		config = function() require('xkbswitch').setup() end
+	},
+
 	-- Symbol Outline
 	{
 		'stevearc/aerial.nvim',
@@ -56,8 +62,18 @@ local plugins = {
 
 	-- Git Client
 	{
-		'TimUntersberger/neogit', dependencies = 'nvim-lua/plenary.nvim',
-		config = function() require('neogit').setup() end
+		'TimUntersberger/neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'sindrets/diffview.nvim'
+		},
+		config = function()
+			require('neogit').setup({
+				integrations = {
+					diffview = true
+				},
+			})
+		end
 	},
 
 	-- Session Manager
