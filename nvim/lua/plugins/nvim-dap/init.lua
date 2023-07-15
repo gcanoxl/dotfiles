@@ -18,37 +18,36 @@ dapui.setup({
 		expand = { "<tab>" },
 		open = { "<enter>" },
 	},
-	-- layouts = {
-	-- 	{
-	-- 		-- You can change the order of elements in the sidebar
-	-- 		elements = {
-	-- 			-- Provide IDs as strings or tables with "id" and "size" keys
-	-- 			{ id = "scopes",      size = 2, },
-	-- 			{ id = "breakpoints", size = 0.25 },
-	-- 			{ id = "stacks",      size = 0.25 },
-	-- 			{ id = "watches",     size = 0.25 },
-	-- 		},
-	-- 		size = 24,
-	-- 		position = "left", -- Can be "left" or "right"
-	-- 	},
-	-- 	{
-	-- 		elements = {
-	-- 			{ id = "console", size = 0.4 },
-	-- 			{ id = "repl",    size = 0.6 },
-	-- 		},
-	-- 		size = 8,
-	-- 		position = "bottom", -- Can be "bottom" or "top"
-	-- 	},
-	-- },
-
-	-- Only output mode
 	layouts = {
 		{
+			-- You can change the order of elements in the sidebar
 			elements = {
-				{ id = "repl", size = 0.4 },
+				-- Provide IDs as strings or tables with "id" and "size" keys
+				{ id = "scopes",      size = 2, },
+				{ id = "breakpoints", size = 0.25 },
+				{ id = "stacks",      size = 0.25 },
+				{ id = "watches",     size = 0.25 },
 			},
 			size = 24,
 			position = "left", -- Can be "left" or "right"
 		},
+		{
+			elements = {
+				{ id = "console", size = 0.4 },
+				{ id = "repl",    size = 0.6 },
+			},
+			size = 8,
+			position = "bottom", -- Can be "bottom" or "top"
+		},
 	},
+	-- Only output mode
+	-- layouts = {
+	-- 	{
+	-- 		elements = {
+	-- 			{ id = "repl", size = 0.4 },
+	-- 		},
+	-- 		size = 24,
+	-- 		position = "left", -- Can be "left" or "right"
+	-- 	},
+	-- },
 })
