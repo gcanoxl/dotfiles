@@ -109,7 +109,10 @@ local plugins = {
 	-- Dap
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = "mfussenegger/nvim-dap",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"mfussenegger/nvim-dap-python",
+		},
 		config = function() require('plugins.nvim-dap') end
 	},
 

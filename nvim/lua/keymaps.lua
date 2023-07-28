@@ -17,6 +17,7 @@ vim.keymap.set('n', '<C-f>', geem.cmd('Telescope find_files'))
 
 -- Terminal
 vim.keymap.set('n', '!', geem.cmd('ToggleTerm'))
+vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 
 -- Emoji
 vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
