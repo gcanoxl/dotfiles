@@ -63,6 +63,10 @@ wk.register(
 			e = { geem.cmd('Telescope emoji'), 'Emoji' },
 			m = { geem.cmd('Telescope notify'), 'Messages' }
 		},
+		-- Errors
+		e = {
+			geem.cmd("TroubleToggle"), "Trouble Toggle"
+		},
 		-- File
 		f = {
 			name = "File",

@@ -1,4 +1,5 @@
 local plugins = {
+
 	-- Dap
 	{
 		"rcarriga/nvim-dap-ui",
@@ -44,6 +45,36 @@ local plugins = {
 	},
 
 
+	-- Better Buffer Closing
+	'famiu/bufdelete.nvim',
+
+	-- Todo List
+	{
+		"folke/todo-comments.nvim",
+		config = function() require('todo-comments').setup() end
+	},
+
+	-- Terminal
+	{
+		"akinsho/toggleterm.nvim", version = 'v2.*',
+		config = function()
+			require("toggleterm").setup({
+				direction = 'float',
+				float_opts = {
+					border = vim.g.preference.border,
+					winblend = vim.g.preference.winblend
+				}
+			})
+		end
+	},
+
+	-- Auto Pairs
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require('nvim-autopairs').setup()
+		end
+	},
 
 	{ import = "new-plugins" }
 }
@@ -52,15 +83,6 @@ geem.initialize_lazy()
 require('lazy').setup(plugins, {
 	dev = {
 		path = "~/Projects"
-	}
-})
-
+	},
 	{ import = "new-plugins" }
-}
-
-geem.initialize_lazy()
-require('lazy').setup(plugins, {
-	dev = {
-		path = "~/Projects"
-	}
 })
