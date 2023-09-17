@@ -21,12 +21,36 @@ return {
 	-- Symbol Outline
 	{
 		'stevearc/aerial.nvim',
-		config = function() require('plugins.nvim-aerial') end
+		config = function()
+			require('aerial').setup({
+				layout = {
+					min_width = 32,
+				},
+				show_guides = true,
+				keymaps = {
+					["<tab>"] = "actions.tree_toggle",
+				}
+			})
+		end
 	},
 
 	-- Notify
 	{
-		'rcarriga/nvim-notify', config = function() require('plugins.nvim-notify') end
+		'rcarriga/nvim-notify',
+		config = function()
+			require('notify').setup({
+				top_down = false,
+				max_width = 80,
+				background_colour = "#000000",
+			})
+
+			vim.notify = require('notify')
+
+			local telescope_ok, telescope = pcall(require, 'telescope')
+			if telescope_ok then
+				telescope.load_extension("notify")
+			end
+		end
 	},
 
 	-- Keymap Reminder
@@ -97,4 +121,35 @@ return {
 	},
 
 	'mrjones2014/smart-splits.nvim',
+
+	-- Better Buffer Closing
+	'famiu/bufdelete.nvim',
+
+	-- Todo List
+	{
+		"folke/todo-comments.nvim",
+		config = function() require('todo-comments').setup() end
+	},
+
+	-- Terminal
+	{
+		"akinsho/toggleterm.nvim", version = 'v2.*',
+		config = function()
+			require("toggleterm").setup({
+				direction = 'float',
+				float_opts = {
+					border = vim.g.preference.border,
+					winblend = vim.g.preference.winblend
+				}
+			})
+		end
+	},
+
+	-- Auto Pairs
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require('nvim-autopairs').setup()
+		end
+	},
 }
