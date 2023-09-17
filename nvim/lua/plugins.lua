@@ -54,7 +54,6 @@ require('lazy').setup(plugins, {
 		path = "~/Projects"
 	}
 })
-	},
 
 	{ import = "new-plugins" }
 }
