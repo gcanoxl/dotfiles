@@ -2,18 +2,6 @@ local plugins = {
 	-- Luapad
 	'rafcamlet/nvim-luapad',
 
-	-- Github Copilot
-	{
-		'github/copilot.vim',
-		build = ':Copilot setup',
-	},
-
-	-- For inputing Chinese
-	{
-		'ivanesmantovich/xkbswitch.nvim',
-		config = function() require('xkbswitch').setup() end
-	},
-
 	-- Symbol Outline
 	{
 		'stevearc/aerial.nvim',
