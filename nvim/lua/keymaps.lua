@@ -122,7 +122,8 @@ geem.map_on_filetype('dart', {
 
 -- Lua Special Keymaps
 geem.map_on_filetype('lua', {
-	['s'] = { geem.cmd('source %'), 'Source' }
+	['s'] = { geem.cmd('source %'), 'Source' },
+	r = { geem.cmd('LuaRun'), 'Run Currenet Buffer' },
 })
 
 -- Python Special Keymaps

@@ -4,7 +4,11 @@ return {
 		config = function()
 			require('telescope').setup {
 				defaults = {
-					winblend = vim.g.preference.winblend
+					winblend = vim.g.preference.winblend,
+					file_ignore_patterns = {
+						-- flutter project
+						"android", "ios", "web", "macos", "windows", "assets",
+					},
 				},
 				extensions = {
 					["ui-select"] = {
