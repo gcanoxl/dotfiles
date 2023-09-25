@@ -36,4 +36,12 @@ return {
 			require("telescope").load_extension("ui-select")
 		end
 	},
+
+	{
+		'LukasPietzschmann/telescope-tabs',
+		dependencies = { 'nvim-telescope/telescope.nvim' },
+		config = function()
+			require 'telescope-tabs'.setup {}
+		end
+	},
 }

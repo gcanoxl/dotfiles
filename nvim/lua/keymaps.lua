@@ -25,8 +25,6 @@ vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
 -- Tabs
 vim.keymap.set('n', '{', geem.cmd('tabprevious'))
 vim.keymap.set('n', '}', geem.cmd('tabnext'))
-vim.keymap.set('n', '<C-t>n', geem.cmd('tabnew'))
-vim.keymap.set('n', '<C-t>c', geem.cmd('tabclose'))
 
 -- Smart Splits
 -- FIX: it
@@ -34,6 +32,7 @@ vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<C-S-j>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<C-S-k>', require('smart-splits').resize_up)
 vim.keymap.set('n', '<C-S-l>', require('smart-splits').resize_right)
+--
 -- moving between splits
 vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
 vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
@@ -69,6 +68,28 @@ wk.register(
 			t = { geem.cmd("TodoTelescope"), "Todo List" },
 			e = { geem.cmd('Telescope emoji'), 'Emoji' },
 			m = { geem.cmd('Telescope notify'), 'Messages' }
+		},
+		-- Tabs
+		t = {
+			name = "Tab",
+			n = { geem.cmd('tabnew'), 'New Empty Tab', },
+			c = { geem.cmd('tabclose'), 'Close Current Table' },
+			o = { geem.cmd('tab split'), 'Duplicate to New Table' },
+			O = {
+				function()
+					local win_id = vim.fn.win_getid()
+					vim.cmd('tab split')
+					vim.fn.win_execute(win_id, 'wincmd c')
+				end
+				, 'Move to New Table',
+			},
+			t = { require('telescope-tabs').list_tabs, 'Tabs' },
+		},
+		b = {
+			name = "Buffer",
+			b = {
+				geem.cmd('Telescope buffers'),
+			},
 		},
 		-- Errors
 		e = {
