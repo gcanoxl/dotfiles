@@ -22,7 +22,14 @@ vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 -- Emoji
 vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
 
+-- Tabs
+vim.keymap.set('n', '{', geem.cmd('tabprevious'))
+vim.keymap.set('n', '}', geem.cmd('tabnext'))
+vim.keymap.set('n', '<C-t>n', geem.cmd('tabnew'))
+vim.keymap.set('n', '<C-t>c', geem.cmd('tabclose'))
+
 -- Smart Splits
+-- FIX: it
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<C-S-j>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<C-S-k>', require('smart-splits').resize_up)
