@@ -27,7 +27,7 @@ vim.keymap.set('n', '{', geem.cmd('tabprevious'))
 vim.keymap.set('n', '}', geem.cmd('tabnext'))
 
 -- Smart Splits
--- FIX: it
+-- FIX: it or delete it
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<C-S-j>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<C-S-k>', require('smart-splits').resize_up)
@@ -69,7 +69,7 @@ wk.register(
 			e = { geem.cmd('Telescope emoji'), 'Emoji' },
 			m = { geem.cmd('Telescope notify'), 'Messages' }
 		},
-		-- Tabs
+		-- Tab
 		t = {
 			name = "Tab",
 			n = { geem.cmd('tabnew'), 'New Empty Tab', },
@@ -85,6 +85,7 @@ wk.register(
 			},
 			t = { require('telescope-tabs').list_tabs, 'Tabs' },
 		},
+		-- Buffer
 		b = {
 			name = "Buffer",
 			b = {
@@ -107,6 +108,10 @@ wk.register(
 		-- Project
 		p = {
 			name = "Project",
+			p = {
+				function() require 'telescope'.extensions.projects.projects {} end,
+				'Projects',
+			},
 			r = { geem.cmd("SessionManager load_last_session"), "Load Last Session" },
 			f = { geem.cmd("SessionManager load_session"), "Find Session" },
 			s = { geem.cmd("SessionManager save_current_session"), "Save Session" },

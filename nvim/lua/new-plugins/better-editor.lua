@@ -111,12 +111,24 @@ return {
 	},
 
 	-- Session Manager
+	-- FIX: delete this line
 	{
 		'Shatur/neovim-session-manager',
 		config = function()
 			require('session_manager').setup({
 				autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
 			})
+		end
+	},
+	--
+	{
+
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup {
+				patterns = { ".project" },
+			}
+			require('telescope').load_extension('projects')
 		end
 	},
 
