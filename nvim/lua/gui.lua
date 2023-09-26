@@ -30,9 +30,7 @@ vim.keymap.set({ 'n', 'i' }, "<D-0>", ResetGuiFont, opts)
 vim.keymap.set('n', '<D-t>', geem.cmd('tabnew'))
 vim.keymap.set('n', '<D-w>', geem.cmd('tabclose'))
 vim.keymap.set('n', '<D-o>', geem.cmd('tab split'))
-vim.keymap.set('n', '<C-D-o>', function()
-	print(vim.inspect(geem.cmd))
-end)
+vim.keymap.set('n', '<C-D-o>', geem.move_to_new_tab)
 
 -- Smart Splits
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
