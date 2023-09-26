@@ -30,3 +30,6 @@ vim.g.preference = {
 	border = 'rounded',
 	winblend = 4
 }
+
+-- default current-directory
+vim.cmd('cd')
