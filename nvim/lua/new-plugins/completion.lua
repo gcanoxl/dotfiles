@@ -57,8 +57,7 @@ return {
 					{ name = 'path', option = {
 						get_cwd = function()
 							if vim.bo.filetype == "dart" then
-								-- TODO: fix here!!!!
-								-- ah
+								return vim.fn.getcwd()
 							end
 						end
 					} },
