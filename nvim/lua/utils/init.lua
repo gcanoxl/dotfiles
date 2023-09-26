@@ -31,3 +31,9 @@ function geem.map_on_filetype(filetype, maps)
 		end
 	})
 end
+
+function geem.move_to_new_tab()
+	local win_id = vim.fn.win_getid()
+	vim.cmd('tab split')
+	vim.fn.win_execute(win_id, 'wincmd c')
+end

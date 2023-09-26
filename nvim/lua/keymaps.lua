@@ -27,7 +27,6 @@ vim.keymap.set('n', '{', geem.cmd('tabprevious'))
 vim.keymap.set('n', '}', geem.cmd('tabnext'))
 
 -- Smart Splits
--- FIX: it or delete it
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<C-S-j>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<C-S-k>', require('smart-splits').resize_up)
@@ -75,14 +74,7 @@ wk.register(
 			n = { geem.cmd('tabnew'), 'New Empty Tab', },
 			c = { geem.cmd('tabclose'), 'Close Current Table' },
 			o = { geem.cmd('tab split'), 'Duplicate to New Table' },
-			O = {
-				function()
-					local win_id = vim.fn.win_getid()
-					vim.cmd('tab split')
-					vim.fn.win_execute(win_id, 'wincmd c')
-				end
-				, 'Move to New Table',
-			},
+			O = { geem.move_to_new_tab, 'Move to New Table', },
 			t = { require('telescope-tabs').list_tabs, 'Tabs' },
 		},
 		-- Buffer
