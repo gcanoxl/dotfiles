@@ -9,6 +9,8 @@ return {
 				width = 24,
 				mappings = {
 					["<tab>"] = "open",
+					["O"] = "expand_all_nodes",
+					['C'] = 'close_all_subnodes',
 				}
 			},
 			filesystem = {

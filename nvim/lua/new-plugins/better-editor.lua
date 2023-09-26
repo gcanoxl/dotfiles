@@ -116,8 +116,7 @@ return {
 		"ahmedkhalf/project.nvim",
 		config = function()
 			require("project_nvim").setup {
-				patterns = { ".project" },
-				exclude_dirs = { '~/Library/CloudStorage/Dropbox/dotfiles' },
+				manual_mode = true,
 			}
 			require('telescope').load_extension('projects')
 		end

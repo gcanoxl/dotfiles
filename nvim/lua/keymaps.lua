@@ -101,6 +101,8 @@ wk.register(
 		p = {
 			name = "Project",
 			p = { function() require 'telescope'.extensions.projects.projects {} end, 'Projects', },
+			P = { geem.cmd('ProjectRoot'), 'Reset Root Directory', },
+			a = { geem.cmd('ProjectAdd'), 'Add Project' },
 		},
 		-- Package Management
 		P = { geem.cmd("Lazy"), "Package Management" },
