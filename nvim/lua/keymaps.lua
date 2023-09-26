@@ -89,7 +89,7 @@ wk.register(
 		b = {
 			name = "Buffer",
 			b = {
-				geem.cmd('Telescope buffers'),
+				geem.cmd('Telescope buffers'), 'Buffers'
 			},
 		},
 		-- Errors
@@ -108,14 +108,7 @@ wk.register(
 		-- Project
 		p = {
 			name = "Project",
-			p = {
-				function() require 'telescope'.extensions.projects.projects {} end,
-				'Projects',
-			},
-			r = { geem.cmd("SessionManager load_last_session"), "Load Last Session" },
-			f = { geem.cmd("SessionManager load_session"), "Find Session" },
-			s = { geem.cmd("SessionManager save_current_session"), "Save Session" },
-			d = { geem.cmd("SessionManager delete_session"), "Delete Session" },
+			p = { function() require 'telescope'.extensions.projects.projects {} end, 'Projects', },
 		},
 		-- Package Management
 		P = { geem.cmd("Lazy"), "Package Management" },
