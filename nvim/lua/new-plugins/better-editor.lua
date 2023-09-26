@@ -154,4 +154,15 @@ return {
 			require('nvim-autopairs').setup()
 		end
 	},
+
+	-- Dired
+	{
+		'X3eRo0/dired.nvim',
+		dependencies = "MunifTanjim/nui.nvim",
+		config = function()
+			require("dired").setup {
+				show_colors = true,
+			}
+		end
+	}
 }

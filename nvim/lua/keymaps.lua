@@ -92,8 +92,9 @@ wk.register(
 		f = {
 			name = "File",
 			w = { geem.cmd("wa"), "Save File" },
-			l = { geem.cmd("Neotree"), "File Explore" },
+			l = { geem.cmd("Neotree"), "File Explorer" },
 			r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
+			d = { geem.cmd('Dired'), 'File Manager' },
 		},
 		-- Git
 		g = { require('neogit').open, "Git" },
