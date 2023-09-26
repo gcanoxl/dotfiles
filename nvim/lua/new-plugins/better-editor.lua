@@ -88,12 +88,6 @@ return {
 		config = function() require('lualine').setup({}) end
 	},
 
-	-- Better Commenting
-	{
-		'numToStr/Comment.nvim',
-		config = function() require('Comment').setup() end
-	},
-
 	-- Git Client
 	{
 		'TimUntersberger/neogit',
@@ -110,7 +104,7 @@ return {
 		end
 	},
 
-	--
+	-- Project
 	{
 
 		"ahmedkhalf/project.nvim",
@@ -144,14 +138,6 @@ return {
 					winblend = vim.g.preference.winblend
 				}
 			})
-		end
-	},
-
-	-- Auto Pairs
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require('nvim-autopairs').setup()
 		end
 	},
 
