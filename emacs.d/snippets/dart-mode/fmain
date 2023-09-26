@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: Flutter Main
-# key: fm
-# group: flutter
-# --
-void main() {
-  runApp($0);
-}

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Class
-# key: cls
-# --
-class $1:
-    $0
