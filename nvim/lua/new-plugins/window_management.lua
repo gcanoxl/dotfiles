@@ -9,9 +9,10 @@ return {
 				{
 					title = "File Explorer",
 					ft = "neo-tree",
-					filter = function(buf)
-						return vim.b[buf].neo_tree_source == "filesystem"
-					end,
+					-- pin = true,
+					-- filter = function(buf)
+					-- 	return vim.b[buf].neo_tree_source == "filesystem"
+					-- end,
 					size = {
 						width = 24,
 					},
@@ -23,10 +24,13 @@ return {
 				{
 					title = "Symbol Outline",
 					ft = "aerial",
+					-- pin = true,
 				},
 				{
 					title = "Widget Outline",
 					ft = "flutterToolsOutline",
+					-- pin = true,
+
 				},
 			},
 
@@ -35,11 +39,14 @@ return {
 				{
 					title = "REPL",
 					ft = "dap-repl",
+					-- pin = true,
+
 				},
 			},
 
 			---@type (Edgy.View.Opts|string)[]
-			top = {}
+			top = {},
+			fix_win_height = false,
 		}
 	}
 }

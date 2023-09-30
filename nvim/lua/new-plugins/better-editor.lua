@@ -29,6 +29,8 @@ return {
 				show_guides = true,
 				keymaps = {
 					["<tab>"] = "actions.tree_toggle",
+					["<C-j>"] = false,
+					["<C-k>"] = false,
 				}
 			})
 		end

@@ -21,6 +21,7 @@ local options = {
 	winblend = 6,
 	swapfile = false,
 	cmdheight = 0,
+	laststatus = 3,
 }
 
 for k, v in pairs(options) do
