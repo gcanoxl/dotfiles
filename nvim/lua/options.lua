@@ -20,6 +20,7 @@ local options = {
 	timeoutlen = 800,
 	winblend = 6,
 	swapfile = false,
+	cmdheight = 0,
 }
 
 for k, v in pairs(options) do
