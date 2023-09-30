@@ -3,6 +3,7 @@ return {
 		"folke/edgy.nvim",
 		event = "VeryLazy",
 		opts = {
+			-- Layout
 			---@type (Edgy.View.Opts|string)[]
 			left = {
 				-- Neo-tree filesystem always takes half the screen height
@@ -46,7 +47,31 @@ return {
 
 			---@type (Edgy.View.Opts|string)[]
 			top = {},
-			fix_win_height = false,
+
+			-- Options
+			---@type table<Edgy.Pos, {size:integer | fun():integer, wo?:vim.wo}>
+			options = {
+				left = { size = 24 },
+				bottom = { size = 10 },
+				right = { size = 30 },
+				top = { size = 10 },
+			},
+			---@type vim.wo
+			wo = {
+				-- Setting to `true`, will add an edgy winbar.
+				-- Setting to `false`, won't set any winbar.
+				-- Setting to a string, will set the winbar to that string.
+				winbar = true,
+				winfixwidth = true,
+				winfixheight = true,
+				winhighlight = "WinBar:EdgyWinBar,Normal:EdgyNormal",
+				spell = false,
+				signcolumn = "no",
+			},
+			animate = {
+				enabled = false,
+			},
 		}
 	}
+
 }

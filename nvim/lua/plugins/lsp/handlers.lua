@@ -35,6 +35,8 @@ local on_attach = function(_, bufnr)
 				a = { vim.lsp.buf.code_action, "Code Action" },
 				f = { geem.cmd("Lspsaga lsp_finder"), "Finder" },
 				F = { function() vim.lsp.buf.format({ async = false }) end, "Format" },
+
+				l = { geem.cmd('DapToggleRepl'), 'Toggle REPL' },
 				d = {
 					name = "Diagnostic",
 					p = { geem.cmd('Lspsaga diagnostic_jump_prev'), 'Previous' },

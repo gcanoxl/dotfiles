@@ -48,6 +48,9 @@ vim.keymap.set('s', "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 
 local wk = require("which-key")
 
+-- Keymaps with `localleader`
+vim.keymap.set('n', '<localleader>l', geem.cmd("DapToggleRepl"))
+
 -- ========================================
 -- |        Keymaps with <Leader>         |
 -- ========================================
@@ -139,7 +142,6 @@ geem.map_on_filetype('dart', {
 	e = { geem.cmd('FlutterEmulators'), 'Emulators' },
 	w = { geem.cmd('FlutterOutlineToggle'), 'Toggle Widget Outline' },
 	r = { geem.cmd('FlutterRun'), 'Run Flutter' },
-	l = { geem.cmd('DapToggleRepl'), 'Toggle REPL' },
 })
 
 -- Lua Special Keymaps
