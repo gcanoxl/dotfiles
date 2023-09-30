@@ -139,6 +139,7 @@ geem.map_on_filetype('dart', {
 	e = { geem.cmd('FlutterEmulators'), 'Emulators' },
 	w = { geem.cmd('FlutterOutlineToggle'), 'Toggle Widget Outline' },
 	r = { geem.cmd('FlutterRun'), 'Run Flutter' },
+	l = { geem.cmd('DapToggleRepl'), 'Toggle REPL' },
 })
 
 -- Lua Special Keymaps
