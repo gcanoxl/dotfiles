@@ -2,7 +2,7 @@ return {
 	'akinsho/flutter-tools.nvim',
 	ft = { 'dart' },
 	config = function()
-		local on_attach, capabilities = require 'plugins.lsp.handlers'
+		local on_attach, capabilities = require 'configs.lsp.handlers'
 
 		local dap_avail, _ = pcall(require, 'dap')
 

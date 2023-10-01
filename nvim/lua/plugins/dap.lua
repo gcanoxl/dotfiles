@@ -1,3 +1,8 @@
 return {
-	'mfussenegger/nvim-dap'
+	{
+		'mfussenegger/nvim-dap',
+		config = function()
+			require 'configs.dap'
+		end
+	}
 }
