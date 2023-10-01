@@ -152,5 +152,22 @@ return {
 				show_colors = true,
 			}
 		end
-	}
+	},
+
+	-- Better Buffer Closing
+	'famiu/bufdelete.nvim',
+
+	-- Todo List
+	{
+		"folke/todo-comments.nvim",
+		config = function() require('todo-comments').setup() end
+	},
+
+	-- Auto Pairs
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require('nvim-autopairs').setup()
+		end
+	},
 }
