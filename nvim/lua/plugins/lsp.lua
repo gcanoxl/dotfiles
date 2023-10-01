@@ -3,7 +3,14 @@ return {
 	{
 		"glepnir/lspsaga.nvim",
 		event = "LspAttach",
-		config = function() require('plugins.nvim-lspsaga') end,
+		config = function()
+			require('lspsaga').setup({
+				request_timeout = 8000,
+				lightbulb = {
+					enable = false,
+				},
+			})
+		end,
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" }
@@ -20,7 +27,7 @@ return {
 		dependencies = { "folke/neodev.nvim" }, -- for better config devlopment
 		config = function()
 			require('neodev').setup({})
-			require('plugins.lsp')
+			require('configs.lsp')
 		end
 	},
 

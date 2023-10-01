@@ -16,7 +16,7 @@ end
 initialize_lazy()
 
 require('lazy').setup({
-	{ import = "new-plugins" }
+	{ import = "plugins" }
 }, {
 	dev = {
 		path = "~/Projects"

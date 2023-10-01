@@ -24,7 +24,7 @@ vim.diagnostic.config({
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'lua_ls', 'vimls', 'pyright', 'gopls', 'clangd', 'jsonls' }
 
-local on_attach, capabilities = require 'plugins.lsp.handlers'
+local on_attach, capabilities = require 'configs.lsp.handlers'
 
 for _, server in ipairs(servers) do
 	local server_config_path = 'plugins.lsp.server-settings.' .. server

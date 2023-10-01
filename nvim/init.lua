@@ -1,6 +1,6 @@
 require 'options'
 require 'utils'
-require 'plugins'
+require 'plugin'
 require 'keymaps'
 
 vim.api.nvim_command [[colorscheme tokyonight-moon]]
