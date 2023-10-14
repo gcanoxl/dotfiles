@@ -51,3 +51,9 @@ alias gp='git push'
 
 alias em='emacsclient -t -a ""'
 alias sem='sudo emacsclient -t -a ""'
+
+# flutter
+alias fc='flutter create'
+alias fa='flutter pub add'
+alias fad='flutter pub add -dev'
+alias fg='flutter pub get'
