@@ -33,6 +33,7 @@ return {
 					format = lspkind_status_ok and lspkind.cmp_format({
 						mode = 'symbol_text',
 						maxwidth = 50,
+						symbol_map = { Copilot = "" }
 					})
 				},
 				snippet = {
@@ -81,7 +82,7 @@ return {
 							end
 						}
 					},
-					{ name = "copilot" },
+					{ name = "copilot", priority = 9000, }
 				},
 			})
 		end
@@ -92,18 +93,12 @@ return {
 		"zbirenbaum/copilot-cmp",
 		dependencies = { "zbirenbaum/copilot.lua" },
 		config = function()
+			-- setup copilot.lua
 			require("copilot").setup({
-				suggestion = {
-					keymap = {
-						accept = "<tab>",
-						accept_word = false,
-						accept_line = "<C-k>",
-						next = "<C-]>",
-						prev = "<C-[>",
-						dismiss = false,
-					},
-				}
+				suggestion = { enabled = false },
+				panel = { enabled = false },
 			})
+			-- setup copilot-cmp
 			require("copilot_cmp").setup()
 		end
 	},
