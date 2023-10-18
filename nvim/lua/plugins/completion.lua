@@ -10,6 +10,12 @@ return {
 	-- Completion Engine
 	{
 		'hrsh7th/nvim-cmp',
+		event = "InsertEnter",
+		dependencies = {
+			'hrsh7th/cmp-nvim-lsp',
+			'saadparwaiz1/cmp_luasnip',
+			'hrsh7th/cmp-path',
+		},
 		config = function()
 			local cmp = require('cmp')
 			local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
@@ -50,6 +56,17 @@ return {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					},
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if require("copilot.suggestion").is_visible() then
+							require("copilot.suggestion").accept()
+						elseif cmp.visible() then
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+						elseif luasnip.expandable() then
+							luasnip.expand()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = {
 					{ name = 'nvim_lsp' },
@@ -70,22 +87,24 @@ return {
 		end
 	},
 
-	-- Lsp Completion Source
-	'hrsh7th/cmp-nvim-lsp',
-
-	-- Snippet Completion Source
-	'saadparwaiz1/cmp_luasnip',
-
-	-- Path Source
-	'hrsh7th/cmp-path',
-
+	-- Copilot Source
 	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = { "zbirenbaum/copilot.lua" },
 		config = function()
-			require("copilot").setup()
+			require("copilot").setup({
+				suggestion = {
+					keymap = {
+						accept = "<tab>",
+						accept_word = false,
+						accept_line = "<C-k>",
+						next = "<C-]>",
+						prev = "<C-[>",
+						dismiss = false,
+					},
+				}
+			})
 			require("copilot_cmp").setup()
 		end
-	}
-
+	},
 }
