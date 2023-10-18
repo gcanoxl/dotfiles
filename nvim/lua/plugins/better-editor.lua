@@ -81,22 +81,6 @@ return {
 		config = function() require('lualine').setup({}) end
 	},
 
-	-- Git Client
-	{
-		'TimUntersberger/neogit',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'sindrets/diffview.nvim'
-		},
-		config = function()
-			require('neogit').setup({
-				integrations = {
-					diffview = true
-				},
-			})
-		end
-	},
-
 	-- Project
 	{
 

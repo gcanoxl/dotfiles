@@ -9,4 +9,28 @@ return {
 			})
 		end
 	},
+
+	-- Git Client
+	{
+		'TimUntersberger/neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'sindrets/diffview.nvim'
+		},
+		config = function()
+			require('neogit').setup({
+				integrations = {
+					diffview = true
+				},
+			})
+		end
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		requires = {
+			"nvim-lua/plenary.nvim",
+		}
+	},
+
 }
