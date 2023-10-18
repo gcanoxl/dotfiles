@@ -3,20 +3,10 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
-			require("indent_blankline").setup()
+			-- require("indent_blankline").setup()
 		end,
 	},
 
-	-- Git Signs
-	{
-		'lewis6991/gitsigns.nvim',
-		config = function()
-			require('gitsigns').setup({
-				linehl = true,
-				numhl = true,
-			})
-		end
-	},
 
 	-- Symbol Outline
 	{
@@ -79,7 +69,8 @@ return {
 
 	-- Mouse Movement
 	{
-		'phaazon/hop.nvim', branch = 'v2',
+		'phaazon/hop.nvim',
+		branch = 'v2',
 		config = function() require 'hop'.setup() end
 	},
 
@@ -131,7 +122,8 @@ return {
 
 	-- Terminal
 	{
-		"akinsho/toggleterm.nvim", version = 'v2.*',
+		"akinsho/toggleterm.nvim",
+		version = 'v2.*',
 		config = function()
 			require("toggleterm").setup({
 				direction = 'tab',

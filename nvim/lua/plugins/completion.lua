@@ -54,13 +54,17 @@ return {
 				sources = {
 					{ name = 'nvim_lsp' },
 					{ name = 'luasnip' },
-					{ name = 'path', option = {
-						get_cwd = function()
-							if vim.bo.filetype == "dart" then
-								return vim.fn.getcwd()
+					{
+						name = 'path',
+						option = {
+							get_cwd = function()
+								if vim.bo.filetype == "dart" then
+									return vim.fn.getcwd()
+								end
 							end
-						end
-					} },
+						}
+					},
+					{ name = "copilot" },
 				},
 			})
 		end
@@ -74,5 +78,14 @@ return {
 
 	-- Path Source
 	'hrsh7th/cmp-path',
+
+	{
+		"zbirenbaum/copilot-cmp",
+		dependencies = { "zbirenbaum/copilot.lua" },
+		config = function()
+			require("copilot").setup()
+			require("copilot_cmp").setup()
+		end
+	}
 
 }
