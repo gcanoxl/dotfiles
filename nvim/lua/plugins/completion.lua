@@ -82,7 +82,7 @@ return {
 							end
 						}
 					},
-					{ name = "copilot", priority = 9000, }
+					{ name = "copilot" }
 				},
 			})
 		end
