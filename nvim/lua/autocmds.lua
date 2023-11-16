@@ -1,3 +1,4 @@
+-- auto perform `Fix All` code action on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.dart",
 	callback = function()
