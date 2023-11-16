@@ -1,6 +1,7 @@
 return {
 	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.0',
+		-- 'nvim-telescope/telescope.nvim', tag = '0.1.0',
+		'nvim-telescope/telescope.nvim',
 		config = function()
 			require('telescope').setup {
 				defaults = {

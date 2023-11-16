@@ -22,3 +22,13 @@ function geem.move_to_new_tab()
 	vim.cmd('tab split')
 	vim.fn.win_execute(win_id, 'wincmd c')
 end
+
+geem.code = function()
+	vim.lsp.buf.code_action({
+		apply = true,
+		filter = function(action)
+			return action.title == "Fix All"
+		end,
+	})
+end
+vim.keymap.set("n", "cc", geem.code)

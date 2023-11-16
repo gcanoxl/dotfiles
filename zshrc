@@ -12,7 +12,8 @@ fi
 source "$ANTIGEN"
 
 antigen use oh-my-zsh
-antigen theme ys
+# antigen theme ys
+antigen theme robbyrussell
 
 # z.lua
 antigen bundle skywind3000/z.lua
@@ -41,11 +42,12 @@ alias bU='brew update && brew upgrade'
 
 alias gs='git status'
 alias gc='git clone'
-alias gcb='git checkout -b'
+alias gw='git switch'
+alias gwc='git switch -c'
 alias ga='git add'
 alias gal='git add .'
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gms='git merge --squash'
+alias gm='git merge'
 alias gcm='git commit -m'
 alias gp='git push'
 

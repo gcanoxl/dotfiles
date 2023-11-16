@@ -82,24 +82,22 @@ return {
 							end
 						}
 					},
-					{ name = "copilot" }
 				},
 			})
 		end
 	},
 
-	-- Copilot Source
+	-- Copilot
 	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = { "zbirenbaum/copilot.lua" },
+		"zbirenbaum/copilot.lua",
 		config = function()
 			-- setup copilot.lua
 			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+				},
 			})
-			-- setup copilot-cmp
-			require("copilot_cmp").setup()
 		end
 	},
 }
