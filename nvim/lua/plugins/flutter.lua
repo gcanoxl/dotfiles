@@ -10,7 +10,7 @@ return {
 			debugger = {
 				enabled = true,
 				run_via_dap = dap_avail,
-				register_configurations = function(paths)
+				register_configurations = function(_)
 					require("dap").configurations.dart = {
 						{
 							type = "dart",
@@ -39,6 +39,12 @@ return {
 			lsp = {
 				on_attach = on_attach,
 				capabilities = capabilities,
+				color = {
+					enabled = true,
+					background = true,
+					background_color = nil,
+					virtual_text = false,
+				}
 			},
 		}
 
