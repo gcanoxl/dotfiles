@@ -30,7 +30,12 @@ antigen apply
 bindkey '^k' autosuggest-accept
 
 
+
+# neovim alias
 alias nv='nvim'
+alias np='nvim --cmd "set rtp+=."'
+
+# brew alias
 alias bs='brew search'
 alias bif='brew info'
 alias bi='brew install'
@@ -40,6 +45,7 @@ alias bcu='brew uninstall --cask'
 alias bl='brew list'
 alias bU='brew update && brew upgrade'
 
+# git alias
 alias gs='git status'
 alias gc='git clone'
 alias gw='git switch'
@@ -51,10 +57,11 @@ alias gm='git merge'
 alias gcm='git commit -m'
 alias gp='git push'
 
+# emacs alias
 alias em='emacsclient -t -a ""'
 alias sem='sudo emacsclient -t -a ""'
 
-# flutter
+# flutter alias
 alias fc='flutter create'
 alias fa='flutter pub add'
 alias fad='flutter pub add -dev'

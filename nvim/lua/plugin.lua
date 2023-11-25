@@ -16,10 +16,11 @@ end
 initialize_lazy()
 
 require('lazy').setup({
+
+	{ "gcanoxl/tnp",     dev = true },
 	{ import = "plugins" }
 }, {
 	dev = {
 		path = "~/Projects"
 	},
-	{ import = "new-plugins" }
 })
