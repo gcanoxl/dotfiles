@@ -1,4 +1,4 @@
-function initialize_lazy()
+local function initialize_lazy()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
 		vim.fn.system({
@@ -16,8 +16,6 @@ end
 initialize_lazy()
 
 require('lazy').setup({
-
-	{ "gcanoxl/tnp",     dev = true },
 	{ import = "plugins" }
 }, {
 	dev = {

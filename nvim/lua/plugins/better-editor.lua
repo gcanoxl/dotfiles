@@ -1,4 +1,33 @@
 return {
+	-- Better-ZZ
+	{
+		"gcanoxl/better-zz.nvim",
+		config = function()
+			require('better-zz').setup({
+				percentage = 0.15
+			})
+		end
+	},
+	-- Scrolling
+	{
+		"petertriho/nvim-scrollbar",
+		dependencies = {
+			'kevinhwang91/nvim-hlslens',
+			'lewis6991/gitsigns.nvim'
+		},
+
+		config = function()
+			require("scrollbar").setup({
+				handle = {
+					color = "#4B5263",
+				},
+			})
+			require("scrollbar.handlers.search").setup({})
+			require('gitsigns').setup()
+			require("scrollbar.handlers.gitsigns").setup()
+		end
+
+	},
 	-- Folding
 	{
 		'kevinhwang91/nvim-ufo',
@@ -106,9 +135,21 @@ return {
 
 	-- Mouse Movement
 	{
-		'phaazon/hop.nvim',
-		branch = 'v2',
-		config = function() require 'hop'.setup() end
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+		-- NOTE: I don't know why this doesn't work properly
+		--
+		-- stylua: ignore
+		-- keys = {
+		-- 	{ "f", mode = { "n", "x", "o" }, require("flash").jump, desc = "Flash" },
+		-- },
+		config = function()
+			require("flash").setup({})
+			vim.keymap.set("n", "f", require("flash").jump, { noremap = true })
+		end,
+
 	},
 
 	-- Status Line
