@@ -2,11 +2,9 @@ return {
 	-- Better-ZZ
 	{
 		"gcanoxl/better-zz.nvim",
-		config = function()
-			require('better-zz').setup({
-				percentage = 0.15
-			})
-		end
+		opts = {
+			percentage = 0.15
+		}
 	},
 	-- Scrolling
 	{
