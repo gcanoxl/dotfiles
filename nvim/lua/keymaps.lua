@@ -94,7 +94,7 @@ wk.register(
 		-- File
 		f = {
 			name = "File",
-			w = { geem.cmd("wa"), "Save File" },
+			w = { geem.cmd("silent wa"), "Save File" },
 			l = { geem.cmd("Neotree"), "File Explorer" },
 			r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
 			d = { geem.cmd('Dired'), 'File Manager' },
@@ -122,7 +122,7 @@ wk.register(
 			l = { require('dap.repl').clear, "Clear REPL" },
 		}
 	},
-	{ prefix = "<leader>", }
+	{ prefix = "<leader>", mode = "n", noremap = true, silent = true }
 )
 
 -- Go Special Keymaps
