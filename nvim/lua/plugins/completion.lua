@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
 	-- Snippet Engine
 	{
@@ -46,29 +47,11 @@ return {
 				},
 				-- keymaps
 				mapping = cmp.mapping.preset.insert({
-
-					['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({
-						behavior = cmp.SelectBehavior.Select
-					}), { 'i' }),
-					['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({
-						behavior = cmp.SelectBehavior.Select
-					}), { 'i' }),
 					['<C-c>'] = cmp.mapping.abort(),
 					['<CR>'] = cmp.mapping.confirm {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					},
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if require("copilot.suggestion").is_visible() then
-							require("copilot.suggestion").accept()
-						elseif cmp.visible() then
-							cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-						elseif luasnip.expandable() then
-							luasnip.expand()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
 				}),
 				sources = {
 					{ name = 'nvim_lsp' },
@@ -98,6 +81,9 @@ return {
 				suggestion = {
 					enabled = true,
 					auto_trigger = true,
+					keymap = {
+						accept = "<C-k>",
+					},
 				},
 			})
 		end
