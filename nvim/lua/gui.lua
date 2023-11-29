@@ -2,7 +2,7 @@
 vim.g.neovide_fullscreen = true
 
 -- dynamically change the font size at runtime
-vim.g.gui_font_face = "Courier"
+vim.g.gui_font_face = "Courier New"
 vim.g.gui_font_default_size = 16
 vim.g.gui_font_size = vim.g.gui_font_default_size
 

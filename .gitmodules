@@ -1,0 +1,3 @@
+[submodule "hammerspoon/Spoons/SplitView.spoon"]
+	path = hammerspoon/Spoons/SplitView.spoon
+	url = https://github.com/jdtsmith/SplitView
