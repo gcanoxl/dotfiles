@@ -16,6 +16,20 @@ end
 initialize_lazy()
 
 require('lazy').setup({
+	{
+		"gcanoxl/dart-const-organizer.nvim",
+		config = function()
+			require('dart-const-organizer').setup()
+			-- reload only for development
+			-- vim.keymap.set('n', '<leader>r',
+			-- 	function()
+			-- 		package.loaded['dart-const-organizer'] = nil
+			-- 		require('dart-const-organizer').setup()
+			-- 	end,
+			-- 	{ noremap = true }
+			-- )
+		end
+	},
 	{ import = "plugins" }
 }, {
 	dev = {

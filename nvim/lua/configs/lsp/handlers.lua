@@ -56,7 +56,6 @@ local on_attach = function(_, bufnr)
 
 	-- creating an autocommand applying format on save
 	vim.api.nvim_create_autocmd('BufWrite', {
-		-- TODO: deciding if it should be grouped
 		pattern = { "*.lua", "*.dart", "*.py" },
 		callback = function()
 			vim.lsp.buf.format({ async = false })
