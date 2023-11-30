@@ -7,6 +7,33 @@ return {
 			require("telescope").load_extension("scope")
 		end
 	},
+
+	-- Bufferline
+	{
+		'akinsho/bufferline.nvim',
+		version = "*",
+		dependencies = 'nvim-tree/nvim-web-devicons',
+		config = function()
+			require("bufferline").setup {
+				options = {
+					diagnostics = "nvim_lsp",
+					diagnostics_update_in_insert = true,
+					offsets = {
+						{
+							filetype = "neo-tree",
+							-- text = "File Explorer",
+							-- text_align = "left",
+							separator = true
+						}
+					},
+					indicator = {
+						style = 'underline',
+					},
+				}
+			}
+		end
+	},
+
 	-- Better-ZZ
 	{
 		"gcanoxl/better-zz.nvim",
@@ -183,9 +210,6 @@ return {
 			}
 		end
 	},
-
-	-- Better Buffer Closing
-	'famiu/bufdelete.nvim',
 
 	-- Todo List
 	{
