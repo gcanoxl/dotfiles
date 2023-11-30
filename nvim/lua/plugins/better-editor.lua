@@ -19,12 +19,12 @@ return {
 					diagnostics = "nvim_lsp",
 					diagnostics_update_in_insert = true,
 					offsets = {
-						{
-							filetype = "neo-tree",
-							-- text = "File Explorer",
-							-- text_align = "left",
-							separator = true
-						}
+						-- {
+						-- 	filetype = "neo-tree",
+						-- 	-- text = "File Explorer",
+						-- 	-- text_align = "left",
+						-- 	separator = true
+						-- }
 					},
 					indicator = {
 						style = 'underline',

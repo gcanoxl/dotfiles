@@ -11,6 +11,8 @@ vim.keymap.set('n', 'F', geem.cmd('HopLine'))
 -- Buffers
 vim.keymap.set('n', '<C-c>', geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
 vim.keymap.set('n', '<C-b>', geem.cmd('Telescope scope buffers'))
+vim.keymap.set('n', '{', geem.cmd('bprevious'))
+vim.keymap.set('n', '}', geem.cmd('bnext'))
 
 -- File
 vim.keymap.set('n', '<C-f>', geem.cmd('Telescope find_files'))
@@ -21,10 +23,6 @@ vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 
 -- Emoji
 vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
-
--- Tabs
-vim.keymap.set('n', '{', geem.cmd('bprevious'))
-vim.keymap.set('n', '}', geem.cmd('bnext'))
 
 -- Smart Splits
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
@@ -79,6 +77,15 @@ wk.register(
 			o = { geem.cmd('tab split'), 'Duplicate to New Table' },
 			O = { geem.move_to_new_tab, 'Move to New Table', },
 			t = { require('telescope-tabs').list_tabs, 'Tabs' },
+			['1'] = { geem.cmd('exec "normal! 1gt"'), 'Go to Tab 1' },
+			['2'] = { geem.cmd('exec "normal! 2gt"'), 'Go to Tab 2' },
+			['3'] = { geem.cmd('exec "normal! 3gt"'), 'Go to Tab 3' },
+			['4'] = { geem.cmd('exec "normal! 4gt"'), 'Go to Tab 4' },
+			['5'] = { geem.cmd('exec "normal! 5gt"'), 'Go to Tab 5' },
+			['6'] = { geem.cmd('exec "normal! 6gt"'), 'Go to Tab 6' },
+			['7'] = { geem.cmd('exec "normal! 7gt"'), 'Go to Tab 7' },
+			['8'] = { geem.cmd('exec "normal! 8gt"'), 'Go to Tab 8' },
+			['9'] = { geem.cmd('exec "normal! 9gt"'), 'Go to Tab 9' },
 		},
 		-- Buffer
 		b = {

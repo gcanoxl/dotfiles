@@ -29,11 +29,20 @@ vim.keymap.set({ 'n', 'i' }, "<D-=>", function() ResizeGuiFont(1) end, opts)
 vim.keymap.set({ 'n', 'i' }, "<D-->", function() ResizeGuiFont(-1) end, opts)
 vim.keymap.set({ 'n', 'i' }, "<D-0>", ResetGuiFont, opts)
 
+-- Buffers
+vim.keymap.set('n', '<D-t>', geem.cmd('enew'))
+vim.keymap.set('n', '<D-w>', geem.cmd('bdelete'))
+
 -- Tabs
-vim.keymap.set('n', '<D-t>', geem.cmd('tabnew'))
-vim.keymap.set('n', '<D-w>', geem.cmd('tabclose'))
-vim.keymap.set('n', '<D-o>', geem.cmd('tab split'))
-vim.keymap.set('n', '<C-D-o>', geem.move_to_new_tab)
+vim.keymap.set('n', '<D-1>', geem.cmd('exec "normal! 1gt"'))
+vim.keymap.set('n', '<D-2>', geem.cmd('exec "normal! 2gt"'))
+vim.keymap.set('n', '<D-3>', geem.cmd('exec "normal! 3gt"'))
+vim.keymap.set('n', '<D-4>', geem.cmd('exec "normal! 4gt"'))
+vim.keymap.set('n', '<D-5>', geem.cmd('exec "normal! 5gt"'))
+vim.keymap.set('n', '<D-6>', geem.cmd('exec "normal! 6gt"'))
+vim.keymap.set('n', '<D-7>', geem.cmd('exec "normal! 7gt"'))
+vim.keymap.set('n', '<D-8>', geem.cmd('exec "normal! 8gt"'))
+vim.keymap.set('n', '<D-9>', geem.cmd('exec "normal! 9gt"'))
 
 -- Smart Splits
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
