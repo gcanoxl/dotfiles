@@ -1,4 +1,12 @@
 return {
+	-- Better Tab-Buffer Logic
+	{
+		"tiagovla/scope.nvim",
+		config = function()
+			require("scope").setup({})
+			require("telescope").load_extension("scope")
+		end
+	},
 	-- Better-ZZ
 	{
 		"gcanoxl/better-zz.nvim",
@@ -63,14 +71,6 @@ return {
 			}
 		},
 	},
-	-- BlankLine
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			-- require("indent_blankline").setup()
-		end,
-	},
-
 
 	-- Symbol Outline
 	{
@@ -148,13 +148,6 @@ return {
 			vim.keymap.set("n", "f", require("flash").jump, { noremap = true })
 		end,
 
-	},
-
-	-- Status Line
-	{
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-		config = function() require('lualine').setup({}) end
 	},
 
 	-- Project

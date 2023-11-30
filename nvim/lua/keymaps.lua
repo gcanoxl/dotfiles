@@ -10,7 +10,7 @@ vim.keymap.set('n', 'F', geem.cmd('HopLine'))
 
 -- Buffers
 vim.keymap.set('n', '<C-c>', geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
-vim.keymap.set('n', '<C-b>', geem.cmd('Telescope buffers'))
+vim.keymap.set('n', '<C-b>', geem.cmd('Telescope scope buffers'))
 
 -- File
 vim.keymap.set('n', '<C-f>', geem.cmd('Telescope find_files'))
@@ -23,8 +23,8 @@ vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 vim.keymap.set('i', '<C-e>', geem.cmd('Telescope emoji'))
 
 -- Tabs
-vim.keymap.set('n', '{', geem.cmd('tabprevious'))
-vim.keymap.set('n', '}', geem.cmd('tabnext'))
+vim.keymap.set('n', '{', geem.cmd('bprevious'))
+vim.keymap.set('n', '}', geem.cmd('bnext'))
 
 -- Smart Splits
 vim.keymap.set('n', '<C-S-h>', require('smart-splits').resize_left)
@@ -83,9 +83,12 @@ wk.register(
 		-- Buffer
 		b = {
 			name = "Buffer",
-			b = {
-				geem.cmd('Telescope buffers'), 'Buffers'
-			},
+			b = { geem.cmd('Telescope scope buffers'), 'Buffers' },
+			B = { geem.cmd('Telescope buffers'), 'Tab-local Buffers' },
+			n = { geem.cmd('bnext'), 'Next Buffer' },
+			p = { geem.cmd('bprevious'), 'Previous Buffer' },
+			N = { geem.cmd('enew'), 'New Buffer' },
+			c = { geem.cmd('bdelete'), 'Close Buffer' },
 		},
 		-- Errors
 		e = {
