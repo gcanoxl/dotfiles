@@ -137,6 +137,7 @@ return {
 	-- Notify
 	{
 		"rcarriga/nvim-notify",
+		event = "VeryLazy",
 		config = function()
 			---@diagnostic disable-next-line: missing-fields
 			require("notify").setup({

@@ -63,7 +63,7 @@ wk.register({
 		q = { geem.cmd("quitall"), "Quit" },
 		n = { geem.cmd("noh"), "Stop Highlight" },
 		j = { geem.cmd("Telescope jumplist"), "Jumplist" },
-		s = { geem.cmd("Telescope live_grep"), "Search" },
+		s = { geem.cmd("Telescope live_grep layout_strategy=vertical"), "Search" },
 		h = { geem.cmd("Telescope help_tags"), "Help" },
 		c = { geem.cmd("Telescope colorscheme"), "Colorscheme" },
 		k = { geem.cmd("Telescope keymaps"), "Keymaps" },

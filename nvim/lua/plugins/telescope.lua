@@ -8,6 +8,22 @@ return {
 		config = function()
 			require("telescope").setup({
 				defaults = {
+					layout_strategy = "flex",
+					sorting_strategy = "ascending",
+					layout_config = {
+						vertical = { width = 0.88 },
+						horizontal = {
+							prompt_position = "top",
+							preview_width = 0.54,
+							width = 0.98,
+							height = 0.98,
+						},
+					},
+					mappings = {
+						i = {
+							["<C-u>"] = false,
+						},
+					},
 					winblend = vim.g.preference.winblend,
 					file_ignore_patterns = {
 						-- flutter project
