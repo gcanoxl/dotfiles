@@ -1,3 +1,73 @@
+local function generate_screen(state)
+	-- TODO: write a template plugin to make it better
+	local node = state.tree:get_node()
+	if not node or node.type ~= "directory" then
+		return
+	end
+
+	local function generate_screen_files(path, name)
+		local screen_dir = path .. "/" .. name
+		local components_dir = screen_dir .. "/components"
+		local screen_file = screen_dir .. "/" .. name .. "_screen.dart"
+		local body_file = components_dir .. "/" .. name .. "_body.dart"
+
+		vim.fn.mkdir(components_dir, "p")
+
+		local function process_name(n)
+			local parts = vim.fn.split(n, "_")
+			local capitalized_parts = {}
+			for _, part in ipairs(parts) do
+				local pname = part:gsub("^%l", string.upper)
+				table.insert(capitalized_parts, pname)
+			end
+			return table.concat(capitalized_parts)
+		end
+
+		local pname = process_name(name)
+		-- screen file
+		vim.fn.writefile({
+			"import 'package:flutter/material.dart';",
+			"",
+			"import 'components/" .. name .. "_body.dart';",
+			"",
+			"class " .. pname .. "Screen extends StatelessWidget {",
+			"  static const String routeName = '/" .. name .. "';",
+			"",
+			"  const " .. pname .. "Screen({super.key});",
+			"",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return const Scaffold(",
+			"      body: " .. pname .. "Body(),",
+			"    );",
+			"  }",
+			"}",
+		}, screen_file)
+		-- screen file
+		vim.fn.writefile({
+			"import 'package:flutter/material.dart';",
+			"",
+			"class " .. pname .. "Body extends StatelessWidget {",
+			"  const " .. pname .. "Body({super.key});",
+			"",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return const Placeholder();",
+			"  }",
+			"}",
+		}, body_file)
+
+		vim.cmd("edit " .. screen_file)
+		vim.cmd("edit " .. body_file)
+	end
+
+	vim.ui.input("screen_name: ", function(name)
+		if name == "" then
+			return
+		end
+		generate_screen_files(node.path, name)
+	end)
+end
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	dependencies = { "MunifTanjim/nui.nvim" },
@@ -13,6 +83,11 @@ return {
 				},
 			},
 			filesystem = {
+				window = {
+					mappings = {
+						["<C-g>"] = generate_screen,
+					},
+				},
 				use_libuv_file_watcher = true,
 				always_show = {
 					".gitignore",

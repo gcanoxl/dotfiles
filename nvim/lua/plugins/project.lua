@@ -16,6 +16,7 @@ return {
 				patterns = {
 					".git",
 					".project",
+					"pubspec.yaml",
 				},
 				scope_chdir = "global",
 			})
