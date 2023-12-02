@@ -17,10 +17,6 @@ return {
 		}
 	},
 
-
-	-- Lsp Auto Format
-	"lukas-reineke/lsp-format.nvim",
-
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",

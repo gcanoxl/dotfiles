@@ -4,7 +4,7 @@ require 'plugin'
 require 'keymaps'
 require 'autocmds'
 
-vim.api.nvim_command [[colorscheme catppuccin-macchiato]]
+vim.api.nvim_command [[colorscheme tokyonight]]
 
 -- configurations for GUI clients
 if vim.g.neovide then

@@ -1,4 +1,7 @@
 return {
+	-- Indent line
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+
 	-- Better Tab-Buffer Logic
 	{
 		"tiagovla/scope.nvim",
