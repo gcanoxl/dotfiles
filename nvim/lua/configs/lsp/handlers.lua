@@ -53,14 +53,6 @@ local on_attach = function(_, bufnr)
 			}
 		}, { prefix = "<leader>", buffer = bufnr, })
 	end
-
-	-- creating an autocommand applying format on save
-	vim.api.nvim_create_autocmd('BufWrite', {
-		pattern = { "*.lua", "*.dart", "*.py" },
-		callback = function()
-			vim.lsp.buf.format({ async = false })
-		end
-	})
 end
 
 -- handlers

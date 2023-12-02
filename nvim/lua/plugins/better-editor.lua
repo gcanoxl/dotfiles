@@ -1,4 +1,18 @@
 return {
+	-- Formatting
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+			},
+			format_on_save = {
+				lsp_fallback = true,
+				timeout_ms = 500,
+			},
+		},
+	},
+
 	-- Indent line
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
@@ -8,16 +22,16 @@ return {
 		config = function()
 			require("scope").setup({})
 			require("telescope").load_extension("scope")
-		end
+		end,
 	},
 
 	-- Bufferline
 	{
-		'akinsho/bufferline.nvim',
+		"akinsho/bufferline.nvim",
 		version = "*",
-		dependencies = 'nvim-tree/nvim-web-devicons',
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
-			require("bufferline").setup {
+			require("bufferline").setup({
 				options = {
 					diagnostics = "nvim_lsp",
 					diagnostics_update_in_insert = true,
@@ -30,26 +44,26 @@ return {
 						-- }
 					},
 					indicator = {
-						style = 'underline',
+						style = "underline",
 					},
-				}
-			}
-		end
+				},
+			})
+		end,
 	},
 
 	-- Better-ZZ
 	{
 		"gcanoxl/better-zz.nvim",
 		opts = {
-			percentage = 0.15
-		}
+			percentage = 0.15,
+		},
 	},
 	-- Scrolling
 	{
 		"petertriho/nvim-scrollbar",
 		dependencies = {
-			'kevinhwang91/nvim-hlslens',
-			'lewis6991/gitsigns.nvim'
+			"kevinhwang91/nvim-hlslens",
+			"lewis6991/gitsigns.nvim",
 		},
 
 		config = function()
@@ -59,31 +73,31 @@ return {
 				},
 			})
 			require("scrollbar.handlers.search").setup({})
-			require('gitsigns').setup()
+			require("gitsigns").setup()
 			require("scrollbar.handlers.gitsigns").setup()
-		end
-
+		end,
 	},
 	-- Folding
 	{
-		'kevinhwang91/nvim-ufo',
-		dependencies = 'kevinhwang91/promise-async',
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
 		config = function()
-			vim.o.foldcolumn = '1' -- '0' is not bad
+			vim.o.foldcolumn = "0" -- '0' is not bad
 			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 			vim.o.foldlevelstart = 99
 			vim.o.foldenable = true
 			vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 			-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-			vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-			vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-			require('ufo').setup({
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+			---@diagnostic disable-next-line: missing-fields
+			require("ufo").setup({
 				provider_selector = function(_, _, _)
-					return { 'treesitter', 'indent' }
-				end
+					return { "treesitter", "indent" }
+				end,
 			})
-		end
+		end,
 	},
 	-- lazy.nvim
 	{
@@ -96,17 +110,17 @@ return {
 		opts = {
 			lsp = {
 				signature = {
-					enabled = false
-				}
-			}
+					enabled = false,
+				},
+			},
 		},
 	},
 
 	-- Symbol Outline
 	{
-		'stevearc/aerial.nvim',
+		"stevearc/aerial.nvim",
 		config = function()
-			require('aerial').setup({
+			require("aerial").setup({
 				layout = {
 					min_width = 32,
 				},
@@ -115,28 +129,29 @@ return {
 					["<tab>"] = "actions.tree_toggle",
 					["<C-j>"] = false,
 					["<C-k>"] = false,
-				}
+				},
 			})
-		end
+		end,
 	},
 
 	-- Notify
 	{
-		'rcarriga/nvim-notify',
+		"rcarriga/nvim-notify",
 		config = function()
-			require('notify').setup({
+			---@diagnostic disable-next-line: missing-fields
+			require("notify").setup({
 				top_down = false,
 				max_width = 80,
 				background_colour = "#000000",
 			})
 
-			vim.notify = require('notify')
+			vim.notify = require("notify")
 
-			local telescope_ok, telescope = pcall(require, 'telescope')
+			local telescope_ok, telescope = pcall(require, "telescope")
 			if telescope_ok then
 				telescope.load_extension("notify")
 			end
-		end
+		end,
 	},
 
 	-- Keymap Reminder
@@ -148,17 +163,17 @@ return {
 	},
 
 	-- Prettier UI
-	'stevearc/dressing.nvim',
+	"stevearc/dressing.nvim",
 
 	-- Error List
 	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
-			require('trouble').setup {
+			require("trouble").setup({
 				auto_close = true,
-			}
-		end
+			})
+		end,
 	},
 
 	-- Mouse Movement
@@ -177,7 +192,6 @@ return {
 			require("flash").setup({})
 			vim.keymap.set("n", "f", require("flash").jump, { noremap = true })
 		end,
-
 	},
 
 	-- Project
@@ -185,46 +199,50 @@ return {
 
 		"ahmedkhalf/project.nvim",
 		config = function()
-			require("project_nvim").setup {
+			require("project_nvim").setup({
 				manual_mode = true,
-			}
-			require('telescope').load_extension('projects')
-		end
+			})
+			require("telescope").load_extension("projects")
+		end,
 	},
 
-	'mrjones2014/smart-splits.nvim',
+	"mrjones2014/smart-splits.nvim",
 
 	-- Better Buffer Closing
-	'famiu/bufdelete.nvim',
+	"famiu/bufdelete.nvim",
 
 	-- Todo List
 	{
 		"folke/todo-comments.nvim",
-		config = function() require('todo-comments').setup() end
+		config = function()
+			require("todo-comments").setup()
+		end,
 	},
 
 	-- Dired
 	{
-		'X3eRo0/dired.nvim',
+		"X3eRo0/dired.nvim",
 		dependencies = "MunifTanjim/nui.nvim",
 		config = function()
-			require("dired").setup {
+			require("dired").setup({
 				show_colors = true,
-			}
-		end
+			})
+		end,
 	},
 
 	-- Todo List
 	{
 		"folke/todo-comments.nvim",
-		config = function() require('todo-comments').setup() end
+		config = function()
+			require("todo-comments").setup()
+		end,
 	},
 
 	-- Auto Pairs
 	{
 		"windwp/nvim-autopairs",
 		config = function()
-			require('nvim-autopairs').setup()
-		end
+			require("nvim-autopairs").setup()
+		end,
 	},
 }
