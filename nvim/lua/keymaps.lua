@@ -97,7 +97,12 @@ wk.register({
 		n = { geem.cmd("bnext"), "Next Buffer" },
 		p = { geem.cmd("bprevious"), "Previous Buffer" },
 		N = { geem.cmd("enew"), "New Buffer" },
-		c = { geem.cmd("bdelete"), "Close Buffer" },
+		c = {
+			function()
+				require("bufdelete").bufdelete(0, false)
+			end,
+			"Close Buffer",
+		},
 	},
 	-- Errors
 	e = {
