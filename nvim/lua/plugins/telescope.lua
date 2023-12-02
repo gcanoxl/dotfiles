@@ -38,7 +38,6 @@ return {
 		end,
 	},
 
-	-- TODO: how this works?
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()

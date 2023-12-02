@@ -59,7 +59,6 @@ return {
 			animate = {
 				enabled = false,
 			},
-		}
-	}
-
+		},
+	},
 }

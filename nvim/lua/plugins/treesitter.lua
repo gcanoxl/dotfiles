@@ -1,17 +1,18 @@
 return {
 	-- Syntax Highlighting
-	'nvim-treesitter/nvim-treesitter',
-	build = ':TSUpdate',
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
 	dependencies = {
 		-- Rainbow Brackets
-		'HiPhish/nvim-ts-rainbow2',
+		"HiPhish/nvim-ts-rainbow2",
 		-- Text Objects based on treesitter
-		'nvim-treesitter/nvim-treesitter-textobjects',
+		"nvim-treesitter/nvim-treesitter-textobjects",
 		-- Playground for treesitter
-		'nvim-treesitter/playground'
+		"nvim-treesitter/playground",
 	},
 	config = function()
-		require('nvim-treesitter.configs').setup {
+		---@diagnostic disable-next-line: missing-fields
+		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"lua",
 				"vim",
@@ -22,7 +23,7 @@ return {
 				"javascript",
 				"markdown",
 				"markdown_inline",
-				"json"
+				"json",
 			},
 
 			highlight = {
@@ -52,7 +53,6 @@ return {
 			rainbow = {
 				enable = true,
 			},
-		}
-	end
-
+		})
+	end,
 }

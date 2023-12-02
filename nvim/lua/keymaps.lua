@@ -119,6 +119,9 @@ wk.register({
 		S = { geem.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
 		u = { geem.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
 		d = { geem.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		n = { geem.cmd("Gitsigns next_hunk"), "Next Hunk" },
+		p = { geem.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
+		l = { geem.cmd("Neotree git_status"), "Git Status" },
 		t = {
 			name = "Toggle",
 			l = { geem.cmd("Gitsigns toggle_linehl"), "Line Highlight" },

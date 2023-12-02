@@ -194,18 +194,6 @@ return {
 		end,
 	},
 
-	-- Project
-	{
-
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				manual_mode = true,
-			})
-			require("telescope").load_extension("projects")
-		end,
-	},
-
 	"mrjones2014/smart-splits.nvim",
 
 	-- Better Buffer Closing
