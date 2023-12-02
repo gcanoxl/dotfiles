@@ -63,7 +63,7 @@ wk.register({
 		q = { geem.cmd("quitall"), "Quit" },
 		n = { geem.cmd("noh"), "Stop Highlight" },
 		j = { geem.cmd("Telescope jumplist"), "Jumplist" },
-		s = { geem.cmd("Telescope live_grep layout_strategy=vertical"), "Search" },
+		s = { geem.cmd("Telescope live_grep"), "Search" },
 		h = { geem.cmd("Telescope help_tags"), "Help" },
 		c = { geem.cmd("Telescope colorscheme"), "Colorscheme" },
 		k = { geem.cmd("Telescope keymaps"), "Keymaps" },
@@ -140,6 +140,18 @@ wk.register({
 		},
 		P = { geem.cmd("ProjectRoot"), "Reset Root Directory" },
 		a = { geem.cmd("AddProject"), "Add Project" },
+		l = {
+			function()
+				require("persistence").load()
+			end,
+			"Load Project",
+		},
+		t = {
+			function()
+				require("persistence").stop()
+			end,
+			"Stop Project",
+		},
 	},
 	-- Package Management
 	P = { geem.cmd("Lazy"), "Package Management" },
