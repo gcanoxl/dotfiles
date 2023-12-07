@@ -94,9 +94,14 @@ wk.register({
 		name = "Buffer",
 		b = { geem.cmd("Telescope scope buffers"), "Buffers" },
 		B = { geem.cmd("Telescope buffers"), "Tab-local Buffers" },
-		n = { geem.cmd("bnext"), "Next Buffer" },
-		p = { geem.cmd("bprevious"), "Previous Buffer" },
-		N = { geem.cmd("enew"), "New Buffer" },
+		o = { geem.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
+		h = { geem.cmd("BufferLineCyclePrev"), "Previous Buffer" },
+		l = { geem.cmd("BufferLineCycleNext"), "Next Buffer" },
+		H = { geem.cmd("BufferLineMovePrev"), "Move Left" },
+		L = { geem.cmd("BufferLineMoveNext"), "Move Right" },
+		p = { geem.cmd("BufferLineTogglePin"), "Pin" },
+		P = { geem.cmd("BufferLinePick"), "Pick Buffer" },
+		n = { geem.cmd("enew"), "New Buffer" },
 		c = {
 			function()
 				require("bufdelete").bufdelete(0, false)

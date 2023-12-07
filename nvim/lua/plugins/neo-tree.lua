@@ -1,5 +1,5 @@
 local function generate_screen(state)
-	-- TODO: write a template plugin to make it better
+	-- TODO: write a template plugin to make it easier to use
 	local node = state.tree:get_node()
 	if not node or node.type ~= "directory" then
 		return
@@ -43,7 +43,7 @@ local function generate_screen(state)
 			"  }",
 			"}",
 		}, screen_file)
-		-- screen file
+		-- body file
 		vim.fn.writefile({
 			"import 'package:flutter/material.dart';",
 			"",
@@ -62,10 +62,9 @@ local function generate_screen(state)
 	end
 
 	vim.ui.input("screen_name: ", function(name)
-		if name == "" then
-			return
+		if name ~= "" then
+			generate_screen_files(node.path, name)
 		end
-		generate_screen_files(node.path, name)
 	end)
 end
 return {
@@ -94,7 +93,7 @@ return {
 				},
 				follow_current_file = {
 					enabled = true,
-					leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+					leave_dirs_open = true,
 				},
 			},
 		})
