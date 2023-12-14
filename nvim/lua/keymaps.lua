@@ -11,8 +11,8 @@ vim.keymap.set("n", "F", geem.cmd("HopLine"))
 -- Buffers
 vim.keymap.set("n", "<C-c>", geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
 vim.keymap.set("n", "<C-b>", geem.cmd("Telescope scope buffers"))
-vim.keymap.set("n", "{", geem.cmd("bprevious"))
-vim.keymap.set("n", "}", geem.cmd("bnext"))
+vim.keymap.set("n", "{", geem.cmd("BufferLineCyclePrev"))
+vim.keymap.set("n", "}", geem.cmd("BufferLineCycleNext"))
 
 -- File
 vim.keymap.set("n", "<C-f>", geem.cmd("Telescope find_files"))

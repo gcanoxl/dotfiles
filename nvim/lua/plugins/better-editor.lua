@@ -14,7 +14,16 @@ return {
 	},
 
 	-- Indent line
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {
+			scope = {
+				show_end = false,
+				show_start = false,
+			},
+		},
+	},
 
 	-- Better Tab-Buffer Logic
 	{
