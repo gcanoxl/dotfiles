@@ -224,12 +224,12 @@ local function config()
 end
 
 return {
-	{
-		"jonahgoldwastaken/copilot-status.nvim",
-		dependencies = { "zbirenbaum/copilot.lua" },
-		lazy = true,
-		event = "BufReadPost",
-	},
+	-- {
+	-- 	"jonahgoldwastaken/copilot-status.nvim",
+	-- 	dependencies = { "zbirenbaum/copilot.lua" },
+	-- 	lazy = true,
+	-- 	event = "BufReadPost",
+	-- },
 	{
 		"rebelot/heirline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
