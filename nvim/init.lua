@@ -1,12 +1,12 @@
-require 'options'
-require 'utils'
-require 'plugin'
-require 'keymaps'
-require 'autocmds'
+require("options")
+require("utils")
+require("plugin")
+require("keymaps")
+require("autocmds")
 
-vim.api.nvim_command [[colorscheme tokyonight]]
+vim.api.nvim_command([[colorscheme tokyonight]])
 
 -- configurations for GUI clients
 if vim.g.neovide then
-	require 'gui'
+	require("gui")
 end

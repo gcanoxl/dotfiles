@@ -1,4 +1,8 @@
 return {
+	-- Submodes
+	{
+		"anuvyklack/hydra.nvim",
+	},
 	-- Formatting
 	{
 		"stevearc/conform.nvim",

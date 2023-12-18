@@ -49,9 +49,6 @@ vim.keymap.set("s", "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
 
 local wk = require("which-key")
 
--- Keymaps with `localleader`
-vim.keymap.set("n", "<localleader>l", geem.cmd("DapToggleRepl"))
-
 -- ========================================
 -- |        Keymaps with <Leader>         |
 -- ========================================
@@ -76,8 +73,9 @@ wk.register({
 		name = "Tab",
 		n = { geem.cmd("tabnew"), "New Empty Tab" },
 		c = { geem.cmd("tabclose"), "Close Current Table" },
-		o = { geem.cmd("tab split"), "Duplicate to New Table" },
-		O = { geem.move_to_new_tab, "Move to New Table" },
+		-- TODO: implement these two key bindings
+		-- o = { geem.cmd("tab split"), "Duplicate to New Table" },
+		-- O = { geem.move_buf_to_new_tab, "Move to New Table" },
 		t = { require("telescope-tabs").list_tabs, "Tabs" },
 		["1"] = { geem.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
 		["2"] = { geem.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
@@ -96,6 +94,7 @@ wk.register({
 		B = { geem.cmd("Telescope buffers"), "Tab-local Buffers" },
 		o = { geem.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
 		h = { geem.cmd("BufferLineCyclePrev"), "Previous Buffer" },
+		m = { geem.cmd("ScopeMoveBuf"), "Move to Table" },
 		l = { geem.cmd("BufferLineCycleNext"), "Next Buffer" },
 		H = { geem.cmd("BufferLineMovePrev"), "Move Left" },
 		L = { geem.cmd("BufferLineMoveNext"), "Move Right" },
@@ -174,7 +173,8 @@ wk.register({
 		i = { require("dap").step_into, "Step Into" },
 		o = { require("dap").step_out, "Step Out" },
 		q = { require("dap").terminate, "Terminate" },
-		l = { require("dap.repl").clear, "Clear REPL" },
+		l = { require("dap.repl").toggle, "Toggle REPL" },
+		L = { require("dap.repl").clear, "Clear REPL" },
 	},
 }, { prefix = "<leader>", mode = "n", noremap = true, silent = true })
 
