@@ -1,4 +1,21 @@
 return {
+	-- Window auto resizing
+	{
+		"anuvyklack/windows.nvim",
+		dependencies = {
+			"anuvyklack/middleclass",
+			"anuvyklack/animation.nvim",
+		},
+		config = function()
+			vim.o.winwidth = 10
+			vim.o.winminwidth = 10
+			vim.o.winheight = 10
+			vim.o.winminheight = 10
+			vim.o.equalalways = false
+			require("windows").setup()
+		end,
+	},
+	-- Edgy
 	{
 		"folke/edgy.nvim",
 		event = "VeryLazy",
@@ -58,6 +75,16 @@ return {
 			},
 			animate = {
 				enabled = false,
+			},
+			keys = {
+				["<D-l>"] = function(win)
+					print("1")
+					win:resize("width", 2)
+				end,
+				-- decrease width
+				-- ["<c-w><lt>"] = function(win)
+				-- 	win:resize("width", -2)
+				-- end,
 			},
 		},
 	},
