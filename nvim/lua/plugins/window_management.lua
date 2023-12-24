@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name
 return {
 	-- Window auto resizing
 	{
@@ -56,8 +57,7 @@ return {
 			top = {},
 
 			-- Options
-			---@diagnostic disable-next-line: undefined-doc-name
-			---@type table<Edgy.Pos, {size:integer | fun():integer, wo?:vim.wo}>
+			-- -@type table<Edgy.Pos, {size:integer | fun():integer, wo?:vim.wo}>
 			options = {
 				left = { size = 24 },
 				bottom = { size = 10 },
@@ -77,10 +77,10 @@ return {
 				enabled = false,
 			},
 			keys = {
-				["<D-l>"] = function(win)
-					print("1")
-					win:resize("width", 2)
-				end,
+				-- ["<D-l>"] = function(win)
+				-- 	print("1")
+				-- 	win:resize("width", 2)
+				-- end,
 				-- decrease width
 				-- ["<c-w><lt>"] = function(win)
 				-- 	win:resize("width", -2)

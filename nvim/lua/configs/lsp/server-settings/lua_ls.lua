@@ -3,9 +3,10 @@ return {
 		Lua = {
 			workspace = {
 				library = {
-					["/Applications/Hammerspoon.app/Contents/Resources/extensions"] = true
+					-- TODO: use neoconf instead
+					["/Users/YOUR_USERNAME/.hammerspoon/Spoons/EmmyLua.spoon/annotations"] = true,
 				},
 			},
-		}
-	}
+		},
+	},
 }

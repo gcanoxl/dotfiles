@@ -4,7 +4,7 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		config = function()
-			require('catppuccin').setup({
+			require("catppuccin").setup({
 				flavour = "frappe",
 				integrations = {
 					neogit = false,
@@ -14,15 +14,59 @@ return {
 						enabled = true,
 						show_root = true,
 						transparent_panel = false,
-					}
-				}
+					},
+				},
 			})
-		end
+		end,
 	},
 
 	-- nightfox
 	"EdenEast/nightfox.nvim",
 
 	-- tokyonight
-	'folke/tokyonight.nvim',
+	{
+		"folke/tokyonight.nvim",
+		config = function()
+			if vim.g.preference.border == "none" then
+				require("tokyonight").setup({
+					on_highlights = function(hl, c)
+						local prompt = "#2d3149"
+						-- LspSaga
+						hl.HoverBorder = {
+							bg = c.bg_dark,
+							fg = c.bg_dark,
+						}
+						-- Telescope
+						hl.TelescopeNormal = {
+							bg = c.bg_dark,
+							fg = c.fg_dark,
+						}
+						hl.TelescopeBorder = {
+							bg = c.bg_dark,
+							fg = c.bg_dark,
+						}
+						hl.TelescopePromptNormal = {
+							bg = prompt,
+						}
+						hl.TelescopePromptBorder = {
+							bg = prompt,
+							fg = prompt,
+						}
+						hl.TelescopePromptTitle = {
+							bg = prompt,
+							fg = prompt,
+						}
+						hl.TelescopePreviewTitle = {
+							bg = c.bg_dark,
+							fg = c.bg_dark,
+						}
+						hl.TelescopeResultsTitle = {
+							bg = c.bg_dark,
+							fg = c.bg_dark,
+						}
+					end,
+				})
+			end
+		end,
+	},
 }

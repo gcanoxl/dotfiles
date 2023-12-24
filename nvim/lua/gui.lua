@@ -1,9 +1,11 @@
--- fullscreen at startup
+- - fullscreen at startup
 vim.g.neovide_fullscreen = true
 
 -- dynamically change the font size at runtime
-vim.g.gui_font_face = "Courier New"
+-- vim.g.gui_font_face = "Courier New"
+vim.g.gui_font_face = "OperatorMono Nerd Font"
 vim.g.gui_font_default_size = 16
+vim.opt.linespace = 16
 vim.g.gui_font_size = vim.g.gui_font_default_size
 
 RefreshGuiFont = function()
