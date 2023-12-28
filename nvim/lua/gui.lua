@@ -1,11 +1,11 @@
-- - fullscreen at startup
+-- fullscreen at startup
 vim.g.neovide_fullscreen = true
 
 -- dynamically change the font size at runtime
--- vim.g.gui_font_face = "Courier New"
-vim.g.gui_font_face = "OperatorMono Nerd Font"
+vim.g.gui_font_face = "Courier New"
+-- vim.g.gui_font_face = "OperatorMono Nerd Font"
 vim.g.gui_font_default_size = 16
-vim.opt.linespace = 16
+vim.opt.linespace = 12
 vim.g.gui_font_size = vim.g.gui_font_default_size
 
 RefreshGuiFont = function()
@@ -55,7 +55,6 @@ vim.keymap.set("n", "<C-S-j>", require("smart-splits").resize_down)
 vim.keymap.set("n", "<C-S-k>", require("smart-splits").resize_up)
 vim.keymap.set("n", "<C-S-l>", require("smart-splits").resize_right)
 
--- TODO: create a custom command to toggle the transparency
 -- Transparency
 local Hydra = require("hydra")
 Hydra({

@@ -1,3 +1,8 @@
+-- TODO: delete lspsaga
+-- TODO: add neoconf
+-- TODO: copilot statusline
+-- TODO: heirline tabbar
+-- TODO: add lazygit support
 require("options")
 require("utils")
 require("plugin")
