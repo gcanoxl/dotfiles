@@ -2,7 +2,13 @@ return {
 	-- NeoConfig
 	{
 		"folke/neoconf.nvim",
-		opts = {},
+		opts = {
+			import = {
+				vscode = true, -- local .vscode/settings.json
+				coc = true, -- global/local coc-settings.json
+				nlsp = true, -- global/local nlsp-settings.nvim json settings
+			},
+		},
 	},
 	-- Lsp UI
 	{
