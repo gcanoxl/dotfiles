@@ -68,6 +68,15 @@ wk.register({
 		e = { geem.cmd("Telescope emoji"), "Emoji" },
 		m = { geem.cmd("Telescope notify"), "Messages" },
 	},
+	-- Config
+	c = {
+		name = "Config",
+		c = { geem.cmd("Neoconf"), "Select Config" },
+		l = { geem.cmd("Neoconf local"), "Edit Local Config" },
+		g = { geem.cmd("Neoconf global"), "Edit Global Config" },
+		s = { geem.cmd("Neoconf show"), "Show Config" },
+		p = { geem.cmd("Neoconf lsp"), "Show LSP Config" },
+	},
 	-- Tab
 	t = {
 		name = "Tab",
