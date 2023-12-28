@@ -1,15 +1,4 @@
 return {
-	-- NeoConfig
-	{
-		"folke/neoconf.nvim",
-		opts = {
-			import = {
-				vscode = true, -- local .vscode/settings.json
-				coc = true, -- global/local coc-settings.json
-				nlsp = true, -- global/local nlsp-settings.nvim json settings
-			},
-		},
-	},
 	-- Lsp UI
 	{
 		"glepnir/lspsaga.nvim",
@@ -31,21 +20,23 @@ return {
 	-- Lsp Config
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "folke/neodev.nvim" }, -- for better config devlopment
+		dependencies = {
+			"folke/neodev.nvim",
+			"folke/neoconf.nvim",
+		},
 		config = function()
 			require("neodev").setup({})
+			require("neoconf").setup({
+				import = {
+					vscode = false, -- local .vscode/settings.json
+					coc = false, -- global/local coc-settings.json
+					nlsp = false, -- global/local nlsp-settings.nvim json settings
+				},
+			})
 			require("configs.lsp")
 		end,
 	},
 
 	-- Lsp Icons
 	"onsails/lspkind.nvim",
-
-	-- Lsp Signature
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").setup({})
-		end,
-	},
 }
