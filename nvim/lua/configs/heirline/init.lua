@@ -12,11 +12,11 @@ local StatusLine = {
 	},
 	layouts.Align,
 	{
+		ornaments.Copilot,
+		layouts.Space,
 		ornaments.LSPActive,
 		layouts.Space,
 		ornaments.Git,
-		layouts.Space,
-		ornaments.Copilot,
 	},
 }
 

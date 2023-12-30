@@ -4,7 +4,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup({
-				linehl = true,
+				linehl = false,
 				numhl = true,
 			})
 		end,

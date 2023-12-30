@@ -1,5 +1,5 @@
--- TODO: copilot statusline
--- TODO: heirline tabbar
+-- TODO: cmd keymaps
+-- TODO: toggleterm
 -- TODO: add lazygit support
 -- TODO: dap
 require("options")
