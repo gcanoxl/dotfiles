@@ -14,7 +14,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set("n", "dn", geem.cmd("Lspsaga diagnostic_jump_next"), bufopts)
 	vim.keymap.set("n", "K", geem.cmd("Lspsaga hover_doc"), bufopts)
 	vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "gd", geem.cmd("Lspsaga goto_definition"), bufopts)
 	vim.keymap.set("n", "gf", geem.cmd("Lspsaga finder"), bufopts)
 	vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
@@ -46,7 +46,7 @@ local on_attach = function(_, bufnr)
 				},
 				g = {
 					name = "Goto",
-					d = { vim.lsp.buf.definition, "Definition" },
+					d = { geem.cmd("Lspsaga goto_definition"), "Definition" },
 					D = { vim.lsp.buf.type_definition, "Type Definition" },
 					i = { vim.lsp.buf.implementation, "Implementation" },
 					o = { geem.cmd("Telescope lsp_dynamic_workspace_symbols"), "Workspace Symbols" },
