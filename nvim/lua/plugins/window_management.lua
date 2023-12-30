@@ -51,6 +51,10 @@ return {
 					title = "REPL",
 					ft = "dap-repl",
 				},
+				{
+					title = "Terminal",
+					ft = "toggleterm",
+				},
 			},
 
 			---@type (Edgy.View.Opts|string)[]

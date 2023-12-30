@@ -17,9 +17,6 @@ vim.keymap.set("n", "}", geem.cmd("BufferLineCycleNext"))
 -- File
 vim.keymap.set("n", "<C-f>", geem.cmd("Telescope find_files"))
 
--- Terminal
-vim.keymap.set("n", "!", geem.cmd("ToggleTerm"))
-
 -- Emoji
 vim.keymap.set("i", "<C-e>", geem.cmd("Telescope emoji"))
 
@@ -76,6 +73,8 @@ wk.register({
 		s = { geem.cmd("Neoconf show"), "Show Config" },
 		p = { geem.cmd("Neoconf lsp"), "Show LSP Config" },
 	},
+	-- Terminal
+	["!"] = { geem.cmd("ToggleTerm"), "Terminal" },
 	-- Tab
 	t = {
 		name = "Tab",
