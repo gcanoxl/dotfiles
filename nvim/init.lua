@@ -1,7 +1,7 @@
--- TODO: delete lspsaga
 -- TODO: copilot statusline
 -- TODO: heirline tabbar
 -- TODO: add lazygit support
+-- TODO: dap
 require("options")
 require("utils")
 require("plugin")

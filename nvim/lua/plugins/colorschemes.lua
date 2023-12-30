@@ -31,6 +31,11 @@ return {
 				require("tokyonight").setup({
 					on_highlights = function(hl, c)
 						local prompt = "#2d3149"
+						-- Lsp Signature
+						hl.FloatBorder = {
+							bg = c.bg_dark,
+							fg = c.bg_dark,
+						}
 						-- LspSaga
 						hl.HoverBorder = {
 							bg = c.bg_dark,
