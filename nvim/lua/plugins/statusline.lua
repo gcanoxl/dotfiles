@@ -126,13 +126,27 @@ local function config()
 		end,
 	}
 	local FileName = {
-		provider = function(self)
-			local filename = vim.fn.fnamemodify(self.filename, ":.")
-			if filename == "" then
-				return "[No Name]"
-			end
-			return filename
+		condition = function()
+			return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t") ~= ""
 		end,
+		flexible = 2,
+		{
+			provider = function(self)
+				local filename = vim.fn.fnamemodify(self.filename, ":.")
+				return filename
+			end,
+		},
+		{
+			provider = function(self)
+				local filename = vim.fn.fnamemodify(self.filename, ":.")
+				return vim.fn.pathshorten(filename)
+			end,
+		},
+		{
+			provider = function(self)
+				return vim.fn.fnamemodify(self.filename, ":t")
+			end,
+		},
 		hl = function(_)
 			return { fg = "cyan" }
 		end,
@@ -186,6 +200,8 @@ local function config()
 			end,
 		},
 	}
+
+	-- Layout components
 	local Align = {
 		provider = function()
 			return "%="
@@ -211,6 +227,7 @@ local function config()
 			Space,
 			Git,
 			Space,
+			Copilot,
 		},
 	}
 
@@ -224,12 +241,13 @@ local function config()
 end
 
 return {
-	-- {
-	-- 	"jonahgoldwastaken/copilot-status.nvim",
-	-- 	dependencies = { "zbirenbaum/copilot.lua" },
-	-- 	lazy = true,
-	-- 	event = "BufReadPost",
-	-- },
+	{
+		"jonahgoldwastaken/copilot-status.nvim",
+		dependencies = { "zbirenbaum/copilot.lua" },
+		config = function()
+			require("copilot_status").setup()
+		end,
+	},
 	{
 		"rebelot/heirline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
