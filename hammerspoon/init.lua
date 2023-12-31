@@ -16,3 +16,15 @@ hs.spoons.use("SplitView", {
 		choose = { mash, "o" },
 	},
 })
+
+local applicationHotkeys = {
+	["1"] = "kitty",
+	["2"] = "Brave Browser",
+	["3"] = "Dictionary",
+}
+
+for key, app in pairs(applicationHotkeys) do
+	hs.hotkey.bind("option", key, function()
+		hs.application.launchOrFocus(app)
+	end)
+end

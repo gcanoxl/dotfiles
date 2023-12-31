@@ -1,6 +1,4 @@
 -- TODO: cmd keymaps
--- TODO: toggleterm
--- TODO: add lazygit support
 -- TODO: dap
 require("options")
 require("utils")
