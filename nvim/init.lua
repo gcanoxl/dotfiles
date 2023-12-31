@@ -1,4 +1,3 @@
--- TODO: cmd keymaps
 -- TODO: dap
 require("options")
 require("utils")

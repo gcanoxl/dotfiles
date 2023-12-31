@@ -131,6 +131,12 @@ wk.register({
 	-- Git
 	g = {
 		g = { require("neogit").open, "Git" },
+		G = {
+			function()
+				geem.lazygit:open()
+			end,
+			"Git",
+		},
 		s = { geem.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
 		S = { geem.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
 		u = { geem.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },

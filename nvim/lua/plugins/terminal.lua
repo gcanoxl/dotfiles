@@ -22,14 +22,10 @@ return {
 		})
 
 		local Terminal = require("toggleterm.terminal").Terminal
-		local lazygit = Terminal:new({
+		geem.lazygit = Terminal:new({
 			cmd = "lazygit",
 			hidden = true,
 			direction = "tab",
 		})
-
-		vim.keymap.set("n", "<leader>G", function()
-			lazygit:toggle()
-		end, { noremap = true, silent = true })
 	end,
 }

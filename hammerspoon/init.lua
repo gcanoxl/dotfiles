@@ -24,7 +24,7 @@ local applicationHotkeys = {
 }
 
 for key, app in pairs(applicationHotkeys) do
-	hs.hotkey.bind("option", key, function()
+	hs.hotkey.bind("ctrl", key, function()
 		hs.application.launchOrFocus(app)
 	end)
 end
