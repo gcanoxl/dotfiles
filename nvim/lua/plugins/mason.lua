@@ -3,7 +3,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		config = function()
-			require('mason').setup({
+			require("mason").setup({
 				ui = {
 					border = vim.g.preference.border,
 				},
@@ -12,13 +12,12 @@ return {
 				},
 			})
 
-			local lsp_config_status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+			local lsp_config_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 			if lsp_config_status_ok then
 				mason_lspconfig.setup({
 					automatic_installation = true,
 				})
 			end
-		end
+		end,
 	},
-
 }
