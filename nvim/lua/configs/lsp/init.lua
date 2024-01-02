@@ -40,5 +40,14 @@ for _, server in ipairs(servers) do
 		capabilities = capabilities,
 		on_attach = on_attach,
 	}
+
+	local path = vim.fn.stdpath("config") .. "/lua/configs/lsp/servers/" .. server .. ".lua"
+	if vim.fn.filereadable(path) == 1 then
+		local ok, custom_settings = pcall(require, "configs.lsp.servers." .. server)
+		if ok then
+			settings = vim.tbl_deep_extend("force", settings, custom_settings or {}) or {}
+		end
+	end
+
 	lspconfig[server].setup(settings)
 end
