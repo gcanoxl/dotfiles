@@ -1,4 +1,19 @@
 return {
+	-- Sniprun
+	{
+
+		"michaelb/sniprun",
+		build = "sh ./install.sh",
+		config = function()
+			require("sniprun").setup({
+				display = {
+					"Terminal",
+				},
+				repl_enable = { "Python3_original" },
+				live_mode_toggle = "enable",
+			})
+		end,
+	},
 	-- Submodes
 	{
 		"anuvyklack/hydra.nvim",
