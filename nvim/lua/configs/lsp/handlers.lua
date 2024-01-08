@@ -1,8 +1,4 @@
-local cmp_lsp_status_ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_lsp_status_ok then
-	return
-end
-
+-- TODO: refactor lsp configs
 local wk_ok, wk = pcall(require, "which-key")
 
 -- on_attach function
@@ -62,7 +58,4 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] =
 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = vim.g.preference.border })
 
--- capabilities
-local capabilities = cmp_lsp.default_capabilities()
-
-return on_attach, capabilities
+return on_attach

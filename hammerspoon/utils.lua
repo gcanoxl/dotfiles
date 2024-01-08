@@ -1,18 +1,24 @@
 local M = {}
 
-function M.inspect(o, depth)
-	if not depth then depth = 1 end
-	if type(o) == 'table' then
-		local s = '{\n'
-		for k, v in pairs(o) do
-			s = s .. string.rep('\t', depth)
-			if type(k) ~= 'number' then k = '"' .. k .. '"' end
-			s = s .. '[' .. k .. '] = ' .. M.inspect(v, depth + 1) .. ',\n'
-		end
-		return s .. string.rep('\t', depth - 1) .. '} '
-	else
-		return tostring(o)
+---Get the current URL of the frontmost tab of the frontmost window
+---@return string | nil
+function M.getCurrentURL()
+	local _, url =
+		hs.osascript.applescript('tell application "Brave Browser" to return URL of active tab of front window')
+	return url
+end
+
+---Get the domain of a URL
+---@param url string
+---@return string | nil
+function M.getDomain(url)
+	local domain = string.match(url, "https?://([^/]+)")
+	if domain == nil then
+		domain = string.match(url, "http?://([^/]+)")
 	end
+	-- only keep the last two parts of the domain
+	domain = string.match(domain, "([^%.]+%.[^%.]+)$")
+	return domain
 end
 
 return M

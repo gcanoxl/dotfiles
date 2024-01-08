@@ -33,7 +33,8 @@ local servers = {
 	"grammarly",
 }
 
-local on_attach, capabilities = require("configs.lsp.handlers")
+local on_attach = require("configs.lsp.handlers")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, server in ipairs(servers) do
 	local settings = {
