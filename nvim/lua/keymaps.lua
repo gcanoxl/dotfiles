@@ -128,6 +128,16 @@ wk.register({
 		r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
 		d = { geem.cmd("Dired"), "File Manager" },
 	},
+	-- Window
+	w = {
+		name = "Window",
+		a = {
+			name = "Auto Resize",
+			t = { geem.cmd("WindowsToggleAutoWidth"), "Toggle Auto Width" },
+			e = { geem.cmd("WindowsEqualize"), "Equalize Width" },
+			m = { geem.cmd("WindowsMaximize"), "Maximize Width" },
+		},
+	},
 	-- Git
 	g = {
 		g = { require("neogit").open, "Git" },
@@ -140,7 +150,14 @@ wk.register({
 		s = { geem.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
 		S = { geem.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
 		u = { geem.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
-		d = { geem.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		x = { geem.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		d = {
+			name = "Diff",
+			d = { geem.cmd("Gitsigns diffthis"), "Diff This" },
+			c = { geem.cmd("DiffviewClose"), "Close Diff" },
+			f = { geem.cmd("DiffviewFileHistory %"), "Current File History" },
+			t = { geem.cmd("DiffviewToggleFiles"), "Toggle Files" },
+		},
 		n = { geem.cmd("Gitsigns next_hunk"), "Next Hunk" },
 		p = { geem.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
 		l = { geem.cmd("Neotree git_status"), "Git Status" },
