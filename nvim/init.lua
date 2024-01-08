@@ -1,7 +1,7 @@
 -- TODO: dap
 require("options")
 require("utils")
-require("plugin")
+require("installer")
 require("keymaps")
 require("autocmds")
 
