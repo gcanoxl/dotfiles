@@ -133,7 +133,7 @@ wk.register({
 		name = "Window",
 		a = {
 			name = "Auto Resize",
-			t = { geem.cmd("WindowsToggleAutoWidth"), "Toggle Auto Width" },
+			t = { geem.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
 			e = { geem.cmd("WindowsEqualize"), "Equalize Width" },
 			m = { geem.cmd("WindowsMaximize"), "Maximize Width" },
 		},
