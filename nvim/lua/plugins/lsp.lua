@@ -33,6 +33,7 @@ return {
 					nlsp = false, -- global/local nlsp-settings.nvim json settings
 				},
 			})
+
 			require("configs.lsp")
 		end,
 	},

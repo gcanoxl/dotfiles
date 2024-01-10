@@ -4,9 +4,8 @@ vim.keymap.set("i", "jk", "<esc>")
 -- Use C-i C-o to jump between locations
 vim.keymap.set("n", "<C-i>", "<C-]>")
 
--- Hop
-vim.keymap.set("n", "f", geem.cmd("HopChar1"))
-vim.keymap.set("n", "F", geem.cmd("HopLine"))
+-- Fold
+vim.keymap.set('n', '<tab>', 'za')
 
 -- Buffers
 vim.keymap.set("n", "<C-c>", geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
