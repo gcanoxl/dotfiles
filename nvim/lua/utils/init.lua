@@ -1,7 +1,5 @@
 _G.geem = {}
 
-geem.map_table = { n = {}, i = {}, v = {}, s = {} }
-
 function geem.cmd(cmd)
 	return "<cmd>" .. cmd .. "<cr>"
 end
@@ -23,7 +21,7 @@ function geem.buf_move_to_new_tab()
 	vim.fn.win_execute(win_id, "wincmd c")
 end
 
-geem.code = function()
+function geem.code()
 	vim.lsp.buf.code_action({
 		apply = true,
 		filter = function(action)
