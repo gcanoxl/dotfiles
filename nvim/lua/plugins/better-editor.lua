@@ -19,18 +19,6 @@ return {
 		"anuvyklack/hydra.nvim",
 	},
 
-	-- Surround
-	{
-		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
-	},
-
 	-- Formatting
 	{
 		"stevearc/conform.nvim",
@@ -99,6 +87,7 @@ return {
 			percentage = 0.15,
 		},
 	},
+
 	-- Scrolling
 	{
 		"petertriho/nvim-scrollbar",
@@ -218,24 +207,6 @@ return {
 		end,
 	},
 
-	-- Mouse Movement
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		---@type Flash.Config
-		opts = {},
-		-- NOTE: I don't know why this doesn't work properly
-		--
-		-- stylua: ignore
-		-- keys = {
-		-- 	{ "f", mode = { "n", "x", "o" }, require("flash").jump, desc = "Flash" },
-		-- },
-		config = function()
-			require("flash").setup({})
-			vim.keymap.set("n", "f", require("flash").jump, { noremap = true })
-		end,
-	},
-
 	"mrjones2014/smart-splits.nvim",
 
 	-- Better Buffer Closing
@@ -265,14 +236,6 @@ return {
 		"folke/todo-comments.nvim",
 		config = function()
 			require("todo-comments").setup()
-		end,
-	},
-
-	-- Auto Pairs
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
 		end,
 	},
 }
