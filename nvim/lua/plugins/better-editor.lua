@@ -1,4 +1,16 @@
 return {
+	{
+		"mateuszwieloch/automkdir.nvim",
+	},
+	{
+		"simonmclean/triptych.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- required
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+		config = true,
+	},
 	-- Sniprun
 	{
 
