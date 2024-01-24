@@ -29,4 +29,3 @@ function geem.code()
 		end,
 	})
 end
-vim.keymap.set("n", "cc", geem.code)
