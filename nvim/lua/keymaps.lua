@@ -5,7 +5,7 @@ vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<C-i>", "<C-]>")
 
 -- Fold
-vim.keymap.set('n', '<tab>', 'za')
+vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
 vim.keymap.set("n", "<C-c>", geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
@@ -196,6 +196,12 @@ wk.register({
 	-- Debug
 	d = {
 		name = "Debug",
+		s = {
+			function()
+				require("osv").launch({ port = 8086 })
+			end,
+			"Start Debug Server",
+		},
 		b = { require("dap").toggle_breakpoint, "Toggle Breakpoint" },
 		c = { require("dap").continue, "Start or Continue" },
 		n = { require("dap").step_over, "Step Over" },
