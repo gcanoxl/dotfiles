@@ -23,7 +23,7 @@ end
 
 --- Bind keymaps for specific apps
 ---@param includes string[] List of app names
----@param keymaps {mods: string[], key: string, fn: string | function}[] List of keymaps
+---@param keymaps {mods: string[]|nil, key: string, fn: string | function}[] List of keymaps
 function M.bindForApp(includes, keymaps)
 	local function getFnByKey(key)
 		return function()

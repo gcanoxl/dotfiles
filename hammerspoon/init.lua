@@ -28,3 +28,19 @@ for key, app in pairs(applicationHotkeys) do
 		hs.application.launchOrFocus(app)
 	end)
 end
+
+-- local utils = require("utils")
+-- utils.bindForApp({ "Brave Browser" }, {
+-- 	{
+-- 		mods = nil,
+-- 		key = "w",
+-- 		fn = function()
+-- 			local type = hs.mouse.currentCursorType()
+-- 			hs.alert.show(type)
+-- 			hs.alert.show(type == "IBeamCursor")
+-- 			if type ~= "IBeamCursor" then
+-- 				hs.eventtap.keyStroke(nil, "up")
+-- 			end
+-- 		end,
+-- 	},
+-- })
