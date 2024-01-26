@@ -21,4 +21,37 @@ function M.getDomain(url)
 	return domain
 end
 
+--- Bind keymaps for specific apps
+---@param includes string[] List of app names
+---@param keymaps {mods: string[], key: string, fn: string | function}[] List of keymaps
+function M.bindForApp(includes, keymaps)
+	local function getFnByKey(key)
+		return function()
+			hs.eventtap.keyStroke(nil, key)
+		end
+	end
+
+	local watcher = hs.application.watcher.new(function(appName, event, _)
+		if event == hs.application.watcher.deactivated then
+			if hs.fnutils.contains(includes, appName) then
+				for _, keybind in ipairs(keymaps) do
+					hs.hotkey.deleteAll(keybind.mods, keybind.key)
+				end
+			end
+		end
+
+		if event == hs.application.watcher.activated then
+			if hs.fnutils.contains(includes, appName) then
+				for _, keybind in ipairs(keymaps) do
+					if type(keybind.fn) == "string" then
+						keybind.fn = getFnByKey(keybind.fn)
+					end
+					hs.hotkey.bind(keybind.mods, keybind.key, keybind.fn)
+				end
+			end
+		end
+	end)
+	watcher:start()
+end
+
 return M
