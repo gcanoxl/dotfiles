@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- Auto Cd to the project or current dir
+-- auto cd to the project or current dir
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
 	group = usergroup,

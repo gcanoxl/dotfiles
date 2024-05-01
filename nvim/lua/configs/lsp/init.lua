@@ -31,6 +31,7 @@ local servers = {
 	"jsonls",
 	"yamlls",
 	"grammarly",
+	"gopls",
 }
 
 local on_attach = require("configs.lsp.handlers")

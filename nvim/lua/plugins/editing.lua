@@ -1,12 +1,12 @@
 return {
 	-- Auto Save
 	-- TODO: disable <leader>fw for better building habits
-	{
-		"willothy/savior.nvim",
-		dependencies = { "j-hui/fidget.nvim" },
-		event = { "InsertEnter", "TextChanged" },
-		config = true,
-	},
+	-- {
+	-- 	"willothy/savior.nvim",
+	-- 	dependencies = { "j-hui/fidget.nvim" },
+	-- 	event = { "InsertEnter", "TextChanged" },
+	-- 	config = true,
+	-- },
 
 	-- Surround
 	{

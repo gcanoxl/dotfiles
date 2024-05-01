@@ -230,6 +230,50 @@ geem.map_on_filetype("dart", {
 	w = { geem.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
 	r = { geem.cmd("FlutterRun"), "Run Flutter" },
 	R = { geem.cmd("FlutterRestart"), "Restart Flutter" },
+	M = {
+		function()
+			vim.lsp.buf.code_action({
+				apply = true,
+				filter = function(action)
+					return action.title == "Extract Method"
+				end,
+			})
+		end,
+		"Extract Method",
+	},
+	W = {
+		function()
+			vim.lsp.buf.code_action({
+				apply = true,
+				filter = function(action)
+					return action.title == "Extract Widget"
+				end,
+			})
+		end,
+		"Extract Method",
+	},
+	L = {
+		function()
+			vim.lsp.buf.code_action({
+				apply = true,
+				filter = function(action)
+					return action.title == "Extract Local Variable"
+				end,
+			})
+		end,
+		"Extract Method",
+	},
+	A = {
+		function()
+			vim.lsp.buf.code_action({
+				apply = true,
+				filter = function(action)
+					return action.title == "Wrap with widget..."
+				end,
+			})
+		end,
+		"Extract Method",
+	},
 })
 
 -- Lua Special Keymaps
