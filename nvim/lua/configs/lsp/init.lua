@@ -32,6 +32,9 @@ local servers = {
 	"yamlls",
 	"grammarly",
 	"gopls",
+	"vuels",
+	"tsserver",
+	"html",
 }
 
 local on_attach = require("configs.lsp.handlers")
