@@ -92,14 +92,6 @@ return {
 		end,
 	},
 
-	-- Better-ZZ
-	{
-		"gcanoxl/better-zz.nvim",
-		opts = {
-			percentage = 0.15,
-		},
-	},
-
 	-- Scrolling
 	{
 		"petertriho/nvim-scrollbar",
