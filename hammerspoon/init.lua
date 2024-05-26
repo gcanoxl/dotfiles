@@ -29,6 +29,7 @@ for key, app in pairs(applicationHotkeys) do
 	end)
 end
 
+-- TODO: improve its stability
 -- local utils = require("utils")
 -- utils.bindForApp({ "Brave Browser" }, {
 -- 	{
@@ -45,21 +46,21 @@ end
 -- 	},
 -- })
 
-local utils = require("utils")
-utils.bindForApp({ "Photos" }, {
-	{
-		mods = nil,
-		key = "h",
-		fn = function()
-			print("h")
-			hs.eventtap.keyStroke(nil, "left")
-		end,
-	},
-	{
-		mods = nil,
-		key = "l",
-		fn = function()
-			hs.eventtap.keyStroke(nil, "right")
-		end,
-	},
-})
+-- local utils = require("utils")
+-- utils.bindForApp({ "Photos" }, {
+-- 	{
+-- 		mods = nil,
+-- 		key = "h",
+-- 		fn = function()
+-- 			print("h")
+-- 			hs.eventtap.keyStroke(nil, "left")
+-- 		end,
+-- 	},
+-- 	{
+-- 		mods = nil,
+-- 		key = "l",
+-- 		fn = function()
+-- 			hs.eventtap.keyStroke(nil, "right")
+-- 		end,
+-- 	},
+-- })
