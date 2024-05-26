@@ -11,10 +11,10 @@ for _, fname in ipairs(filelist) do
 end
 
 -- auto close/open dapui and set keybindings
-local dap = require("dap")
-local dapui = require("dapui")
+-- local dap = require("dap")
+-- local dapui = require("dapui")
 
-local opts = { noremap = true, silent = true }
+-- local opts = { noremap = true, silent = true }
 
 -- dap.listeners.after.event_initialized["dapui_config"] = function()
 -- 	dapui.open()

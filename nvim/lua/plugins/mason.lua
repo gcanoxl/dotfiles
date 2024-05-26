@@ -21,7 +21,18 @@ return {
 		})
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"stylua",
+				-- TODO: use a global variable
+				"lua_ls",
+				"lua_ls",
+				"vimls",
+				"pyright",
+				"jsonls",
+				"yamlls",
+				"grammarly",
+				"gopls",
+				"vuels",
+				"tsserver",
+				"html",
 			},
 		})
 		require("mason-nvim-dap").setup()

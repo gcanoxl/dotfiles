@@ -67,30 +67,30 @@ return {
 	},
 
 	-- Bufferline
-	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup({
-				options = {
-					diagnostics = "nvim_lsp",
-					diagnostics_update_in_insert = true,
-					offsets = {
-						-- {
-						-- 	filetype = "neo-tree",
-						-- 	-- text = "File Explorer",
-						-- 	-- text_align = "left",
-						-- 	separator = true
-						-- }
-					},
-					indicator = {
-						style = "underline",
-					},
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	version = "*",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	config = function()
+	-- 		require("bufferline").setup({
+	-- 			options = {
+	-- 				diagnostics = "nvim_lsp",
+	-- 				diagnostics_update_in_insert = true,
+	-- 				offsets = {
+	-- 					-- {
+	-- 					-- 	filetype = "neo-tree",
+	-- 					-- 	-- text = "File Explorer",
+	-- 					-- 	-- text_align = "left",
+	-- 					-- 	separator = true
+	-- 					-- }
+	-- 				},
+	-- 				indicator = {
+	-- 					style = "underline",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
 	-- Scrolling
 	{
