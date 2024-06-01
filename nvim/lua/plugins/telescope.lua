@@ -15,8 +15,8 @@ return {
 						horizontal = {
 							prompt_position = "top",
 							preview_width = 0.54,
-							width = 0.98,
-							height = 0.98,
+							width = 0.88,
+							height = 0.88,
 						},
 					},
 					mappings = {
@@ -27,12 +27,12 @@ return {
 					winblend = vim.g.preference.winblend,
 					file_ignore_patterns = {
 						-- flutter project
-						"android",
-						"ios",
-						"web",
-						"macos",
-						"windows",
-						"assets",
+						-- "android",
+						-- "ios",
+						-- "web",
+						-- "macos",
+						-- "windows",
+						-- "assets",
 					},
 				},
 				extensions = {

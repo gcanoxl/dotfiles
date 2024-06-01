@@ -29,8 +29,8 @@ for k, v in pairs(options) do
 end
 
 vim.g.preference = {
-	border = "none",
-	-- border = "rounded",
+	-- border = "none",
+	border = "rounded",
 	winblend = 4,
 }
 
