@@ -1,21 +1,5 @@
 ---@diagnostic disable: undefined-doc-name
 return {
-	-- Window auto resizing
-	{
-		"anuvyklack/windows.nvim",
-		dependencies = {
-			"anuvyklack/middleclass",
-			"anuvyklack/animation.nvim",
-		},
-		config = function()
-			vim.o.winwidth = 10
-			vim.o.winminwidth = 10
-			vim.o.winheight = 10
-			vim.o.winminheight = 10
-			vim.o.equalalways = false
-			require("windows").setup()
-		end,
-	},
 	-- Edgy
 	{
 		"folke/edgy.nvim",
