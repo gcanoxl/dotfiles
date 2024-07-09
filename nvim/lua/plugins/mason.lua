@@ -33,6 +33,7 @@ return {
 				"vuels",
 				"tsserver",
 				"html",
+				"yapf",
 			},
 		})
 		require("mason-nvim-dap").setup()

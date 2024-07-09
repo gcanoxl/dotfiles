@@ -28,3 +28,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		end
 	end,
 })
+
+-- folds restore
+vim.api.nvim_create_autocmd("BufDelete", {
+	pattern = "*",
+	group = usergroup,
+	command = "silent! mkview",
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "*",
+	group = usergroup,
+	command = "silent! loadview",
+})
