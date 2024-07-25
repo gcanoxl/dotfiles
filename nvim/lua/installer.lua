@@ -20,5 +20,6 @@ require("lazy").setup({
 }, {
 	dev = {
 		path = "~/Projects",
+		patterns = { "gcanoxl" },
 	},
 })
