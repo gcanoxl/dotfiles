@@ -2,6 +2,7 @@ local ViMode = require("configs.heirline.components.vi_mode")
 local fs = require("configs.heirline.components.fs")
 local ornaments = require("configs.heirline.components.ornaments")
 local layouts = require("configs.heirline.components.layouts")
+local debugger = require("configs.heirline.components.debugger")
 
 local StatusLine = {
 	{
@@ -12,6 +13,8 @@ local StatusLine = {
 	},
 	layouts.Align,
 	{
+		debugger.DAPMessages,
+		layouts.Space,
 		ornaments.Copilot,
 		layouts.Space,
 		ornaments.LSPActive,
