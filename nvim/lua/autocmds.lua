@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = usergroup,
 	callback = function()
 		local lsp_util = require("lspconfig.util")
-		local root_dir = lsp_util.root_pattern(".project", "pubspec.yaml", ".git")(vim.fn.expand("%:p:h"))
+		local root_dir = lsp_util.root_pattern(".project", "pubspec.yaml", ".git", "README.md")(vim.fn.expand("%:p:h"))
 		if root_dir ~= nil then
 			vim.cmd("cd " .. root_dir)
 		else
