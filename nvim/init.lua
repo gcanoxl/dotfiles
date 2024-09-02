@@ -11,3 +11,6 @@ vim.api.nvim_command([[colorscheme nightfox]])
 if vim.g.neovide then
 	require("gui")
 end
+
+-- loading configs
+require("configs")
