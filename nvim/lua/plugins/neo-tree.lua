@@ -82,6 +82,11 @@ return {
 				},
 			},
 			filesystem = {
+				filtered_items = {
+					hide_by_pattern = { -- uses glob style patterns
+						"*.g.dart",
+					},
+				},
 				window = {
 					mappings = {
 						["<C-g>"] = generate_screen,
