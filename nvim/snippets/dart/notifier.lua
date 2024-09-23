@@ -4,7 +4,7 @@ return {
 		[[ 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part '$1_provider.g.dart';
+part '$1.g.dart';
 
 @riverpod
 class $2 extends _$$2 {
@@ -13,6 +13,7 @@ class $2 extends _$$2 {
   ${3:void} build() {
     return $4;
   }
+}
 	$0
 	]]
 	),
