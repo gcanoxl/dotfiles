@@ -85,6 +85,7 @@ return {
 				filtered_items = {
 					hide_by_pattern = { -- uses glob style patterns
 						"*.g.dart",
+						"*.freezed.dart",
 					},
 				},
 				window = {
