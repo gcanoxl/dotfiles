@@ -1,12 +1,12 @@
 return {
-	'akinsho/flutter-tools.nvim',
-	ft = { 'dart' },
+	"akinsho/flutter-tools.nvim",
+	ft = { "dart" },
 	config = function()
-		local on_attach, capabilities = require 'configs.lsp.handlers'
+		local on_attach, capabilities = require("configs.lsp.handlers")
 
-		local dap_avail, _ = pcall(require, 'dap')
+		local dap_avail, _ = pcall(require, "dap")
 
-		require('flutter-tools').setup {
+		require("flutter-tools").setup({
 			debugger = {
 				enabled = true,
 				run_via_dap = dap_avail,
@@ -19,8 +19,8 @@ return {
 							program = "./lib/main.dart",
 							cwd = "${workspaceFolder}",
 							-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
-							-- toolArgs = { "-d", "web" }
-						}
+							toolArgs = { "-d", "chrome" },
+						},
 					}
 				end,
 			},
@@ -28,7 +28,7 @@ return {
 				statusline = {
 					app_version = false,
 					device = true,
-				}
+				},
 			},
 			widget_guides = {
 				enabled = true,
@@ -44,13 +44,13 @@ return {
 					background = true,
 					background_color = nil,
 					virtual_text = false,
-				}
+				},
 			},
-		}
+		})
 
-		local telescope_ok, telescope = pcall(require, 'telescope')
+		local telescope_ok, telescope = pcall(require, "telescope")
 		if telescope_ok then
 			telescope.load_extension("flutter")
 		end
-	end
+	end,
 }
