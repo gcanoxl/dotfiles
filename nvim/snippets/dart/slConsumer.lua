@@ -6,7 +6,7 @@ return {
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class $1 extends ConsumerWidget {
-  const LibraryScreen({super.key});
+  const $1({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

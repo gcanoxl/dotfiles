@@ -35,6 +35,7 @@ local servers = {
 	"vuels",
 	"tsserver",
 	"html",
+	"clangd",
 }
 
 local on_attach = require("configs.lsp.handlers")
