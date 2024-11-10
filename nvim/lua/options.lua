@@ -3,6 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 local options = {
+	exrc = true,
 	clipboard = "unnamedplus",
 	termguicolors = true,
 	mouse = "a",
@@ -33,6 +34,3 @@ vim.g.preference = {
 	border = "rounded",
 	winblend = 4,
 }
-
--- default current-directory
-vim.cmd("cd")
