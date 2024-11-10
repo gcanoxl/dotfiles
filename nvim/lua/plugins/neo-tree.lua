@@ -87,6 +87,11 @@ return {
 						"*.g.dart",
 						"*.freezed.dart",
 					},
+
+					always_show = {
+						".gitignore",
+						".nvim.lua",
+					},
 				},
 				window = {
 					mappings = {
@@ -94,9 +99,6 @@ return {
 					},
 				},
 				use_libuv_file_watcher = true,
-				always_show = {
-					".gitignore",
-				},
 				follow_current_file = {
 					enabled = true,
 					leave_dirs_open = true,
