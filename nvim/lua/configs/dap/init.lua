@@ -12,8 +12,8 @@ end
 
 -- auto close/open dapui and set keybindings
 -- local dap = require("dap")
-local dapui = require("dapui")
-dapui.setup()
+-- local dapui = require("dapui")
+-- dapui.setup()
 --
 -- dap.listeners.before.attach.dapui_config = function()
 -- 	dapui.open()
