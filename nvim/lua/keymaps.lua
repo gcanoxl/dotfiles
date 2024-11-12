@@ -203,6 +203,7 @@ wk.register({
 			"Start Debug Server",
 		},
 		b = { require("dap").toggle_breakpoint, "Toggle Breakpoint" },
+		u = { require("dapui").toggle, "Toggle DAP UI" },
 		c = { require("dap").continue, "Start or Continue" },
 		n = { require("dap").step_over, "Step Over" },
 		i = { require("dap").step_into, "Step Into" },
