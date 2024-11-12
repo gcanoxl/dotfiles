@@ -34,6 +34,7 @@ return {
 				"tsserver",
 				"html",
 				"yapf",
+				"codelldb",
 			},
 		})
 		require("mason-nvim-dap").setup()
