@@ -15,6 +15,38 @@ return {
 						width = 24,
 					},
 				},
+				{
+					title = "DAP Scopes",
+					ft = "dapui_scopes",
+					size = {
+						width = 24,
+						height = 0.3,
+					},
+				},
+				{
+					title = "DAP Watches",
+					ft = "dapui_watches",
+					size = {
+						width = 24,
+						height = 0.3,
+					},
+				},
+				{
+					title = "DAP Stacks",
+					ft = "dapui_stacks",
+					size = {
+						width = 24,
+						height = 0.2,
+					},
+				},
+				{
+					title = "DAP Breakpoints",
+					ft = "dapui_breakpoints",
+					size = {
+						width = 24,
+						height = 0.2,
+					},
+				},
 			},
 
 			---@type (Edgy.View.Opts|string)[]
@@ -34,6 +66,10 @@ return {
 				{
 					title = "REPL",
 					ft = "dap-repl",
+				},
+				{
+					title = "DAP Consoles",
+					ft = "dapui_console",
 				},
 				{
 					title = "Terminal",

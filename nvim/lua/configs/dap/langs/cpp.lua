@@ -20,7 +20,7 @@ dap.configurations.cpp = {
 			return program
 		end,
 		cwd = "${workspaceFolder}",
-		terminal = "integrated",
+		terminal = "console",
 		stopOnEntry = false,
 		breakpointMode = "file",
 	},
