@@ -86,6 +86,7 @@ return {
 					hide_by_pattern = { -- uses glob style patterns
 						"*.g.dart",
 						"*.freezed.dart",
+						"__pycache__",
 					},
 
 					always_show = {
