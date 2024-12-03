@@ -1,10 +1,10 @@
-_G.geem = {}
+_G.util = {}
 
-function geem.cmd(cmd)
+function util.cmd(cmd)
 	return "<cmd>" .. cmd .. "<cr>"
 end
 
-function geem.map_on_filetype(filetype, maps)
+function util.map_on_filetype(filetype, maps)
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
 		group = vim.api.nvim_create_augroup("mapping" .. filetype, { clear = true }),
@@ -15,13 +15,13 @@ function geem.map_on_filetype(filetype, maps)
 	})
 end
 
-function geem.buf_move_to_new_tab()
+function util.buf_move_to_new_tab()
 	local win_id = vim.fn.win_getid()
 	vim.cmd("tabnew")
 	vim.fn.win_execute(win_id, "wincmd c")
 end
 
-function geem.code()
+function util.code()
 	vim.lsp.buf.code_action({
 		apply = true,
 		filter = function(action)

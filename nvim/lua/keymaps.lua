@@ -8,16 +8,16 @@ vim.keymap.set("n", "<C-i>", "<C-]>")
 vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
-vim.keymap.set("n", "<C-c>", geem.cmd('lua require("bufdelete").bufdelete(0, false)'))
-vim.keymap.set("n", "<C-b>", geem.cmd("Telescope scope buffers"))
-vim.keymap.set("n", "{", geem.cmd("BufferLineCyclePrev"))
-vim.keymap.set("n", "}", geem.cmd("BufferLineCycleNext"))
+vim.keymap.set("n", "<C-c>", util.cmd('lua require("bufdelete").bufdelete(0, false)'))
+vim.keymap.set("n", "<C-b>", util.cmd("Telescope scope buffers"))
+vim.keymap.set("n", "{", util.cmd("BufferLineCyclePrev"))
+vim.keymap.set("n", "}", util.cmd("BufferLineCycleNext"))
 
 -- File
-vim.keymap.set("n", "<C-f>", geem.cmd("Telescope find_files"))
+vim.keymap.set("n", "<C-f>", util.cmd("Telescope find_files"))
 
 -- Emoji
-vim.keymap.set("i", "<C-e>", geem.cmd("Telescope emoji"))
+vim.keymap.set("i", "<C-e>", util.cmd("Telescope emoji"))
 
 -- Smart Splits
 vim.keymap.set("n", "<C-S-h>", require("smart-splits").resize_left)
@@ -38,9 +38,9 @@ vim.api.nvim_set_keymap(
 	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
 	{ silent = true, expr = true }
 )
-vim.keymap.set("i", "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
-vim.keymap.set("s", "<Tab>", geem.cmd("lua require'luasnip'.jump(1)"))
-vim.keymap.set("s", "<S-Tab>", geem.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set("i", "<S-Tab>", util.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set("s", "<Tab>", util.cmd("lua require'luasnip'.jump(1)"))
+vim.keymap.set("s", "<S-Tab>", util.cmd("lua require'luasnip'.jump(-1)"))
 
 local wk = require("which-key")
 
@@ -48,65 +48,62 @@ local wk = require("which-key")
 -- |        Keymaps with <Leader>         |
 -- ========================================
 wk.register({
-	["<leader>"] = { geem.cmd("Telescope commands"), "Commands" },
+	["<leader>"] = { util.cmd("Telescope commands"), "Commands" },
 	-- Application
 	a = {
 		name = "Application",
-		q = { geem.cmd("quitall"), "Quit" },
-		n = { geem.cmd("noh"), "Stop Highlight" },
-		j = { geem.cmd("Telescope jumplist"), "Jumplist" },
-		s = { geem.cmd("Telescope live_grep"), "Search" },
-		h = { geem.cmd("Telescope help_tags"), "Help" },
-		c = { geem.cmd("Telescope colorscheme"), "Colorscheme" },
-		k = { geem.cmd("Telescope keymaps"), "Keymaps" },
-		t = { geem.cmd("TodoTelescope"), "Todo List" },
-		e = { geem.cmd("Telescope emoji"), "Emoji" },
-		m = { geem.cmd("Telescope notify"), "Messages" },
+		q = { util.cmd("quitall"), "Quit" },
+		n = { util.cmd("noh"), "Stop Highlight" },
+		j = { util.cmd("Telescope jumplist"), "Jumplist" },
+		s = { util.cmd("Telescope live_grep"), "Search" },
+		h = { util.cmd("Telescope help_tags"), "Help" },
+		c = { util.cmd("Telescope colorscheme"), "Colorscheme" },
+		k = { util.cmd("Telescope keymaps"), "Keymaps" },
+		t = { util.cmd("TodoTelescope"), "Todo List" },
+		e = { util.cmd("Telescope emoji"), "Emoji" },
+		m = { util.cmd("Telescope notify"), "Messages" },
 	},
 	-- Config
 	c = {
 		name = "Config",
-		c = { geem.cmd("Neoconf"), "Select Config" },
-		l = { geem.cmd("Neoconf local"), "Edit Local Config" },
-		g = { geem.cmd("Neoconf global"), "Edit Global Config" },
-		s = { geem.cmd("Neoconf show"), "Show Config" },
-		p = { geem.cmd("Neoconf lsp"), "Show LSP Config" },
+		c = { util.cmd("Neoconf"), "Select Config" },
+		l = { util.cmd("Neoconf local"), "Edit Local Config" },
+		g = { util.cmd("Neoconf global"), "Edit Global Config" },
+		s = { util.cmd("Neoconf show"), "Show Config" },
+		p = { util.cmd("Neoconf lsp"), "Show LSP Config" },
 	},
 	-- Terminal
-	["!"] = { geem.cmd("ToggleTerm"), "Terminal" },
+	["!"] = { util.cmd("ToggleTerm"), "Terminal" },
 	-- Tab
 	t = {
 		name = "Tab",
-		n = { geem.cmd("tabnew"), "New Empty Tab" },
-		c = { geem.cmd("tabclose"), "Close Current Table" },
-		-- TODO: implement these two key bindings
-		-- o = { geem.cmd("tab split"), "Duplicate to New Table" },
-		-- O = { geem.move_buf_to_new_tab, "Move to New Table" },
+		n = { util.cmd("tabnew"), "New Empty Tab" },
+		c = { util.cmd("tabclose"), "Close Current Table" },
 		t = { require("telescope-tabs").list_tabs, "Tabs" },
-		["1"] = { geem.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
-		["2"] = { geem.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
-		["3"] = { geem.cmd('exec "normal! 3gt"'), "Go to Tab 3" },
-		["4"] = { geem.cmd('exec "normal! 4gt"'), "Go to Tab 4" },
-		["5"] = { geem.cmd('exec "normal! 5gt"'), "Go to Tab 5" },
-		["6"] = { geem.cmd('exec "normal! 6gt"'), "Go to Tab 6" },
-		["7"] = { geem.cmd('exec "normal! 7gt"'), "Go to Tab 7" },
-		["8"] = { geem.cmd('exec "normal! 8gt"'), "Go to Tab 8" },
-		["9"] = { geem.cmd('exec "normal! 9gt"'), "Go to Tab 9" },
+		["1"] = { util.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
+		["2"] = { util.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
+		["3"] = { util.cmd('exec "normal! 3gt"'), "Go to Tab 3" },
+		["4"] = { util.cmd('exec "normal! 4gt"'), "Go to Tab 4" },
+		["5"] = { util.cmd('exec "normal! 5gt"'), "Go to Tab 5" },
+		["6"] = { util.cmd('exec "normal! 6gt"'), "Go to Tab 6" },
+		["7"] = { util.cmd('exec "normal! 7gt"'), "Go to Tab 7" },
+		["8"] = { util.cmd('exec "normal! 8gt"'), "Go to Tab 8" },
+		["9"] = { util.cmd('exec "normal! 9gt"'), "Go to Tab 9" },
 	},
 	-- Buffer
 	b = {
 		name = "Buffer",
-		b = { geem.cmd("Telescope scope buffers"), "Buffers" },
-		B = { geem.cmd("Telescope buffers"), "Tab-local Buffers" },
-		o = { geem.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
-		h = { geem.cmd("BufferLineCyclePrev"), "Previous Buffer" },
-		m = { geem.cmd("ScopeMoveBuf"), "Move to Table" },
-		l = { geem.cmd("BufferLineCycleNext"), "Next Buffer" },
-		H = { geem.cmd("BufferLineMovePrev"), "Move Left" },
-		L = { geem.cmd("BufferLineMoveNext"), "Move Right" },
-		p = { geem.cmd("BufferLineTogglePin"), "Pin" },
-		P = { geem.cmd("BufferLinePick"), "Pick Buffer" },
-		n = { geem.cmd("enew"), "New Buffer" },
+		b = { util.cmd("Telescope scope buffers"), "Buffers" },
+		B = { util.cmd("Telescope buffers"), "Tab-local Buffers" },
+		o = { util.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
+		h = { util.cmd("BufferLineCyclePrev"), "Previous Buffer" },
+		m = { util.cmd("ScopeMoveBuf"), "Move to Table" },
+		l = { util.cmd("BufferLineCycleNext"), "Next Buffer" },
+		H = { util.cmd("BufferLineMovePrev"), "Move Left" },
+		L = { util.cmd("BufferLineMoveNext"), "Move Right" },
+		p = { util.cmd("BufferLineTogglePin"), "Pin" },
+		P = { util.cmd("BufferLinePick"), "Pick Buffer" },
+		n = { util.cmd("enew"), "New Buffer" },
 		c = {
 			function()
 				require("bufdelete").bufdelete(0, false)
@@ -116,25 +113,25 @@ wk.register({
 	},
 	-- Errors
 	e = {
-		geem.cmd("TroubleToggle"),
+		util.cmd("TroubleToggle"),
 		"Trouble Toggle",
 	},
 	-- File
 	f = {
 		name = "File",
-		w = { geem.cmd("silent wa"), "Save File" },
-		l = { geem.cmd("Neotree"), "File Explorer" },
-		r = { geem.cmd("Telescope oldfiles"), "Recent Files" },
-		d = { geem.cmd("Dired"), "File Manager" },
+		w = { util.cmd("silent wa"), "Save File" },
+		l = { util.cmd("Neotree"), "File Explorer" },
+		r = { util.cmd("Telescope oldfiles"), "Recent Files" },
+		d = { util.cmd("Dired"), "File Manager" },
 	},
 	-- Window
 	w = {
 		name = "Window",
 		a = {
 			name = "Auto Resize",
-			t = { geem.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
-			e = { geem.cmd("WindowsEqualize"), "Equalize Width" },
-			m = { geem.cmd("WindowsMaximize"), "Maximize Width" },
+			t = { util.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
+			e = { util.cmd("WindowsEqualize"), "Equalize Width" },
+			m = { util.cmd("WindowsMaximize"), "Maximize Width" },
 		},
 	},
 	-- Git
@@ -142,29 +139,29 @@ wk.register({
 		g = { require("neogit").open, "Git" },
 		G = {
 			function()
-				geem.lazygit:open()
+				util.lazygit:open()
 			end,
 			"Git",
 		},
-		s = { geem.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
-		S = { geem.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
-		u = { geem.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
-		x = { geem.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		s = { util.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
+		S = { util.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
+		u = { util.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
+		x = { util.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
 		d = {
 			name = "Diff",
-			d = { geem.cmd("Gitsigns diffthis"), "Diff This" },
-			c = { geem.cmd("DiffviewClose"), "Close Diff" },
-			f = { geem.cmd("DiffviewFileHistory %"), "Current File History" },
-			t = { geem.cmd("DiffviewToggleFiles"), "Toggle Files" },
+			d = { util.cmd("Gitsigns diffthis"), "Diff This" },
+			c = { util.cmd("DiffviewClose"), "Close Diff" },
+			f = { util.cmd("DiffviewFileHistory %"), "Current File History" },
+			t = { util.cmd("DiffviewToggleFiles"), "Toggle Files" },
 		},
-		n = { geem.cmd("Gitsigns next_hunk"), "Next Hunk" },
-		p = { geem.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
-		l = { geem.cmd("Neotree git_status"), "Git Status" },
+		n = { util.cmd("Gitsigns next_hunk"), "Next Hunk" },
+		p = { util.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
+		l = { util.cmd("Neotree git_status"), "Git Status" },
 		t = {
 			name = "Toggle",
-			l = { geem.cmd("Gitsigns toggle_linehl"), "Line Highlight" },
-			n = { geem.cmd("Gitsigns toggle_numhl"), "Number Highlight" },
-			s = { geem.cmd("Gitsigns toggle_signs"), "Signs" },
+			l = { util.cmd("Gitsigns toggle_linehl"), "Line Highlight" },
+			n = { util.cmd("Gitsigns toggle_numhl"), "Number Highlight" },
+			s = { util.cmd("Gitsigns toggle_signs"), "Signs" },
 		},
 	},
 	-- Project
@@ -176,8 +173,8 @@ wk.register({
 			end,
 			"Projects",
 		},
-		P = { geem.cmd("ProjectRoot"), "Reset Root Directory" },
-		a = { geem.cmd("AddProject"), "Add Project" },
+		P = { util.cmd("ProjectRoot"), "Reset Root Directory" },
+		a = { util.cmd("AddProject"), "Add Project" },
 		l = {
 			function()
 				require("persistence").load()
@@ -192,7 +189,7 @@ wk.register({
 		},
 	},
 	-- Package Management
-	P = { geem.cmd("Lazy"), "Package Management" },
+	P = { util.cmd("Lazy"), "Package Management" },
 	-- Debug
 	d = {
 		name = "Debug",
@@ -215,22 +212,22 @@ wk.register({
 }, { prefix = "<leader>", mode = "n", noremap = true, silent = true })
 
 -- Go Special Keymaps
-geem.map_on_filetype("go", {
-	a = { geem.cmd("GoAlt"), "Alt" },
+util.map_on_filetype("go", {
+	a = { util.cmd("GoAlt"), "Alt" },
 	t = {
 		name = "Test",
-		t = { geem.cmd("GoTest"), "GoTest" },
+		t = { util.cmd("GoTest"), "GoTest" },
 	},
-	c = { geem.cmd("GoCodeAction"), "GoCodeAction", mode = { "n", "v" } },
+	c = { util.cmd("GoCodeAction"), "GoCodeAction", mode = { "n", "v" } },
 })
 
 -- Dart Special Keymaps
-geem.map_on_filetype("dart", {
-	["<localleader>"] = { geem.cmd("Telescope flutter commands"), "Flutter Commands" },
-	e = { geem.cmd("FlutterEmulators"), "Emulators" },
-	w = { geem.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
-	r = { geem.cmd("FlutterRun"), "Run Flutter" },
-	R = { geem.cmd("FlutterRestart"), "Restart Flutter" },
+util.map_on_filetype("dart", {
+	["<localleader>"] = { util.cmd("Telescope flutter commands"), "Flutter Commands" },
+	e = { util.cmd("FlutterEmulators"), "Emulators" },
+	w = { util.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
+	r = { util.cmd("FlutterRun"), "Run Flutter" },
+	R = { util.cmd("FlutterRestart"), "Restart Flutter" },
 	M = {
 		function()
 			vim.lsp.buf.code_action({
@@ -278,12 +275,12 @@ geem.map_on_filetype("dart", {
 })
 
 -- Lua Special Keymaps
-geem.map_on_filetype("lua", {
-	["s"] = { geem.cmd("source %"), "Source" },
-	r = { geem.cmd("LuaRun"), "Run Currenet Buffer" },
+util.map_on_filetype("lua", {
+	["s"] = { util.cmd("source %"), "Source" },
+	r = { util.cmd("LuaRun"), "Run Currenet Buffer" },
 })
 
 -- Python Special Keymaps
-geem.map_on_filetype("python", {
-	["r"] = { geem.cmd("RunCode"), "Run" },
+util.map_on_filetype("python", {
+	["r"] = { util.cmd("RunCode"), "Run" },
 })
