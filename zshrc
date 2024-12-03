@@ -37,6 +37,7 @@ alias np='nvim --cmd "set rtp+=."'
 # launch neovim with the variable $APP_NAME is set to canvim
 alias nc='NVIM_APPNAME=canvim nvim'
 alias cnv='NVIM_APPNAME=cleanvim nvim'
+alias lv='NVIM_APPNAME=lazy nvim'
 
 # brew alias
 alias bs='brew search'
