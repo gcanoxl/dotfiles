@@ -65,7 +65,10 @@ wk.register({
 	},
 	-- Config
 	c = {
-		name = "Config",
+		c = { util.config_files, "Edit Config" },
+	},
+	C = {
+		name = "Neoconf",
 		c = { util.cmd("Neoconf"), "Select Config" },
 		l = { util.cmd("Neoconf local"), "Edit Local Config" },
 		g = { util.cmd("Neoconf global"), "Edit Global Config" },

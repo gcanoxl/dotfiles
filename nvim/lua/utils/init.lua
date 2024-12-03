@@ -29,3 +29,15 @@ function util.code()
 		end,
 	})
 end
+
+function util.config_files()
+	local ok, telescope = pcall(require, "telescope.builtin")
+	if not ok then
+		vim.notify("Telescope not found", vim.log.levels.ERROR)
+		return
+	end
+	telescope.find_files({
+		prompt_title = "Config Files",
+		cwd = "~/.config/nvim/",
+	})
+end
