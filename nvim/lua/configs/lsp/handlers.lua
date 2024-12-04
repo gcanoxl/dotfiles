@@ -5,7 +5,7 @@ local wk_ok, wk = pcall(require, "which-key")
 local on_attach = function(_, bufnr)
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "dp", util.cmd("Lspsaga diagnostic_jump_prev"), bufopts)
 	vim.keymap.set("n", "dn", util.cmd("Lspsaga diagnostic_jump_next"), bufopts)
 	vim.keymap.set("n", "K", util.cmd("Lspsaga hover_doc"), bufopts)
