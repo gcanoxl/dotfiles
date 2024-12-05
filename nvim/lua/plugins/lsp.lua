@@ -21,11 +21,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"folke/neodev.nvim",
 			"folke/neoconf.nvim",
 		},
 		config = function()
-			require("neodev").setup({})
 			require("neoconf").setup({
 				import = {
 					vscode = false, -- local .vscode/settings.json

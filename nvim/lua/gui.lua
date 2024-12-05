@@ -5,7 +5,7 @@ vim.g.neovide_fullscreen = true
 vim.g.gui_font_face = "Courier New"
 -- vim.g.gui_font_face = "OperatorMono Nerd Font"
 -- vim.g.gui_font_face = "Cartograph CF"
-vim.g.gui_font_default_size = 16
+vim.g.gui_font_default_size = 20
 -- vim.opt.linespace = 12
 vim.g.gui_font_size = vim.g.gui_font_default_size
 
