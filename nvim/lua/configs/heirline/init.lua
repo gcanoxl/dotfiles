@@ -4,6 +4,8 @@ local ornaments = require("configs.heirline.components.ornaments")
 local layouts = require("configs.heirline.components.layouts")
 local debugger = require("configs.heirline.components.debugger")
 
+local cloc = require("configs.heirline.components.cloc")
+
 local StatusLine = {
 	{
 		ViMode,
@@ -15,7 +17,7 @@ local StatusLine = {
 	{
 		debugger.DAPMessages,
 		layouts.Space,
-		ornaments.Neocodeium,
+		cloc,
 		layouts.Space,
 		ornaments.LSPActive,
 		layouts.Space,

@@ -1,5 +1,10 @@
 return {
 	{
+		"gcanoxl/cloc.nvim",
+		config = true,
+	},
+
+	{
 		"mateuszwieloch/automkdir.nvim",
 	},
 	{
