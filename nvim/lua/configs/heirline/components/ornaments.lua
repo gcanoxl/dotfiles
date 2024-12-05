@@ -29,14 +29,7 @@ local Git = {
 	},
 }
 
-local Copilot = {
-	provider = function()
-		return "copilot: " .. require("copilot_status").status().status
-	end,
-}
-
 return {
 	LSPActive = LSPActive,
 	Git = Git,
-	Copilot = Copilot,
 }

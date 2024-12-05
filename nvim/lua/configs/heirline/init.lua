@@ -15,8 +15,7 @@ local StatusLine = {
 	{
 		debugger.DAPMessages,
 		layouts.Space,
-		-- TODO: use codeium
-		-- ornaments.Copilot,
+		ornaments.Neocodeium,
 		layouts.Space,
 		ornaments.LSPActive,
 		layouts.Space,
