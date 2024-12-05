@@ -2,7 +2,10 @@
 local wk_ok, wk = pcall(require, "which-key")
 
 -- on_attach function
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+	if client.supports_method("textDocument/inlayHint", { bufnr = bufnr }) then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
