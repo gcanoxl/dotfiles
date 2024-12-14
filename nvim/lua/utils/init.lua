@@ -41,3 +41,5 @@ function util.config_files()
 		cwd = "~/.config/nvim/",
 	})
 end
+
+util.toggles = require("utils.toggles")

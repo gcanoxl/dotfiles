@@ -4,7 +4,7 @@ local wk_ok, wk = pcall(require, "which-key")
 -- on_attach function
 local on_attach = function(client, bufnr)
 	if client.supports_method("textDocument/inlayHint", { bufnr = bufnr }) then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+		vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
 	end
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -50,6 +50,13 @@ local on_attach = function(client, bufnr)
 					i = { vim.lsp.buf.implementation, "Implementation" },
 					o = { util.cmd("Telescope lsp_dynamic_workspace_symbols"), "Workspace Symbols" },
 					l = { util.cmd("Telescope lsp_document_symbols"), "Document Symbols" },
+				},
+				t = {
+					name = "Toggle",
+					i = {
+						util.toggles.toggle_inlay_hint,
+						"Inlay Hint",
+					},
 				},
 			},
 		}, { prefix = "<leader>", buffer = bufnr })
