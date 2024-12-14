@@ -4,7 +4,9 @@ if not ok then
 end
 
 local Cloc = {
-	provider = function(self)
+	update = { "User", pattern = "ClocStatusUpdated" },
+	provider = function(_)
+		---@type ClocStatus
 		local status = cloc.get_status()
 		if status.statusCode == "loading" then
 			return "Clocing..."
