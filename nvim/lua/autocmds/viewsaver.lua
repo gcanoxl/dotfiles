@@ -12,13 +12,13 @@ vim.api.nvim_create_autocmd({ "BufUnload", "VimLeave" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufRead", {
+vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
 	group = usergroup,
 	callback = function(data)
 		if data.file == "" then
 			return
 		end
-		vim.cmd("silent! loadview!")
+		vim.cmd("silent! loadview")
 	end,
 })
