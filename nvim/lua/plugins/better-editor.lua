@@ -218,9 +218,6 @@ return {
 
 	"mrjones2014/smart-splits.nvim",
 
-	-- Better Buffer Closing
-	"famiu/bufdelete.nvim",
-
 	-- Todo List
 	{
 		"folke/todo-comments.nvim",

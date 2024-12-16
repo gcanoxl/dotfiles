@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-i>", "<C-]>")
 vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
-vim.keymap.set("n", "<C-c>", util.cmd('lua require("bufdelete").bufdelete(0, false)'))
+vim.keymap.set("n", "<C-c>", util.cmd("bdelete"))
 vim.keymap.set("n", "<C-b>", util.cmd("Telescope scope buffers"))
 vim.keymap.set("n", "{", util.cmd("BufferLineCyclePrev"))
 vim.keymap.set("n", "}", util.cmd("BufferLineCycleNext"))
@@ -107,12 +107,7 @@ wk.register({
 		p = { util.cmd("BufferLineTogglePin"), "Pin" },
 		P = { util.cmd("BufferLinePick"), "Pick Buffer" },
 		n = { util.cmd("enew"), "New Buffer" },
-		c = {
-			function()
-				require("bufdelete").bufdelete(0, false)
-			end,
-			"Close Buffer",
-		},
+		c = { util.cmd("bdelete"), "Close Buffer" },
 	},
 	-- Errors
 	e = {
