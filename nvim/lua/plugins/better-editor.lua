@@ -212,6 +212,16 @@ return {
 		config = function()
 			require("trouble").setup({
 				auto_close = true,
+				modes = {
+					errors = {
+						mode = "diagnostics",
+						filter = function(items)
+							return vim.tbl_filter(function(item)
+								return item.severity == vim.diagnostic.severity.ERROR
+							end, items)
+						end,
+					},
+				},
 			})
 		end,
 	},

@@ -38,11 +38,6 @@ local on_attach = function(client, bufnr)
 				K = { util.cmd("Lspsaga hover_doc ++keep"), "Persistent Hover Doc" },
 				a = { vim.lsp.buf.code_action, "Code Action" },
 				f = { util.cmd("Lspsaga finder"), "Finder" },
-				d = {
-					name = "Diagnostic",
-					p = { util.cmd("Lspsaga diagnostic_jump_prev"), "Previous" },
-					n = { util.cmd("Lspsaga diagnostic_jump_next"), "Next" },
-				},
 				g = {
 					name = "Goto",
 					d = { util.cmd("Lspsaga goto_definition"), "Definition" },

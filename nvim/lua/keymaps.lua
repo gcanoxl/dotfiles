@@ -111,8 +111,10 @@ wk.register({
 	},
 	-- Errors
 	e = {
-		util.cmd("TroubleToggle"),
-		"Trouble Toggle",
+		name = "Diagostic",
+		e = { util.cmd("Trouble errors toggle"), "Errors" },
+		p = { util.cmd("Lspsaga diagnostic_jump_prev"), "Previous" },
+		n = { util.cmd("Lspsaga diagnostic_jump_next"), "Next" },
 	},
 	-- File
 	f = {
