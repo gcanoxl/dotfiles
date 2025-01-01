@@ -43,3 +43,4 @@ function util.config_files()
 end
 
 util.toggles = require("utils.toggles")
+util.bufdelete = require("utils.bufdelete")
