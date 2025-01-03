@@ -1,10 +1,10 @@
-_G.util = {}
+_G.utils = {}
 
-function util.cmd(cmd)
+function utils.cmd(cmd)
 	return "<cmd>" .. cmd .. "<cr>"
 end
 
-function util.map_on_filetype(filetype, maps)
+function utils.map_on_filetype(filetype, maps)
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
 		group = vim.api.nvim_create_augroup("mapping" .. filetype, { clear = true }),
@@ -15,13 +15,13 @@ function util.map_on_filetype(filetype, maps)
 	})
 end
 
-function util.buf_move_to_new_tab()
+function utils.buf_move_to_new_tab()
 	local win_id = vim.fn.win_getid()
 	vim.cmd("tabnew")
 	vim.fn.win_execute(win_id, "wincmd c")
 end
 
-function util.code()
+function utils.code()
 	vim.lsp.buf.code_action({
 		apply = true,
 		filter = function(action)
@@ -30,7 +30,7 @@ function util.code()
 	})
 end
 
-function util.config_files()
+function utils.config_files()
 	local ok, telescope = pcall(require, "telescope.builtin")
 	if not ok then
 		vim.notify("Telescope not found", vim.log.levels.ERROR)
@@ -42,5 +42,5 @@ function util.config_files()
 	})
 end
 
-util.toggles = require("utils.toggles")
-util.bufdelete = require("utils.bufdelete")
+utils.toggles = require("utils.toggles")
+utils.bufdelete = require("utils.bufdelete")

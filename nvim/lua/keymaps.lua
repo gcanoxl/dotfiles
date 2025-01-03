@@ -8,16 +8,16 @@ vim.keymap.set("n", "<C-i>", "<C-]>")
 vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
-vim.keymap.set("n", "<C-c>", util.bufdelete.delete)
-vim.keymap.set("n", "<C-b>", util.cmd("Telescope scope buffers"))
-vim.keymap.set("n", "{", util.cmd("BufferLineCyclePrev"))
-vim.keymap.set("n", "}", util.cmd("BufferLineCycleNext"))
+vim.keymap.set("n", "<C-c>", utils.bufdelete.delete)
+vim.keymap.set("n", "<C-b>", utils.cmd("Telescope scope buffers"))
+vim.keymap.set("n", "{", utils.cmd("BufferLineCyclePrev"))
+vim.keymap.set("n", "}", utils.cmd("BufferLineCycleNext"))
 
 -- File
-vim.keymap.set("n", "<C-f>", util.cmd("Telescope find_files"))
+vim.keymap.set("n", "<C-f>", utils.cmd("Telescope find_files"))
 
 -- Emoji
-vim.keymap.set("i", "<C-e>", util.cmd("Telescope emoji"))
+vim.keymap.set("i", "<C-e>", utils.cmd("Telescope emoji"))
 
 -- Smart Splits
 vim.keymap.set("n", "<C-S-h>", require("smart-splits").resize_left)
@@ -38,9 +38,9 @@ vim.api.nvim_set_keymap(
 	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
 	{ silent = true, expr = true }
 )
-vim.keymap.set("i", "<S-Tab>", util.cmd("lua require'luasnip'.jump(-1)"))
-vim.keymap.set("s", "<Tab>", util.cmd("lua require'luasnip'.jump(1)"))
-vim.keymap.set("s", "<S-Tab>", util.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set("i", "<S-Tab>", utils.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set("s", "<Tab>", utils.cmd("lua require'luasnip'.jump(1)"))
+vim.keymap.set("s", "<S-Tab>", utils.cmd("lua require'luasnip'.jump(-1)"))
 
 local wk = require("which-key")
 
@@ -48,90 +48,90 @@ local wk = require("which-key")
 -- |        Keymaps with <Leader>         |
 -- ========================================
 wk.register({
-	["<leader>"] = { util.cmd("Telescope commands"), "Commands" },
+	["<leader>"] = { utils.cmd("Telescope commands"), "Commands" },
 	-- Application
 	a = {
 		name = "Application",
-		q = { util.cmd("quitall"), "Quit" },
-		n = { util.cmd("noh"), "Stop Highlight" },
-		j = { util.cmd("Telescope jumplist"), "Jumplist" },
-		s = { util.cmd("Telescope live_grep"), "Search" },
-		h = { util.cmd("Telescope help_tags"), "Help" },
-		c = { util.cmd("Telescope colorscheme"), "Colorscheme" },
-		k = { util.cmd("Telescope keymaps"), "Keymaps" },
-		t = { util.cmd("TodoTelescope"), "Todo List" },
-		e = { util.cmd("Telescope emoji"), "Emoji" },
-		m = { util.cmd("Telescope notify"), "Messages" },
+		q = { utils.cmd("quitall"), "Quit" },
+		n = { utils.cmd("noh"), "Stop Highlight" },
+		j = { utils.cmd("Telescope jumplist"), "Jumplist" },
+		s = { utils.cmd("Telescope live_grep"), "Search" },
+		h = { utils.cmd("Telescope help_tags"), "Help" },
+		c = { utils.cmd("Telescope colorscheme"), "Colorscheme" },
+		k = { utils.cmd("Telescope keymaps"), "Keymaps" },
+		t = { utils.cmd("TodoTelescope"), "Todo List" },
+		e = { utils.cmd("Telescope emoji"), "Emoji" },
+		m = { utils.cmd("Telescope notify"), "Messages" },
 	},
 	-- Config
 	c = {
-		c = { util.config_files, "Edit Config" },
+		c = { utils.config_files, "Edit Config" },
 	},
 	C = {
 		name = "Neoconf",
-		c = { util.cmd("Neoconf"), "Select Config" },
-		l = { util.cmd("Neoconf local"), "Edit Local Config" },
-		g = { util.cmd("Neoconf global"), "Edit Global Config" },
-		s = { util.cmd("Neoconf show"), "Show Config" },
-		p = { util.cmd("Neoconf lsp"), "Show LSP Config" },
+		c = { utils.cmd("Neoconf"), "Select Config" },
+		l = { utils.cmd("Neoconf local"), "Edit Local Config" },
+		g = { utils.cmd("Neoconf global"), "Edit Global Config" },
+		s = { utils.cmd("Neoconf show"), "Show Config" },
+		p = { utils.cmd("Neoconf lsp"), "Show LSP Config" },
 	},
 	-- Terminal
-	["!"] = { util.cmd("ToggleTerm"), "Terminal" },
+	["!"] = { utils.cmd("ToggleTerm"), "Terminal" },
 	-- Tab
 	t = {
 		name = "Tab",
-		n = { util.cmd("tabnew"), "New Empty Tab" },
-		c = { util.cmd("tabclose"), "Close Current Table" },
+		n = { utils.cmd("tabnew"), "New Empty Tab" },
+		c = { utils.cmd("tabclose"), "Close Current Table" },
 		t = { require("telescope-tabs").list_tabs, "Tabs" },
-		["1"] = { util.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
-		["2"] = { util.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
-		["3"] = { util.cmd('exec "normal! 3gt"'), "Go to Tab 3" },
-		["4"] = { util.cmd('exec "normal! 4gt"'), "Go to Tab 4" },
-		["5"] = { util.cmd('exec "normal! 5gt"'), "Go to Tab 5" },
-		["6"] = { util.cmd('exec "normal! 6gt"'), "Go to Tab 6" },
-		["7"] = { util.cmd('exec "normal! 7gt"'), "Go to Tab 7" },
-		["8"] = { util.cmd('exec "normal! 8gt"'), "Go to Tab 8" },
-		["9"] = { util.cmd('exec "normal! 9gt"'), "Go to Tab 9" },
+		["1"] = { utils.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
+		["2"] = { utils.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
+		["3"] = { utils.cmd('exec "normal! 3gt"'), "Go to Tab 3" },
+		["4"] = { utils.cmd('exec "normal! 4gt"'), "Go to Tab 4" },
+		["5"] = { utils.cmd('exec "normal! 5gt"'), "Go to Tab 5" },
+		["6"] = { utils.cmd('exec "normal! 6gt"'), "Go to Tab 6" },
+		["7"] = { utils.cmd('exec "normal! 7gt"'), "Go to Tab 7" },
+		["8"] = { utils.cmd('exec "normal! 8gt"'), "Go to Tab 8" },
+		["9"] = { utils.cmd('exec "normal! 9gt"'), "Go to Tab 9" },
 	},
 	-- Buffer
 	b = {
 		name = "Buffer",
-		b = { util.cmd("Telescope scope buffers"), "Buffers" },
-		B = { util.cmd("Telescope buffers"), "Tab-local Buffers" },
-		o = { util.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
-		h = { util.cmd("BufferLineCyclePrev"), "Previous Buffer" },
-		m = { util.cmd("ScopeMoveBuf"), "Move to Table" },
-		l = { util.cmd("BufferLineCycleNext"), "Next Buffer" },
-		H = { util.cmd("BufferLineMovePrev"), "Move Left" },
-		L = { util.cmd("BufferLineMoveNext"), "Move Right" },
-		p = { util.cmd("BufferLineTogglePin"), "Pin" },
-		P = { util.cmd("BufferLinePick"), "Pick Buffer" },
-		n = { util.cmd("enew"), "New Buffer" },
-		c = { util.bufdelete.delete, "Close Buffer" },
+		b = { utils.cmd("Telescope scope buffers"), "Buffers" },
+		B = { utils.cmd("Telescope buffers"), "Tab-local Buffers" },
+		o = { utils.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
+		h = { utils.cmd("BufferLineCyclePrev"), "Previous Buffer" },
+		m = { utils.cmd("ScopeMoveBuf"), "Move to Table" },
+		l = { utils.cmd("BufferLineCycleNext"), "Next Buffer" },
+		H = { utils.cmd("BufferLineMovePrev"), "Move Left" },
+		L = { utils.cmd("BufferLineMoveNext"), "Move Right" },
+		p = { utils.cmd("BufferLineTogglePin"), "Pin" },
+		P = { utils.cmd("BufferLinePick"), "Pick Buffer" },
+		n = { utils.cmd("enew"), "New Buffer" },
+		c = { utils.bufdelete.delete, "Close Buffer" },
 	},
 	-- Errors
 	e = {
 		name = "Diagostic",
-		e = { util.cmd("Trouble errors toggle"), "Errors" },
-		p = { util.cmd("Lspsaga diagnostic_jump_prev"), "Previous" },
-		n = { util.cmd("Lspsaga diagnostic_jump_next"), "Next" },
+		e = { utils.cmd("Trouble errors toggle"), "Errors" },
+		p = { utils.cmd("Lspsaga diagnostic_jump_prev"), "Previous" },
+		n = { utils.cmd("Lspsaga diagnostic_jump_next"), "Next" },
 	},
 	-- File
 	f = {
 		name = "File",
-		w = { util.cmd("silent wa"), "Save File" },
-		l = { util.cmd("Neotree"), "File Explorer" },
-		r = { util.cmd("Telescope oldfiles"), "Recent Files" },
-		d = { util.cmd("Dired"), "File Manager" },
+		w = { utils.cmd("silent wa"), "Save File" },
+		l = { utils.cmd("Neotree"), "File Explorer" },
+		r = { utils.cmd("Telescope oldfiles"), "Recent Files" },
+		d = { utils.cmd("Dired"), "File Manager" },
 	},
 	-- Window
 	w = {
 		name = "Window",
 		a = {
 			name = "Auto Resize",
-			t = { util.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
-			e = { util.cmd("WindowsEqualize"), "Equalize Width" },
-			m = { util.cmd("WindowsMaximize"), "Maximize Width" },
+			t = { utils.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
+			e = { utils.cmd("WindowsEqualize"), "Equalize Width" },
+			m = { utils.cmd("WindowsMaximize"), "Maximize Width" },
 		},
 	},
 	-- Git
@@ -139,29 +139,29 @@ wk.register({
 		g = { require("neogit").open, "Git" },
 		G = {
 			function()
-				util.lazygit:open()
+				utils.lazygit:open()
 			end,
 			"Git",
 		},
-		s = { util.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
-		S = { util.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
-		u = { util.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
-		x = { util.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		s = { utils.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
+		S = { utils.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
+		u = { utils.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
+		x = { utils.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
 		d = {
 			name = "Diff",
-			d = { util.cmd("Gitsigns diffthis"), "Diff This" },
-			c = { util.cmd("DiffviewClose"), "Close Diff" },
-			f = { util.cmd("DiffviewFileHistory %"), "Current File History" },
-			t = { util.cmd("DiffviewToggleFiles"), "Toggle Files" },
+			d = { utils.cmd("Gitsigns diffthis"), "Diff This" },
+			c = { utils.cmd("DiffviewClose"), "Close Diff" },
+			f = { utils.cmd("DiffviewFileHistory %"), "Current File History" },
+			t = { utils.cmd("DiffviewToggleFiles"), "Toggle Files" },
 		},
-		n = { util.cmd("Gitsigns next_hunk"), "Next Hunk" },
-		p = { util.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
-		l = { util.cmd("Neotree git_status"), "Git Status" },
+		n = { utils.cmd("Gitsigns next_hunk"), "Next Hunk" },
+		p = { utils.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
+		l = { utils.cmd("Neotree git_status"), "Git Status" },
 		t = {
 			name = "Toggle",
-			l = { util.cmd("Gitsigns toggle_linehl"), "Line Highlight" },
-			n = { util.cmd("Gitsigns toggle_numhl"), "Number Highlight" },
-			s = { util.cmd("Gitsigns toggle_signs"), "Signs" },
+			l = { utils.cmd("Gitsigns toggle_linehl"), "Line Highlight" },
+			n = { utils.cmd("Gitsigns toggle_numhl"), "Number Highlight" },
+			s = { utils.cmd("Gitsigns toggle_signs"), "Signs" },
 		},
 	},
 	-- Project
@@ -173,8 +173,8 @@ wk.register({
 			end,
 			"Projects",
 		},
-		P = { util.cmd("ProjectRoot"), "Reset Root Directory" },
-		a = { util.cmd("AddProject"), "Add Project" },
+		P = { utils.cmd("ProjectRoot"), "Reset Root Directory" },
+		a = { utils.cmd("AddProject"), "Add Project" },
 		l = {
 			function()
 				require("persistence").load()
@@ -189,7 +189,7 @@ wk.register({
 		},
 	},
 	-- Package Management
-	P = { util.cmd("Lazy"), "Package Management" },
+	P = { utils.cmd("Lazy"), "Package Management" },
 	-- Debug
 	d = {
 		name = "Debug",
@@ -212,22 +212,22 @@ wk.register({
 }, { prefix = "<leader>", mode = "n", noremap = true, silent = true })
 
 -- Go Special Keymaps
-util.map_on_filetype("go", {
-	a = { util.cmd("GoAlt"), "Alt" },
+utils.map_on_filetype("go", {
+	a = { utils.cmd("GoAlt"), "Alt" },
 	t = {
 		name = "Test",
-		t = { util.cmd("GoTest"), "GoTest" },
+		t = { utils.cmd("GoTest"), "GoTest" },
 	},
-	c = { util.cmd("GoCodeAction"), "GoCodeAction", mode = { "n", "v" } },
+	c = { utils.cmd("GoCodeAction"), "GoCodeAction", mode = { "n", "v" } },
 })
 
 -- Dart Special Keymaps
-util.map_on_filetype("dart", {
-	["<localleader>"] = { util.cmd("Telescope flutter commands"), "Flutter Commands" },
-	e = { util.cmd("FlutterEmulators"), "Emulators" },
-	w = { util.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
-	r = { util.cmd("FlutterRun"), "Run Flutter" },
-	R = { util.cmd("FlutterRestart"), "Restart Flutter" },
+utils.map_on_filetype("dart", {
+	["<localleader>"] = { utils.cmd("Telescope flutter commands"), "Flutter Commands" },
+	e = { utils.cmd("FlutterEmulators"), "Emulators" },
+	w = { utils.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
+	r = { utils.cmd("FlutterRun"), "Run Flutter" },
+	R = { utils.cmd("FlutterRestart"), "Restart Flutter" },
 	M = {
 		function()
 			vim.lsp.buf.code_action({
@@ -275,12 +275,12 @@ util.map_on_filetype("dart", {
 })
 
 -- Lua Special Keymaps
-util.map_on_filetype("lua", {
-	["s"] = { util.cmd("source %"), "Source" },
-	r = { util.cmd("LuaRun"), "Run Currenet Buffer" },
+utils.map_on_filetype("lua", {
+	["s"] = { utils.cmd("source %"), "Source" },
+	r = { utils.cmd("LuaRun"), "Run Currenet Buffer" },
 })
 
 -- Python Special Keymaps
-util.map_on_filetype("python", {
-	["r"] = { util.cmd("RunCode"), "Run" },
+utils.map_on_filetype("python", {
+	["r"] = { utils.cmd("RunCode"), "Run" },
 })

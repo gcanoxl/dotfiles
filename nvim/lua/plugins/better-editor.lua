@@ -78,8 +78,12 @@ return {
 		version = "*",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
+			---@type bufferline.Config
 			require("bufferline").setup({
 				options = {
+					close_command = function(buf)
+						utils.bufdelete.delete(buf)
+					end,
 					diagnostics = "nvim_lsp",
 					offsets = {
 						-- {

@@ -9,12 +9,12 @@ local on_attach = function(client, bufnr)
 	-- shortcuts
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "dp", util.cmd("Lspsaga diagnostic_jump_prev"), bufopts)
-	vim.keymap.set("n", "dn", util.cmd("Lspsaga diagnostic_jump_next"), bufopts)
-	vim.keymap.set("n", "K", util.cmd("Lspsaga hover_doc"), bufopts)
+	vim.keymap.set("n", "dp", utils.cmd("Lspsaga diagnostic_jump_prev"), bufopts)
+	vim.keymap.set("n", "dn", utils.cmd("Lspsaga diagnostic_jump_next"), bufopts)
+	vim.keymap.set("n", "K", utils.cmd("Lspsaga hover_doc"), bufopts)
 	vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gd", util.cmd("Lspsaga goto_definition"), bufopts)
-	vim.keymap.set("n", "gf", util.cmd("Lspsaga finder"), bufopts)
+	vim.keymap.set("n", "gd", utils.cmd("Lspsaga goto_definition"), bufopts)
+	vim.keymap.set("n", "gf", utils.cmd("Lspsaga finder"), bufopts)
 	vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 	vim.api.nvim_buf_set_keymap(
@@ -32,24 +32,24 @@ local on_attach = function(client, bufnr)
 			l = {
 				name = "LSP",
 				n = { vim.lsp.buf.rename, "Rename" },
-				o = { util.cmd("AerialToggle"), "Symbol List" },
-				O = { util.cmd("AerialNavToggle"), "Symbol Navigation" },
-				k = { util.cmd("Lspsaga hover_doc"), "Hover Doc" },
-				K = { util.cmd("Lspsaga hover_doc ++keep"), "Persistent Hover Doc" },
+				o = { utils.cmd("AerialToggle"), "Symbol List" },
+				O = { utils.cmd("AerialNavToggle"), "Symbol Navigation" },
+				k = { utils.cmd("Lspsaga hover_doc"), "Hover Doc" },
+				K = { utils.cmd("Lspsaga hover_doc ++keep"), "Persistent Hover Doc" },
 				a = { vim.lsp.buf.code_action, "Code Action" },
-				f = { util.cmd("Lspsaga finder"), "Finder" },
+				f = { utils.cmd("Lspsaga finder"), "Finder" },
 				g = {
 					name = "Goto",
-					d = { util.cmd("Lspsaga goto_definition"), "Definition" },
+					d = { utils.cmd("Lspsaga goto_definition"), "Definition" },
 					D = { vim.lsp.buf.type_definition, "Type Definition" },
 					i = { vim.lsp.buf.implementation, "Implementation" },
-					o = { util.cmd("Telescope lsp_dynamic_workspace_symbols"), "Workspace Symbols" },
-					l = { util.cmd("Telescope lsp_document_symbols"), "Document Symbols" },
+					o = { utils.cmd("Telescope lsp_dynamic_workspace_symbols"), "Workspace Symbols" },
+					l = { utils.cmd("Telescope lsp_document_symbols"), "Document Symbols" },
 				},
 				t = {
 					name = "Toggle",
 					i = {
-						util.toggles.toggle_inlay_hint,
+						utils.toggles.toggle_inlay_hint,
 						"Inlay Hint",
 					},
 				},
