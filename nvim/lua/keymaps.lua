@@ -13,6 +13,10 @@ vim.keymap.set("n", "<C-b>", utils.cmd("Telescope scope buffers"))
 vim.keymap.set("n", "{", utils.cmd("BufferLineCyclePrev"))
 vim.keymap.set("n", "}", utils.cmd("BufferLineCycleNext"))
 
+-- Tabs
+vim.keymap.set("n", "<C-[>", utils.cmd("tabprevious"))
+vim.keymap.set("n", "<C-]>", utils.cmd("tabnext"))
+
 -- File
 vim.keymap.set("n", "<C-f>", utils.cmd("Telescope find_files"))
 

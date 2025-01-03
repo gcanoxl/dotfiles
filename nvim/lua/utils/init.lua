@@ -15,12 +15,6 @@ function utils.map_on_filetype(filetype, maps)
 	})
 end
 
-function utils.buf_move_to_new_tab()
-	local win_id = vim.fn.win_getid()
-	vim.cmd("tabnew")
-	vim.fn.win_execute(win_id, "wincmd c")
-end
-
 function utils.code()
 	vim.lsp.buf.code_action({
 		apply = true,
