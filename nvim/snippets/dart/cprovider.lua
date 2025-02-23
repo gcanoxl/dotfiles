@@ -1,14 +1,17 @@
 return {
 	require("luasnip").parser.parse_snippet(
-		"provider",
+		"cprovider",
 		[[import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part '${1}.g.dart';
 
-@riverpod
-${2:dynamic} ${3}(Ref ref) {
-	${0}
-} ]]
+@Riverpod(keepAlive: true)
+${2} ${3}(Ref ref) => ${2}();
+
+class ${2} {
+  static get provider => ${3}Provider;
+}
+]]
 	),
 }
