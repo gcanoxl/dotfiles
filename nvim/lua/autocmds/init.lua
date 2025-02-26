@@ -18,7 +18,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
 	group = usergroup,
-	callback = function()
+	callback = function(buf)
+		local listed = vim.bo[buf.buf].buflisted
+		if not listed then
+			return
+		end
 		local lsp_util = require("lspconfig.util")
 		local root_dir = lsp_util.root_pattern(".project", "pubspec.yaml", ".git", "README.md")(vim.fn.expand("%:p:h"))
 		if root_dir ~= nil then
