@@ -80,13 +80,7 @@ wk.register({
 		p = { utils.cmd("Neoconf lsp"), "Show LSP Config" },
 	},
 	-- Terminal
-	["!"] = {
-		function()
-			local term = utils.term.new("echo success")
-			term:toggle()
-		end,
-		"Open Terminal",
-	},
+	["!"] = { utils.term.select, "Open Terminal" },
 	-- Tab
 	t = {
 		name = "Tab",
