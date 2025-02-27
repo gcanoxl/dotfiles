@@ -14,7 +14,7 @@ M.__index = M
 function M.new(cmd)
 	---@type terminal.Term
 	local self = setmetatable({}, M)
-	self.cmd = cmd or ""
+	self.cmd = cmd or vim.o.shell
 	-- create buf
 	self.buf = vim.api.nvim_create_buf(false, true)
 	-- run cmd
@@ -38,7 +38,7 @@ function M:open(win_id, opts)
 		opts = opts or {}
 		local parent = opts.parent or vim.api.nvim_get_current_win()
 		vim.api.nvim_win_call(parent, function()
-			vim.cmd([[split]])
+			vim.cmd("rightbelow 12 split")
 			win = vim.api.nvim_get_current_win()
 		end)
 	end
