@@ -17,17 +17,17 @@ local terminals = {}
 ---@param buf number
 local function buf_setup(buf)
 	-- apply autocmds
-	local augroup = vim.api.nvim_create_augroup("terminal", { clear = true })
-	vim.api.nvim_create_autocmd("BufEnter", {
-		group = augroup,
-		buffer = buf,
-		callback = function()
-			-- auto insert
-			vim.api.nvim_buf_call(buf, function()
-				vim.cmd.startinsert()
-			end)
-		end,
-	})
+	-- local augroup = vim.api.nvim_create_augroup("terminal", { clear = true })
+	-- vim.api.nvim_create_autocmd("BufEnter", {
+	-- 	group = augroup,
+	-- 	buffer = buf,
+	-- 	callback = function()
+	-- 		-- -- auto insert
+	-- 		-- vim.api.nvim_buf_call(buf, function()
+	-- 		-- 	vim.cmd.startinsert()
+	-- 		-- end)
+	-- 	end,
+	-- })
 	-- map jk
 	vim.keymap.set("t", "jk", [[<C-\><C-n>]], { buffer = buf, silent = true })
 	-- close terminal window on <C-c>
