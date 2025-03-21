@@ -70,3 +70,5 @@ alias fc='flutter create'
 alias fa='flutter pub add'
 alias fad='flutter pub add -dev'
 alias fg='flutter pub get'
+alias fadd='flutter pub add freezed_annotation dev:freezed riverpod_annotation flutter_riverpod dev:riverpod_generator dev:build_runner'
+
