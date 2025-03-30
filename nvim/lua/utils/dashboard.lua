@@ -10,6 +10,20 @@ local M = setmetatable({}, {
 ---@field buf? number
 ---@field win? number
 
+local wo = {
+	colorcolumn = "",
+	cursorcolumn = false,
+	cursorline = false,
+	foldmethod = "manual",
+	list = false,
+	number = false,
+	relativenumber = false,
+	---
+	spell = false,
+	winbar = "",
+	wrap = false,
+}
+
 ---@class utils.dashboard.Class
 ---@field win number
 ---@field buf number
@@ -17,6 +31,10 @@ local D = {}
 
 function D:init()
 	vim.api.nvim_win_set_buf(self.win, self.buf)
+	vim.o.ei = "all"
+	for name, value in pairs(wo) do
+		vim.api.nvim_set_option_value(name, value, { scope = "local", win = self.win })
+	end
 end
 
 ---Open a new dashboard
