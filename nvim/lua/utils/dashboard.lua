@@ -6,10 +6,28 @@ local M = setmetatable({}, {
 	end,
 })
 
----@class utils.dashboard.Opts
+---@class utils.dashboard.Config
+---@field sections utils.dashboard.Item[]
+local defaults = {
+	present = {
+		header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+	},
+	sections = {
+		{
+			section = "header",
+		},
+	},
+}
+
+---@class utils.dashboard.Opts: utils.dashboard.Config
 ---@field buf? number
 ---@field win? number
----@field sections utils.dashboard.Item[]
 
 local wo = {
 	colorcolumn = "",
@@ -82,8 +100,10 @@ function D:update()
 	self.items = self:resolve(self.opts.sections)
 end
 
----@param sections? utils.dashboard.Item[]
-function D:resolve(sections) end
+---@param item utils.dashboard.Item?
+function D:resolve(item)
+	print(vim.inspect(item))
+end
 
 ---@return { width: number, height: number }
 function D:size()
@@ -96,11 +116,6 @@ end
 function D:is_float()
 	return vim.api.nvim_win_get_config(self.win).relative ~= ""
 end
-
----@type utils.dashboard.Opts
-local defaults = {
-	sections = {},
-}
 
 ---Open a new dashboard
 ---@param opts? utils.dashboard.Opts
@@ -115,6 +130,7 @@ function M.open(opts)
 	self.win = self.win == 0 and vim.api.nvim_get_current_win() or self.win
 	self.augroup = vim.api.nvim_create_augroup("utils_dashboard", { clear = true })
 	self:init()
+	self:update()
 	return self
 end
 
