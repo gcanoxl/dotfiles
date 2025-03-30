@@ -53,6 +53,7 @@ local bo = {
 }
 
 ---@class utils.dashboard.Item
+---@field enabled? boolean|fun(opts:utils.dashboard.Opts):boolean if false, the section will be disabled
 ---@field title? string
 
 ---@class utils.dashboard.Class
@@ -101,8 +102,29 @@ function D:update()
 end
 
 ---@param item utils.dashboard.Item?
-function D:resolve(item)
+---@param results? utils.dashboard.Item[]
+---@param parent? utils.dashboard.Item
+function D:resolve(item, results, parent)
 	print(vim.inspect(item))
+	results = results or {}
+	if not item then
+		return results
+	end
+	if type(item) == "table" and vim.tbl_isempty(item) then
+		return results
+	end
+	if type(item) == "table" and self:is_enabled(item) then
+	end
+	-- TODO: implement
+end
+
+---@param item utils.dashboard.Item
+function D:is_enabled(item)
+	local e = item.enabled
+	if type(e) == "function" then
+		return e(self.opts)
+	end
+	return e == nil or e
 end
 
 ---@return { width: number, height: number }
