@@ -9,7 +9,16 @@ function M.map_on_filetype(filetype, maps)
 		group = vim.api.nvim_create_augroup("mapping" .. filetype, { clear = true }),
 		callback = function()
 			local buf = vim.api.nvim_get_current_buf()
-			require("which-key").register(maps, { prefix = "<localleader>", buffer = buf })
+
+			for lhs, detail in pairs(maps) do
+				local rhs, desc = detail[1], detail[2]
+				require("which-key").add({
+					"<localleader>" .. lhs,
+					rhs,
+					buffer = buf,
+					desc = desc,
+				})
+			end
 		end,
 	})
 end
