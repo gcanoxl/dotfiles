@@ -201,9 +201,11 @@ return {
 	-- Keymap Reminder
 	{
 		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup({})
-		end,
+		event = "VeryLazy",
+		dependencies = {
+			"echasnovski/mini.icons",
+			"nvim-tree/nvim-web-devicons",
+		},
 	},
 
 	-- Prettier UI
