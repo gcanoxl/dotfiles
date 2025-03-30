@@ -51,152 +51,169 @@ local wk = require("which-key")
 -- ========================================
 -- |        Keymaps with <Leader>         |
 -- ========================================
-wk.add({
-	{ "<leader>", group = "main" }, -- Top-level group for leader key mappings
-	{ "<leader><leader>", "<cmd>Telescope commands<CR>", desc = "Commands", mode = "n" },
-
-	-- Application group
-	{ "<leader>a", group = "Application" },
-	{ "<leader>aq", "<cmd>quitall<CR>", desc = "Quit", mode = "n" },
-	{ "<leader>an", "<cmd>noh<CR>", desc = "Stop Highlight", mode = "n" },
-	{ "<leader>aj", "<cmd>Telescope jumplist<CR>", desc = "Jumplist", mode = "n" },
-	{ "<leader>as", "<cmd>Telescope live_grep<CR>", desc = "Search", mode = "n" },
-	{ "<leader>ah", "<cmd>Telescope help_tags<CR>", desc = "Help", mode = "n" },
-	{ "<leader>ac", "<cmd>Telescope colorscheme<CR>", desc = "Colorscheme", mode = "n" },
-	{ "<leader>ak", "<cmd>Telescope keymaps<CR>", desc = "Keymaps", mode = "n" },
-	{ "<leader>at", "<cmd>TodoTelescope<CR>", desc = "Todo List", mode = "n" },
-	{ "<leader>ae", "<cmd>Telescope emoji<CR>", desc = "Emoji", mode = "n" },
-	{ "<leader>am", "<cmd>Telescope notify<CR>", desc = "Messages", mode = "n" },
-
-	-- Neoconf group
-	{ "<leader>C", group = "Neoconf" },
-	{ "<leader>Cc", "<cmd>Neoconf<CR>", desc = "Select Config", mode = "n" },
-	{ "<leader>Cl", "<cmd>Neoconf local<CR>", desc = "Edit Local Config", mode = "n" },
-	{ "<leader>Cg", "<cmd>Neoconf global<CR>", desc = "Edit Global Config", mode = "n" },
-	{ "<leader>Cs", "<cmd>Neoconf show<CR>", desc = "Show Config", mode = "n" },
-	{ "<leader>Cp", "<cmd>Neoconf lsp<CR>", desc = "Show LSP Config", mode = "n" },
-
-	-- Buffers group
-	{ "<leader>b", group = "Buffer" },
-	{ "<leader>bb", "<cmd>Telescope scope buffers<CR>", desc = "Buffers", mode = "n" },
-	{ "<leader>bB", "<cmd>Telescope buffers<CR>", desc = "Tab-local Buffers", mode = "n" },
-	{ "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", desc = "Close Other Buffers", mode = "n" },
-	{ "<leader>bh", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer", mode = "n" },
-	{ "<leader>bm", "<cmd>ScopeMoveBuf<CR>", desc = "Move to Table", mode = "n" },
-	{ "<leader>bl", "<cmd>BufferLineCycleNext<CR>", desc = "Next Buffer", mode = "n" },
-	{ "<leader>bH", "<cmd>BufferLineMovePrev<CR>", desc = "Move Left", mode = "n" },
-	{ "<leader>bL", "<cmd>BufferLineMoveNext<CR>", desc = "Move Right", mode = "n" },
-	{ "<leader>bp", "<cmd>BufferLineTogglePin<CR>", desc = "Pin", mode = "n" },
-	{ "<leader>bP", "<cmd>BufferLinePick<CR>", desc = "Pick Buffer", mode = "n" },
-	{ "<leader>bn", "<cmd>enew<CR>", desc = "New Buffer", mode = "n" },
-	{
-		"<leader>bc",
-		function()
-			utils.bufdelete.delete()
-		end,
-		desc = "Close Buffer",
-		mode = "n",
+wk.register({
+	["<leader>"] = { utils.cmd("Telescope commands"), "Commands" },
+	-- Application
+	a = {
+		name = "Application",
+		q = { utils.cmd("quitall"), "Quit" },
+		n = { utils.cmd("noh"), "Stop Highlight" },
+		j = { utils.cmd("Telescope jumplist"), "Jumplist" },
+		s = { utils.cmd("Telescope live_grep"), "Search" },
+		h = { utils.cmd("Telescope help_tags"), "Help" },
+		c = { utils.cmd("Telescope colorscheme"), "Colorscheme" },
+		k = { utils.cmd("Telescope keymaps"), "Keymaps" },
+		t = { utils.cmd("TodoTelescope"), "Todo List" },
+		e = { utils.cmd("Telescope emoji"), "Emoji" },
+		m = { utils.cmd("Telescope notify"), "Messages" },
 	},
-
-	-- File group
-	{ "<leader>f", group = "File" },
-	{ "<leader>fw", "<cmd>silent wa<CR>", desc = "Save File", mode = "n" },
-	{ "<leader>fl", "<cmd>Neotree<CR>", desc = "File Explorer", mode = "n" },
-	{ "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent Files", mode = "n" },
-	{ "<leader>fd", "<cmd>Dired<CR>", desc = "File Manager", mode = "n" },
-
-	-- Git group
-	{ "<leader>g", group = "Git" },
-	{
-		"<leader>gg",
-		function()
-			require("neogit").open()
-		end,
-		desc = "Git",
-		mode = "n",
+	-- Config
+	c = {
+		c = { utils.config_files, "Edit Config" },
 	},
-	{ "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Stage Hunk", mode = "n" },
-	{ "<leader>gS", "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage Buffer", mode = "n" },
-	{ "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo Stage Hunk", mode = "n" },
-	{ "<leader>gx", "<cmd>Gitsigns reset_hunk<CR>", desc = "Reset Hunk", mode = "n" },
-	{ "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", desc = "Next Hunk", mode = "n" },
-	{ "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", desc = "Previous Hunk", mode = "n" },
-	{ "<leader>gB", "<cmd>Gitsigns blame<CR>", desc = "Blame File", mode = "n" },
-	{ "<leader>gb", "<cmd>Gitsigns blame_line<CR>", desc = "Blame Line", mode = "n" },
-
-	-- Debug group
-	{ "<leader>d", group = "Debug" },
-	{
-		"<leader>ds",
-		function()
-			require("osv").launch({ port = 8086 })
-		end,
-		desc = "Start Debug Server",
+	C = {
+		name = "Neoconf",
+		c = { utils.cmd("Neoconf"), "Select Config" },
+		l = { utils.cmd("Neoconf local"), "Edit Local Config" },
+		g = { utils.cmd("Neoconf global"), "Edit Global Config" },
+		s = { utils.cmd("Neoconf show"), "Show Config" },
+		p = { utils.cmd("Neoconf lsp"), "Show LSP Config" },
 	},
-	{
-		"<leader>db",
-		function()
-			require("dap").toggle_breakpoint()
-		end,
-		desc = "Toggle Breakpoint",
+	-- Terminal
+	["!"] = { utils.term.select, "Open Terminal" },
+	-- Tab
+	t = {
+		name = "Tab",
+		n = { utils.cmd("tabnew"), "New Empty Tab" },
+		c = { utils.cmd("tabclose"), "Close Current Table" },
+		t = { require("telescope-tabs").list_tabs, "Tabs" },
+		["1"] = { utils.cmd('exec "normal! 1gt"'), "Go to Tab 1" },
+		["2"] = { utils.cmd('exec "normal! 2gt"'), "Go to Tab 2" },
+		["3"] = { utils.cmd('exec "normal! 3gt"'), "Go to Tab 3" },
+		["4"] = { utils.cmd('exec "normal! 4gt"'), "Go to Tab 4" },
+		["5"] = { utils.cmd('exec "normal! 5gt"'), "Go to Tab 5" },
+		["6"] = { utils.cmd('exec "normal! 6gt"'), "Go to Tab 6" },
+		["7"] = { utils.cmd('exec "normal! 7gt"'), "Go to Tab 7" },
+		["8"] = { utils.cmd('exec "normal! 8gt"'), "Go to Tab 8" },
+		["9"] = { utils.cmd('exec "normal! 9gt"'), "Go to Tab 9" },
 	},
-	{
-		"<leader>du",
-		function()
-			require("dapui").toggle()
-		end,
-		desc = "Toggle DAP UI",
+	-- Buffer
+	b = {
+		name = "Buffer",
+		b = { utils.cmd("Telescope scope buffers"), "Buffers" },
+		B = { utils.cmd("Telescope buffers"), "Tab-local Buffers" },
+		o = { utils.cmd("BufferLineCloseOthers"), "Close Other Buffers" },
+		h = { utils.cmd("BufferLineCyclePrev"), "Previous Buffer" },
+		m = { utils.cmd("ScopeMoveBuf"), "Move to Table" },
+		l = { utils.cmd("BufferLineCycleNext"), "Next Buffer" },
+		H = { utils.cmd("BufferLineMovePrev"), "Move Left" },
+		L = { utils.cmd("BufferLineMoveNext"), "Move Right" },
+		p = { utils.cmd("BufferLineTogglePin"), "Pin" },
+		P = { utils.cmd("BufferLinePick"), "Pick Buffer" },
+		n = { utils.cmd("enew"), "New Buffer" },
+		c = { utils.bufdelete.delete, "Close Buffer" },
 	},
-	{
-		"<leader>dc",
-		function()
-			require("dap").continue()
-		end,
-		desc = "Start or Continue",
+	-- Errors
+	e = {
+		name = "Diagostic",
+		e = { utils.cmd("Trouble errors toggle"), "Errors" },
+		p = { utils.cmd("Lspsaga diagnostic_jump_prev"), "Previous" },
+		n = { utils.cmd("Lspsaga diagnostic_jump_next"), "Next" },
 	},
-	{
-		"<leader>dn",
-		function()
-			require("dap").step_over()
-		end,
-		desc = "Step Over",
+	-- File
+	f = {
+		name = "File",
+		w = { utils.cmd("silent wa"), "Save File" },
+		l = { utils.cmd("Neotree"), "File Explorer" },
+		r = { utils.cmd("Telescope oldfiles"), "Recent Files" },
+		d = { utils.cmd("Dired"), "File Manager" },
 	},
-	{
-		"<leader>di",
-		function()
-			require("dap").step_into()
-		end,
-		desc = "Step Into",
+	-- Window
+	w = {
+		name = "Window",
+		a = {
+			name = "Auto Resize",
+			t = { utils.cmd("WindowsToggleAutowidth"), "Toggle Auto Width" },
+			e = { utils.cmd("WindowsEqualize"), "Equalize Width" },
+			m = { utils.cmd("WindowsMaximize"), "Maximize Width" },
+		},
 	},
-	{
-		"<leader>do",
-		function()
-			require("dap").step_out()
-		end,
-		desc = "Step Out",
+	-- Git
+	g = {
+		g = { require("neogit").open, "Git" },
+		G = {
+			function()
+				utils.lazygit:open()
+			end,
+			"Git",
+		},
+		s = { utils.cmd("Gitsigns stage_hunk"), "Stage Hunk" },
+		S = { utils.cmd("Gitsigns stage_buffer"), "Stage Buffer" },
+		u = { utils.cmd("Gitsigns undo_stage_hunk"), "Undo Stage Hunk" },
+		x = { utils.cmd("Gitsigns reset_hunk"), "Reset Hunk" },
+		d = {
+			name = "Diff",
+			d = { utils.cmd("Gitsigns diffthis"), "Diff This" },
+			c = { utils.cmd("DiffviewClose"), "Close Diff" },
+			f = { utils.cmd("DiffviewFileHistory %"), "Current File History" },
+			t = { utils.cmd("DiffviewToggleFiles"), "Toggle Files" },
+		},
+		n = { utils.cmd("Gitsigns next_hunk"), "Next Hunk" },
+		p = { utils.cmd("Gitsigns prev_hunk"), "Previous Hunk" },
+		l = { utils.cmd("Neotree git_status"), "Git Status" },
+		t = {
+			name = "Toggle",
+			l = { utils.cmd("Gitsigns toggle_linehl"), "Line Highlight" },
+			n = { utils.cmd("Gitsigns toggle_numhl"), "Number Highlight" },
+			s = { utils.cmd("Gitsigns toggle_signs"), "Signs" },
+		},
 	},
-	{
-		"<leader>dq",
-		function()
-			require("dap").terminate()
-		end,
-		desc = "Terminate",
+	-- Project
+	p = {
+		name = "Project",
+		p = {
+			function()
+				require("telescope").extensions.projects.projects({})
+			end,
+			"Projects",
+		},
+		P = { utils.cmd("ProjectRoot"), "Reset Root Directory" },
+		a = { utils.cmd("AddProject"), "Add Project" },
+		l = {
+			function()
+				require("persistence").load()
+			end,
+			"Load Project",
+		},
+		t = {
+			function()
+				require("persistence").stop()
+			end,
+			"Stop Project",
+		},
 	},
-	{
-		"<leader>dl",
-		function()
-			require("dap.repl").toggle()
-		end,
-		desc = "Toggle REPL",
+	-- Package Management
+	P = { utils.cmd("Lazy"), "Package Management" },
+	-- Debug
+	d = {
+		name = "Debug",
+		s = {
+			function()
+				require("osv").launch({ port = 8086 })
+			end,
+			"Start Debug Server",
+		},
+		b = { require("dap").toggle_breakpoint, "Toggle Breakpoint" },
+		u = { require("dapui").toggle, "Toggle DAP UI" },
+		c = { require("dap").continue, "Start or Continue" },
+		n = { require("dap").step_over, "Step Over" },
+		i = { require("dap").step_into, "Step Into" },
+		o = { require("dap").step_out, "Step Out" },
+		q = { require("dap").terminate, "Terminate" },
+		l = { require("dap.repl").toggle, "Toggle REPL" },
+		L = { require("dap.repl").clear, "Clear REPL" },
 	},
-	{
-		"<leader>dL",
-		function()
-			require("dap.repl").clear()
-		end,
-		desc = "Clear REPL",
-	},
-}, { mode = "n", noremap = true, silent = true })
+}, { prefix = "<leader>", mode = "n", noremap = true, silent = true })
 
 -- Go Special Keymaps
 utils.map_on_filetype("go", {
