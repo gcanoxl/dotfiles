@@ -36,6 +36,7 @@ local bo = {
 ---@class utils.dashboard.Class
 ---@field win number
 ---@field buf number
+---@field augroup number
 local D = {}
 
 function D:init()
@@ -49,6 +50,27 @@ function D:init()
 	for name, value in pairs(bo) do
 		vim.api.nvim_set_option_value(name, value, { scope = "local", buf = self.buf })
 	end
+	vim.o.ei = ""
+	if self:is_float() then
+		vim.keymap.set("n", "<esc>", "<cmd>bd<cr>", { silent = true, buffer = self.buf })
+	end
+	vim.keymap.set("n", "q", "<cmd>bd<cr>", { silent = true, buffer = self.buf })
+	vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
+		group = self.augroup,
+		callback = function()
+			-- TODO: implement
+		end,
+	})
+	vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
+		augroup = self.augroup,
+		callback = function()
+			vim.api.nvim_del_augroup_by_id(self.augroup)
+		end,
+	})
+end
+
+function D:is_float()
+	return vim.api.nvim_win_get_config(self.win).relative ~= ""
 end
 
 ---Open a new dashboard
