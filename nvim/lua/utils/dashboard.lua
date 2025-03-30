@@ -9,6 +9,7 @@ local M = setmetatable({}, {
 ---@class utils.dashboard.Opts
 ---@field buf? number
 ---@field win? number
+---@field sections utils.dashboard.Item[]
 
 local wo = {
 	colorcolumn = "",
@@ -33,9 +34,13 @@ local bo = {
 	undofile = false,
 }
 
+---@class utils.dashboard.Item
+---@field title? string
+
 ---@class utils.dashboard.Class
 ---@field win number
 ---@field buf number
+---@field opts utils.dashboard.Opts
 ---@field augroup number
 local D = {}
 
@@ -62,23 +67,48 @@ function D:init()
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
-		augroup = self.augroup,
+		group = self.augroup,
 		callback = function()
 			vim.api.nvim_del_augroup_by_id(self.augroup)
 		end,
 	})
 end
 
+function D:update()
+	if not (self.buf and vim.api.nvim_buf_is_valid(self.buf)) then
+		return
+	end
+	self._size = self:size()
+	self.items = self:resolve(self.opts.sections)
+end
+
+---@param sections? utils.dashboard.Item[]
+function D:resolve(sections) end
+
+---@return { width: number, height: number }
+function D:size()
+	return {
+		width = vim.api.nvim_win_get_width(self.win),
+		height = vim.api.nvim_win_get_height(self.win),
+	}
+end
+
 function D:is_float()
 	return vim.api.nvim_win_get_config(self.win).relative ~= ""
 end
+
+---@type utils.dashboard.Opts
+local defaults = {
+	sections = {},
+}
 
 ---Open a new dashboard
 ---@param opts? utils.dashboard.Opts
 ---@return utils.dashboard.Class
 function M.open(opts)
 	local self = setmetatable({}, { __index = D })
-	self.opts = opts or {}
+	---@type utils.dashboard.Opts
+	self.opts = vim.tbl_extend("force", defaults, opts or {})
 	self.buf = self.opts.buf or vim.api.nvim_create_buf(false, true)
 	self.buf = self.buf == 0 and vim.api.nvim_get_current_buf() or self.buf
 	self.win = self.opts.win or 0
