@@ -261,6 +261,68 @@ utils.map_on_filetype("dart", {
 	},
 })
 
+local augroup = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = augroup,
+	callback = function(data)
+		local client = vim.lsp.get_client_by_id(data.data.client_id)
+		if not client then
+			vim.notify("Failed to get LSP Client by Id: " .. data.id, vim.log.levels.WARN)
+			return
+		end
+
+		local buf = data.buf
+		if client:supports_method("textDocument/inlayHint", buf) then
+			vim.lsp.inlay_hint.enable(false, { bufnr = buf })
+		end
+		-- shortcuts
+		local bufopts = { noremap = true, silent = true, buffer = buf }
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+		vim.keymap.set("n", "dp", utils.cmd("Lspsaga diagnostic_jump_prev"), bufopts)
+		vim.keymap.set("n", "dn", utils.cmd("Lspsaga diagnostic_jump_next"), bufopts)
+		vim.keymap.set("n", "K", utils.cmd("Lspsaga hover_doc"), bufopts)
+		vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set("n", "gd", utils.cmd("Lspsaga goto_definition"), bufopts)
+		vim.keymap.set("n", "gf", utils.cmd("Lspsaga finder"), bufopts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"go",
+			":Telescope lsp_dynamic_workspace_symbols<CR>",
+			{ noremap = true, silent = true }
+		)
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"gl",
+			":Telescope lsp_document_symbols<CR>",
+			{ noremap = true, silent = true }
+		)
+
+		-- register keymaps using which-key
+		require("which-key").add({
+			{ "<leader>l", group = "LSP" }, -- group for LSP
+			{ "<leader>ln", vim.lsp.buf.rename, desc = "Rename", buffer = buf },
+			{ "<leader>lo", utils.cmd("AerialToggle"), desc = "Symbol List" },
+			{ "<leader>lO", utils.cmd("AerialNavToggle"), desc = "Symbol Navigation" },
+			{ "<leader>lk", utils.cmd("Lspsaga hover_doc"), desc = "Hover Doc" },
+			{ "<leader>lK", utils.cmd("Lspsaga hover_doc ++keep"), desc = "Persistent Hover Doc" },
+			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
+			{ "<leader>lf", utils.cmd("Lspsaga finder"), desc = "Finder" },
+			{ "<leader>l", group = "Goto" },
+			{ "<leader>lgd", utils.cmd("Lspsaga goto_definition"), desc = "Definition" },
+			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition" },
+			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation" },
+			{ "<leader>lgo", utils.cmd("Telescope lsp_dynamic_workspace_symbols"), desc = "Workspace Symbols" },
+			{ "<leader>lgl", utils.cmd("Telescope lsp_document_symbols"), desc = "Document Symbols" },
+			{ "<leader>lt", group = "Toggle", buffer = buf },
+			{ "<leader>lti", utils.toggles.toggle_inlay_hint, desc = "Inlay Hint" },
+		})
+	end,
+})
+
 -- Lua Special Keymaps
 utils.map_on_filetype("lua", {
 	["s"] = { utils.cmd("source %"), "Source" },
