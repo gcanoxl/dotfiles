@@ -1,3 +1,4 @@
+local M = {}
 local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
 	return
@@ -24,15 +25,14 @@ vim.diagnostic.config({
 })
 
 -- enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {
+M.servers = {
 	"lua_ls",
 	"vimls",
 	"pyright",
 	"jsonls",
 	"yamlls",
 	"gopls",
-	"vuels",
-	"tsserver",
+	"ts_ls",
 	"html",
 	"clangd",
 }
@@ -40,7 +40,7 @@ local servers = {
 local on_attach = require("configs.lsp.handlers")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-for _, server in ipairs(servers) do
+for _, server in ipairs(M.servers) do
 	local settings = {
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -56,3 +56,5 @@ for _, server in ipairs(servers) do
 
 	lspconfig[server].setup(settings)
 end
+
+return M

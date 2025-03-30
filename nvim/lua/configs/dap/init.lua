@@ -1,3 +1,5 @@
+local M = {}
+
 require("configs.dap.highlight")
 
 -- load all files in the cfgs directory
@@ -27,3 +29,8 @@ dapui.setup()
 -- dap.listeners.before.event_exited.dapui_config = function()
 -- 	dapui.close()
 -- end
+--
+
+M.servers = {}
+
+return M

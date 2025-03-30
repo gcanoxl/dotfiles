@@ -6,9 +6,9 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
 		},
-		config = function()
-			require("configs.dap")
-		end,
+		-- config = function()
+		-- 	require("configs.dap")
+		-- end,
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
