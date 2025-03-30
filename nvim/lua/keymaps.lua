@@ -52,7 +52,7 @@ local wk = require("which-key")
 -- |        Keymaps with <Leader>         |
 -- ========================================
 wk.add({
-	{ "<leader><leader>", group = "Commands", cmd = "Telescope commands" },
+	{ "<leader><leader>", "<cmd>Telescope commands<cr>", group = "Commands", desc = "Telescope commands" },
 	-- Application
 	{ "<leader>a", group = "Application" },
 	{ "<leader>aq", "<cmd>quitall<cr>", desc = "Quit" },
