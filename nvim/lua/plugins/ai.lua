@@ -12,7 +12,16 @@ return {
 
 	{
 		"olimorris/codecompanion.nvim",
-		config = true,
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>ii",
+				function()
+					require("codecompanion").actions({})
+				end,
+				desc = "Toggle Code Companion",
+			},
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -45,6 +54,12 @@ return {
 				},
 			},
 			strategies = {
+				inline = {
+					adapter = "openai",
+				},
+				cmd = {
+					adapter = "openai",
+				},
 				-- CHAT STRATEGY ----------------------------------------------------------
 				chat = {
 					adapter = "openai",
