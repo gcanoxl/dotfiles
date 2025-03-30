@@ -6,7 +6,7 @@ local LSPActive = {
 	update = { "LspAttach", "LspDetach" },
 	provider = function()
 		local names = {}
-		for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+		for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 			table.insert(names, server.name)
 		end
 		return "[" .. table.concat(names, " ") .. "]"
