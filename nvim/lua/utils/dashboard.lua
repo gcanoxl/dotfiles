@@ -24,6 +24,15 @@ local wo = {
 	wrap = false,
 }
 
+local bo = {
+	bufhidden = "wipe",
+	buftype = "nofile",
+	buflisted = false,
+	filetype = "dashboard",
+	swapfile = false,
+	undofile = false,
+}
+
 ---@class utils.dashboard.Class
 ---@field win number
 ---@field buf number
@@ -32,8 +41,13 @@ local D = {}
 function D:init()
 	vim.api.nvim_win_set_buf(self.win, self.buf)
 	vim.o.ei = "all"
+	-- setup wo
 	for name, value in pairs(wo) do
 		vim.api.nvim_set_option_value(name, value, { scope = "local", win = self.win })
+	end
+	-- setup bo
+	for name, value in pairs(bo) do
+		vim.api.nvim_set_option_value(name, value, { scope = "local", buf = self.buf })
 	end
 end
 
