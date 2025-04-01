@@ -6,9 +6,24 @@ local M = setmetatable({}, {
 	end,
 })
 
+M.sections = {}
+
+---@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Item
+---@return utils.dashboard.Gen
+function M.sections.header()
+	---@param self utils.dashboard.Class
+	return function(self)
+		return { header = self.opts.present.header }
+	end
+end
+
 ---@class utils.dashboard.Config
 ---@field sections utils.dashboard.Item[]
+---@field pane_gap number
+---@field width number
 local defaults = {
+	pane_gap = 4,
+	width = 60,
 	present = {
 		header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
@@ -55,6 +70,9 @@ local bo = {
 ---@class utils.dashboard.Item
 ---@field enabled? boolean|fun(opts:utils.dashboard.Opts):boolean if false, the section will be disabled
 ---@field title? string
+---@field section? utils.dashboard.Item
+---@field hidden? boolean
+---@field [string] any
 
 ---@class utils.dashboard.Class
 ---@field win number
@@ -99,13 +117,26 @@ function D:update()
 	end
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
+	self:render()
+end
+
+function D:render()
+	local lines = {}
+	for _, item in ipairs(self.items) do
+		local header = item.header ---@type string
+		lines = vim.split(header, "\n")
+	end
+
+	vim.bo[self.buf].modifiable = true
+	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, lines)
+	vim.bo[self.buf].modifiable = false
 end
 
 ---@param item utils.dashboard.Item?
 ---@param results? utils.dashboard.Item[]
 ---@param parent? utils.dashboard.Item
 function D:resolve(item, results, parent)
-	print(vim.inspect(item))
+	-- print("resolving: " .. vim.inspect(item))
 	results = results or {}
 	if not item then
 		return results
@@ -113,9 +144,26 @@ function D:resolve(item, results, parent)
 	if type(item) == "table" and vim.tbl_isempty(item) then
 		return results
 	end
-	if type(item) == "table" and self:is_enabled(item) then
+	if type(item) == "function" then
+		return self:resolve(item(self), results, parent)
+	elseif type(item) == "table" and self:is_enabled(item) then
+		if not item.section and not item[1] then
+			table.insert(results, item)
+			return results
+		end
+		if item.section then
+			local items = M.sections[item.section]()
+			self:resolve(items, results, item)
+		end
+		if item[1] then
+			for _, value in ipairs(item) do
+				self:resolve(value, results, item)
+			end
+		end
+		-- print("trying to add" .. vim.inspect(item))
+		-- table.insert(results, item)
+		return results
 	end
-	-- TODO: implement
 end
 
 ---@param item utils.dashboard.Item
