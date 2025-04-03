@@ -17,10 +17,16 @@ function M.sections.header()
 	end
 end
 
+---@class utils.dashboard.Text
+---@field [1] string
+---@field align? "left" | "center" | "right"
+---@field hl? string
+
 ---@class utils.dashboard.Config
 ---@field sections utils.dashboard.Item[]
 ---@field pane_gap number
 ---@field width number
+---@field formats table<string, utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
@@ -36,7 +42,11 @@ local defaults = {
 	sections = {
 		{
 			section = "header",
+			pane = 2,
 		},
+	},
+	formats = {
+		header = { "%s", align = "center" },
 	},
 }
 
@@ -79,6 +89,7 @@ local bo = {
 ---@field buf number
 ---@field opts utils.dashboard.Opts
 ---@field augroup number
+---@field panes? utils.dashboard.Item[][]
 local D = {}
 
 function D:init()
@@ -117,7 +128,24 @@ function D:update()
 	end
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
+	self:layout()
 	self:render()
+end
+
+function D:layout()
+	local max_panes = math.floor((self._size.width + self.opts.pane_gap) / (self.opts.width + self.opts.pane_gap))
+	self.panes = {} ----@type utils.dashboard.Item[][]
+	for _, item in ipairs(self.items) do
+		if not item.hidden then
+			local pane = item.pane or 1
+			pane = math.fmod(pane - 1, max_panes) + 1
+			self.panes[pane] = self.panes[pane] or {}
+			table.insert(self.panes[pane], item)
+		end
+	end
+	for i = 1, math.max(unpack(vim.tbl_keys(self.panes))) do
+		self.panes[i] = self.panes[i] or {}
+	end
 end
 
 function D:render()
@@ -144,6 +172,11 @@ function D:resolve(item, results, parent)
 	if type(item) == "table" and vim.tbl_isempty(item) then
 		return results
 	end
+	if type(item) == "table" and parent then
+		for _, prop in ipairs({ "pane" }) do
+			item[prop] = item[prop] or parent[prop]
+		end
+	end
 	if type(item) == "function" then
 		return self:resolve(item(self), results, parent)
 	elseif type(item) == "table" and self:is_enabled(item) then
@@ -152,18 +185,14 @@ function D:resolve(item, results, parent)
 			return results
 		end
 		if item.section then
-			local items = M.sections[item.section]()
-			self:resolve(items, results, item)
+			local section = M.sections[item.section]()
+			self:resolve(section, results, item)
 		end
 		if item[1] then
-			for _, value in ipairs(item) do
-				self:resolve(value, results, item)
-			end
+			self:resolve(item[1], results, item)
 		end
-		-- print("trying to add" .. vim.inspect(item))
-		-- table.insert(results, item)
-		return results
 	end
+	return results
 end
 
 ---@param item utils.dashboard.Item
