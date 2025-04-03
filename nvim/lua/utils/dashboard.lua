@@ -191,10 +191,22 @@ function D:format(item)
 	local lines = {}
 	if item.header then
 		for _, line in ipairs(vim.split(item.header, "\n")) do
-			table.insert(lines, { line, width = vim.api.nvim_strwidth(line) })
+			local align = self.opts.formats["header"].align
+			table.insert(lines, { self:align(line, self.opts.width, align), width = vim.api.nvim_strwidth(line) })
 		end
 	end
 	return lines
+end
+
+---@param text string
+---@param width? number
+---@param align? "left" | "center" | "right"
+function D:align(text, width, align)
+	align = align or "left"
+	local len = vim.api.nvim_strwidth(text)
+	local before = align == "center" and math.floor((width - len) / 2) or align == "right" and width - len or 0
+	local after = align == "center" and width - len - before or align == "left" and width - len or 0
+	return (" "):rep(before) .. text .. (" "):rep(after)
 end
 
 ---@param item utils.dashboard.Item?
