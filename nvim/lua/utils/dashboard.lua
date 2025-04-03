@@ -46,10 +46,6 @@ local defaults = {
 	sections = {
 		{
 			section = "header",
-			pane = 2,
-		},
-		{
-			section = "header",
 			pane = 1,
 		},
 	},
@@ -179,6 +175,11 @@ function D:render()
 				lines[row] = lines[row] .. line[1]
 			end
 		end
+	end
+	-- vertical position
+	local above = math.floor((self._size.height - #lines) / 2)
+	for _ = 1, above do
+		table.insert(lines, 1, "")
 	end
 
 	vim.bo[self.buf].modifiable = true
