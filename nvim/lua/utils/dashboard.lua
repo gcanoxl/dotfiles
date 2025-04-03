@@ -26,10 +26,14 @@ end
 ---@field sections utils.dashboard.Item[]
 ---@field pane_gap number
 ---@field width number
+---@field col? number
+---@field row? number
 ---@field formats table<string, utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
+	col = nil,
+	row = nil,
 	present = {
 		header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
@@ -43,6 +47,10 @@ local defaults = {
 		{
 			section = "header",
 			pane = 2,
+		},
+		{
+			section = "header",
+			pane = 1,
 		},
 	},
 	formats = {
@@ -128,6 +136,7 @@ function D:update()
 	end
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
+	-- print(vim.inspect(self.items))
 	self:layout()
 	self:render()
 end
@@ -149,15 +158,43 @@ function D:layout()
 end
 
 function D:render()
+	self.col = self.opts.col
+		or math.floor(self._size.width - (self.opts.width * #self.panes + self.opts.pane_gap * (#self.panes - 1)))
+			/ 2
+
 	local lines = {}
-	for _, item in ipairs(self.items) do
-		local header = item.header ---@type string
-		lines = vim.split(header, "\n")
+	for p, pane in ipairs(self.panes) do
+		local indent = (" "):rep(p == 1 and self.col or self.opts.pane_gap)
+		local row = 0
+		for _, item in ipairs(pane) do
+			for _, line in ipairs(self:format(item)) do
+				row = row + 1
+				if p > 1 and not lines[row] then
+					lines[row] = (" "):rep(self.col + (self.opts.pane_gap * self.opts.width) * (p - 1))
+				elseif p == 1 and line.width > self.opts.width then
+					lines[row] = (" "):rep(self.col - math.floor((line.width - self.opts.width) / 2))
+				else
+					lines[row] = (lines[row] or "") .. indent
+				end
+				lines[row] = lines[row] .. line[1]
+			end
+		end
 	end
 
 	vim.bo[self.buf].modifiable = true
 	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, lines)
 	vim.bo[self.buf].modifiable = false
+end
+
+---@param item utils.dashboard.Item
+function D:format(item)
+	local lines = {}
+	if item.header then
+		for _, line in ipairs(vim.split(item.header, "\n")) do
+			table.insert(lines, { line, width = vim.api.nvim_strwidth(line) })
+		end
+	end
+	return lines
 end
 
 ---@param item utils.dashboard.Item?
@@ -189,7 +226,9 @@ function D:resolve(item, results, parent)
 			self:resolve(section, results, item)
 		end
 		if item[1] then
-			self:resolve(item[1], results, item)
+			for _, child in ipairs(item) do
+				self:resolve(child, results, item)
+			end
 		end
 	end
 	return results
