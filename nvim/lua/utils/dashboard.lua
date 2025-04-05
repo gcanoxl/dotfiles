@@ -19,8 +19,17 @@ end
 
 ---@class utils.dashboard.Text
 ---@field [1] string
+---@field width number
 ---@field align? "left" | "center" | "right"
 ---@field hl? string
+
+---@class utils.dashboard.Line
+---@field [number] utils.dashboard.Text
+---@field width number
+
+---@class utils.dashboard.Block
+---@field [number] utils.dashboard.Line
+---@field width number
 
 ---@class utils.dashboard.Config
 ---@field sections utils.dashboard.Item[]
@@ -172,7 +181,9 @@ function D:render()
 				else
 					lines[row] = (lines[row] or "") .. indent
 				end
-				lines[row] = lines[row] .. line[1]
+				for t, text in ipairs(line[1]) do
+					lines[row] = lines[row] .. text
+				end
 			end
 		end
 	end
@@ -188,15 +199,66 @@ function D:render()
 end
 
 ---@param item utils.dashboard.Item
+---@return utils.dashboard.Block
 function D:format(item)
-	local lines = {}
+	local lines = {} ---@type utils.dashboard.Text[]
 	if item.header then
-		for _, line in ipairs(vim.split(item.header, "\n")) do
-			local align = self.opts.formats["header"].align
-			table.insert(lines, { self:align(line, self.opts.width, align), width = vim.api.nvim_strwidth(line) })
+		-- for _, line in ipairs(vim.split(item.header, "\n")) do
+		-- 	local align = self.opts.formats["header"].align
+		-- 	table.insert(lines, { self:align(line, self.opts.width, align), width = vim.api.nvim_strwidth(line) })
+		-- end
+		for _, line in ipairs(self:texts(self:format_field(item, "header"))) do
+			table.insert(lines, line)
 		end
 	end
-	return lines
+	local block = self:block(lines)
+	-- print(vim.inspect(block))
+	return block
+end
+
+---@param texts utils.dashboard.Text[]
+---@return utils.dashboard.Block
+function D:block(texts)
+	local ret = { { width = 0 }, width = 0 } ---@type utils.dashboard.Block
+	for _, text in ipairs(texts) do
+		local lines = text[1]:find("\n") and vim.split(text[1], "\n") or { text[1] }
+		for l, line in ipairs(lines) do
+			if l > 1 then
+				ret[#ret + 1] = { width = 0 }
+			end
+			local child = setmetatable({ line }, { __index = text })
+			-- self:align(child)
+			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(line)
+			ret.width = math.max(ret.width, ret[#ret].width)
+			table.insert(ret[#ret], child)
+		end
+	end
+	return ret
+end
+
+---@param item utils.dashboard.Item
+---@param field string
+---@return utils.dashboard.Text|utils.dashboard.Text[]
+function D:format_field(item, field)
+	local format = self.opts.formats[field]
+	if format == nil then
+		return { item[field], hl = field }
+	elseif type(format) == "function" then
+		return format(item)
+	else
+		local text = format and vim.deepcopy(format) or { "%s" }
+		text.hl = text.hl or field
+		text[1] = text[1] == "%s" and item[field] or text[1]:format(item[field])
+		return text
+	end
+end
+
+---@param texts string|utils.dashboard.Text|utils.dashboard.Text[]
+---@return utils.dashboard.Text[]
+function D:texts(texts)
+	texts = type(texts) == "string" and { { texts } } or texts
+	texts = type(texts[1]) == "string" and { texts } or texts
+	return texts --[[ @as utils.dashboard.Text[] ]]
 end
 
 ---@param text string
