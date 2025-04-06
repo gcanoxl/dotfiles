@@ -22,7 +22,7 @@ end
 function M.sections.keys()
 	---@param self utils.dashboard.Class
 	return function(self)
-		return { keys = vim.deepcopy(self.opts.present.keys) }
+		return vim.deepcopy(self.opts.present.keys)
 	end
 end
 
@@ -171,7 +171,6 @@ function D:update()
 	end
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
-	-- print(vim.inspect(self.items))
 	self:layout()
 	self:render()
 end
@@ -245,14 +244,34 @@ end
 ---@return utils.dashboard.Block
 function D:format(item)
 	local lines = {} ---@type utils.dashboard.Text[]
-	if item.header then
-		for _, line in ipairs(self:texts(self:format_field(item, "header"))) do
-			table.insert(lines, line)
+
+	---@param fields string[]
+	---@param opts? {multi:boolean}
+	---@return utils.dashboard.Block
+	local function find(fields, opts)
+		local texts = {} ---@type utils.dashboard.Text[]
+		for _, field in ipairs(fields) do
+			if item[field] then
+				vim.list_extend(texts, self:texts(self:format_field(item, field)))
+			end
+			if opts and opts.multi then
+				break
+			end
 		end
+		local block = self:block(texts)
+		return block
 	end
-	local block = self:block(lines)
-	-- print(vim.inspect(block))
-	return block
+
+	local center = find({ "header" })
+	local left = find({ "icon" }, { multi = false })
+	local ret = { width = 0 } ---@type utils.dashboard.Block
+
+	for i = 1, math.max(#center, #left, 1) do
+		ret[i] = { width = 0 }
+		vim.list_extend(ret[i], left[i] or { width = 0 })
+		vim.list_extend(ret[i], center[i] or { width = 0 })
+	end
+	return ret
 end
 
 ---@param texts utils.dashboard.Text[]
