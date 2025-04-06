@@ -262,14 +262,17 @@ function D:format(item)
 		return block
 	end
 
-	local center = find({ "header" })
 	local left = find({ "icon" }, { multi = false })
+	local center = find({ "header", "desc" })
+	local right = find({ "key" }, { multi = false })
+
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
-	for i = 1, math.max(#center, #left, 1) do
+	for i = 1, math.max(#center, #left, #right, 1) do
 		ret[i] = { width = 0 }
 		vim.list_extend(ret[i], left[i] or { width = 0 })
 		vim.list_extend(ret[i], center[i] or { width = 0 })
+		vim.list_extend(ret[i], right[i] or { width = 0 })
 	end
 	return ret
 end
