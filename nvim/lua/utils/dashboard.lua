@@ -9,6 +9,8 @@ local M = setmetatable({}, {
 M.sections = {}
 
 ---@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Item
+---@alias utils.dashboard.Section utils.dashboard.Gen|utils.dashboard.Section[]
+
 ---@return utils.dashboard.Gen
 function M.sections.header()
 	---@param self utils.dashboard.Class
@@ -17,9 +19,16 @@ function M.sections.header()
 	end
 end
 
+function M.sections.keys()
+	---@param self utils.dashboard.Class
+	return function(self)
+		return { keys = vim.deepcopy(self.opts.present.keys) }
+	end
+end
+
 ---@class utils.dashboard.Text
 ---@field [1] string
----@field width number
+---@field width? number
 ---@field align? "left" | "center" | "right"
 ---@field hl? string
 
@@ -32,7 +41,7 @@ end
 ---@field width number
 
 ---@class utils.dashboard.Config
----@field sections utils.dashboard.Item[]
+---@field sections utils.dashboard.Section[]
 ---@field pane_gap number
 ---@field width number
 ---@field col? number
@@ -51,12 +60,20 @@ local defaults = {
 ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+		keys = {
+			{ icon = " ", key = "f", desc = "Find File", action = ":lua print('Find File')" },
+			{ icon = " ", key = "n", desc = "New File", action = ":lua print('New File')" },
+			{ icon = " ", key = "g", desc = "Find Text", action = ":lua print('Find Text')" },
+			{ icon = " ", key = "r", desc = "Recent Files", action = ":lua print('Recent Files')" },
+			{ icon = " ", key = "c", desc = "Config", action = ":lua print('Config')" },
+			{ icon = " ", key = "s", desc = "Restore Session", action = ":lua print('Restore Session')" },
+			{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":lua print('Lazy')" },
+			{ icon = " ", key = "q", desc = "Quit", action = ":lua print('Quit')" },
+		},
 	},
 	sections = {
-		{
-			section = "header",
-			pane = 1,
-		},
+		{ section = "header", pane = 1 },
+		{ section = "keys", gap = 1, padding = 1 },
 	},
 	formats = {
 		header = { "%s", align = "center" },
