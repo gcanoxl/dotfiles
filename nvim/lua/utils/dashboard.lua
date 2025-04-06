@@ -90,6 +90,19 @@ local bo = {
 	undofile = false,
 }
 
+-- dealing with highlights
+M.ns = vim.api.nvim_create_namespace("dashboard")
+local links = {
+	Header = "Title",
+}
+local hl_groups = {}
+for k, v in pairs(links) do
+	local hl_name = "Dashboard" .. k
+	hl_groups[k:lower()] = hl_name
+	-- TODO: set it non-global
+	vim.api.nvim_set_hl(0, hl_name, { link = v })
+end
+
 ---@class utils.dashboard.Item
 ---@field enabled? boolean|fun(opts:utils.dashboard.Opts):boolean if false, the section will be disabled
 ---@field title? string
@@ -168,6 +181,7 @@ function D:render()
 			/ 2
 
 	local lines = {}
+	local extmarks = {} ---@type { row: number, col: number, opts: vim.api.keyset.set_extmark }[]
 	for p, pane in ipairs(self.panes) do
 		local indent = (" "):rep(p == 1 and self.col or self.opts.pane_gap)
 		local row = 0
@@ -181,8 +195,15 @@ function D:render()
 				else
 					lines[row] = (lines[row] or "") .. indent
 				end
-				for t, text in ipairs(line[1]) do
-					lines[row] = lines[row] .. text
+				for _, text in ipairs(line) do ---@type utils.dashboard.Text
+					lines[row] = lines[row] .. text[1]
+					if text.hl then
+						table.insert(extmarks, {
+							row = row - 1,
+							col = #lines[row] - #text[1],
+							opts = { hl_group = hl_groups[text.hl] or text.hl, end_col = #lines[row] },
+						})
+					end
 				end
 			end
 		end
@@ -196,6 +217,11 @@ function D:render()
 	vim.bo[self.buf].modifiable = true
 	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, lines)
 	vim.bo[self.buf].modifiable = false
+
+	vim.api.nvim_buf_clear_namespace(self.buf, M.ns, 0, -1)
+	for _, mark in ipairs(extmarks) do
+		vim.api.nvim_buf_set_extmark(self.buf, M.ns, above + mark.row, mark.col, mark.opts)
+	end
 end
 
 ---@param item utils.dashboard.Item
@@ -203,10 +229,6 @@ end
 function D:format(item)
 	local lines = {} ---@type utils.dashboard.Text[]
 	if item.header then
-		-- for _, line in ipairs(vim.split(item.header, "\n")) do
-		-- 	local align = self.opts.formats["header"].align
-		-- 	table.insert(lines, { self:align(line, self.opts.width, align), width = vim.api.nvim_strwidth(line) })
-		-- end
 		for _, line in ipairs(self:texts(self:format_field(item, "header"))) do
 			table.insert(lines, line)
 		end
