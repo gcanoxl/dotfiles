@@ -5,6 +5,7 @@ local layouts = require("configs.heirline.components.layouts")
 local debugger = require("configs.heirline.components.debugger")
 
 local cloc = require("configs.heirline.components.cloc")
+local daily_code = require("configs.heirline.components.dailycode")
 
 local StatusLine = {
 	{
@@ -17,7 +18,10 @@ local StatusLine = {
 	{
 		debugger.DAPMessages,
 		layouts.Space,
+		daily_code,
+		layouts.Space,
 		cloc,
+
 		layouts.Space,
 		ornaments.LSPActive,
 		layouts.Space,
