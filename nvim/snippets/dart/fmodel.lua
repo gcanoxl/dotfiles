@@ -7,7 +7,7 @@ part '$1.freezed.dart';
 part '$1.g.dart';
 
 @freezed
-class $2 with _$$2 {
+abstract class $2 with _$$2 {
   const factory $2({
 		$0
   }) = _$2;
