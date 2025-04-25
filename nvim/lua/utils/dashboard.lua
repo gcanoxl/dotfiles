@@ -113,6 +113,8 @@ M.ns = vim.api.nvim_create_namespace("dashboard")
 local links = {
 	Header = "Title",
 	Icon = "Special",
+	Desc = "Special",
+	Key = "Number",
 }
 local hl_groups = {}
 for k, v in pairs(links) do
