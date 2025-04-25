@@ -274,6 +274,12 @@ function D:format(item)
 
 	for i = 1, math.max(#center, #left, #right, 1) do
 		ret[i] = { width = 0 }
+		left[i] = left[i] or { width = 0 }
+		right[i] = right[i] or { width = 0 }
+		center[i] = center[i] or { width = 0 }
+		self:align(left[i], left.width, "left")
+		self:align(right[i], right.width, "right")
+		self:align(center[i], self.opts.width - left[i].width - right[i].width, item.align)
 		vim.list_extend(ret[i], left[i] or { width = 0 })
 		vim.list_extend(ret[i], center[i] or { width = 0 })
 		vim.list_extend(ret[i], right[i] or { width = 0 })
@@ -326,13 +332,20 @@ function D:texts(texts)
 	return texts --[[ @as utils.dashboard.Text[] ]]
 end
 
----@param item utils.dashboard.Text
+---@param item utils.dashboard.Text|utils.dashboard.Line
 ---@param width? number
 ---@param align? "left" | "center" | "right"
 function D:align(item, width, align)
 	local len = 0
-	if type(item[1]) == "string" then
+	if type(item[1]) == "string" then ---@cast item utils.dashboard.Text
 		width, align, len = width or item.width, align or "left", vim.api.nvim_strwidth(item[1])
+	else ---@cast item utils.dashboard.Line
+		if #item == 1 then -- only one text, so align that instead
+			self:align(item[1], width, align)
+			item.width = item[1].width
+			return
+		end
+		len = item.width
 	end
 
 	if not width or width <= 0 or width == len then
@@ -344,10 +357,17 @@ function D:align(item, width, align)
 	local before = align == "center" and math.floor((width - len) / 2) or align == "right" and width - len or 0
 	local after = align == "center" and width - len - before or align == "left" and width - len or 0
 
-	if type(item[1]) == "string" then
+	if type(item[1]) == "string" then ---@cast item utils.dashboard.Text
 		item[1] = (" "):rep(before) .. item[1] .. (" "):rep(after)
-		item.width = math.max(width, len)
+	else ---@cast item utils.dashboard.Line
+		if before > 0 then
+			table.insert(item, 1, { (" "):rep(before) })
+		end
+		if after > 0 then
+			table.insert(item, { (" "):rep(after) })
+		end
 	end
+	item.width = math.max(width, len)
 end
 
 ---@param item utils.dashboard.Item?
