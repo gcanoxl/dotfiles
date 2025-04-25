@@ -19,10 +19,34 @@ function M.sections.header()
 	end
 end
 
+---@return utils.dashboard.Gen
 function M.sections.keys()
 	---@param self utils.dashboard.Class
 	return function(self)
 		return vim.deepcopy(self.opts.present.keys)
+	end
+end
+
+---@return utils.dashboard.Gen
+function M.sections.startup()
+	---@param opts utils.dashboard.Class
+	return function(opts)
+		opts = opts or {}
+		M.lazy_stats = M.lazy_stats and M.lazy_stats.startup > 0 and M.lazy_stats or require("lazy.stats").stats()
+		local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
+		local icon = opts.icon or "⚡ "
+		return {
+			align = "center",
+			text = {
+				{ icon .. "Loaded ", hl = "footer" },
+				{
+					M.lazy_stats.loaded .. "/" .. M.lazy_stats.count,
+					hl = "special",
+				},
+				{ " plugins in ", hl = "footer" },
+				{ ms .. "ms", hl = "special" },
+			},
+		}
 	end
 end
 
@@ -74,6 +98,7 @@ local defaults = {
 	sections = {
 		{ section = "header", pane = 1 },
 		{ section = "keys", gap = 1, padding = 1 },
+		{ section = "startup" },
 	},
 	formats = {
 		icon = { "%s", width = 2 },
@@ -115,6 +140,8 @@ local links = {
 	Icon = "Special",
 	Desc = "Special",
 	Key = "Number",
+	Footer = "Title",
+	Special = "Special",
 }
 local hl_groups = {}
 for k, v in pairs(links) do
@@ -137,6 +164,7 @@ end
 ---@field opts utils.dashboard.Opts
 ---@field augroup number
 ---@field panes? utils.dashboard.Item[][]
+---@field icon? string
 local D = {}
 
 function D:init()
@@ -265,9 +293,10 @@ function D:format(item)
 		return block
 	end
 
-	local left = find({ "icon" }, { multi = false, padding = 1 })
-	local right = find({ "key" }, { multi = false })
-	local center = find({ "header", "desc" }, { multi = true })
+	local block = item.text and self:block(self:texts(item.text))
+	local left = block and { width = 0 } or find({ "icon" }, { multi = false, padding = 1 })
+	local right = block and { width = 0 } or find({ "key" }, { multi = false })
+	local center = block or find({ "header", "desc" }, { multi = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
