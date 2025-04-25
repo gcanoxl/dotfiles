@@ -271,7 +271,8 @@ function D:format(item)
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
-	for i = 1, math.max(#center, #left, #right, 1) do
+	local padding = self:padding(item)
+	for i = 1, math.max(#center, #left, #right, 1) + padding[1] do
 		ret[i] = { width = 0 }
 		left[i] = left[i] or { width = 0 }
 		right[i] = right[i] or { width = 0 }
@@ -283,7 +284,16 @@ function D:format(item)
 		vim.list_extend(ret[i], center[i] or { width = 0 })
 		vim.list_extend(ret[i], right[i] or { width = 0 })
 	end
+	for _ = 1, padding[2] do
+		table.insert(ret, 1, { width = 0 })
+	end
 	return ret
+end
+
+---@param item utils.dashboard.Item
+---@return {[1]: number,[2]: number }
+function D:padding(item)
+	return item.padding and (type(item.padding) == "table" and item.padding or { item.padding, 0 }) or { 0, 0 }
 end
 
 ---@param texts utils.dashboard.Text[]
@@ -393,6 +403,7 @@ function D:resolve(item, results, parent)
 			table.insert(results, item)
 			return results
 		end
+		local first_child = #results + 1
 		if item.section then
 			local section = M.sections[item.section]()
 			self:resolve(section, results, item)
@@ -402,7 +413,26 @@ function D:resolve(item, results, parent)
 				self:resolve(child, results, item)
 			end
 		end
+
+		local first, last = first_child, #results
+
+		if item.gap then -- add padding between child items
+			for i = first, last - 1 do
+				results[i].padding = item.gap
+			end
+		end
+
+		if item.padding then
+			local padding = self:padding(item)
+			if padding[2] > 0 and results[first] then
+				results[first].padding = padding[2]
+			end
+			if padding[1] > 0 and results[last] then
+				results[last].padding = padding[1]
+			end
+		end
 	end
+
 	return results
 end
 
