@@ -338,7 +338,7 @@ end
 function D:align(item, width, align)
 	local len = 0
 	if type(item[1]) == "string" then ---@cast item utils.dashboard.Text
-		width, align, len = width or item.width, align or "left", vim.api.nvim_strwidth(item[1])
+		width, align, len = width or item.width, align or item.align, vim.api.nvim_strwidth(item[1])
 	else ---@cast item utils.dashboard.Line
 		if #item == 1 then -- only one text, so align that instead
 			self:align(item[1], width, align)
