@@ -247,10 +247,8 @@ end
 ---@param item utils.dashboard.Item
 ---@return utils.dashboard.Block
 function D:format(item)
-	local lines = {} ---@type utils.dashboard.Text[]
-
 	---@param fields string[]
-	---@param opts? {multi:boolean}
+	---@param opts {multi?:boolean, padding?: number}
 	---@return utils.dashboard.Block
 	local function find(fields, opts)
 		local texts = {} ---@type utils.dashboard.Text[]
@@ -258,17 +256,18 @@ function D:format(item)
 			if item[field] then
 				vim.list_extend(texts, self:texts(self:format_field(item, field)))
 			end
-			if opts and opts.multi then
+			if not opts.multi then
 				break
 			end
 		end
 		local block = self:block(texts)
+		block.width = block.width + (opts.padding or 0)
 		return block
 	end
 
-	local left = find({ "icon" }, { multi = false })
-	local center = find({ "header", "desc" })
+	local left = find({ "icon" }, { multi = false, padding = 1 })
 	local right = find({ "key" }, { multi = false })
+	local center = find({ "header", "desc" }, { multi = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
