@@ -76,6 +76,7 @@ local defaults = {
 		{ section = "keys", gap = 1, padding = 1 },
 	},
 	formats = {
+		icon = { "%s", width = 2 },
 		header = { "%s", align = "center" },
 	},
 }
@@ -289,7 +290,7 @@ function D:block(texts)
 				ret[#ret + 1] = { width = 0 }
 			end
 			local child = setmetatable({ line }, { __index = text })
-			-- self:align(child)
+			self:align(child)
 			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(line)
 			ret.width = math.max(ret.width, ret[#ret].width)
 			table.insert(ret[#ret], child)
@@ -323,15 +324,28 @@ function D:texts(texts)
 	return texts --[[ @as utils.dashboard.Text[] ]]
 end
 
----@param text string
+---@param item utils.dashboard.Text
 ---@param width? number
 ---@param align? "left" | "center" | "right"
-function D:align(text, width, align)
+function D:align(item, width, align)
+	local len = 0
+	if type(item[1]) == "string" then
+		width, align, len = width or item.width, align or "left", vim.api.nvim_strwidth(item[1])
+	end
+
+	if not width or width <= 0 or width == len then
+		item.width = math.max(width or 0, len)
+		return
+	end
+
 	align = align or "left"
-	local len = vim.api.nvim_strwidth(text)
 	local before = align == "center" and math.floor((width - len) / 2) or align == "right" and width - len or 0
 	local after = align == "center" and width - len - before or align == "left" and width - len or 0
-	return (" "):rep(before) .. text .. (" "):rep(after)
+
+	if type(item[1]) == "string" then
+		item[1] = (" "):rep(before) .. item[1] .. (" "):rep(after)
+		item.width = math.max(width, len)
+	end
 end
 
 ---@param item utils.dashboard.Item?
