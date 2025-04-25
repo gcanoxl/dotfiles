@@ -229,7 +229,7 @@ function D:render()
 		end
 	end
 	-- vertical position
-	local above = math.floor((self._size.height - #lines) / 2)
+	local above = math.max(math.floor((self._size.height - #lines) / 2), 0)
 	for _ = 1, above do
 		table.insert(lines, 1, "")
 	end
