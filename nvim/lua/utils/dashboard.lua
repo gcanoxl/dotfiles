@@ -15,7 +15,7 @@ M.sections = {}
 function M.sections.header()
 	---@param self utils.dashboard.Class
 	return function(self)
-		return { header = self.opts.present.header, padding = 2 }
+		return { header = self.opts.present.header }
 	end
 end
 
