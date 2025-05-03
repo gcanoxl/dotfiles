@@ -4,8 +4,8 @@ require("installer")
 require("keymaps")
 require("autocmds")
 
--- vim.api.nvim_command([[colorscheme tokyonight-moon]])
-vim.cmd("colorscheme catppuccin-frappe")
+vim.api.nvim_command([[colorscheme tokyonight-moon]])
+-- vim.cmd("colorscheme catppuccin-frappe")
 
 -- configurations for GUI clients
 if vim.g.neovide then
