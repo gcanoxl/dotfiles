@@ -18,6 +18,9 @@ local section_lowline = {
 		gap = 1,
 	},
 }
-dashboard({
-	sections = is_higherline and section_highline or section_lowline,
-})
+
+if vim.fn.argc(-1) == 0 then
+	dashboard({
+		sections = is_higherline and section_highline or section_lowline,
+	})
+end
