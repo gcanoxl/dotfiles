@@ -5,7 +5,16 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local neocodeium = require("neocodeium")
-			neocodeium.setup()
+			neocodeium.setup({
+				enabled = true,
+				silent = true,
+				filetypes = {
+					help = false,
+					gitrebase = false,
+					["."] = false,
+					["cpp"] = false,
+				},
+			})
 			vim.keymap.set("i", "<C-k>", neocodeium.accept)
 		end,
 	},
