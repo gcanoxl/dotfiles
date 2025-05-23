@@ -4,7 +4,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup,
 	callback = function()
 		local buf = vim.api.nvim_get_current_buf()
-		vim.keymap.set("n", "q", "<cmd>bd<cr>", { silent = true, buffer = buf })
 		vim.api.nvim_set_option_value("buflisted", false, { scope = "local", buf = buf })
 	end,
 })
@@ -12,5 +11,8 @@ return {
 	"stevearc/overseer.nvim",
 	opts = {
 		templates = { "builtin", "user.oi_run" },
+		task_list = {
+			direction = "right",
+		},
 	},
 }

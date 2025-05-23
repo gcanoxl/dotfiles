@@ -6,11 +6,11 @@ return {
 			cmd = { "sh" },
 			args = {
 				"-c",
-				"g++ '" .. file .. "' -o /tmp/a.out && /tmp/a.out",
+				"g++ '" .. file .. "' -o a.out && ./a.out && rm a.out",
 			},
 			components = {
 				{ "on_output_quickfix", open = true },
-				-- { "open_output", direction = "vertical" },
+				{ "on_complete_notify", statuses = {} },
 				{ "timeout", timeout = 5 },
 				"default",
 			},
