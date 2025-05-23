@@ -10,7 +10,8 @@ return {
 			},
 			components = {
 				{ "on_output_quickfix", open = true },
-				{ "timeout", seconds = 5 },
+				-- { "open_output", direction = "vertical" },
+				{ "timeout", timeout = 5 },
 				"default",
 			},
 		}
