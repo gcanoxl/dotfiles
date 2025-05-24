@@ -19,8 +19,7 @@ require("lazy").setup({
 	{ import = "plugins" },
 }, {
 	dev = {
-		-- TODO: detect if this machine is my personal one, or simply a remote ssh machine
 		path = "~/Developer/",
-		patterns = { "gcanoxl" },
+		patterns = jit.os == "OSX" and { "gcanoxl" } or {},
 	},
 })
