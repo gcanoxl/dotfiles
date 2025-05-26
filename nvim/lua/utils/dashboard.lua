@@ -8,7 +8,7 @@ local M = setmetatable({}, {
 
 M.sections = {}
 
----@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Item
+---@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Section
 ---@alias utils.dashboard.Section utils.dashboard.Gen|utils.dashboard.Section[]
 
 ---@return utils.dashboard.Gen
@@ -50,11 +50,65 @@ function M.sections.startup()
 	end
 end
 
+---@param opts {filter?: table<string, boolean>}?
+---@return fun():string?
+function M.oldfiles(opts)
+	opts = vim.tbl_deep_extend("force", {
+		filter = {
+			[vim.fn.stdpath("data")] = false,
+			[vim.fn.stdpath("cache")] = false,
+			[vim.fn.stdpath("state")] = false,
+		},
+	}, opts or {})
+	---@cast opts {filter: table<string, boolean>}
+	local filters = {} ---@type {path:string, want:string}[]
+	for path, want in pairs(opts.filter or {}) do
+		table.insert(filters, { path = vim.fs.normalize(path), want = want })
+	end
+	local i = 1
+	local oldfiles = vim.v.oldfiles
+	local done = {} ---@type {[string]:boolean}
+	return function()
+		while oldfiles[i] do
+			local path = vim.fs.normalize(oldfiles[i])
+			local want = not done[path]
+			if want then
+				done[path] = true
+				for _, filter in ipairs(filters) do
+					if (path:sub(1, #filter.path) == filter.path) ~= filter.want then
+						want = false
+						break
+					end
+				end
+			end
+			i = i + 1
+			if want and vim.uv.fs_stat(path) then
+				return path
+			end
+		end
+	end
+end
+
+---@param opts{limit:number?, cwd: string|boolean, filter:fun(string):boolean?}
 ---@return utils.dashboard.Gen
-function M.sections.recent_files()
-	---@param opts utils.dashboard.Class
-	return function(opts)
-		return {}
+function M.sections.recent_files(opts)
+	return function()
+		opts = opts or {}
+		local limit = opts.limit or 5
+		local root = opts.cwd or false
+		root = opts.cwd and vim.fs.normalize(type(root) == "string" and root or root and vim.fn.getcwd() or "") or ""
+		local ret = {} ---@type utils.dashboard.Section
+		for file in M.oldfiles({ filter = { [root] = true } }) do
+			if not opts.filter or opts.filter(file) then
+				ret[#ret + 1] = {
+					text = file,
+				}
+				if #ret >= limit then
+					break
+				end
+			end
+		end
+		return ret
 	end
 end
 ---@class utils.dashboard.Text
