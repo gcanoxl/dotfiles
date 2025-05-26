@@ -75,16 +75,22 @@ return {
 					title = "Terminal",
 					ft = "toggleterm",
 				},
+				{
+					title = "QuickFix",
+					ft = "qf",
+				},
 			},
 
 			---@type (Edgy.View.Opts|string)[]
-			top = {},
+			top = {
+				{ title = "Help", ft = "help" },
+			},
 
 			-- Options
 			-- -@type table<Edgy.Pos, {size:integer | fun():integer, wo?:vim.wo}>
 			options = {
 				left = { size = 24 },
-				bottom = { size = 10 },
+				bottom = { size = 0.36 },
 				right = { size = 30 },
 				top = { size = 10 },
 			},

@@ -333,3 +333,8 @@ utils.map_on_filetype("lua", {
 utils.map_on_filetype("python", {
 	["r"] = { utils.cmd("RunCode"), "Run" },
 })
+
+-- C++ Special Keymaps
+utils.map_on_filetype("cpp", {
+	["r"] = { utils.cmd("OverseerRun OI\\ C++\\ Build\\ and\\ Run"), "Run OI Program" },
+})
