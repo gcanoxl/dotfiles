@@ -50,6 +50,13 @@ function M.sections.startup()
 	end
 end
 
+---@return utils.dashboard.Gen
+function M.sections.recent_files()
+	---@param opts utils.dashboard.Class
+	return function(opts)
+		return {}
+	end
+end
 ---@class utils.dashboard.Text
 ---@field [1] string
 ---@field width? number
