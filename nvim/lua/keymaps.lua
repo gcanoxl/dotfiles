@@ -335,6 +335,4 @@ utils.map_on_filetype("python", {
 })
 
 -- C++ Special Keymaps
-utils.map_on_filetype("cpp", {
-	["r"] = { utils.cmd("OverseerRun OI\\ C++\\ Build\\ and\\ Run"), "Run OI Program" },
-})
+-- TODO: add competitest keymaps
