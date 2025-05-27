@@ -101,7 +101,8 @@ function M.sections.recent_files(opts)
 		for file in M.oldfiles({ filter = { [root] = true } }) do
 			if not opts.filter or opts.filter(file) then
 				ret[#ret + 1] = {
-					text = file,
+					file = file,
+					icon = "file",
 				}
 				if #ret >= limit then
 					break
@@ -131,7 +132,7 @@ end
 ---@field width number
 ---@field col? number
 ---@field row? number
----@field formats table<string, utils.dashboard.Text>
+---@field formats table<string, utils.dashboard.Text|fun(utils.dashboard.Item):utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
@@ -162,10 +163,48 @@ local defaults = {
 		{ section = "startup" },
 	},
 	formats = {
-		icon = { "%s", width = 2 },
+		icon = function(item)
+			local icon = item.icon
+			if item.icon == "file" or item.icon == "directory" then
+				icon = M.icon(item.file, item.icon)
+			end
+			return { icon, hl = "icon" }
+		end,
 		header = { "%s", align = "center" },
 	},
 }
+
+---@param name string
+---@param cat? "file"|"filetype"|"extension"|"directory"
+---@param opts? {fallback?:{file?:string, dir?: string}}
+---@return string
+function M.icon(name, cat, opts)
+	opts = opts or {}
+	opts.fallback = opts.fallback or {}
+	local tries = {
+		function()
+			if cat == "directory" then
+				return opts.fallback.dir or "󰉋 "
+			end
+			local Icon = require("nvim-web-devicons")
+			if cat == "filetype" then
+				Icon.get_icon_by_filetype(name, { default = false })
+			elseif cat == "extension" then
+				Icon.get_icon(nil, name, { default = false })
+			elseif cat == "file" then
+				local ext = name:match("%.(%w+)$")
+				return Icon.get_icon(name, ext, { default = false })
+			end
+		end,
+	}
+	for _, fn in ipairs(tries) do
+		local ok, icon = pcall(fn)
+		if ok and icon then
+			return icon
+		end
+	end
+	return opts.fallback.file or "󰈔 "
+end
 
 ---@class utils.dashboard.Opts: utils.dashboard.Config
 ---@field buf? number
@@ -357,7 +396,7 @@ function D:format(item)
 	local block = item.text and self:block(self:texts(item.text))
 	local left = block and { width = 0 } or find({ "icon" }, { multi = false, padding = 1 })
 	local right = block and { width = 0 } or find({ "key" }, { multi = false })
-	local center = block or find({ "header", "desc" }, { multi = true })
+	local center = block or find({ "header", "desc", "file" }, { multi = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
