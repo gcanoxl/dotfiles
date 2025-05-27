@@ -33,4 +33,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+-- don't show qf in the buffer list
+local augroup = vim.api.nvim_create_augroup("qf", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	group = augroup,
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		vim.api.nvim_set_option_value("buflisted", false, { scope = "local", buf = buf })
+	end,
+})
+
 require("autocmds.viewsaver")
