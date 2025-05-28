@@ -534,7 +534,7 @@ function D:resolve(item, results, parent)
 		end
 		local first_child = #results + 1
 		if item.section then
-			local section = M.sections[item.section]()
+			local section = M.sections[item.section](item)
 			self:resolve(section, results, item)
 		end
 		if item[1] then
