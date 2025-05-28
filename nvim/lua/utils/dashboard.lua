@@ -175,8 +175,13 @@ local defaults = {
 		file = function(item, ctx)
 			local fname = vim.fn.fnamemodify(item.file, ":~")
 			fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
-
-			return { fname, hl = "file" }
+			local dir = vim.fn.fnamemodify(fname, ":h")
+			local file = vim.fn.fnamemodify(fname, ":t")
+			if #fname > ctx.width and dir and file then
+				file = file:sub(-(ctx.width - #dir - 2))
+				fname = dir .. "/…" .. file
+			end
+			return dir and { { dir .. "/", hl = "dir" }, { file, hl = "file" } } or { { fname, hl = "file" } }
 		end,
 		header = { "%s", align = "center" },
 	},
@@ -250,6 +255,8 @@ local links = {
 	Key = "Number",
 	Footer = "Title",
 	Special = "Special",
+	File = "Special",
+	Dir = "NonText",
 }
 local hl_groups = {}
 for k, v in pairs(links) do
