@@ -401,6 +401,7 @@ function D:format(item)
 		end
 		local block = self:block(texts)
 		block.width = block.width + (opts.padding or 0)
+		width = width + block.width
 		return block
 	end
 
