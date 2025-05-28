@@ -168,7 +168,7 @@ local defaults = {
 			if item.icon == "file" or item.icon == "directory" then
 				icon = M.icon(item.file, item.icon)
 			end
-			return { icon, hl = "icon" }
+			return { icon, hl = "icon", width = 2 }
 		end,
 		header = { "%s", align = "center" },
 	},
@@ -437,7 +437,7 @@ function D:block(texts)
 			end
 			local child = setmetatable({ line }, { __index = text })
 			self:align(child)
-			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(line)
+			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(child[1])
 			ret.width = math.max(ret.width, ret[#ret].width)
 			table.insert(ret[#ret], child)
 		end
