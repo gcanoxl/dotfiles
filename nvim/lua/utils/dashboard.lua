@@ -103,6 +103,8 @@ function M.sections.recent_files(opts)
 				ret[#ret + 1] = {
 					file = file,
 					icon = "file",
+					autokey = true,
+					action = ":e " .. vim.fn.fnameescape(file),
 				}
 				if #ret >= limit then
 					break
@@ -140,6 +142,7 @@ local defaults = {
 	width = 60,
 	col = nil,
 	row = nil,
+	autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
 	present = {
 		header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
@@ -266,11 +269,25 @@ for k, v in pairs(links) do
 	vim.api.nvim_set_hl(0, hl_name, { link = v })
 end
 
+---@alias utils.dashboard.Action string|fun(self:utils.dashboard.Class)
+
 ---@class utils.dashboard.Item
 ---@field enabled? boolean|fun(opts:utils.dashboard.Opts):boolean if false, the section will be disabled
 ---@field title? string
 ---@field section? utils.dashboard.Item
 ---@field hidden? boolean
+---@field autokey? boolean
+---@field action? utils.dashboard.Action
+---@field key? string
+---@field indent? number
+---@field align? "left" | "center" | "right"
+---@field gap? number the number of empty lines between child items
+---@field padding? number | {[1]:number, [2]:number} bottom or {bottom, top} padding
+---@field file? string
+---@field footer? string
+---@field header? string
+---@field icon? string
+---@field text? string|utils.dashboard.Text[]
 ---@field [string] any
 
 ---@class utils.dashboard.Class
@@ -319,7 +336,45 @@ function D:update()
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
 	self:layout()
+	self:keys()
 	self:render()
+end
+
+function D:keys()
+	local autokeys = self.opts.autokeys:gsub("[hjklq]", "")
+	for _, item in ipairs(self.items) do
+		if item.key and not item.autokey then
+			autokeys = autokeys:gsub(vim.pesc(item.key), "")
+		end
+	end
+	for _, item in ipairs(self.items) do
+		if item.autokey then
+			item.key, autokeys = autokeys:sub(1, 1), autokeys:sub(2)
+		end
+		if item.key then
+			vim.keymap.set("n", item.key, function()
+				self:action(item.action)
+			end, {
+				buffer = self.buf,
+				nowait = not item.autokey,
+				silent = true,
+				desc = "Dashboard Action",
+			})
+		end
+	end
+end
+
+---@param action utils.dashboard.Action
+function D:action(action)
+	if type(action) == "string" then
+		if action:find("^:") then
+			return vim.cmd(action:sub(2))
+		else
+			local keys = vim.api.nvim_replace_termcodes(action, true, true, true)
+			return vim.api.nvim_feedkeys(keys, "tm", true)
+		end
+	end
+	action(self)
 end
 
 function D:layout()
