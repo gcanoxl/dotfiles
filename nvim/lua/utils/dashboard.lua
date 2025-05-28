@@ -126,13 +126,15 @@ end
 ---@field [number] utils.dashboard.Line
 ---@field width number
 
+---@alias utils.dashboard.Format.ctx {width?:number}
+
 ---@class utils.dashboard.Config
 ---@field sections utils.dashboard.Section[]
 ---@field pane_gap number
 ---@field width number
 ---@field col? number
 ---@field row? number
----@field formats table<string, utils.dashboard.Text|fun(utils.dashboard.Item):utils.dashboard.Text>
+---@field formats table<string, utils.dashboard.Text|fun(item: utils.dashboard.Item, ctx:utils.dashboard.Format.ctx):utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
@@ -169,6 +171,12 @@ local defaults = {
 				icon = M.icon(item.file, item.icon)
 			end
 			return { icon, hl = "icon", width = 2 }
+		end,
+		file = function(item, ctx)
+			local fname = vim.fn.fnamemodify(item.file, ":~")
+			fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
+
+			return { fname, hl = "file" }
 		end,
 		header = { "%s", align = "center" },
 	},
@@ -375,14 +383,17 @@ end
 ---@param item utils.dashboard.Item
 ---@return utils.dashboard.Block
 function D:format(item)
+	local width = item.indent or 0
+
 	---@param fields string[]
-	---@param opts {multi?:boolean, padding?: number}
+	---@param opts {multi?:boolean, padding?: number, flex?: boolean}
 	---@return utils.dashboard.Block
 	local function find(fields, opts)
+		local flex = opts.flex and math.max(0, self.opts.width - width) or nil
 		local texts = {} ---@type utils.dashboard.Text[]
 		for _, field in ipairs(fields) do
 			if item[field] then
-				vim.list_extend(texts, self:texts(self:format_field(item, field)))
+				vim.list_extend(texts, self:texts(self:format_field(item, field, flex)))
 			end
 			if not opts.multi then
 				break
@@ -396,7 +407,7 @@ function D:format(item)
 	local block = item.text and self:block(self:texts(item.text))
 	local left = block and { width = 0 } or find({ "icon" }, { multi = false, padding = 1 })
 	local right = block and { width = 0 } or find({ "key" }, { multi = false })
-	local center = block or find({ "header", "desc", "file" }, { multi = true })
+	local center = block or find({ "header", "desc", "file" }, { multi = true, flex = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
@@ -447,13 +458,14 @@ end
 
 ---@param item utils.dashboard.Item
 ---@param field string
+---@param width? number
 ---@return utils.dashboard.Text|utils.dashboard.Text[]
-function D:format_field(item, field)
+function D:format_field(item, field, width)
 	local format = self.opts.formats[field]
 	if format == nil then
 		return { item[field], hl = field }
 	elseif type(format) == "function" then
-		return format(item)
+		return format(item, { width = width })
 	else
 		local text = format and vim.deepcopy(format) or { "%s" }
 		text.hl = text.hl or field
