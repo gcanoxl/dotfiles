@@ -196,6 +196,33 @@ wk.add({
 	{ "<leader>dq", require("dap").terminate, desc = "Terminate" },
 	{ "<leader>dl", require("dap.repl").toggle, desc = "Toggle REPL" },
 	{ "<leader>dL", require("dap.repl").clear, desc = "Clear REPL" },
+	-- Competitive Programming
+	{ "<leader>I", group = "Competitive" },
+	{
+		"<leader>Ic",
+		"<cmd>CompetiTest receive problem<cr>",
+		desc = "Receive Problem",
+	},
+	{
+		"<leader>Ir",
+		"<cmd>CompetiTest run<cr>",
+		desc = "Run",
+	},
+	{
+		"<leader>Ia",
+		"<cmd>CompetiTest add_testcase<cr>",
+		desc = "Add Testcase",
+	},
+	{
+		"<leader>Ie",
+		"<cmd>CompetiTest edit_testcase<cr>",
+		desc = "Edit Testcase",
+	},
+	{
+		"<leader>Id",
+		"<cmd>CompetiTest delete_testcase<cr>",
+		desc = "Delete Testcase",
+	},
 })
 
 -- Go Special Keymaps
@@ -333,6 +360,3 @@ utils.map_on_filetype("lua", {
 utils.map_on_filetype("python", {
 	["r"] = { utils.cmd("RunCode"), "Run" },
 })
-
--- C++ Special Keymaps
--- TODO: add competitest keymaps
