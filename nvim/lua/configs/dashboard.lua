@@ -1,26 +1,30 @@
 local dashboard = require("utils.dashboard")
-local is_higherline = vim.api.nvim_win_get_height(0) > 30
-
-local section_highline = {
-	{ section = "header", pane = 1, padding = 2 },
-	{
-		section = "keys",
-		gap = 1,
-		padding = 1,
-	},
-	{ section = "startup" },
-}
-
-local section_lowline = {
-	{ section = "startup", padding = 1 },
-	{
-		section = "keys",
-		gap = 1,
-	},
-}
 
 if vim.fn.argc(-1) == 0 then
-	dashboard({
-		sections = is_higherline and section_highline or section_lowline,
+	local augroup = vim.api.nvim_create_augroup("dashboard", { clear = true })
+	vim.api.nvim_create_autocmd("VimEnter", {
+		group = augroup,
+		callback = function()
+			dashboard({
+				-- formats = {
+				-- 	key = function(item)
+				-- 		return { { "[", hl = "special" }, { item.key, hl = "key" }, { "]", hl = "special" } }
+				-- 	end,
+				-- },
+				sections = {
+					{ section = "header", padding = 1, pane = 1 },
+					{ section = "keys", pane = 1, gap = 1, padding = 1 },
+					{ section = "startup", pane = 1 },
+					{ section = "recent_files", padding = 1, pane = 2, limit = 8 },
+					-- { section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
+					-- { title = "MRU", padding = 1 },
+					-- { section = "recent_files", limit = 8, padding = 1 },
+					-- { title = "MRU ", file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
+					-- { title = "Sessions", padding = 1 },
+					-- { section = "projects", padding = 1 },
+					-- { title = "Bookmarks", padding = 1 },
+				},
+			})
+		end,
 	})
 end

@@ -8,7 +8,7 @@ local M = setmetatable({}, {
 
 M.sections = {}
 
----@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Item
+---@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Section
 ---@alias utils.dashboard.Section utils.dashboard.Gen|utils.dashboard.Section[]
 
 ---@return utils.dashboard.Gen
@@ -50,6 +50,70 @@ function M.sections.startup()
 	end
 end
 
+---@param opts {filter?: table<string, boolean>}?
+---@return fun():string?
+function M.oldfiles(opts)
+	opts = vim.tbl_deep_extend("force", {
+		filter = {
+			[vim.fn.stdpath("data")] = false,
+			[vim.fn.stdpath("cache")] = false,
+			[vim.fn.stdpath("state")] = false,
+		},
+	}, opts or {})
+	---@cast opts {filter: table<string, boolean>}
+	local filters = {} ---@type {path:string, want:string}[]
+	for path, want in pairs(opts.filter or {}) do
+		table.insert(filters, { path = vim.fs.normalize(path), want = want })
+	end
+	local i = 1
+	local oldfiles = vim.v.oldfiles
+	local done = {} ---@type {[string]:boolean}
+	return function()
+		while oldfiles[i] do
+			local path = vim.fs.normalize(oldfiles[i])
+			local want = not done[path]
+			if want then
+				done[path] = true
+				for _, filter in ipairs(filters) do
+					if (path:sub(1, #filter.path) == filter.path) ~= filter.want then
+						want = false
+						break
+					end
+				end
+			end
+			i = i + 1
+			if want and vim.uv.fs_stat(path) then
+				return path
+			end
+		end
+	end
+end
+
+---@param opts{limit:number?, cwd: string|boolean, filter:fun(string):boolean?}
+---@return utils.dashboard.Gen
+function M.sections.recent_files(opts)
+	return function()
+		opts = opts or {}
+		local limit = opts.limit or 5
+		local root = opts.cwd or false
+		root = opts.cwd and vim.fs.normalize(type(root) == "string" and root or root and vim.fn.getcwd() or "") or ""
+		local ret = {} ---@type utils.dashboard.Section
+		for file in M.oldfiles({ filter = { [root] = true } }) do
+			if not opts.filter or opts.filter(file) then
+				ret[#ret + 1] = {
+					file = file,
+					icon = "file",
+					autokey = true,
+					action = ":e " .. vim.fn.fnameescape(file),
+				}
+				if #ret >= limit then
+					break
+				end
+			end
+		end
+		return ret
+	end
+end
 ---@class utils.dashboard.Text
 ---@field [1] string
 ---@field width? number
@@ -64,18 +128,21 @@ end
 ---@field [number] utils.dashboard.Line
 ---@field width number
 
+---@alias utils.dashboard.Format.ctx {width?:number}
+
 ---@class utils.dashboard.Config
 ---@field sections utils.dashboard.Section[]
 ---@field pane_gap number
 ---@field width number
 ---@field col? number
 ---@field row? number
----@field formats table<string, utils.dashboard.Text>
+---@field formats table<string, utils.dashboard.Text|fun(item: utils.dashboard.Item, ctx:utils.dashboard.Format.ctx):utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
 	col = nil,
 	row = nil,
+	autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
 	present = {
 		header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
@@ -101,10 +168,59 @@ local defaults = {
 		{ section = "startup" },
 	},
 	formats = {
-		icon = { "%s", width = 2 },
+		icon = function(item)
+			local icon = item.icon
+			if item.icon == "file" or item.icon == "directory" then
+				icon = M.icon(item.file, item.icon)
+			end
+			return { icon, hl = "icon", width = 2 }
+		end,
+		file = function(item, ctx)
+			local fname = vim.fn.fnamemodify(item.file, ":~")
+			fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
+			local dir = vim.fn.fnamemodify(fname, ":h")
+			local file = vim.fn.fnamemodify(fname, ":t")
+			if #fname > ctx.width and dir and file then
+				file = file:sub(-(ctx.width - #dir - 2))
+				fname = dir .. "/…" .. file
+			end
+			return dir and { { dir .. "/", hl = "dir" }, { file, hl = "file" } } or { { fname, hl = "file" } }
+		end,
 		header = { "%s", align = "center" },
 	},
 }
+
+---@param name string
+---@param cat? "file"|"filetype"|"extension"|"directory"
+---@param opts? {fallback?:{file?:string, dir?: string}}
+---@return string
+function M.icon(name, cat, opts)
+	opts = opts or {}
+	opts.fallback = opts.fallback or {}
+	local tries = {
+		function()
+			if cat == "directory" then
+				return opts.fallback.dir or "󰉋 "
+			end
+			local Icon = require("nvim-web-devicons")
+			if cat == "filetype" then
+				Icon.get_icon_by_filetype(name, { default = false })
+			elseif cat == "extension" then
+				Icon.get_icon(nil, name, { default = false })
+			elseif cat == "file" then
+				local ext = name:match("%.(%w+)$")
+				return Icon.get_icon(name, ext, { default = false })
+			end
+		end,
+	}
+	for _, fn in ipairs(tries) do
+		local ok, icon = pcall(fn)
+		if ok and icon then
+			return icon
+		end
+	end
+	return opts.fallback.file or "󰈔 "
+end
 
 ---@class utils.dashboard.Opts: utils.dashboard.Config
 ---@field buf? number
@@ -142,6 +258,8 @@ local links = {
 	Key = "Number",
 	Footer = "Title",
 	Special = "Special",
+	File = "Special",
+	Dir = "NonText",
 }
 local hl_groups = {}
 for k, v in pairs(links) do
@@ -151,11 +269,25 @@ for k, v in pairs(links) do
 	vim.api.nvim_set_hl(0, hl_name, { link = v })
 end
 
+---@alias utils.dashboard.Action string|fun(self:utils.dashboard.Class)
+
 ---@class utils.dashboard.Item
 ---@field enabled? boolean|fun(opts:utils.dashboard.Opts):boolean if false, the section will be disabled
 ---@field title? string
 ---@field section? utils.dashboard.Item
 ---@field hidden? boolean
+---@field autokey? boolean
+---@field action? utils.dashboard.Action
+---@field key? string
+---@field indent? number
+---@field align? "left" | "center" | "right"
+---@field gap? number the number of empty lines between child items
+---@field padding? number | {[1]:number, [2]:number} bottom or {bottom, top} padding
+---@field file? string
+---@field footer? string
+---@field header? string
+---@field icon? string
+---@field text? string|utils.dashboard.Text[]
 ---@field [string] any
 
 ---@class utils.dashboard.Class
@@ -204,7 +336,45 @@ function D:update()
 	self._size = self:size()
 	self.items = self:resolve(self.opts.sections)
 	self:layout()
+	self:keys()
 	self:render()
+end
+
+function D:keys()
+	local autokeys = self.opts.autokeys:gsub("[hjklq]", "")
+	for _, item in ipairs(self.items) do
+		if item.key and not item.autokey then
+			autokeys = autokeys:gsub(vim.pesc(item.key), "")
+		end
+	end
+	for _, item in ipairs(self.items) do
+		if item.autokey then
+			item.key, autokeys = autokeys:sub(1, 1), autokeys:sub(2)
+		end
+		if item.key then
+			vim.keymap.set("n", item.key, function()
+				self:action(item.action)
+			end, {
+				buffer = self.buf,
+				nowait = not item.autokey,
+				silent = true,
+				desc = "Dashboard Action",
+			})
+		end
+	end
+end
+
+---@param action utils.dashboard.Action
+function D:action(action)
+	if type(action) == "string" then
+		if action:find("^:") then
+			return vim.cmd(action:sub(2))
+		else
+			local keys = vim.api.nvim_replace_termcodes(action, true, true, true)
+			return vim.api.nvim_feedkeys(keys, "tm", true)
+		end
+	end
+	action(self)
 end
 
 function D:layout()
@@ -275,14 +445,17 @@ end
 ---@param item utils.dashboard.Item
 ---@return utils.dashboard.Block
 function D:format(item)
+	local width = item.indent or 0
+
 	---@param fields string[]
-	---@param opts {multi?:boolean, padding?: number}
+	---@param opts {multi?:boolean, padding?: number, flex?: boolean}
 	---@return utils.dashboard.Block
 	local function find(fields, opts)
+		local flex = opts.flex and math.max(0, self.opts.width - width) or nil
 		local texts = {} ---@type utils.dashboard.Text[]
 		for _, field in ipairs(fields) do
 			if item[field] then
-				vim.list_extend(texts, self:texts(self:format_field(item, field)))
+				vim.list_extend(texts, self:texts(self:format_field(item, field, flex)))
 			end
 			if not opts.multi then
 				break
@@ -290,13 +463,14 @@ function D:format(item)
 		end
 		local block = self:block(texts)
 		block.width = block.width + (opts.padding or 0)
+		width = width + block.width
 		return block
 	end
 
 	local block = item.text and self:block(self:texts(item.text))
 	local left = block and { width = 0 } or find({ "icon" }, { multi = false, padding = 1 })
 	local right = block and { width = 0 } or find({ "key" }, { multi = false })
-	local center = block or find({ "header", "desc" }, { multi = true })
+	local center = block or find({ "header", "desc", "file" }, { multi = true, flex = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
@@ -337,7 +511,7 @@ function D:block(texts)
 			end
 			local child = setmetatable({ line }, { __index = text })
 			self:align(child)
-			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(line)
+			ret[#ret].width = ret[#ret].width + vim.api.nvim_strwidth(child[1])
 			ret.width = math.max(ret.width, ret[#ret].width)
 			table.insert(ret[#ret], child)
 		end
@@ -347,13 +521,14 @@ end
 
 ---@param item utils.dashboard.Item
 ---@param field string
+---@param width? number
 ---@return utils.dashboard.Text|utils.dashboard.Text[]
-function D:format_field(item, field)
+function D:format_field(item, field, width)
 	local format = self.opts.formats[field]
 	if format == nil then
 		return { item[field], hl = field }
 	elseif type(format) == "function" then
-		return format(item)
+		return format(item, { width = width })
 	else
 		local text = format and vim.deepcopy(format) or { "%s" }
 		text.hl = text.hl or field
@@ -434,7 +609,7 @@ function D:resolve(item, results, parent)
 		end
 		local first_child = #results + 1
 		if item.section then
-			local section = M.sections[item.section]()
+			local section = M.sections[item.section](item)
 			self:resolve(section, results, item)
 		end
 		if item[1] then

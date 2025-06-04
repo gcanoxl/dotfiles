@@ -8,8 +8,8 @@ config.font = wezterm.font("Operator Mono", {
 	weight = "Book",
 })
 
-config.font_size = 20
-config.line_height = 1.6
+config.font_size = 18
+config.line_height = 1.2
 
 config.window_padding = {
 	left = 0,
