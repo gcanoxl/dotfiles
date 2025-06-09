@@ -15,9 +15,6 @@ antigen use oh-my-zsh
 # antigen theme ys
 antigen theme robbyrussell
 
-# z.lua
-antigen bundle skywind3000/z.lua
-
 # syntax highlight
 antigen bundle zdharma/fast-syntax-highlighting
 
@@ -72,3 +69,4 @@ alias fad='flutter pub add -dev'
 alias fg='flutter pub get'
 alias fadd='flutter pub add freezed_annotation dev:freezed riverpod_annotation flutter_riverpod dev:riverpod_generator dev:build_runner'
 
+eval "$(zoxide init --cmd cd zsh)"
