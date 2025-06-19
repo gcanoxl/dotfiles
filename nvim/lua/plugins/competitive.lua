@@ -115,9 +115,12 @@ return {
 
 			companion_port = 27121,
 			receive_print_message = true,
-			start_receiving_persistently_on_setup = false,
-			template_file = false,
-			evaluate_template_modifiers = false,
+			start_receiving_persistently_on_setup = true,
+			template_file = {
+				-- config path
+				cpp = vim.fn.stdpath("config") .. "/templates/template.cpp",
+			},
+			evaluate_template_modifiers = true,
 			date_format = "%c",
 			received_files_extension = "cpp",
 			received_problems_path = function(task, extension)
