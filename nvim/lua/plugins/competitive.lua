@@ -120,7 +120,15 @@ return {
 			evaluate_template_modifiers = false,
 			date_format = "%c",
 			received_files_extension = "cpp",
-			received_problems_path = "$(CWD)/$(PROBLEM).$(FEXT)",
+			received_problems_path = function(task, extension)
+				local url = task.url
+				-- only root domain
+				local domain = url:match("^https?://([^/]+)")
+				-- add underscores and convert to lowercase
+				local converted_name = task.name:gsub("%s+", "_"):lower()
+				local ret = domain .. "/" .. converted_name .. "/" .. converted_name .. "." .. extension
+				return ret
+			end,
 			received_problems_prompt_path = true,
 			received_contests_directory = "$(CWD)",
 			received_contests_problems_path = "$(PROBLEM).$(FEXT)",
