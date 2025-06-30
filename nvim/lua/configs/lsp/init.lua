@@ -35,6 +35,7 @@ M.servers = {
 	"ts_ls",
 	"html",
 	"clangd",
+	"sourcekit",
 }
 
 local on_attach = require("configs.lsp.handlers")
