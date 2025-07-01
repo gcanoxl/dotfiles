@@ -10,7 +10,13 @@ local group = vim.api.nvim_create_augroup("autocmds.templating", { clear = true 
 ---@field templates_path string|fun():string
 ---@field filetypes table<string, table<string>|string>
 ---@field patterns? table<string, autocmds.templating.Opts.Pattern>
----@field variables? table<string, (fun():string)|string>
+---@field variables? table<string, autocmds.templating.VariableCallback|string>
+
+---@class autocmds.templating.VariableCallbackContext
+---@field filetype? string
+---@field buf? number
+
+---@alias autocmds.templating.VariableCallback fun(ctx: autocmds.templating.VariableCallbackContext):string
 
 ---@type autocmds.templating.Opts
 local defaults = {
@@ -27,9 +33,19 @@ local defaults = {
 		FileName = function()
 			return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r")
 		end,
-		ProjectName = function()
-			-- TODO: implement
-			return ""
+		ProjectName = function(ctx)
+			ctx = ctx or {}
+			local fullpath = vim.fs.root(vim.api.nvim_buf_get_name(ctx.buf or 0), { ".project", ".git" })
+			if ctx.filetype and ctx.filetype == "swift" then
+				local ok, config = pcall(require, "xcodebuild.project.config")
+				if ok then
+					local workingDirectory = config.settings.workingDirectory
+					fullpath = workingDirectory and workingDirectory or fullpath
+				end
+			end
+			-- get the last directory
+			local ret = (fullpath or ""):match(".*[/\\](.*)")
+			return ret
 		end,
 		Author = "Cano XL",
 		Date = function()
@@ -53,18 +69,10 @@ local function default_template_path(filetype, pattern, exts)
 end
 
 ---@param template any
+---@param data table<string, string>
 ---@return string[]
-local function render_template(template)
-	-- init variables
-	local variables = defaults.variables or {}
-	---@type table<string, string>
-	local data = {}
-	for name, value in pairs(variables) do
-		---@cast value string|fun():string
-		local v = type(value) == "function" and value() or value or "" ---@cast v string
-		data[name] = v
-	end
-
+local function render_template(template, data)
+	-- TODO: precompile
 	-- render template
 	local lines = {}
 	for _, line in pairs(template) do
@@ -125,7 +133,18 @@ for filetype, _ in pairs(defaults.patterns or {}) do
 
 					-- load template
 					local template = vim.fn.readfile(path)
-					local rendered = render_template(template)
+
+					-- init variables
+					local variables = defaults.variables or {}
+					---@type table<string, string>
+					local data = {}
+					for name, val in pairs(variables) do
+						---@cast val string|autocmds.templating.VariableCallback
+						local v = type(val) == "function" and val({ filetype = filetype, buf = args.buf }) or val or "" ---@cast v string
+						data[name] = v
+					end
+					local rendered = render_template(template, data)
+					-- render
 					vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, rendered)
 				end
 				::continue::
