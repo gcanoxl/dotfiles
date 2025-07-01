@@ -88,18 +88,18 @@ return {
 			save_all_files = false,
 			compile_directory = ".",
 			compile_command = {
-				c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
-				cpp = { exec = "g++", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
-				rust = { exec = "rustc", args = { "$(FNAME)" } },
-				java = { exec = "javac", args = { "$(FNAME)" } },
+				c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "program" } },
+				cpp = { exec = "g++", args = { "-Wall", "$(FNAME)", "-o", "program" } },
+				-- rust = { exec = "rustc", args = { "$(FNAME)" } },
+				-- java = { exec = "javac", args = { "$(FNAME)" } },
 			},
 			running_directory = ".",
 			run_command = {
-				c = { exec = "./$(FNOEXT)" },
-				cpp = { exec = "./$(FNOEXT)" },
-				rust = { exec = "./$(FNOEXT)" },
-				python = { exec = "python", args = { "$(FNAME)" } },
-				java = { exec = "java", args = { "$(FNOEXT)" } },
+				c = { exec = "./program" },
+				cpp = { exec = "./program" },
+				-- rust = { exec = "./$(FNOEXT)" },
+				-- python = { exec = "python", args = { "$(FNAME)" } },
+				-- java = { exec = "java", args = { "$(FNOEXT)" } },
 			},
 			multiple_testing = -1,
 			maximum_time = 5000,
@@ -115,7 +115,7 @@ return {
 
 			companion_port = 27121,
 			receive_print_message = true,
-			start_receiving_persistently_on_setup = true,
+			start_receiving_persistently_on_setup = false,
 			template_file = {
 				-- config path
 				cpp = vim.fn.stdpath("config") .. "/templates/template.cpp",
