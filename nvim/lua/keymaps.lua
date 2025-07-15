@@ -200,7 +200,21 @@ wk.add({
 	{ "<leader>I", group = "Competitive" },
 	{
 		"<leader>Ic",
-		"<cmd>CompetiTest receive problem<cr>",
+		function()
+			local ok, picker = pcall(require, "fzf-lua")
+			if not ok then
+				vim.notify("fzf-lua not found", vim.log.levels.ERROR)
+				return
+			end
+			picker.fzf_exec("fd --type d", {
+				actions = {
+					["default"] = function(selected)
+						_G.received_position = vim.fn.fnamemodify(selected[1], ":p")
+					end,
+				},
+			})
+			vim.cmd("CompetiTest receive problem")
+		end,
 		desc = "Receive Problem",
 	},
 	{

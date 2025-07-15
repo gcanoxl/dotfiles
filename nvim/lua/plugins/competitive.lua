@@ -1,3 +1,5 @@
+---@type string|nil
+_G.received_position = nil
 return {
 	{
 		"xeluxee/competitest.nvim",
@@ -123,16 +125,23 @@ return {
 			evaluate_template_modifiers = true,
 			date_format = "%c",
 			received_files_extension = "cpp",
-			-- TODO: auto detect
-			-- received_problems_path = function(task, extension)
-			-- 	local url = task.url
-			-- 	-- only root domain
-			-- 	local domain = url:match("^https?://([^/]+)")
-			-- 	-- add underscores and convert to lowercase
-			-- 	local converted_name = task.name:gsub("%s+", "_"):lower()
-			-- 	local ret = domain .. "/" .. converted_name .. "/" .. converted_name .. "." .. extension
-			-- 	return ret
-			-- end,
+			received_problems_path = function(task, _)
+				if received_position == nil or vim.fn.isdirectory(received_position) == 0 then
+					vim.notify("received_position is invalid: " .. received_position, vim.log.levels.ERROR)
+					return
+				end
+				local url = task.url
+				-- only root domain
+				local domain = url:match("^https?://([^/]+)")
+				if domain == "open.kattis.com" then
+					local id = url:match("/problems/([^/]+)")
+					local ret = vim.fs.joinpath(received_position, id, id .. ".cpp")
+					return ret
+				else
+					vim.notify("Unsupported domain", vim.log.levels.WARN)
+					return
+				end
+			end,
 			received_problems_prompt_path = true,
 			received_contests_directory = "$(CWD)",
 			received_contests_problems_path = "$(PROBLEM).$(FEXT)",
