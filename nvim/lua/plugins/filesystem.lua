@@ -8,7 +8,7 @@ return {
 		},
 	},
 
-	-- TODO: write my own projectile.nvim and dashboard.nvim
+	-- TODO: delete
 	{
 		"ahmedkhalf/project.nvim",
 		config = function()
@@ -21,7 +21,7 @@ return {
 				},
 				scope_chdir = "global",
 			})
-			require("telescope").load_extension("projects")
+			-- require("telescope").load_extension("projects")
 		end,
 	},
 

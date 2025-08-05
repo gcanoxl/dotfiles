@@ -33,15 +33,16 @@ function M.code()
 end
 
 function M.config_files()
-	local ok, telescope = pcall(require, "telescope.builtin")
-	if not ok then
-		vim.notify("Telescope not found", vim.log.levels.ERROR)
-		return
-	end
-	telescope.find_files({
-		prompt_title = "Config Files",
-		cwd = "~/.config/nvim/",
-	})
+	-- TODO: implement this
+	-- local ok, picker = pcall(require, "telescope.builtin")
+	-- if not ok then
+	-- 	vim.notify("Picker not found", vim.log.levels.ERROR)
+	-- 	return
+	-- end
+	-- picker.find_files({
+	-- 	prompt_title = "Config Files",
+	-- 	cwd = "~/.config/nvim/",
+	-- })
 end
 
 return M

@@ -67,15 +67,6 @@ return {
 		},
 	},
 
-	-- Better Tab-Buffer Logic
-	{
-		"tiagovla/scope.nvim",
-		config = function()
-			require("scope").setup({})
-			require("telescope").load_extension("scope")
-		end,
-	},
-
 	-- Bufferline
 	{
 		"akinsho/bufferline.nvim",
@@ -173,6 +164,7 @@ return {
 
 			vim.notify = require("notify")
 
+			-- TODO: replace
 			local telescope_ok, telescope = pcall(require, "telescope")
 			if telescope_ok then
 				telescope.load_extension("notify")

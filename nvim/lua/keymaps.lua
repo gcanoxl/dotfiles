@@ -9,7 +9,7 @@ vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
 vim.keymap.set("n", "<C-c>", utils.bufdelete.delete)
-vim.keymap.set("n", "<C-b>", utils.cmd("Telescope scope buffers"))
+vim.keymap.set("n", "<C-b>", utils.cmd("FzfLua buffers"))
 vim.keymap.set("n", "{", utils.cmd("BufferLineCyclePrev"))
 vim.keymap.set("n", "}", utils.cmd("BufferLineCycleNext"))
 
@@ -18,10 +18,11 @@ vim.keymap.set("n", "<C-[>", utils.cmd("tabprevious"))
 vim.keymap.set("n", "<C-]>", utils.cmd("tabnext"))
 
 -- File
-vim.keymap.set("n", "<C-f>", utils.cmd("Telescope find_files"))
+vim.keymap.set("n", "<C-f>", utils.cmd("FzfLua files"))
 
 -- Emoji
-vim.keymap.set("i", "<C-e>", utils.cmd("Telescope emoji"))
+-- TODO: replace this
+-- vim.keymap.set("i", "<C-e>", utils.cmd("Telescope emoji"))
 
 -- Smart Splits
 vim.keymap.set("n", "<C-S-h>", require("smart-splits").resize_left)
@@ -52,19 +53,20 @@ local wk = require("which-key")
 -- |        Keymaps with <Leader>         |
 -- ========================================
 wk.add({
-	{ "<leader><leader>", "<cmd>Telescope commands<cr>", group = "Commands", desc = "Telescope commands" },
+	{ "<leader><leader>", "<cmd>FzfLua commands<cr>", group = "Commands", desc = "Search Commands" },
 	-- Application
 	{ "<leader>a", group = "Application" },
 	{ "<leader>aq", "<cmd>quitall<cr>", desc = "Quit" },
 	{ "<leader>an", "<cmd>noh<cr>", desc = "Stop Highlight" },
-	{ "<leader>aj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
-	{ "<leader>as", "<cmd>Telescope live_grep<cr>", desc = "Search" },
-	{ "<leader>ah", "<cmd>Telescope help_tags<cr>", desc = "Help" },
-	{ "<leader>ac", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
-	{ "<leader>ak", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
-	{ "<leader>at", "<cmd>TodoTelescope<cr>", desc = "Todo List" },
-	{ "<leader>ae", "<cmd>Telescope emoji<cr>", desc = "Emoji" },
-	{ "<leader>am", "<cmd>Telescope notify<cr>", desc = "Messages" },
+	{ "<leader>aj", "<cmd>FzfLua jumps<cr>", desc = "Jumplist" },
+	{ "<leader>as", "<cmd>FzfLua live_grep<cr>", desc = "Search" },
+	{ "<leader>ah", "<cmd>FzfLua helptags<cr>", desc = "Help" },
+	{ "<leader>ac", "<cmd>FzfLua colorscheme<cr>", desc = "Colorscheme" },
+	{ "<leader>ak", "<cmd>FzfLua keymaps<cr>", desc = "Keymaps" },
+	-- TODO: replace this
+	-- { "<leader>at", "<cmd>TodoTelescope<cr>", desc = "Todo List" },
+	-- { "<leader>ae", "<cmd>Telescope emoji<cr>", desc = "Emoji" },
+	-- { "<leader>am", "<cmd>Telescope notify<cr>", desc = "Messages" },
 	-- Config
 	{ "<leader>c", group = "Config" },
 	{ "<leader>cc", utils.config_files, desc = "Edit Config" },
@@ -82,7 +84,6 @@ wk.add({
 	{ "<leader>t", group = "Tab" },
 	{ "<leader>tn", "<cmd>tabnew<cr>", desc = "New Empty Tab" },
 	{ "<leader>tc", "<cmd>tabclose<cr>", desc = "Close Current Table" },
-	{ "<leader>tt", require("telescope-tabs").list_tabs, desc = "Tabs" },
 	{ "<leader>t1", "<cmd>exec 'normal! 1gt'<cr>", desc = "Go to Tab 1" },
 	{ "<leader>t2", "<cmd>exec 'normal! 2gt'<cr>", desc = "Go to Tab 2" },
 	{ "<leader>t3", "<cmd>exec 'normal! 3gt'<cr>", desc = "Go to Tab 3" },
@@ -94,8 +95,7 @@ wk.add({
 	{ "<leader>t9", "<cmd>exec 'normal! 9gt'<cr>", desc = "Go to Tab 9" },
 	-- Buffer
 	{ "<leader>b", group = "Buffer" },
-	{ "<leader>bb", "<cmd>Telescope scope buffers<cr>", desc = "Buffers" },
-	{ "<leader>bB", "<cmd>Telescope buffers<cr>", desc = "Tab-local Buffers" },
+	{ "<leader>bb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
 	{ "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", desc = "Close Other Buffers" },
 	{ "<leader>bh", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
 	{ "<leader>bm", "<cmd>ScopeMoveBuf<cr>", desc = "Move to Table" },
@@ -115,7 +115,7 @@ wk.add({
 	{ "<leader>f", group = "File" },
 	{ "<leader>fw", "<cmd>silent wa<cr>", desc = "Save File" },
 	{ "<leader>fl", "<cmd>Neotree<cr>", desc = "File Explorer" },
-	{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+	{ "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files" },
 	{ "<leader>fd", "<cmd>Dired<cr>", desc = "File Manager" },
 	-- Window
 	{ "<leader>w", group = "Window" },
@@ -156,6 +156,7 @@ wk.add({
 	{
 		"<leader>pp",
 		function()
+			-- TODO:remake projects related
 			require("telescope").extensions.projects.projects({})
 		end,
 		desc = "Projects",
@@ -251,7 +252,8 @@ utils.map_on_filetype("go", {
 
 -- Dart Special Keymaps
 utils.map_on_filetype("dart", {
-	["<localleader>"] = { utils.cmd("Telescope flutter commands"), "Flutter Commands" },
+	-- TODO: implement this
+	-- ["<localleader>"] = { utils.cmd("Telescope flutter commands"), "Flutter Commands" },
 	e = { utils.cmd("FlutterEmulators"), "Emulators" },
 	w = { utils.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
 	r = { utils.cmd("FlutterRun"), "Run Flutter" },
@@ -331,16 +333,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			0,
 			"n",
 			"go",
-			":Telescope lsp_dynamic_workspace_symbols<CR>",
+			":FzfLua lsp_workspace_symbols<CR>",
 			{ noremap = true, silent = true }
 		)
-		vim.api.nvim_buf_set_keymap(
-			0,
-			"n",
-			"gl",
-			":Telescope lsp_document_symbols<CR>",
-			{ noremap = true, silent = true }
-		)
+		vim.api.nvim_buf_set_keymap(0, "n", "gl", ":FzfLua lsp_document_symbols<CR>", { noremap = true, silent = true })
 
 		-- register keymaps using which-key
 		require("which-key").add({
@@ -356,8 +352,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ "<leader>lgd", utils.cmd("Lspsaga goto_definition"), desc = "Definition" },
 			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition" },
 			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation" },
-			{ "<leader>lgo", utils.cmd("Telescope lsp_dynamic_workspace_symbols"), desc = "Workspace Symbols" },
-			{ "<leader>lgl", utils.cmd("Telescope lsp_document_symbols"), desc = "Document Symbols" },
+			{ "<leader>lgo", utils.cmd("FzfLua lsp_workspace_symbols"), desc = "Workspace Symbols" },
+			{ "<leader>lgl", utils.cmd("FzfLua lsp_document_symbols"), desc = "Document Symbols" },
 			{ "<leader>lt", group = "Toggle", buffer = buf },
 			{ "<leader>lti", utils.toggles.toggle_inlay_hint, desc = "Inlay Hint" },
 		})

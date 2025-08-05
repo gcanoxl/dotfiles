@@ -9,7 +9,6 @@ return {
 				integrations = {
 					neogit = false,
 					hop = true,
-					telescope = true,
 					neotree = {
 						enabled = true,
 						show_root = true,
@@ -38,34 +37,6 @@ return {
 						}
 						-- LspSaga
 						hl.HoverBorder = {
-							bg = c.bg_dark,
-							fg = c.bg_dark,
-						}
-						-- Telescope
-						hl.TelescopeNormal = {
-							bg = c.bg_dark,
-							fg = c.fg_dark,
-						}
-						hl.TelescopeBorder = {
-							bg = c.bg_dark,
-							fg = c.bg_dark,
-						}
-						hl.TelescopePromptNormal = {
-							bg = prompt,
-						}
-						hl.TelescopePromptBorder = {
-							bg = prompt,
-							fg = prompt,
-						}
-						hl.TelescopePromptTitle = {
-							bg = prompt,
-							fg = prompt,
-						}
-						hl.TelescopePreviewTitle = {
-							bg = c.bg_dark,
-							fg = c.bg_dark,
-						}
-						hl.TelescopeResultsTitle = {
 							bg = c.bg_dark,
 							fg = c.bg_dark,
 						}
