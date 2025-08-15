@@ -23,6 +23,8 @@ local options = {
 	swapfile = false,
 	cmdheight = 0,
 	laststatus = 3,
+	title = true,
+	titlestring = "%{expand('%:p') != '' ? expand('%:p') : getcwd()}",
 }
 
 for k, v in pairs(options) do
