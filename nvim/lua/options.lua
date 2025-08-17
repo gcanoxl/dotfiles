@@ -36,3 +36,10 @@ vim.g.preference = {
 	border = "rounded",
 	winblend = 4,
 }
+
+-- filetypes
+vim.filetype.add({
+	extension = {
+		arb = "json",
+	},
+})

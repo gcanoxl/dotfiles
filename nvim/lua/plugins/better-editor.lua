@@ -47,6 +47,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "yapf" },
+				json = { "jsonls" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
