@@ -36,6 +36,7 @@ M.servers = {
 	"html",
 	"clangd",
 	"sourcekit",
+	"postgres_lsp",
 }
 
 local on_attach = require("configs.lsp.handlers")
