@@ -131,9 +131,9 @@ wk.add({
 	-- Git
 	{
 		"<leader>g",
-		function()
-			require("which-key").show({ keys = "<leader>g", loop = true })
-		end,
+		-- function()
+		-- 	require("which-key").show({ keys = "<leader>g", loop = true })
+		-- end,
 		group = "Git",
 	},
 	{ "<leader>gg", require("neogit").open, desc = "Git" },
