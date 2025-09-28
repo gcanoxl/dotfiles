@@ -52,6 +52,11 @@ local wk = require("which-key")
 -- |        Keymaps with <Leader>         |
 -- ========================================
 wk.add({
+	mode = { "n", "x" },
+	buffer = nil,
+	silent = true,
+	noremap = true,
+	nowait = false,
 	{ "<leader><leader>", "<cmd>Telescope commands<cr>", group = "Commands", desc = "Telescope commands" },
 	-- Application
 	{ "<leader>a", group = "Application" },
@@ -124,7 +129,13 @@ wk.add({
 	{ "<leader>wae", "<cmd>WindowsEqualize<cr>", desc = "Equalize Width" },
 	{ "<leader>wam", "<cmd>WindowsMaximize<cr>", desc = "Maximize Width" },
 	-- Git
-	{ "<leader>g", group = "Git" },
+	{
+		"<leader>g",
+		function()
+			require("which-key").show({ keys = "<leader>g", loop = true })
+		end,
+		group = "Git",
+	},
 	{ "<leader>gg", require("neogit").open, desc = "Git" },
 	{
 		"<leader>gG",
@@ -142,8 +153,11 @@ wk.add({
 	{ "<leader>gdc", "<cmd>DiffviewClose<cr>", desc = "Close Diff" },
 	{ "<leader>gdf", "<cmd>DiffviewFileHistory %<cr>", desc = "Current File History" },
 	{ "<leader>gdt", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle Files" },
-	{ "<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "Next Hunk" },
-	{ "<leader>gp", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous Hunk" },
+	{ "<leader>gj", "<cmd>Gitsigns next_hunk<cr>", desc = "Next Hunk" },
+	{ "<leader>gk", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous Hunk" },
+	{ "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Preview Hunk" },
+	{ "<leader>gH", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview Hunk Popup" },
+
 	{ "<leader>gl", "<cmd>Neotree git_status<cr>", desc = "Git Status" },
 	{ "<leader>gt", group = "Toggle" },
 	{ "<leader>gtl", "<cmd>Gitsigns toggle_linehl<cr>", desc = "Line Highlight" },
