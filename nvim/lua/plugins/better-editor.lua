@@ -1,9 +1,5 @@
 return {
 	{
-		"gcanoxl/daily-code.nvim",
-		config = true,
-	},
-	{
 		"gcanoxl/cloc.nvim",
 		config = true,
 	},

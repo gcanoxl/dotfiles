@@ -18,8 +18,8 @@ initialize_lazy()
 require("lazy").setup({
 	{ import = "plugins" },
 }, {
-	dev = {
-		path = "~/Developer/",
-		patterns = jit.os == "OSX" and { "gcanoxl" } or {},
-	},
+	-- dev = {
+	-- 	path = "~/Developer/",
+	-- 	patterns = jit.os == "OSX" and { "gcanoxl" } or {},
+	-- },
 })
