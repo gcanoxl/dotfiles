@@ -176,20 +176,6 @@ wk.add({
 	},
 	{ "<leader>pP", "<cmd>ProjectRoot<cr>", desc = "Reset Root Directory" },
 	{ "<leader>pa", "<cmd>AddProject<cr>", desc = "Add Project" },
-	{
-		"<leader>pl",
-		function()
-			require("persistence").load()
-		end,
-		desc = "Load Project",
-	},
-	{
-		"<leader>pt",
-		function()
-			require("persistence").stop()
-		end,
-		desc = "Stop Project",
-	},
 	-- Package Management
 	{ "<leader>P", "<cmd>Lazy<cr>", desc = "Package Management" },
 	-- Debug
