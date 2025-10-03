@@ -1,6 +1,5 @@
 local M = {}
 
--- enable some language servers with the additional completion capabilities offered by nvim-cmp
 M.servers = {
 	"lua_ls",
 	"vimls",
@@ -15,11 +14,9 @@ M.servers = {
 	"postgres_lsp",
 }
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 for _, server in ipairs(M.servers) do
 	local settings = {
-		capabilities = capabilities,
+		-- capabilities = capabilities,
 		-- on_attach = on_attach,
 	}
 
