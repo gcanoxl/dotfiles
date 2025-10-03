@@ -25,12 +25,4 @@ return {
 			vim.api.nvim_buf_create_user_command(0, "PeekClose", require("peek").close, {})
 		end,
 	},
-
-	-- Emoji Finder
-	{
-		"xiyaowong/telescope-emoji.nvim",
-		config = function()
-			require("telescope").load_extension("emoji")
-		end,
-	},
 }
