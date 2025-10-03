@@ -2,15 +2,12 @@
 vim.g.neovide_fullscreen = true
 
 -- dynamically change the font size at runtime
-vim.g.gui_font_face = "Operator Mono"
--- vim.g.gui_font_face = "OperatorMono Nerd Font"
--- vim.g.gui_font_face = "Cartograph CF"
-vim.g.gui_font_default_size = 22
-vim.opt.linespace = 16
+vim.g.gui_font_face = "OperatorMono Nerd Font"
+vim.g.gui_font_default_size = 16
+vim.opt.linespace = 8
 vim.g.gui_font_size = vim.g.gui_font_default_size
 
 RefreshGuiFont = function()
-	-- vim.opt.guifont = string.format("%s:h%s:b", vim.g.gui_font_face, vim.g.gui_font_size)
 	vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
 end
 
@@ -50,9 +47,3 @@ vim.keymap.set("n", "<D-6>", utils.cmd('exec "normal! 6gt"'))
 vim.keymap.set("n", "<D-7>", utils.cmd('exec "normal! 7gt"'))
 vim.keymap.set("n", "<D-8>", utils.cmd('exec "normal! 8gt"'))
 vim.keymap.set("n", "<D-9>", utils.cmd('exec "normal! 9gt"'))
-
--- Smart Splits
-vim.keymap.set("n", "<C-S-h>", require("smart-splits").resize_left)
-vim.keymap.set("n", "<C-S-j>", require("smart-splits").resize_down)
-vim.keymap.set("n", "<C-S-k>", require("smart-splits").resize_up)
-vim.keymap.set("n", "<C-S-l>", require("smart-splits").resize_right)
