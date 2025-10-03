@@ -3,9 +3,8 @@ local config = wezterm.config_builder()
 
 config.automatically_reload_config = true
 
-config.font = wezterm.font("Operator Mono", {
-	stretch = "Normal",
-	weight = "Book",
+config.font = wezterm.font("OperatorMono Nerd Font", {
+	weight = "Medium",
 })
 
 config.font_size = 18
