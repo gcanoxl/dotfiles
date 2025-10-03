@@ -56,34 +56,3 @@ vim.keymap.set("n", "<C-S-h>", require("smart-splits").resize_left)
 vim.keymap.set("n", "<C-S-j>", require("smart-splits").resize_down)
 vim.keymap.set("n", "<C-S-k>", require("smart-splits").resize_up)
 vim.keymap.set("n", "<C-S-l>", require("smart-splits").resize_right)
-
--- Transparency
-local Hydra = require("hydra")
-Hydra({
-	name = "Transparency",
-	mode = "n",
-	body = "<leader>ap",
-	heads = {
-		{
-			"+",
-			function()
-				vim.g.neovide_transparency = vim.g.neovide_transparency + 0.05
-			end,
-			{ desc = "Increase" },
-		},
-		{
-			"-",
-			function()
-				vim.g.neovide_transparency = vim.g.neovide_transparency - 0.05
-			end,
-			{ desc = "Descrease" },
-		},
-		{
-			"=",
-			function()
-				vim.g.neovide_transparency = 1
-			end,
-			{ desc = "Reset" },
-		},
-	},
-})
