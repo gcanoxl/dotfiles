@@ -25,17 +25,12 @@ local options = {
 	laststatus = 3,
 	title = true,
 	titlestring = "%{expand('%:p') != '' ? expand('%:p') : getcwd()}",
+	winborder = "none",
 }
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
-
-vim.g.preference = {
-	-- border = "none",
-	border = "rounded",
-	winblend = 4,
-}
 
 -- filetypes
 vim.filetype.add({

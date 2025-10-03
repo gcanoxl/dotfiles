@@ -24,7 +24,6 @@ return {
 							["<C-u>"] = false,
 						},
 					},
-					winblend = vim.g.preference.winblend,
 					file_ignore_patterns = {
 						-- flutter project
 						-- "android",

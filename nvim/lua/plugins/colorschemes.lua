@@ -27,7 +27,7 @@ return {
 	{
 		"folke/tokyonight.nvim",
 		config = function()
-			if vim.g.preference.border == "none" then
+			if vim.o.winborder == "none" then
 				require("tokyonight").setup({
 					on_highlights = function(hl, c)
 						local prompt = "#2d3149"

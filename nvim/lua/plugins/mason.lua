@@ -8,9 +8,6 @@ return {
 	priority = 100,
 	config = function()
 		require("mason").setup({
-			ui = {
-				border = vim.g.preference.border,
-			},
 			keymaps = {
 				toggle_package_expand = "<TAB>",
 			},
