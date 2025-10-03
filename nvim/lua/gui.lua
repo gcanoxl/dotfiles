@@ -7,6 +7,9 @@ vim.g.gui_font_default_size = 16
 vim.opt.linespace = 8
 vim.g.gui_font_size = vim.g.gui_font_default_size
 
+-- use option key as meta key
+vim.g.neovide_input_macos_option_is_meta = true
+
 RefreshGuiFont = function()
 	vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
 end
@@ -47,3 +50,12 @@ vim.keymap.set("n", "<D-6>", utils.cmd('exec "normal! 6gt"'))
 vim.keymap.set("n", "<D-7>", utils.cmd('exec "normal! 7gt"'))
 vim.keymap.set("n", "<D-8>", utils.cmd('exec "normal! 8gt"'))
 vim.keymap.set("n", "<D-9>", utils.cmd('exec "normal! 9gt"'))
+
+-- disable all animations
+vim.g.neovide_position_animation_length = 0
+vim.g.neovide_cursor_animation_length = 0.00
+vim.g.neovide_cursor_trail_size = 0
+vim.g.neovide_cursor_animate_in_insert_mode = false
+vim.g.neovide_cursor_animate_command_line = false
+vim.g.neovide_scroll_animation_far_lines = 0
+vim.g.neovide_scroll_animation_length = 0.00
