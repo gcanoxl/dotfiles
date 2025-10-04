@@ -9,7 +9,7 @@ vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
 vim.keymap.set("n", "<C-c>", utils.bufdelete.delete)
-vim.keymap.set("n", "<C-b>", utils.cmd("Telescope scope buffers"))
+vim.keymap.set("n", "<C-b>", utils.cmd("Telescope buffers"))
 vim.keymap.set("n", "{", utils.cmd("BufferLineCyclePrev"))
 vim.keymap.set("n", "}", utils.cmd("BufferLineCycleNext"))
 
@@ -93,7 +93,7 @@ wk.add({
 	{ "<leader>t9", "<cmd>exec 'normal! 9gt'<cr>", desc = "Go to Tab 9" },
 	-- Buffer
 	{ "<leader>b", group = "Buffer" },
-	{ "<leader>bb", "<cmd>Telescope scope buffers<cr>", desc = "Buffers" },
+	{ "<leader>bb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 	{ "<leader>bB", "<cmd>Telescope buffers<cr>", desc = "Tab-local Buffers" },
 	{ "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", desc = "Close Other Buffers" },
 	{ "<leader>bh", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
@@ -340,8 +340,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		require("which-key").add({
 			{ "<leader>l", group = "LSP" }, -- group for LSP
 			{ "<leader>ln", vim.lsp.buf.rename, desc = "Rename", buffer = buf },
-			{ "<leader>lo", utils.cmd("AerialToggle"), desc = "Symbol List" },
-			{ "<leader>lO", utils.cmd("AerialNavToggle"), desc = "Symbol Navigation" },
 			{ "<leader>lk", utils.cmd("Lspsaga hover_doc"), desc = "Hover Doc" },
 			{ "<leader>lK", utils.cmd("Lspsaga hover_doc ++keep"), desc = "Persistent Hover Doc" },
 			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
