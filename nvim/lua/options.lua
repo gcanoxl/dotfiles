@@ -25,7 +25,7 @@ local options = {
 	laststatus = 3,
 	title = true,
 	titlestring = "%{expand('%:p') != '' ? expand('%:p') : getcwd()}",
-	winborder = "none",
+	winborder = "bold",
 }
 
 for k, v in pairs(options) do

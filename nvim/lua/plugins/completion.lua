@@ -67,7 +67,8 @@ return {
 				enabled = true,
 				keymap = {
 					["<C-k>"] = { "accept" },
-					["<CR>"] = { "accept_and_enter" },
+					["<TAB>"] = { "accept", "fallback" },
+					["<CR>"] = { "accept_and_enter", "fallback" },
 				},
 				sources = { "buffer", "cmdline" },
 				completion = {
