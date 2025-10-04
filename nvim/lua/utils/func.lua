@@ -1,7 +1,4 @@
 local M = {}
-function M.cmd(cmd)
-	return "<cmd>" .. cmd .. "<cr>"
-end
 
 function M.map_on_filetype(filetype, maps)
 	vim.api.nvim_create_autocmd("FileType", {

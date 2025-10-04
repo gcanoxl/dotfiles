@@ -9,19 +9,19 @@ vim.keymap.set("n", "<tab>", "za")
 
 -- Buffers
 vim.keymap.set("n", "<C-c>", utils.bufdelete.delete)
-vim.keymap.set("n", "<C-b>", utils.cmd("Telescope buffers"))
-vim.keymap.set("n", "{", utils.cmd("BufferLineCyclePrev"))
-vim.keymap.set("n", "}", utils.cmd("BufferLineCycleNext"))
+vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "{", "<cmd>BufferLineCyclePrev<cr>")
+vim.keymap.set("n", "}", "<cmd>BufferLineCycleNext<cr>")
 
 -- Tabs
-vim.keymap.set("n", "<C-[>", utils.cmd("tabprevious"))
-vim.keymap.set("n", "<C-]>", utils.cmd("tabnext"))
+vim.keymap.set("n", "<C-[>", "<cmd>tabprevious<cr>")
+vim.keymap.set("n", "<C-]>", "<cmd>tabnext<cr>")
 
 -- File
-vim.keymap.set("n", "<C-f>", utils.cmd("Telescope find_files"))
+vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>")
 
 -- Emoji
-vim.keymap.set("i", "<C-e>", utils.cmd("Telescope emoji"))
+vim.keymap.set("i", "<C-e>", "<cmd>Telescope emoji<cr>")
 
 -- moving between splits
 vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
@@ -36,9 +36,9 @@ vim.api.nvim_set_keymap(
 	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
 	{ silent = true, expr = true }
 )
-vim.keymap.set("i", "<S-Tab>", utils.cmd("lua require'luasnip'.jump(-1)"))
-vim.keymap.set("s", "<Tab>", utils.cmd("lua require'luasnip'.jump(1)"))
-vim.keymap.set("s", "<S-Tab>", utils.cmd("lua require'luasnip'.jump(-1)"))
+vim.keymap.set("i", "<S-Tab>", "<cmd>lua require'luasnip'.jump(-1)<cr>")
+vim.keymap.set("s", "<Tab>", "<cmd>lua require'luasnip'.jump(1)<cr>")
+vim.keymap.set("s", "<S-Tab>", "<cmd>lua require'luasnip'.jump(-1)<cr>")
 
 local wk = require("which-key")
 
@@ -235,21 +235,21 @@ wk.add({
 
 -- Go Special Keymaps
 utils.map_on_filetype("go", {
-	a = { utils.cmd("GoAlt"), "Alt" },
+	a = { "<cmd>GoAlt<cr>", "Alt" },
 	t = {
 		name = "Test",
-		t = { utils.cmd("GoTest"), "GoTest" },
+		t = { "<cmd>GoTest<cr>", "GoTest" },
 	},
-	c = { utils.cmd("GoCodeAction"), "GoCodeAction", mode = { "n", "v" } },
+	c = { "<cmd>GoCodeAction<cr>", "GoCodeAction", mode = { "n", "v" } },
 })
 
 -- Dart Special Keymaps
 utils.map_on_filetype("dart", {
-	["<localleader>"] = { utils.cmd("Telescope flutter commands"), "Flutter Commands" },
-	e = { utils.cmd("FlutterEmulators"), "Emulators" },
-	w = { utils.cmd("FlutterOutlineToggle"), "Toggle Widget Outline" },
-	r = { utils.cmd("FlutterRun"), "Run Flutter" },
-	R = { utils.cmd("FlutterRestart"), "Restart Flutter" },
+	["<localleader>"] = { "<cmd>Telescope flutter commands<cr>", "Flutter Commands" },
+	e = { "<cmd>FlutterEmulators<cr>", "Emulators" },
+	w = { "<cmd>FlutterOutlineToggle<cr>", "Toggle Widget Outline" },
+	r = { "<cmd>FlutterRun<cr>", "Run Flutter" },
+	R = { "<cmd>FlutterRestart<cr>", "Restart Flutter" },
 	M = {
 		function()
 			vim.lsp.buf.code_action({
@@ -313,12 +313,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- shortcuts
 		local bufopts = { noremap = true, silent = true, buffer = buf }
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "dp", utils.cmd("Lspsaga diagnostic_jump_prev"), bufopts)
-		vim.keymap.set("n", "dn", utils.cmd("Lspsaga diagnostic_jump_next"), bufopts)
-		vim.keymap.set("n", "K", utils.cmd("Lspsaga hover_doc"), bufopts)
+		vim.keymap.set("n", "dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", bufopts)
+		vim.keymap.set("n", "dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", bufopts)
+		vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", bufopts)
 		vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
-		vim.keymap.set("n", "gd", utils.cmd("Lspsaga goto_definition"), bufopts)
-		vim.keymap.set("n", "gf", utils.cmd("Lspsaga finder"), bufopts)
+		vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", bufopts)
+		vim.keymap.set("n", "gf", "<cmd>Lspsaga finder<cr>", bufopts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 		vim.api.nvim_buf_set_keymap(
@@ -340,16 +340,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		require("which-key").add({
 			{ "<leader>l", group = "LSP" }, -- group for LSP
 			{ "<leader>ln", vim.lsp.buf.rename, desc = "Rename", buffer = buf },
-			{ "<leader>lk", utils.cmd("Lspsaga hover_doc"), desc = "Hover Doc" },
-			{ "<leader>lK", utils.cmd("Lspsaga hover_doc ++keep"), desc = "Persistent Hover Doc" },
+			{ "<leader>lk", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Doc" },
+			{ "<leader>lK", "<cmd>Lspsaga hover_doc ++keep<cr>", desc = "Persistent Hover Doc" },
 			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
-			{ "<leader>lf", utils.cmd("Lspsaga finder"), desc = "Finder" },
+			{ "<leader>lf", "<cmd>Lspsaga finder<cr>", desc = "Finder" },
 			{ "<leader>l", group = "Goto" },
-			{ "<leader>lgd", utils.cmd("Lspsaga goto_definition"), desc = "Definition" },
+			{ "<leader>lgd", "<cmd>Lspsaga goto_definition<cr>", desc = "Definition" },
 			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition" },
 			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation" },
-			{ "<leader>lgo", utils.cmd("Telescope lsp_dynamic_workspace_symbols"), desc = "Workspace Symbols" },
-			{ "<leader>lgl", utils.cmd("Telescope lsp_document_symbols"), desc = "Document Symbols" },
+			{ "<leader>lgo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+			{ "<leader>lgl", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
 			{ "<leader>lt", group = "Toggle", buffer = buf },
 			{ "<leader>lti", utils.toggles.toggle_inlay_hint, desc = "Inlay Hint" },
 		})
@@ -358,11 +358,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Lua Special Keymaps
 utils.map_on_filetype("lua", {
-	["s"] = { utils.cmd("source %"), "Source" },
-	r = { utils.cmd("LuaRun"), "Run Currenet Buffer" },
+	["s"] = { "<cmd>source %<cr>", "Source" },
+	r = { "<cmd>LuaRun<cr>", "Run Currenet Buffer" },
 })
 
 -- Python Special Keymaps
 utils.map_on_filetype("python", {
-	["r"] = { utils.cmd("RunCode"), "Run" },
+	["r"] = { "<cmd>RunCode<cr>", "Run" },
 })

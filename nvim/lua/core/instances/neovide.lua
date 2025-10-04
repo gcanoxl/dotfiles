@@ -38,18 +38,18 @@ end, opts)
 vim.keymap.set({ "n", "i" }, "<D-0>", ResetGuiFont, opts)
 
 -- Buffers
--- vim.keymap.set("n", "<D-t>", utils.cmd("enew"))
+vim.keymap.set("n", "<D-t>", "<cmd>enew<cr>")
 
 -- Tabs
--- vim.keymap.set("n", "<D-1>", utils.cmd('exec "normal! 1gt"'))
--- vim.keymap.set("n", "<D-2>", utils.cmd('exec "normal! 2gt"'))
--- vim.keymap.set("n", "<D-3>", utils.cmd('exec "normal! 3gt"'))
--- vim.keymap.set("n", "<D-4>", utils.cmd('exec "normal! 4gt"'))
--- vim.keymap.set("n", "<D-5>", utils.cmd('exec "normal! 5gt"'))
--- vim.keymap.set("n", "<D-6>", utils.cmd('exec "normal! 6gt"'))
--- vim.keymap.set("n", "<D-7>", utils.cmd('exec "normal! 7gt"'))
--- vim.keymap.set("n", "<D-8>", utils.cmd('exec "normal! 8gt"'))
--- vim.keymap.set("n", "<D-9>", utils.cmd('exec "normal! 9gt"'))
+vim.keymap.set("n", "<D-1>", "<cmd>exec 'normal! 1gt'<cr>")
+vim.keymap.set("n", "<D-2>", "<cmd>exec 'normal! 2gt'<cr>")
+vim.keymap.set("n", "<D-3>", "<cmd>exec 'normal! 3gt'<cr>")
+vim.keymap.set("n", "<D-4>", "<cmd>exec 'normal! 4gt'<cr>")
+vim.keymap.set("n", "<D-5>", "<cmd>exec 'normal! 5gt'<cr>")
+vim.keymap.set("n", "<D-6>", "<cmd>exec 'normal! 6gt'<cr>")
+vim.keymap.set("n", "<D-7>", "<cmd>exec 'normal! 7gt'<cr>")
+vim.keymap.set("n", "<D-8>", "<cmd>exec 'normal! 8gt'<cr>")
+vim.keymap.set("n", "<D-9>", "<cmd>exec 'normal! 9gt'<cr>")
 
 -- disable all animations
 vim.g.neovide_position_animation_length = 0
