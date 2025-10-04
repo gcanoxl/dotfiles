@@ -2,7 +2,6 @@ require("core")
 require("utils")
 require("installer")
 require("keymaps")
-require("autocmds")
 
 vim.api.nvim_command([[colorscheme tokyonight-moon]])
 -- vim.cmd("colorscheme catppuccin-frappe")

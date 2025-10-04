@@ -7,3 +7,5 @@ utils.toggles = require("utils.toggles")
 utils.bufdelete = require("utils.bufdelete")
 utils.term = require("utils.terminal")
 utils.dashboard = require("utils.dashboard")
+
+require("utils.viewsaver")
