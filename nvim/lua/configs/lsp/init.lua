@@ -15,7 +15,7 @@ M.servers = {
 for _, server in ipairs(M.servers) do
 	---@type vim.lsp.Config
 	local settings = {
-		on_attach = function(client, bufnr)
+		on_attach = function(client, _)
 			vim.cmd("cd " .. client.root_dir)
 		end,
 		root_markers = { ".project", ".git" },
