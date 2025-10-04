@@ -64,8 +64,7 @@ function M.delete(opts)
 		end
 
 		if vim.api.nvim_buf_is_valid(buf) then
-			---@diagnostic disable-next-line: param-type-mismatch
-			pcall(vim.cmd, (opts.wipeout and "bwipeout! " or "bdelete! ") .. buf)
+			pcall(opts.wipeout and vim.cmd.bwipeout or vim.cmd.bdelete, buf)
 		end
 	end)
 end
