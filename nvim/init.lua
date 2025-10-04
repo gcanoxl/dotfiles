@@ -1,4 +1,4 @@
-require("options")
+require("core")
 require("utils")
 require("installer")
 require("keymaps")
