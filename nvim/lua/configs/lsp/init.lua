@@ -15,9 +15,9 @@ M.servers = {
 }
 
 for _, server in ipairs(M.servers) do
+	---@type vim.lsp.Config
 	local settings = {
-		-- capabilities = capabilities,
-		-- on_attach = on_attach,
+		root_markers = { ".project", ".git" },
 	}
 
 	local path = vim.fn.stdpath("config") .. "/lua/configs/lsp/servers/" .. server .. ".lua"

@@ -1,6 +1,5 @@
 _G.core = {}
-core.config = {}
-core.config.icons = require("core.icons")
+core.configs = require("core.configs")
 
 require("core.options")
 
