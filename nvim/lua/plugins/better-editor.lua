@@ -75,6 +75,7 @@ return {
 				"<c-s-p>",
 				function()
 					require("trouble").prev()
+					require("trouble").jump()
 				end,
 				desc = "Previous Diagnostics",
 			},
@@ -82,22 +83,9 @@ return {
 				"<c-s-n>",
 				function()
 					require("trouble").next()
+					require("trouble").jump()
 				end,
 				desc = "Next Diagnostics",
-			},
-			{
-				"<c-s-o>",
-				function()
-					require("trouble").jump_only()
-				end,
-				desc = "Jump",
-			},
-			{
-				"<c-s-i>",
-				function()
-					require("trouble").jump_split()
-				end,
-				desc = "Jump Split",
 			},
 		},
 	},
