@@ -17,24 +17,6 @@ return {
 		},
 	},
 
-	-- Lsp Config
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			"folke/neoconf.nvim",
-		},
-		config = function()
-			require("neoconf").setup({
-				import = {
-					vscode = false, -- local .vscode/settings.json
-					coc = false, -- global/local coc-settings.json
-					nlsp = false, -- global/local nlsp-settings.nvim json settings
-				},
-			})
-			require("configs.lsp")
-		end,
-	},
-
 	-- Lsp Icons
 	"onsails/lspkind.nvim",
 
