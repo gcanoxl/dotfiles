@@ -36,11 +36,6 @@ return {
 							bg = c.bg_dark,
 							fg = c.bg_dark,
 						}
-						-- LspSaga
-						hl.HoverBorder = {
-							bg = c.bg_dark,
-							fg = c.bg_dark,
-						}
 						-- Telescope
 						hl.TelescopeNormal = {
 							bg = c.bg_dark,

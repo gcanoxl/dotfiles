@@ -29,17 +29,6 @@ vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
 vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
 vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
 
--- LuaSnip
-vim.api.nvim_set_keymap(
-	"i",
-	"<Tab>",
-	[[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>']],
-	{ silent = true, expr = true }
-)
-vim.keymap.set("i", "<S-Tab>", "<cmd>lua require'luasnip'.jump(-1)<cr>")
-vim.keymap.set("s", "<Tab>", "<cmd>lua require'luasnip'.jump(1)<cr>")
-vim.keymap.set("s", "<S-Tab>", "<cmd>lua require'luasnip'.jump(-1)<cr>")
-
 local wk = require("which-key")
 
 -- ========================================
@@ -97,7 +86,6 @@ wk.add({
 	{ "<leader>bB", "<cmd>Telescope buffers<cr>", desc = "Tab-local Buffers" },
 	{ "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", desc = "Close Other Buffers" },
 	{ "<leader>bh", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
-	{ "<leader>bm", "<cmd>ScopeMoveBuf<cr>", desc = "Move to Table" },
 	{ "<leader>bl", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
 	{ "<leader>bH", "<cmd>BufferLineMovePrev<cr>", desc = "Move Left" },
 	{ "<leader>bL", "<cmd>BufferLineMoveNext<cr>", desc = "Move Right" },
@@ -107,8 +95,6 @@ wk.add({
 	{ "<leader>bc", utils.bufdelete.delete, desc = "Close Buffer" },
 	-- Diagnostic
 	{ "<leader>e", group = "Diagnostic" },
-	{ "<leader>ep", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Previous" },
-	{ "<leader>en", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next" },
 	-- File
 	{ "<leader>f", group = "File" },
 	{ "<leader>fw", "<cmd>silent wa<cr>", desc = "Save File" },
@@ -312,12 +298,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- shortcuts
 		local bufopts = { noremap = true, silent = true, buffer = buf }
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", bufopts)
-		vim.keymap.set("n", "dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", bufopts)
-		vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", bufopts)
 		vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
-		vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", bufopts)
-		vim.keymap.set("n", "gf", "<cmd>Lspsaga finder<cr>", bufopts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 		vim.api.nvim_buf_set_keymap(
@@ -339,12 +320,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		require("which-key").add({
 			{ "<leader>l", group = "LSP" }, -- group for LSP
 			{ "<leader>ln", vim.lsp.buf.rename, desc = "Rename", buffer = buf },
-			{ "<leader>lk", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Doc" },
-			{ "<leader>lK", "<cmd>Lspsaga hover_doc ++keep<cr>", desc = "Persistent Hover Doc" },
 			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
-			{ "<leader>lf", "<cmd>Lspsaga finder<cr>", desc = "Finder" },
 			{ "<leader>l", group = "Goto" },
-			{ "<leader>lgd", "<cmd>Lspsaga goto_definition<cr>", desc = "Definition" },
 			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition" },
 			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation" },
 			{ "<leader>lgo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
