@@ -22,6 +22,7 @@ return {
 					mappings = {
 						i = {
 							["<C-u>"] = false,
+							["<C-q>"] = require("trouble.sources.telescope").open,
 						},
 					},
 					file_ignore_patterns = {

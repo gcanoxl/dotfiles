@@ -107,7 +107,6 @@ wk.add({
 	{ "<leader>bc", utils.bufdelete.delete, desc = "Close Buffer" },
 	-- Diagnostic
 	{ "<leader>e", group = "Diagnostic" },
-	{ "<leader>ee", "<cmd>Trouble errors toggle<cr>", desc = "Errors" },
 	{ "<leader>ep", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Previous" },
 	{ "<leader>en", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next" },
 	-- File

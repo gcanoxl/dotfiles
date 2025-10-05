@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-parameter
 return {
 	-- Formatting
 	{
@@ -58,25 +59,47 @@ return {
 		},
 	},
 
-	-- Error List
+	-- better list
 	{
 		"folke/trouble.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({
-				auto_close = true,
-				modes = {
-					errors = {
-						mode = "diagnostics",
-						filter = function(items)
-							return vim.tbl_filter(function(item)
-								return item.severity == vim.diagnostic.severity.ERROR
-							end, items)
-						end,
-					},
-				},
-			})
-		end,
+		opts = {
+			auto_preview = false,
+			auto_refresh = true,
+			auto_close = true,
+		},
+		keys = {
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+			{ "<leader>xf", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
+			{ "<leader>xs", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/..." },
+			{
+				"<c-s-p>",
+				function()
+					require("trouble").prev()
+				end,
+				desc = "Previous Diagnostics",
+			},
+			{
+				"<c-s-n>",
+				function()
+					require("trouble").next()
+				end,
+				desc = "Next Diagnostics",
+			},
+			{
+				"<c-s-o>",
+				function()
+					require("trouble").jump_only()
+				end,
+				desc = "Jump",
+			},
+			{
+				"<c-s-i>",
+				function()
+					require("trouble").jump_split()
+				end,
+				desc = "Jump Split",
+			},
+		},
 	},
 
 	"mrjones2014/smart-splits.nvim",
