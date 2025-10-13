@@ -37,4 +37,7 @@ vim.filetype.add({
 	extension = {
 		arb = "json",
 	},
+	filename = {
+		[".zshrc"] = "sh",
+	},
 })

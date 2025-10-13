@@ -2,15 +2,11 @@ return {
 	root_markers = { ".project", ".git" },
 	lsp = {
 		servers = {
+			-- Lua
 			"lua_ls",
-			"vimls",
-			"pyright",
-			"jsonls",
-			"yamlls",
-			"ts_ls",
-			"html",
-			"clangd",
-			"postgres_lsp",
+			-- Shell
+			"shellcheck",
+			"bashls",
 		},
 	},
 	icons = require("core.configs.icons"),
