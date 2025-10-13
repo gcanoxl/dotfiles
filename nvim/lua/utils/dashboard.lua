@@ -152,14 +152,12 @@ local defaults = {
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
 		keys = {
-			{ icon = " ", key = "f", desc = "Find File", action = ":lua print('Find File')" },
-			{ icon = " ", key = "n", desc = "New File", action = ":lua print('New File')" },
-			{ icon = " ", key = "g", desc = "Find Text", action = ":lua print('Find Text')" },
-			{ icon = " ", key = "r", desc = "Recent Files", action = ":lua print('Recent Files')" },
-			{ icon = " ", key = "c", desc = "Config", action = ":lua print('Config')" },
-			{ icon = " ", key = "s", desc = "Restore Session", action = ":lua print('Restore Session')" },
-			{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":lua print('Lazy')" },
-			{ icon = " ", key = "q", desc = "Quit", action = ":lua print('Quit')" },
+			{ icon = " ", key = "f", desc = "Find File", action = ":Telescope find_files" },
+			{ icon = " ", key = "s", desc = "Find Text", action = ":Telescope live_grep" },
+			{ icon = " ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
+			{ icon = " ", key = "c", desc = "Config", action = ":cd ~/.config/nvim" },
+			{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy" },
+			{ icon = " ", key = "q", desc = "Quit", action = ":quitall" },
 		},
 	},
 	sections = {
