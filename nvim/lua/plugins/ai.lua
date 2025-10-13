@@ -82,4 +82,8 @@ return {
 			},
 		},
 	},
+	{
+		"404pilo/aicommits.nvim",
+		config = true,
+	},
 }
