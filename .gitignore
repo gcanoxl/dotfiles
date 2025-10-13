@@ -5,3 +5,4 @@ emacs.d/*
 !emacs.d/snippets
 hammerspoon/Spoons/EmmyLua.spoon/annotations/*
 !.neoconf.json
+zshrc.zwc
