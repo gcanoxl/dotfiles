@@ -131,12 +131,12 @@ end
 ---@alias utils.dashboard.Format.ctx {width?:number}
 
 ---@class utils.dashboard.Config
----@field sections utils.dashboard.Section[]
----@field pane_gap number
----@field width number
+---@field sections? utils.dashboard.Section[]
+---@field pane_gap? number
+---@field width? number
 ---@field col? number
 ---@field row? number
----@field formats table<string, utils.dashboard.Text|fun(item: utils.dashboard.Item, ctx:utils.dashboard.Format.ctx):utils.dashboard.Text>
+---@field formats? table<string, utils.dashboard.Text|fun(item: utils.dashboard.Item, ctx:utils.dashboard.Format.ctx):utils.dashboard.Text>
 local defaults = {
 	pane_gap = 4,
 	width = 60,
@@ -364,6 +364,10 @@ end
 
 ---@param action utils.dashboard.Action
 function D:action(action)
+	if self:is_float() then
+		vim.api.nvim_win_close(self.win, true)
+		self.win = nil
+	end
 	if type(action) == "string" then
 		if action:find("^:") then
 			return vim.cmd(action:sub(2))
@@ -400,7 +404,7 @@ function D:render()
 	local lines = {}
 	local extmarks = {} ---@type { row: number, col: number, opts: vim.api.keyset.set_extmark }[]
 	for p, pane in ipairs(self.panes) do
-		local indent = (" "):rep(p == 1 and self.col or self.opts.pane_gap)
+		local indent = (" "):rep(p == 1 and self.col or (self.opts.pane_gap or 0))
 		local row = 0
 		for _, item in ipairs(pane) do
 			for _, line in ipairs(self:format(item)) do
@@ -495,7 +499,10 @@ end
 ---@param item utils.dashboard.Item
 ---@return {[1]: number,[2]: number }
 function D:padding(item)
-	return item.padding and (type(item.padding) == "table" and item.padding or { item.padding, 0 }) or { 0, 0 }
+	-- NOTE: prevent gratuious warning from lus_ls
+	local padding = item.padding or { 0, 0 }
+	return type(padding) == "table" and padding or { padding, 0 }
+	-- return item.padding and (type(item.padding) == "table" and item.padding or { item.padding, 0 }) or { 0, 0 }
 end
 
 ---@param texts utils.dashboard.Text[]
