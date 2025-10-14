@@ -376,7 +376,8 @@ function D:action(action)
 end
 
 function D:layout()
-	local max_panes = math.floor((self._size.width + self.opts.pane_gap) / (self.opts.width + self.opts.pane_gap))
+	local max_panes =
+		math.max(1, math.floor((self._size.width + self.opts.pane_gap) / (self.opts.width + self.opts.pane_gap)))
 	self.panes = {} ----@type utils.dashboard.Item[][]
 	for _, item in ipairs(self.items) do
 		if not item.hidden then
