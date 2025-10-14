@@ -316,7 +316,7 @@ function D:init()
 	vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
 		group = self.augroup,
 		callback = function()
-			-- TODO: implement
+			self:update()
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
