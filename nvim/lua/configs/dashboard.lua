@@ -14,7 +14,7 @@ if vim.fn.argc(-1) == 0 then
 				sections = {
 					{ section = "header", padding = 1, pane = 1 },
 					{ section = "keys", pane = 1, gap = 1, padding = 1 },
-					-- { section = "startup", pane = 1 },
+					{ section = "startup", pane = 1 },
 					{ section = "recent_files", padding = 1, pane = 2, limit = 8 },
 					-- { section = "terminal", cmd = "fortune -s | cowsay", hl = "header", padding = 1, indent = 8 },
 					-- { title = "MRU", padding = 1 },
