@@ -472,8 +472,8 @@ function D:format(item)
 
 	local block = item.text and self:block(self:texts(item.text))
 	local left = block and { width = 0 } or find({ "icon" }, { multi = false, padding = 1 })
-	local right = block and { width = 0 } or find({ "key" }, { multi = false })
-	local center = block or find({ "header", "desc", "file" }, { multi = true, flex = true })
+	local right = block and { width = 0 } or find({ "key" }, { multi = false, padding = 1 })
+	local center = block or find({ "header", "desc", "file", "title" }, { multi = true, flex = true })
 
 	local ret = { width = 0 } ---@type utils.dashboard.Block
 
@@ -484,6 +484,9 @@ function D:format(item)
 		right[i] = right[i] or { width = 0 }
 		center[i] = center[i] or { width = 0 }
 		self:align(left[i], left.width, "left")
+		if item.indent then
+			self:align(left[i], left[i].width + item.indent, "right")
+		end
 		self:align(right[i], right.width, "right")
 		self:align(center[i], self.opts.width - left[i].width - right[i].width, item.align)
 		vim.list_extend(ret[i], left[i] or { width = 0 })
@@ -554,6 +557,7 @@ end
 ---@param item utils.dashboard.Text|utils.dashboard.Line
 ---@param width? number
 ---@param align? "left" | "center" | "right"
+---@return nil
 function D:align(item, width, align)
 	local len = 0
 	if type(item[1]) == "string" then ---@cast item utils.dashboard.Text
@@ -602,7 +606,7 @@ function D:resolve(item, results, parent)
 		return results
 	end
 	if type(item) == "table" and parent then
-		for _, prop in ipairs({ "pane" }) do
+		for _, prop in ipairs({ "pane", "indent" }) do
 			item[prop] = item[prop] or parent[prop]
 		end
 	end
@@ -622,6 +626,18 @@ function D:resolve(item, results, parent)
 			for _, child in ipairs(item) do
 				self:resolve(child, results, item)
 			end
+		end
+
+		-- add title
+		if #results > first_child and item.title then
+			---@type utils.dashboard.Item
+			local title = {
+				icon = item.icon,
+				title = item.title,
+				pane = item.pane,
+			}
+			table.insert(results, first_child, title)
+			first_child = first_child + 1
 		end
 
 		local first, last = first_child, #results

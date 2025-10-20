@@ -3,7 +3,7 @@ local dashboard = require("utils.dashboard")
 local configs = {
 	advanced = {
 		sections = {
-			{ section = "header" },
+			{ section = "header", pane = 1, padding = 2 },
 			-- {
 			-- 	pane = 2,
 			-- 	section = "terminal",
@@ -11,7 +11,7 @@ local configs = {
 			-- 	height = 5,
 			-- 	padding = 1,
 			-- },
-			{ section = "keys", gap = 1, padding = 1 },
+			{ section = "keys", gap = 1, padding = 2, pane = 1 },
 			{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
 			-- { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 			-- {
