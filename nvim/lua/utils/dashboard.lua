@@ -11,7 +11,7 @@ M.sections = {}
 ---@alias utils.dashboard.Gen fun(utils.dashboard.Class) :utils.dashboard.Section
 ---@alias utils.dashboard.Section utils.dashboard.Gen|utils.dashboard.Section[]
 
----@return utils.dashboard.Gen
+---@return utils.dashboard.Section
 function M.sections.header()
 	---@param self utils.dashboard.Class
 	return function(self)
@@ -19,7 +19,7 @@ function M.sections.header()
 	end
 end
 
----@return utils.dashboard.Gen
+---@return utils.dashboard.Section
 function M.sections.keys()
 	---@param self utils.dashboard.Class
 	return function(self)
@@ -27,7 +27,7 @@ function M.sections.keys()
 	end
 end
 
----@return utils.dashboard.Gen
+---@return utils.dashboard.Section
 function M.sections.startup()
 	---@param opts utils.dashboard.Class
 	return function(opts)
@@ -90,7 +90,7 @@ function M.oldfiles(opts)
 end
 
 ---@param opts{limit:number?, cwd: string|boolean, filter:fun(string):boolean?}
----@return utils.dashboard.Gen
+---@return utils.dashboard.Section
 function M.sections.recent_files(opts)
 	return function()
 		opts = opts or {}
@@ -114,6 +114,48 @@ function M.sections.recent_files(opts)
 		return ret
 	end
 end
+
+---@param opts { limit?:number, dirs?: (string[]|fun():string[]), markers?:string[], filter?:(fun(dir:string):boolean?), action?: (fun(dir:string)) }
+---@return utils.dashboard.Section
+function M.sections.projects(opts)
+	opts = opts or {}
+	local limit = opts.limit or 5
+	local dirs = opts.dirs or {}
+	dirs = type(dirs) == "function" and dirs() or dirs --[[ @as string[] ]]
+	dirs = vim.list_slice(dirs, 1, limit)
+
+	if not opts.dirs then
+		for file in M.oldfiles() do
+			local dir = vim.fs.root(file, opts.markers or { ".project", ".git" })
+			if dir and not vim.tbl_contains(dirs, dir) then
+				table.insert(dirs, dir)
+				if #dirs >= limit then
+					break
+				end
+			end
+		end
+	end
+
+	local ret = {} ---@type utils.dashboard.Section
+	for _, dir in ipairs(dirs) do
+		if not opts.filter or opts.filter(dir) then
+			ret[#ret + 1] = {
+				icon = "directory",
+				file = dir,
+				autokey = true,
+				action = function()
+					if opts.action then
+						return opts.action(dir)
+					end
+					vim.fn.chdir(dir)
+					-- TODO: implement sessions
+				end,
+			}
+		end
+	end
+	return ret
+end
+
 ---@class utils.dashboard.Text
 ---@field [1] string
 ---@field width? number
@@ -161,7 +203,7 @@ local defaults = {
 		},
 	},
 	sections = {
-		{ section = "header", pane = 1 },
+		{ section = "header" },
 		{ section = "keys", gap = 1, padding = 1 },
 		{ section = "startup" },
 	},
@@ -629,7 +671,7 @@ function D:resolve(item, results, parent)
 		end
 
 		-- add title
-		if #results > first_child and item.title then
+		if #results >= first_child and item.title then
 			---@type utils.dashboard.Item
 			local title = {
 				icon = item.icon,
