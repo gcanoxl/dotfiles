@@ -156,6 +156,50 @@ function M.sections.projects(opts)
 	return ret
 end
 
+---@param opts {cmd?:string|string[], height?:number, width?:number, indent?:number, ttl?:number, random?:number}
+---@return utils.dashboard.Section
+function M.sections.terminal(opts)
+	return function(self)
+		opts = opts or {}
+		local cmd = opts.cmd or [[echo "No `cmd` provided"]]
+		local height = opts.height or 10
+		local width = opts.width
+		if not width then
+			width = self.opts.width - (opts.indent or 0)
+		end
+		local ttl = opts.ttl or 3600
+
+		local cache_parts = {
+			table.concat(type(cmd) == "table" and cmd or { cmd }, " "),
+			vim.uv.cwd(),
+		}
+
+		local optput, recording = assert(vim.uv.new_timer())
+
+		local jid = vim.fn.jobstart(cmd, {
+			height = height,
+			width = width,
+			pty = true,
+			on_stdout = function(_, data)
+				print(vim.inspect(table.concat(data, "\n")))
+
+				local termenv = {}
+
+				if data == "" then
+					return
+				end
+			end,
+			on_exit = function() end,
+		})
+
+		return {
+			{
+				title = "test",
+			},
+		}
+	end
+end
+
 ---@class utils.dashboard.Text
 ---@field [1] string
 ---@field width? number
