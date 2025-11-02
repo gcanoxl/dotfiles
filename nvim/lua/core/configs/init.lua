@@ -7,6 +7,11 @@ return {
 			-- Shell
 			"shellcheck",
 			"bashls",
+			-- Web Frontend
+			"html-lsp",
+			"css-lsp",
+			-- TS
+			"ts_ls",
 		},
 	},
 	icons = require("core.configs.icons"),

@@ -75,7 +75,7 @@ return {
 				},
 			},
 			rainbow = {
-				enable = false,
+				enable = true,
 			},
 		})
 	end,
