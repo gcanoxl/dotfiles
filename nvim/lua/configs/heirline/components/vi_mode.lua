@@ -1,4 +1,6 @@
-ViMode = {
+local utils = require("heirline.utils")
+
+local ViMode = {
 	init = function(self)
 		self.mode = vim.fn.mode()
 	end,
@@ -15,20 +17,25 @@ ViMode = {
 			["\19"] = "purple",
 			R = "orange",
 			r = "orange",
-			["!"] = "red",
-			t = "red",
+			["!"] = "orange",
+			t = "orange",
+		},
+		mode_icons = {
+			n = "󰈸",
+			i = "",
+			v = "",
+			V = "",
+			["\22"] = "",
+			c = "",
+			s = "",
+			S = "",
+			["\19"] = "",
+			R = "",
+			r = "",
+			["!"] = "",
+			t = "",
 		},
 	},
-	provider = function(self)
-		return " " .. self.mode:upper() .. " "
-	end,
-	hl = function(self)
-		return {
-			fg = self.mode_colors[self.mode],
-			bg = "bright_bg",
-			bold = true,
-		}
-	end,
 	update = {
 		"ModeChanged",
 		pattern = "*:*",
@@ -37,4 +44,46 @@ ViMode = {
 		end),
 	},
 }
+
+local ViModeIcon = {
+	provider = function(self)
+		local icon = self.mode_icons[self.mode:sub(1, 1)] or ""
+		local label = self.mode:upper()
+		if icon == "" then
+			return label
+		end
+		return string.format("%s %s", icon, label)
+	end,
+	hl = function(self)
+		return {
+			fg = "bright_bg",
+			bg = self.mode_colors[self.mode],
+			bold = true,
+		}
+	end,
+}
+
+local ViModeLeftSurrounder = {
+	provider = function()
+		return ""
+	end,
+	hl = function(self)
+		return {
+			fg = self.mode_colors[self.mode],
+		}
+	end,
+}
+
+local ViModeRightSurrounder = {
+	provider = function()
+		return ""
+	end,
+	hl = function(self)
+		return {
+			fg = self.mode_colors[self.mode],
+		}
+	end,
+}
+
+ViMode = utils.insert(ViMode, ViModeLeftSurrounder, ViModeIcon, ViModeRightSurrounder)
 return ViMode

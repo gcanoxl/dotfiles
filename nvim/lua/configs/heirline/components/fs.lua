@@ -3,11 +3,10 @@ local conditions = require("heirline.conditions")
 -- WorkDir
 local WorkDir = {
 	init = function(self)
-		-- self.icon = (vim.fn.haslocaldir(0) == 1 and "l" or "") .. " "
 		local cwd = vim.fn.getcwd(0)
 		self.cwd = vim.fn.fnamemodify(cwd, ":~")
 	end,
-	hl = { fg = utils.get_highlight("Directory").fg, bold = true },
+	hl = { fg = "directory" },
 	flexible = 1,
 	{
 		-- evaluates to the full-lenth path
@@ -25,10 +24,6 @@ local WorkDir = {
 			return cwd .. trail .. " "
 		end,
 	},
-	{
-		-- evaluates to "", hiding the component
-		provider = "",
-	},
 }
 
 -- File Section
@@ -36,6 +31,7 @@ local FileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
+	hl = { fg = "file" },
 }
 local FileIcon = {
 	init = function(self)
@@ -44,7 +40,10 @@ local FileIcon = {
 		self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension)
 	end,
 	provider = function(self)
-		return self.icon and self.icon .. " "
+		if not self.icon then
+			return ""
+		end
+		return " " .. self.icon
 	end,
 	hl = function(self)
 		return { fg = self.icon_color }
@@ -67,14 +66,6 @@ local FileName = {
 			return vim.fn.pathshorten(filename)
 		end,
 	},
-	{
-		provider = function(self)
-			return vim.fn.fnamemodify(self.filename, ":t")
-		end,
-	},
-	hl = function(_)
-		return { fg = "cyan" }
-	end,
 }
 
 local FileFlags = {
@@ -83,7 +74,7 @@ local FileFlags = {
 			return vim.bo.modified
 		end,
 		provider = function()
-			return "[+]"
+			return " [+]"
 		end,
 		hl = { fg = "green" },
 	},
@@ -96,9 +87,14 @@ local FileFlags = {
 	},
 }
 
-FileNameBlock = utils.insert(FileNameBlock, FileName, FileFlags, { provider = "%<" })
-return {
-	FileIcon = FileIcon,
-	FileNameBlock = FileNameBlock,
-	WorkDir = WorkDir,
+FileNameBlock = utils.insert(FileNameBlock, FileName, FileFlags, FileIcon, { provider = "%<" })
+
+local FilePath = {
+	hl = {
+		bg = "bright_bg",
+	},
 }
+
+FilePath = utils.insert(FilePath, WorkDir, FileNameBlock)
+
+return FilePath

@@ -1,8 +1,10 @@
 local utils = require("heirline.utils")
 local conditions = require("heirline.conditions")
 
-local LSPActive = {
+local LSPActiveCondition = {
 	condition = conditions.lsp_attached,
+}
+local LSPActive = {
 	update = { "LspAttach", "LspDetach" },
 	provider = function()
 		local names = {}
@@ -11,15 +13,20 @@ local LSPActive = {
 		end
 		return " " .. table.concat(names, " ")
 	end,
-	hl = { fg = "green", bold = false },
+	hl = { fg = "black", bg = "green", bold = false },
+	-- hl = { fg = "green", bold = false },
 }
+LSPActiveCondition = utils.insert(LSPActiveCondition, utils.surround({ "", "" }, "green", LSPActive))
 
-local Git = {
+local GitBranchCondition = {
 	condition = conditions.is_git_repo,
+}
+local GitBranch = {
 	init = function(self)
 		self.status_dict = vim.b.gitsigns_status_dict
 	end,
-	hl = { fg = "orange", bold = false },
+	hl = { fg = "black", bg = "orange", bold = false },
+	-- hl = { fg = "orange", bold = false },
 
 	-- git branch name
 	{
@@ -28,8 +35,9 @@ local Git = {
 		end,
 	},
 }
+GitBranchCondition = utils.insert(GitBranchCondition, utils.surround({ "", "" }, "orange", GitBranch))
 
 return {
-	LSPActive = LSPActive,
-	Git = Git,
+	LSPActive = LSPActiveCondition,
+	GitBranch = GitBranchCondition,
 }

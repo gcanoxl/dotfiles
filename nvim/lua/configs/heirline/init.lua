@@ -1,5 +1,7 @@
+local utils = require("heirline.utils")
+
 local ViMode = require("configs.heirline.components.vi_mode")
-local fs = require("configs.heirline.components.fs")
+local FilePath = require("configs.heirline.components.fs")
 local ornaments = require("configs.heirline.components.ornaments")
 local layouts = require("configs.heirline.components.layouts")
 local debugger = require("configs.heirline.components.debugger")
@@ -7,19 +9,14 @@ local debugger = require("configs.heirline.components.debugger")
 local StatusLine = {
 	{
 		ViMode,
-		layouts.Space,
-		fs.WorkDir,
-		fs.FileNameBlock,
+		utils.surround({ "", "" }, "bright_bg", FilePath),
 	},
 	layouts.Align,
 	{
-		debugger.DAPMessages,
-		layouts.Space,
-		layouts.Space,
-		layouts.Space,
+		-- 	debugger.DAPMessages,
+		-- 	layouts.Space,
 		ornaments.LSPActive,
-		layouts.Space,
-		ornaments.Git,
+		ornaments.GitBranch,
 	},
 }
 
