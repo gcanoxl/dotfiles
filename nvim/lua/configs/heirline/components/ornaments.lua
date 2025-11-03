@@ -9,9 +9,9 @@ local LSPActive = {
 		for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 			table.insert(names, server.name)
 		end
-		return "[" .. table.concat(names, " ") .. "]"
+		return " " .. table.concat(names, " ")
 	end,
-	hl = { fg = "green", bold = true },
+	hl = { fg = "green", bold = false },
 }
 
 local Git = {
@@ -19,7 +19,7 @@ local Git = {
 	init = function(self)
 		self.status_dict = vim.b.gitsigns_status_dict
 	end,
-	hl = { fg = "orange", bold = true },
+	hl = { fg = "orange", bold = false },
 
 	-- git branch name
 	{
