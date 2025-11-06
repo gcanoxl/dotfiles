@@ -12,6 +12,8 @@ return {
 			"css-lsp",
 			-- TS
 			"ts_ls",
+			-- C & C++
+			"clangd",
 		},
 	},
 	icons = require("core.configs.icons"),
