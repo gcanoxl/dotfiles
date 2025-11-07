@@ -33,6 +33,9 @@ function M.sections.startup()
 	return function(opts)
 		opts = opts or {}
 		M.lazy_stats = M.lazy_stats and M.lazy_stats.startuptime > 0 and M.lazy_stats or require("lazy.stats").stats()
+		-- NOTE: don't know why the startuptime in my machine is always 0
+		M.lazy_stats.startuptime = M.lazy_stats.startuptime ~= 0 and M.lazy_stats.startuptime
+			or M.lazy_stats.times.LazyDone + M.lazy_stats.times.LazyStart
 		local ms = (math.floor(M.lazy_stats.startuptime * 100 + 0.5) / 100)
 		local icon = opts.icon or "⚡ "
 		return {
