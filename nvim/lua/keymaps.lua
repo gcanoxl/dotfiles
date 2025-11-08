@@ -54,12 +54,9 @@ wk.add({
 	{ "<leader>ae", "<cmd>Telescope emoji<cr>", desc = "Emoji" },
 	{ "<leader>am", "<cmd>Telescope notify<cr>", desc = "Messages" },
 	-- Config
-	{ "<leader>c", group = "Config" },
-	{ "<leader>cc", utils.config_files, desc = "Edit Config" },
-
-	-- Neoconf
-	{ "<leader>C", group = "Neoconf" },
-	{ "<leader>Cc", "<cmd>Neoconf<cr>", desc = "Select Config" },
+	{ "<leader>C", group = "Config" },
+	{ "<leader>Cc", utils.config_files, desc = "Edit Config" },
+	{ "<leader>CC", "<cmd>Neoconf<cr>", desc = "Select Config" },
 	{ "<leader>Cl", "<cmd>Neoconf local<cr>", desc = "Edit Local Config" },
 	{ "<leader>Cg", "<cmd>Neoconf global<cr>", desc = "Edit Global Config" },
 	{ "<leader>Cs", "<cmd>Neoconf show<cr>", desc = "Show Config" },
