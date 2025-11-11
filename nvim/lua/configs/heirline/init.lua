@@ -5,6 +5,7 @@ local FilePath = require("configs.heirline.components.fs")
 local ornaments = require("configs.heirline.components.ornaments")
 local layouts = require("configs.heirline.components.layouts")
 local debugger = require("configs.heirline.components.debugger")
+local swift = require("configs.heirline.components.swift")
 
 local StatusLine = {
 	{
@@ -13,9 +14,17 @@ local StatusLine = {
 	},
 	layouts.Align,
 	{
-		-- 	debugger.DAPMessages,
-		-- 	layouts.Space,
+		-- swift
+		layouts.Space,
+		swift.XcodeBuildLastStatus,
+		layouts.Space,
+		swift.XcodeBuildTestPlan,
+		layouts.Space,
+		swift.XcodeBuildDevice,
+		layouts.Space,
+		-- lsp
 		ornaments.LSPActive,
+		-- git
 		ornaments.GitBranch,
 	},
 }

@@ -7,13 +7,11 @@ return {
 			-- Shell
 			"shellcheck",
 			"bashls",
-			-- Web Frontend
-			"html-lsp",
-			"css-lsp",
-			-- TS
-			"ts_ls",
-			-- C & C++
-			"clangd",
+			-- SwiftUI
+			{
+				"sourcekit-lsp",
+				mason = false,
+			},
 		},
 	},
 	icons = require("core.configs.icons"),

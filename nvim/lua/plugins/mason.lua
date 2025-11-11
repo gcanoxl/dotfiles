@@ -17,9 +17,17 @@ return {
 			automatic_installation = true,
 		})
 		local lsp_servers = require("core.configs").lsp.servers
-		require("mason-tool-installer").setup({
-			ensure_installed = lsp_servers,
-		})
-		require("mason-nvim-dap").setup()
+		local ensure_installed = {}
+		for _, server in ipairs(lsp_servers) do
+			if type(server) == "string" then
+				table.insert(ensure_installed, server)
+			elseif type(server) == "table" and server[1] and (server["mason"] == nil or server["mason"] == true) then
+				table.insert(ensure_installed, server[1])
+			end
+			require("mason-tool-installer").setup({
+				ensure_installed = ensure_installed,
+			})
+			require("mason-nvim-dap").setup()
+		end
 	end,
 }
