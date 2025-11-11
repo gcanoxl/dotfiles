@@ -12,6 +12,12 @@ return {
 				"sourcekit-lsp",
 				mason = false,
 			},
+			-- Flutter
+			{
+				"dartls",
+				enabled = false,
+				mason = false,
+			}
 		},
 	},
 	icons = require("core.configs.icons"),

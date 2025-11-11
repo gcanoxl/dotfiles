@@ -2,7 +2,7 @@ local enabled_servers = {}
 for _, server in ipairs(core.configs.lsp.servers) do
 	if type(server) == "string" then
 		table.insert(enabled_servers, server)
-	elseif type(server) == "table" and server[1] and (server["enable"] == nil or server["enable"] == true) then
+	elseif type(server) == "table" and server[1] and (server["enabled"] == nil or server["enabled"] == true) then
 		table.insert(enabled_servers, server[1])
 	end
 end
