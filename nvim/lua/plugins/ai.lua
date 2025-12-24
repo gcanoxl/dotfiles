@@ -42,14 +42,12 @@ return {
 			},
 			{
 				"<c-.>",
-				function()
-					require("sidekick.cli").focus()
-				end,
-				mode = { "n", "x", "i", "t" },
-				desc = "Sidekick Switch Focus",
+				function() require("sidekick.cli").toggle({ name = "codex", focus = true }) end,
+				desc = "Sidekick Toggle",
+				mode = { "n", "t", "i", "x" },
 			},
 			{
-				"<leader>aa",
+				"<leader>ai",
 				function()
 					require("sidekick.cli").toggle({ focus = true })
 				end,
@@ -57,25 +55,9 @@ return {
 				mode = { "n", "v" },
 			},
 			{
-				"<leader>ac",
-				function()
-					require("sidekick.cli").toggle({ name = "claude", focus = true })
-				end,
-				desc = "Sidekick Claude Toggle",
-				mode = { "n", "v" },
-			},
-			{
-				"<leader>ag",
-				function()
-					require("sidekick.cli").toggle({ name = "codex", focus = true })
-				end,
-				desc = "Sidekick Grok Toggle",
-				mode = { "n", "v" },
-			},
-			{
 				"<leader>ap",
 				function()
-					require("sidekick.cli").select_prompt()
+					require("sidekick.cli").prompt()
 				end,
 				desc = "Sidekick Ask Prompt",
 				mode = { "n", "v" },
