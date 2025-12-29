@@ -4,7 +4,46 @@ return {
 		lazy = false,
 		branch = "main",
 		build = ":TSUpdate",
-		opts = {},
+		ops = {
+			install_dir = vim.fn.stdpath('data') .. '/site'
+		},
+		config = function()
+			require 'nvim-treesitter'.install {
+				'bash',
+				'c',
+				'cpp',
+				'csv',
+				'dart',
+				'diff',
+				'json',
+				'python',
+				'sql',
+				'ssh_config',
+				'swift',
+				'vim',
+				'vimdoc',
+				'zsh',
+				-- web
+				'html',
+				'css',
+				'javascript',
+				'typescript',
+				'jsx',
+				'tsx',
+				-- lua
+				'lua',
+				'luadoc',
+				-- markdown
+				'markdown',
+				'markdowninline',
+				'mermaid',
+				-- git
+				'git_config',
+				'git_rebase',
+				'gitcommit',
+				'gitignore',
+			}
+		end
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
