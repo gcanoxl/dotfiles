@@ -19,5 +19,5 @@ return {
 		'vue',
 	},
 	-- TODO: integrate this
-	root_markers = vim.list_extend(core.configs.root_markers, { ".luarc.json" }),
+	root_markers = vim.list_extend(vim.deepcopy(core.configs.root_markers), { ".luarc.json" }),
 }
