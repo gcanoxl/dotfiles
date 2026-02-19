@@ -4,6 +4,8 @@ return {
 		servers = {
 			-- Lua
 			"lua_ls",
+			-- Python
+			"pyright",
 			-- Shell
 			"shellcheck",
 			"bashls",
