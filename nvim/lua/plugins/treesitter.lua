@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		branch = "main",
 		build = ":TSUpdate",
-		ops = {
+		opts = {
 			install_dir = vim.fn.stdpath('data') .. '/site'
 		},
 		config = function()
