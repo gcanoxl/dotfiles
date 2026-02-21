@@ -7,7 +7,6 @@ return {
 			-- Python
 			"pyright",
 			-- Shell
-			"shellcheck",
 			"bashls",
 			-- SwiftUI
 			{

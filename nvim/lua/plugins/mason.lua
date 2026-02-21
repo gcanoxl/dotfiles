@@ -17,7 +17,7 @@ return {
 			automatic_installation = true,
 		})
 		local lsp_servers = require("core.configs").lsp.servers
-		local ensure_installed = {}
+		local ensure_installed = { "shellcheck" }
 		for _, server in ipairs(lsp_servers) do
 			if type(server) == "string" then
 				table.insert(ensure_installed, server)
