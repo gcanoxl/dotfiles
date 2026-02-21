@@ -295,7 +295,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- shortcuts
 		local bufopts = { noremap = true, silent = true, buffer = buf }
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "ca", vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 		vim.api.nvim_buf_set_keymap(
@@ -315,14 +315,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- register keymaps using which-key
 		require("which-key").add({
-			{ "<leader>l", group = "LSP" }, -- group for LSP
+			{ "<leader>l", group = "LSP", buffer = buf }, -- group for LSP
 			{ "<leader>ln", vim.lsp.buf.rename, desc = "Rename", buffer = buf },
-			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
-			{ "<leader>l", group = "Goto" },
-			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition" },
-			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation" },
-			{ "<leader>lgo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
-			{ "<leader>lgl", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
+			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", buffer = buf },
+			{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = buf },
+			{ "<leader>lg", group = "Goto", buffer = buf },
+			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition", buffer = buf },
+			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation", buffer = buf },
+			{ "<leader>lgo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", buffer = buf },
+			{ "<leader>lgl", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols", buffer = buf },
 			{ "<leader>lt", group = "Toggle", buffer = buf },
 			{ "<leader>lti", utils.toggles.toggle_inlay_hint, desc = "Inlay Hint" },
 		})
