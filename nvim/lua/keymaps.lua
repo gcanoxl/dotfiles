@@ -296,6 +296,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufopts = { noremap = true, silent = true, buffer = buf }
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 		vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 		vim.api.nvim_buf_set_keymap(
@@ -320,6 +321,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", buffer = buf },
 			{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = buf },
 			{ "<leader>lg", group = "Goto", buffer = buf },
+			{ "<leader>lgd", vim.lsp.buf.definition, desc = "Definition", buffer = buf },
 			{ "<leader>lgD", vim.lsp.buf.type_definition, desc = "Type Definition", buffer = buf },
 			{ "<leader>lgi", vim.lsp.buf.implementation, desc = "Implementation", buffer = buf },
 			{ "<leader>lgo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", buffer = buf },
