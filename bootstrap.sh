@@ -192,8 +192,8 @@ prompt_conflict_action() {
   local reply=""
 
   while true; do
-    printf "%s[CONFLICT]%s %s exists and is not the expected symlink.\n" "$CLR_YELLOW" "$CLR_RESET" "$target"
-    printf "Action [b]ackup / [s]kip / [f]orce / [q]uit (default: b): "
+    printf "%s[CONFLICT]%s %s exists and is not the expected symlink.\n" "$CLR_YELLOW" "$CLR_RESET" "$target" >&2
+    printf "Action [b]ackup / [s]kip / [f]orce / [q]uit (default: b): " >&2
 
     if ! IFS= read -r reply; then
       printf 'quit\n'
@@ -219,7 +219,7 @@ prompt_conflict_action() {
         return 0
         ;;
       *)
-        warn "Invalid choice: $reply"
+        warn "Invalid choice: $reply" >&2
         ;;
     esac
   done
@@ -228,6 +228,7 @@ prompt_conflict_action() {
 ensure_zshrc_source() {
   local zshrc_file="$HOME/.zshrc"
   local source_line=""
+  local zshrc_exists=false
 
   if [[ "$REPO_ROOT" == "$HOME/.dotfiles" ]]; then
     source_line='source "$HOME/.dotfiles/zshrc"'
@@ -243,6 +244,10 @@ ensure_zshrc_source() {
     return 1
   fi
 
+  if [[ -e "$zshrc_file" ]]; then
+    zshrc_exists=true
+  fi
+
   if [[ ! -e "$zshrc_file" ]]; then
     if ! run_cmd touch "$zshrc_file"; then
       error "Failed to create $zshrc_file"
@@ -252,7 +257,7 @@ ensure_zshrc_source() {
     info "Created $zshrc_file"
   fi
 
-  if grep -Fqx "$source_line" "$zshrc_file"; then
+  if $zshrc_exists && grep -Fqx "$source_line" "$zshrc_file"; then
     ok "Source line already present: $source_line"
     zshrc_unchanged_count=$((zshrc_unchanged_count + 1))
     return 0
@@ -441,13 +446,14 @@ main() {
   ensure_zshrc_source || true
 
   section "Creating symlinks"
-  sources=("nvim" "kitty" "hammerspoon" "wezterm" "doom")
+  sources=("nvim" "kitty" "hammerspoon" "wezterm" "doom" "codex/rules/default.rules")
   targets=(
     "$HOME/.config/nvim"
     "$HOME/.config/kitty"
     "$HOME/.hammerspoon"
     "$HOME/.config/wezterm"
     "$HOME/.doom.d"
+    "$HOME/.codex/rules/default.rules"
   )
 
   for ((i = 0; i < ${#sources[@]}; i++)); do
