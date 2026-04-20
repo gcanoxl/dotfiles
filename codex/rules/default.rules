@@ -1,5 +1,11 @@
-prefix_rule(
-  pattern = ["xcodebuild"],
-  decision = "allow",
-  justification = "Allow xcodebuild commands"
-)
+prefix_rule(pattern=["uv", "run"], decision="allow",)
+prefix_rule(pattern=["xcodebuild", "test"], decision="allow")
+prefix_rule(pattern=["flutter", "--version"], decision="allow")
+prefix_rule(pattern=["dart", "--version"], decision="allow")
+prefix_rule(pattern=["flutter", "pub", "get"], decision="allow")
+prefix_rule(pattern=["flutter", "gen-l10n"], decision="allow")
+prefix_rule(pattern=["flutter", "analyze"], decision="allow")
+prefix_rule(pattern=["flutter", "test"], decision="allow")
+prefix_rule(pattern=["flutter", "build"], decision="allow")
+prefix_rule(pattern=["dart", "format"], decision="allow")
+prefix_rule(pattern=["flutter", "pub", "add"], decision="allow")
