@@ -35,7 +35,7 @@ return {
 				'luadoc',
 				-- markdown
 				'markdown',
-				'markdowninline',
+				'markdown_inline',
 				'mermaid',
 				-- git
 				'git_config',
