@@ -1,2 +1,5 @@
 vim.opt.number = true
-vim.o.autocomplete = true
+
+-- autocomplete
+vim.opt.autocomplete = true
+vim.opt.completeopt = {'menu', 'menuone', 'fuzzy', 'nosort','noinsert', 'popup'}
