@@ -1,3 +1,3 @@
 require('options')
-require('appearance')
+require('ui')
 require('keybindings')

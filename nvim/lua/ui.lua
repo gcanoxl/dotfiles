@@ -1,3 +1,4 @@
+-- Colorscheme
 vim.pack.add({
 	'https://github.com/rebelot/kanagawa.nvim.git',
 	{
@@ -8,6 +9,11 @@ vim.pack.add({
 	'https://github.com/savq/melange-nvim.git'
 })
 
-
-
 vim.cmd[[colorscheme tokyonight-moon]]
+
+-- Statusline
+vim.pack.add({
+    'https://github.com/nvim-tree/nvim-web-devicons',
+    'https://github.com/nvim-lualine/lualine.nvim'
+})
+require('lualine').setup()
