@@ -3,7 +3,7 @@ return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
   root_markers = { '.project', '.git' },
-  ---@type lspconfig.settings.lua_ls
+  ---@type lspconfig.se ttings.lua_ls  
   settings = {
     Lua = {
       runtime = {
