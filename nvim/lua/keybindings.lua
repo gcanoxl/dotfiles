@@ -23,7 +23,7 @@ local keymaps = {
     desc = 'Find Neovim Config Files',
   },
   { 'n', '<leader>an', function() Snacks.picker.notifications() end, desc = 'Notification History' },
-  { 'n', '<leader>aC', function() Snacks.picker.colorscheme() end, desc = 'Colorschemes' },
+  { '<leader>aC', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
 
   -- Search
   { 'n', '<leader>ss', function() Snacks.picker.grep() end, desc = 'Grep Files' },
