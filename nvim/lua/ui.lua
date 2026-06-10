@@ -57,3 +57,9 @@ require('snacks').setup({
   statuscolumn = { enabled = false },
   words = { enabled = false },
 })
+
+-- which-key
+vim.pack.add({ 'https://github.com/folke/which-key.nvim' })
+require('which-key').setup({
+  preset = 'modern',
+})
