@@ -9,6 +9,7 @@ local icons = {
   files = { icon = '', color = 'blue' },
   git = { cat = 'filetype', name = 'git', color = 'orange' },
   git_log = { icon = '󰋚', color = 'yellow' },
+  ai = { icon = '󰚩', color = 'purple' },
   projects = { icon = '󰏗', color = 'purple' },
 }
 
@@ -76,6 +77,18 @@ local keymaps = {
   { '<leader>gs', function() Snacks.picker.git_status() end, desc = 'Git Status' },
   { '<leader>gS', function() Snacks.picker.git_stash() end, desc = 'Git Stashes' },
   { '<leader>gd', function() Snacks.picker.git_diff() end, desc = 'Git Diff' },
+  -- AI
+  { '<leader>i', group = 'AI', icon = icons.ai },
+  {
+    '<leader>ic',
+    function() require('sidekick.cli').toggle({ name = 'codex_readonly', focus = true }) end,
+    desc = 'Codex Readonly',
+  },
+  {
+    '<leader>iC',
+    function() require('sidekick.cli').toggle({ name = 'codex', focus = true }) end,
+    desc = 'Codex',
+  },
   -- Project
   { '<leader>p', group = 'Projects', icon = icons.projects },
   { '<leader>pp', function() Snacks.picker.projects() end, desc = 'Projects' },
