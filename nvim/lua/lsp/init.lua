@@ -10,7 +10,11 @@ for file, _ in vim.fs.dir(configs_dir) do
   local config = require('lsp.configs.' .. module_name)
   vim.lsp.config(module_name, config)
   vim.lsp.enable({ module_name })
-  table.insert(ensure_installs, config.cmd)
+  if type(config.mason) == 'nil' or (type(config.mason) == 'boolean' and config.mason == true) then
+    table.insert(ensure_installs, config.cmd[1])
+  elseif config.mason and type(config.mason) == 'string' then
+    table.insert(ensure_installs, config.mason)
+  end
 end
 
 -- Install executables
@@ -30,9 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = group,
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client == nil then
-      return
-    end
+    if client == nil then return end
     -- auto complete
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion, ev.buf) then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
