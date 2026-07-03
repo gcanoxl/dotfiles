@@ -16,6 +16,18 @@ local icons = {
 local keymaps = {
   -- Basic
   { 'jk', '<esc>', desc = 'Quit Insert Mode', mode = 'i' },
+  -- Sidekick
+  {
+    '<Tab>',
+    function()
+      if require('sidekick').nes_jump_or_apply() then return end
+      return '<Tab>'
+    end,
+    desc = 'Goto/Apply Next Edit Suggestion',
+    expr = true,
+    mode = { 'i', 'n' },
+  },
+
   -- Application
   { '<leader>a', group = 'Application', icon = icons.application },
   { '<leader>aq', '<cmd>wqa<cr>', desc = 'Write Quit All' },

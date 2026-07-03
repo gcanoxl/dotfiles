@@ -1,5 +1,5 @@
 require('options')
+require('ai')
+require('lsp')
 require('ui')
 require('keybindings')
-require('lsp')
-require('ai')
