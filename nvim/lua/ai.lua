@@ -1,5 +1,5 @@
 -- Sidekick
-vim.pack.add({ 'folke/sidekick.nvim' })
+vim.pack.add({ 'https://github.com/folke/sidekick.nvim' })
 
 require('sidekick').setup({
   cli = {
