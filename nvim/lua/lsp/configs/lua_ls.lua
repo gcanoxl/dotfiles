@@ -9,7 +9,7 @@ require('lazydev').setup({
 return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
-  root_markers = { '.project', '.git' },
+  root_markers = vim.deepcopy(_G.configs.lsp.root_markers),
   settings = {
     Lua = {
       runtime = {

@@ -105,7 +105,7 @@ return {
     'copilot-language-server',
     '--stdio',
   },
-  root_markers = { '.project', '.git' },
+  root_markers = vim.deepcopy(_G.configs.lsp.root_markers),
   init_options = {
     editorInfo = {
       name = 'Neovim',

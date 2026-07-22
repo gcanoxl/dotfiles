@@ -9,7 +9,7 @@ return {
   cmd = { 'sourcekit-lsp' },
   mason = false,
   filetypes = { 'swift', 'objc', 'objcpp' },
-  root_markers = { '.project', '.git' },
+  root_markers = vim.deepcopy(_G.configs.lsp.root_markers),
   get_language_id = function(_, ftype)
     local t = { objc = 'objective-c', objcpp = 'objective-cpp' }
     return t[ftype] or ftype
