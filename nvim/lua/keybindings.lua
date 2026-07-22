@@ -20,12 +20,25 @@ local keymaps = {
   {
     '<Tab>',
     function()
+      if vim.fn.mode() == 'i' and vim.snippet.active({ direction = 1 }) then
+        return '<cmd>lua vim.snippet.jump(1)<cr>'
+      end
       if require('sidekick').nes_jump_or_apply() then return end
       return '<Tab>'
     end,
-    desc = 'Goto/Apply Next Edit Suggestion',
+    desc = 'Snippet Jump or Next Edit Suggestion',
     expr = true,
     mode = { 'i', 'n' },
+  },
+  {
+    '<S-Tab>',
+    function()
+      if vim.snippet.active({ direction = -1 }) then return '<cmd>lua vim.snippet.jump(-1)<cr>' end
+      return '<S-Tab>'
+    end,
+    desc = 'Previous Snippet Position',
+    expr = true,
+    mode = { 'i', 's' },
   },
 
   -- Application
