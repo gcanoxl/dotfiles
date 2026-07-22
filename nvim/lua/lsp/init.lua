@@ -35,14 +35,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client == nil then return end
-    -- auto complete
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion, ev.buf) then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
     -- auto format
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting, ev.buf) then
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = group,
+        buffer = ev.buf,
         callback = function()
           vim.lsp.buf.format({
             id = ev.data.client_id,
