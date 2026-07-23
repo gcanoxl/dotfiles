@@ -146,3 +146,27 @@ local keymaps = {
 
 local wk = require('which-key')
 wk.add(keymaps)
+
+local local_keymaps_group = vim.api.nvim_create_augroup('LocalKeymaps', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = local_keymaps_group,
+  pattern = 'dart',
+  callback = function(event)
+    vim.keymap.set('n', '<localleader>e', '<cmd>FlutterEmulators<cr>', {
+      buffer = event.buf,
+      desc = 'Flutter Emulators',
+    })
+    vim.keymap.set('n', '<localleader>w', '<cmd>FlutterOutlineToggle<cr>', {
+      buffer = event.buf,
+      desc = 'Flutter Widget Outline',
+    })
+    vim.keymap.set('n', '<localleader>r', '<cmd>FlutterRun<cr>', {
+      buffer = event.buf,
+      desc = 'Flutter Run',
+    })
+    vim.keymap.set('n', '<localleader>R', '<cmd>FlutterRestart<cr>', {
+      buffer = event.buf,
+      desc = 'Flutter Restart',
+    })
+  end,
+})
