@@ -128,6 +128,17 @@ local keymaps = {
     function() require('sidekick.cli').toggle({ name = 'codex', focus = true }) end,
     desc = 'Codex',
   },
+  -- Competitive Programming
+  { '<leader>I', group = 'Competitive' },
+  {
+    '<leader>Ic',
+    function() require('competitive').receive_problem() end,
+    desc = 'Receive Problem',
+  },
+  { '<leader>Ir', '<cmd>CompetiTest run<cr>', desc = 'Run' },
+  { '<leader>Ia', '<cmd>CompetiTest add_testcase<cr>', desc = 'Add Testcase' },
+  { '<leader>Ie', '<cmd>CompetiTest edit_testcase<cr>', desc = 'Edit Testcase' },
+  { '<leader>Id', '<cmd>CompetiTest delete_testcase<cr>', desc = 'Delete Testcase' },
   -- Project
   { '<leader>p', group = 'Projects', icon = icons.projects },
   { '<leader>pp', function() Snacks.picker.projects() end, desc = 'Projects' },

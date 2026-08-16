@@ -4,6 +4,10 @@
       "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim.git"
     },
+    "competitest.nvim": {
+      "rev": "b42c06ca308906f07912ba9aff015ac2c0831f85",
+      "src": "https://github.com/xeluxee/competitest.nvim"
+    },
     "flutter-tools.nvim": {
       "rev": "7d1acfd139215e02d2784733af69a61aaebe06e8",
       "src": "https://github.com/nvim-flutter/flutter-tools.nvim"
@@ -35,6 +39,10 @@
     "melange-nvim": {
       "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
       "src": "https://github.com/savq/melange-nvim.git"
+    },
+    "nui.nvim": {
+      "rev": "a25dd472316d806eb38a5dd667c2e40da5570c75",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-web-devicons": {
       "rev": "dad71387de386a946b123079d0e53f23028f3abd",

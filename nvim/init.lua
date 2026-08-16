@@ -5,6 +5,7 @@ require('lsp')
 require('flutter')
 require('ui')
 require('editor')
+require('competitive')
 require('keybindings')
 if vim.g.neovide then require('neovide') end
 require('autocmds')
