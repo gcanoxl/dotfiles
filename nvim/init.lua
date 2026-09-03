@@ -7,5 +7,6 @@ require('ui')
 require('editor')
 require('competitive')
 require('keybindings')
+require('lilyponds')
 if vim.g.neovide then require('neovide') end
 require('autocmds')
