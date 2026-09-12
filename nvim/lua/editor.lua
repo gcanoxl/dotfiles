@@ -19,6 +19,15 @@ require('snacks').setup({
             max_width = 40,
           },
         },
+        win = {
+          list = {
+            keys = {
+              ['<Tab>'] = 'confirm',
+              ['s'] = { 'select_and_next', mode = { 'n', 'i' } },
+              ['<CR>'] = 'confirm',
+            },
+          },
+        },
       },
     },
     win = {
