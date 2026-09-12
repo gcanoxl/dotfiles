@@ -1,5 +1,6 @@
 require('config')
 require('options')
+require('auto_complete')
 require('ai')
 require('lsp')
 require('flutter')
