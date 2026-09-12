@@ -1,5 +1,6 @@
 -- Snacks
 vim.pack.add({ 'https://github.com/folke/snacks.nvim.git' })
+---@type snacks.Config
 require('snacks').setup({
   bigfile = { enabled = false },
   dashboard = { enabled = false },
