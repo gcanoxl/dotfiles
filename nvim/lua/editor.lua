@@ -23,8 +23,9 @@ require('snacks').setup({
           list = {
             keys = {
               ['<Tab>'] = 'confirm',
-              ['s'] = { 'select_and_next', mode = { 'n', 'i' } },
+              ['s'] = { 'select_and_next', mode = { 'n' } },
               ['<CR>'] = 'confirm',
+              ['R'] = 'update',
             },
           },
         },
