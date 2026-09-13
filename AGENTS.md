@@ -22,6 +22,8 @@ Before requesting authorization, preview the intended result:
 
 Show the complete resulting content of affected sections.
 
+- Always present every proposed AGENTS.md change as a diff before requesting authorization, regardless of the file's location.
+
 Keep the detail proportional to the change, but sufficient to understand the intended implementation before approval.
 
 ### Capture conventions
@@ -40,20 +42,23 @@ Do not silently add, restore, or duplicate conventions.
 
 ### Execution gate
 
-Make changes only after the user sends a bare go-ahead with no scope, condition, or approach attached, such as `ok`, `go`, `do`, `write`, `revert`, `implement`, or `yes`.
+Authorization is valid only when both conditions are met:
 
-This gate applies to all changes, including those in temporary directories and outside the repository, whether performed directly or through tools or commands.
+1. The immediately preceding assistant message is an explicit, complete plan preview.
+2. The user's entire authorization message is exactly `ok` or `go`, in lowercase, with no whitespace, punctuation, or additional content.
 
-Authorization applies only to the latest unexecuted plan preview in the current conversation.
+No other message counts as authorization. Do not translate, normalize, or infer equivalent expressions.
 
-- Do not treat a planning request as authorization.
+Each authorization applies only to the exact plan preview immediately preceding it. Any change to that plan invalidates the authorization, including changes to scope, approach, steps, or affected files. Authorization never transfers to a revised plan.
+
+This gate applies to all changes, including temporary files, files outside the repository, tests, AGENTS.md updates, deletions, reverts, and repairs of unauthorized changes.
+
+- Before every write, verify that the current plan is unchanged from the authorized preview and that the write is covered by it.
 - Do not expand beyond the approved plan.
-- If the scope changes, present a revised plan preview and request authorization again.
-- If the applicable plan or authorization is ambiguous, do not make any changes.
-- Never apply unsolicited changes, fixes, reverts, refactors, or `AGENTS.md` updates.
-- Before every write, require a concrete plan preview followed by standalone bare authorization for that exact scope.
+- If any part of the plan changes, stop execution, present a new complete plan preview, and obtain fresh bare authorization before making further changes.
+- If either condition is unmet or ambiguous, do not make changes.
 - Never infer authorization from urgency, frustration, questions, corrections, or repeated requests.
-- Reverts and repairs of unauthorized changes require the same gate.
+- Discovering an unauthorized change does not authorize reverting or repairing it.
 
 ### Task continuity
 
@@ -89,6 +94,13 @@ When the user explicitly identifies a task or plan as large:
 - Immediately before applying an approved change, re-read every target file and inspect its current Git status and diff to detect concurrent or unrelated changes.
 - When an approved change shares a file with unrelated edits, limit the patch to the approved section and preserve all other content exactly.
 
+## Architecture and responsibility boundaries
+
+- Correct architecture and clear responsibility boundaries are mandatory. Never compromise them to minimize changed files, line count, or diff size.
+- Establish component responsibilities, state ownership, and data flow before choosing an implementation. Place behavior in the component that owns it, even when this requires changes across multiple files.
+- Minimize implementation only within those boundaries. Minimal-fix preferences, including Ponytail mode, must not justify misplaced responsibilities or structural shortcuts.
+- During verification, check responsibility boundaries and state ownership as well as functional behavior.
+
 ## Repository language
 
 - Use English for all repository content, including code identifiers, comments, documentation, configuration, and default UI text. Non-English content is permitted only where necessary for internationalization (i18n).
@@ -108,3 +120,23 @@ When writing tests, do not modify code. When writing code, do not modify tests. 
 ## Usage reset credits
 
 - Never use or redeem usage reset credits.
+
+## Communication
+
+- Before sending a response, complete any further verification or investigation that the response would otherwise identify as still needed. Report the findings instead of deferring that work to a later reply.
+- When the user adds, changes, or corrects task instructions, take exactly one of two actions: execute a validly authorized plan, or formulate or revise a concrete plan and present its complete preview.
+- Never substitute acknowledgments, repetition, paraphrases, or explanations without task progress for either action.
+- Never repeat or paraphrase the user's request as an acknowledgment. Respond directly with the answer, concrete findings, or necessary next action.
+- Before sending each response, remove any opening that merely repeats or paraphrases the user's request.
+- When an error is identified, propose a concrete, durable prevention measure and explain how to verify it. An apology, cause explanation, or promise alone is insufficient. Follow the execution gate before making persistent changes.
+
+### Pre-send check
+
+Before sending each response, check all four items:
+
+1. Does the response directly address the user's current question or instruction without switching to another task?
+2. Does it comply with all applicable instructions, including authorization, non-repetition, and completing required investigation before reporting?
+3. If an error was identified, does it provide a concrete, durable prevention measure and a way to verify it, rather than continuing to explain the cause?
+4. Is every completion claim supported by observed results, with failures and unverified scope stated accurately?
+
+If any item fails, revise the response or complete the required authorized work before sending it.
