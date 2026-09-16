@@ -50,8 +50,15 @@ function CompleteSnippets(findstart, _)
     for _, snippet in ipairs(snippets) do
       table.insert(words, {
         word = snippet['abbr'] or '',
-        info = snippet['body'] or '',
-        user_data = { is_custom_snippet = true },
+        info = '```'
+          .. (snippet['ft'] or '')
+          .. '\n'
+          .. (snippet['body'] or '')
+          .. '\n```',
+        user_data = {
+          is_custom_snippet = true,
+          snippet = (snippet['body'] or ''),
+        },
         kind = 'Snippet',
       })
     end
@@ -74,7 +81,19 @@ vim.api.nvim_create_autocmd('CompleteDone', {
     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
     local start_col = col - #item.word
     vim.api.nvim_buf_set_text(0, row - 1, start_col, row - 1, col, {})
-    vim.snippet.expand(item.info)
+    vim.snippet.expand(
+      item.user_data.snippet ~= nil and item.user_data.snippet or ''
+    )
+  end,
+})
+
+vim.api.nvim_create_autocmd('CompleteChanged', {
+  group = group,
+  callback = function()
+    local info = vim.fn.complete_info()
+    if info and info['preview_bufnr'] then
+      vim.treesitter.start(info['preview_bufnr'], 'markdown')
+    end
   end,
 })
 

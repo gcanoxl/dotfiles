@@ -5,6 +5,7 @@ M.loaded = {}
 ---@class SnippetEntry
 ---@field abbr string
 ---@field body string
+---@field ft string
 
 ---comment
 ---@param filetypes? string|table<string>
@@ -28,7 +29,8 @@ function M.load(filetypes)
           if type == 'file' then
             local body = vim.fn.readblob(ft_path .. name)
             ---@type SnippetEntry
-            local entry = { abbr = name, body = body }
+            local entry =
+              { abbr = name, body = body, ft = ft ~= 'all' and ft or '' }
             table.insert(ft_snippets, entry)
           end
         end

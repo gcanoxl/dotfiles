@@ -16,6 +16,13 @@ local icons = {
 local keymaps = {
   -- Basic
   { 'jk', '<esc>', desc = 'Quit Insert Mode', mode = 'i' },
+  -- Auto Complete
+  {
+    '<cr>',
+    function() return vim.fn.pumvisible() ~= 0 and '<C-y>' or '<cr>' end,
+    expr = true,
+    mode = 'i',
+  },
   -- Application
   { '<leader>a', group = 'Application', icon = icons.application },
   { '<leader>aq', '<cmd>wqa<cr>', desc = 'Write Quit All' },
