@@ -6,7 +6,15 @@ return {
   ---@type lspconfig.settings.yamlls
   settings = {
     redhat = { telemetry = { enabled = false } },
-    yaml = { format = { enable = true } },
+    yaml = {
+      format = { enable = true },
+      schemas = {
+        [vim.fn.stdpath('config') .. '/schemas/xcodegen.schema.json'] = {
+          'project.yml',
+          'project.yaml',
+        },
+      },
+    },
   },
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = true
