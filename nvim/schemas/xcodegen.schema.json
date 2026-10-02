@@ -1,0 +1,5629 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "XcodeGen Project Specification",
+  "description": "Third-party editor schema for XcodeGen project.yml and project.yaml, targeting master 366592bc5be446b427fc8e2a21520344460f96ab (2026-09-13). The latest published release observed during research was 2.46.0; this schema may include changes after that release. Includes, templates and variable expansion cannot be resolved by JSON Schema. Inherited fields are checked structurally and their required-field checks are deferred. XcodeGen remains responsible for resolved references, paths, version parsing and project generation.",
+  "$comment": "Sources: https://github.com/yonaskolb/XcodeGen/blob/366592bc5be446b427fc8e2a21520344460f96ab/Docs/ProjectSpec.md ; https://github.com/yonaskolb/XcodeGen/tree/366592bc5be446b427fc8e2a21520344460f96ab/Sources/ProjectSpec ; XcodeProj revision eb001108f64467b0cc7e8cbf90b3b4aaa1822cbb. Use #/$defs/projectFragment for an included file that intentionally has no name. Fixed structures reject unknown keys; settings, attributes and plist contents stay open. Only known keys receive typed :REPLACE aliases. Presence of include conservatively defers requirements, including when the include is empty or disabled. Actual merge order, empty template expansions, alias precedence and environment values must be checked by XcodeGen. Documented examples contain an invalid ExceptionBreakpoint shorthand, a target-level fileGroups key, and a tab-indented script block; the mixed flat/grouped settings example intentionally demonstrates an ignored setting. These examples are not used to broaden the accepted specification. Validation command with Ajv 8 installed: node -e 'const s=require(\"./xcodegen.schema.json\"); const a=new (require(\"ajv/dist/2020\").default)({strict:false,validateFormats:false}); const v=a.compile(s); for(const x of s.examples) if(!v(x)) throw Error(JSON.stringify(v.errors)); console.log(\"Schema and examples valid\");'",
+  "$ref": "#/$defs/projectFragment",
+  "allOf": [
+    {
+      "if": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "include"
+              ]
+            },
+            {
+              "required": [
+                "include:REPLACE"
+              ]
+            }
+          ]
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "name"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "name:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "properties": {
+              "targets": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completeTarget"
+                }
+              },
+              "targets:REPLACE": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completeTarget"
+                }
+              },
+              "schemes": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completeScheme"
+                }
+              },
+              "schemes:REPLACE": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completeScheme"
+                }
+              },
+              "packages": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completePackage"
+                }
+              },
+              "packages:REPLACE": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/completePackage"
+                }
+              },
+              "projectReferences": {
+                "type": "object",
+                "additionalProperties": {
+                  "allOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "path"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "path:REPLACE"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "projectReferences:REPLACE": {
+                "type": "object",
+                "additionalProperties": {
+                  "allOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "path"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "path:REPLACE"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "options": {
+                "properties": {
+                  "fileTypes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "properties": {
+                        "buildPhase": {
+                          "$ref": "#/$defs/buildPhase"
+                        },
+                        "buildPhase:REPLACE": {
+                          "$ref": "#/$defs/buildPhase"
+                        }
+                      }
+                    }
+                  },
+                  "fileTypes:REPLACE": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "properties": {
+                        "buildPhase": {
+                          "$ref": "#/$defs/buildPhase"
+                        },
+                        "buildPhase:REPLACE": {
+                          "$ref": "#/$defs/buildPhase"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "options:REPLACE": {
+                "properties": {
+                  "fileTypes": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "properties": {
+                        "buildPhase": {
+                          "$ref": "#/$defs/buildPhase"
+                        },
+                        "buildPhase:REPLACE": {
+                          "$ref": "#/$defs/buildPhase"
+                        }
+                      }
+                    }
+                  },
+                  "fileTypes:REPLACE": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "properties": {
+                        "buildPhase": {
+                          "$ref": "#/$defs/buildPhase"
+                        },
+                        "buildPhase:REPLACE": {
+                          "$ref": "#/$defs/buildPhase"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "name": "Today",
+      "targets": {
+        "Today": {
+          "type": "application",
+          "platform": "iOS",
+          "sources": [
+            "Today"
+          ],
+          "settings": {
+            "PRODUCT_BUNDLE_IDENTIFIER": "com.example.Today",
+            "GENERATE_INFOPLIST_FILE": true
+          }
+        }
+      }
+    },
+    {
+      "name": "Shared",
+      "targets": {
+        "Core": {
+          "type": "framework",
+          "supportedDestinations": [
+            "iOS",
+            "macCatalyst"
+          ],
+          "sources": [
+            "Sources"
+          ]
+        }
+      },
+      "packages": {
+        "Utilities": {
+          "github": "example/Utilities",
+          "from": "1.0.0",
+          "traits": [
+            "StrictConcurrency"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Tools",
+      "aggregateTargets": {
+        "Checks": {
+          "buildScripts": [
+            {
+              "script": "swiftlint"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Inherited",
+      "include": [
+        "base.yml"
+      ],
+      "targets": {
+        "Today": {
+          "info": {
+            "properties": {
+              "CFBundleDisplayName": "Today"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "variable": {
+      "type": "string",
+      "pattern": "\\$\\{[^}]+\\}",
+      "description": "Environment or template substitution. The resolved value must satisfy the corresponding field type and enum."
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "String list."
+    },
+    "version": {
+      "type": [
+        "string",
+        "number"
+      ],
+      "description": "Version accepted by XcodeGen's tolerant version parser. Quote version strings to avoid YAML numeric conversion.",
+      "examples": [
+        "1.2.0",
+        "17.0"
+      ]
+    },
+    "platform": {
+      "description": "Target platform. With supportedDestinations, omission or an empty string resolves to auto.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "auto",
+            "iOS",
+            "tvOS",
+            "macOS",
+            "watchOS",
+            "visionOS",
+            ""
+          ]
+        },
+        {
+          "$ref": "#/$defs/variable"
+        }
+      ]
+    },
+    "destination": {
+      "description": "Supported destination.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "iOS",
+            "tvOS",
+            "macOS",
+            "macCatalyst",
+            "watchOS",
+            "visionOS"
+          ]
+        },
+        {
+          "$ref": "#/$defs/variable"
+        }
+      ]
+    },
+    "destinations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/destination"
+      },
+      "description": "Destination list. A target cannot combine macOS and macCatalyst."
+    },
+    "productType": {
+      "description": "Product type accepted by XcodeGen and its pinned XcodeProj 9.14.0 dependency. Empty represents a legacy target; full com.apple.product-type identifiers are also accepted.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "",
+            "application",
+            "framework",
+            "framework.static",
+            "xcframework",
+            "library.dynamic",
+            "library.static",
+            "bundle",
+            "bundle.unit-test",
+            "bundle.ui-testing",
+            "app-extension",
+            "extensionkit-extension",
+            "tool",
+            "application.watchapp",
+            "application.watchapp2",
+            "application.watchapp2-container",
+            "watchkit-extension",
+            "watchkit2-extension",
+            "tv-app-extension",
+            "application.messages",
+            "app-extension.messages",
+            "app-extension.messages-sticker-pack",
+            "xpc-service",
+            "bundle.ocunit-test",
+            "xcode-extension",
+            "instruments-package",
+            "app-extension.intents-service",
+            "application.on-demand-install-capable",
+            "metal-library",
+            "driver-extension",
+            "system-extension",
+            "com.apple.product-type.application",
+            "com.apple.product-type.framework",
+            "com.apple.product-type.framework.static",
+            "com.apple.product-type.xcframework",
+            "com.apple.product-type.library.dynamic",
+            "com.apple.product-type.library.static",
+            "com.apple.product-type.bundle",
+            "com.apple.product-type.bundle.unit-test",
+            "com.apple.product-type.bundle.ui-testing",
+            "com.apple.product-type.app-extension",
+            "com.apple.product-type.extensionkit-extension",
+            "com.apple.product-type.tool",
+            "com.apple.product-type.application.watchapp",
+            "com.apple.product-type.application.watchapp2",
+            "com.apple.product-type.application.watchapp2-container",
+            "com.apple.product-type.watchkit-extension",
+            "com.apple.product-type.watchkit2-extension",
+            "com.apple.product-type.tv-app-extension",
+            "com.apple.product-type.application.messages",
+            "com.apple.product-type.app-extension.messages",
+            "com.apple.product-type.app-extension.messages-sticker-pack",
+            "com.apple.product-type.xpc-service",
+            "com.apple.product-type.bundle.ocunit-test",
+            "com.apple.product-type.xcode-extension",
+            "com.apple.product-type.instruments-package",
+            "com.apple.product-type.app-extension.intents-service",
+            "com.apple.product-type.application.on-demand-install-capable",
+            "com.apple.product-type.metal-library",
+            "com.apple.product-type.driver-extension",
+            "com.apple.product-type.system-extension"
+          ]
+        },
+        {
+          "$ref": "#/$defs/variable"
+        }
+      ]
+    },
+    "deploymentTargets": {
+      "type": "object",
+      "description": "Deployment versions by platform.",
+      "properties": {
+        "iOS": {
+          "$ref": "#/$defs/version"
+        },
+        "tvOS": {
+          "$ref": "#/$defs/version"
+        },
+        "macOS": {
+          "$ref": "#/$defs/version"
+        },
+        "watchOS": {
+          "$ref": "#/$defs/version"
+        },
+        "visionOS": {
+          "$ref": "#/$defs/version"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^iOS:REPLACE$": {
+          "$ref": "#/$defs/deploymentTargets/properties/iOS"
+        },
+        "^tvOS:REPLACE$": {
+          "$ref": "#/$defs/deploymentTargets/properties/tvOS"
+        },
+        "^macOS:REPLACE$": {
+          "$ref": "#/$defs/deploymentTargets/properties/macOS"
+        },
+        "^watchOS:REPLACE$": {
+          "$ref": "#/$defs/deploymentTargets/properties/watchOS"
+        },
+        "^visionOS:REPLACE$": {
+          "$ref": "#/$defs/deploymentTargets/properties/visionOS"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Xcode attributes, including nested SystemCapabilities. Keys and values are intentionally open."
+    },
+    "configFiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Build configuration name to xcconfig path."
+    },
+    "buildSettings": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Xcode build settings, including user-defined names and conditional keys such as EXCLUDED_ARCHS[sdk=iphonesimulator*]. XcodeGen stringifies scalars and preserves string lists."
+    },
+    "groupedSettings": {
+      "type": "object",
+      "description": "Grouped build settings. Mixing flat keys with this form causes XcodeGen to ignore the flat keys.",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/buildSettings"
+        },
+        "groups": {
+          "$ref": "#/$defs/stringList"
+        },
+        "presets": {
+          "$ref": "#/$defs/stringList",
+          "description": "Compatibility alias for groups. Effective when base, groups, or configs selects the grouped form."
+        },
+        "configs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/settings"
+          },
+          "description": "Configuration selector to settings. Matching is case-insensitive, with exact configuration-name matches taking priority."
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "base"
+          ]
+        },
+        {
+          "required": [
+            "base:REPLACE"
+          ]
+        },
+        {
+          "required": [
+            "groups"
+          ]
+        },
+        {
+          "required": [
+            "groups:REPLACE"
+          ]
+        },
+        {
+          "required": [
+            "configs"
+          ]
+        },
+        {
+          "required": [
+            "configs:REPLACE"
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^base:REPLACE$": {
+          "$ref": "#/$defs/groupedSettings/properties/base"
+        },
+        "^groups:REPLACE$": {
+          "$ref": "#/$defs/groupedSettings/properties/groups"
+        },
+        "^presets:REPLACE$": {
+          "$ref": "#/$defs/groupedSettings/properties/presets"
+        },
+        "^configs:REPLACE$": {
+          "$ref": "#/$defs/groupedSettings/properties/configs"
+        }
+      }
+    },
+    "settings": {
+      "description": "Flat build settings or grouped settings. The forms must not be mixed.",
+      "oneOf": [
+        {
+          "type": "object",
+          "propertyNames": {
+            "not": {
+              "enum": [
+                "base",
+                "groups",
+                "configs",
+                "base:REPLACE",
+                "groups:REPLACE",
+                "configs:REPLACE"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        {
+          "$ref": "#/$defs/groupedSettings"
+        }
+      ]
+    },
+    "includeObject": {
+      "type": "object",
+      "description": "Included specification.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Specification path."
+        },
+        "relativePaths": {
+          "type": [
+            "boolean",
+            "string"
+          ],
+          "description": "Resolve paths relative to the included file. String values are parsed as booleans after variable substitution.",
+          "default": true
+        },
+        "enable": {
+          "type": [
+            "boolean",
+            "string"
+          ],
+          "description": "Enable this include. Supports an environment-variable expression.",
+          "default": true
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "path"
+                  ]
+                },
+                {
+                  "required": [
+                    "path:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/includeObject/properties/path"
+        },
+        "^relativePaths:REPLACE$": {
+          "$ref": "#/$defs/includeObject/properties/relativePaths"
+        },
+        "^enable:REPLACE$": {
+          "$ref": "#/$defs/includeObject/properties/enable"
+        }
+      }
+    },
+    "includeItem": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Specification path."
+        },
+        {
+          "$ref": "#/$defs/includeObject"
+        }
+      ]
+    },
+    "include": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/includeItem"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/includeItem"
+          },
+          "description": "Included specifications, merged in order before the current specification."
+        }
+      ]
+    },
+    "groupOrdering": {
+      "type": "object",
+      "description": "Group ordering.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Group name or regular expression. Omit for the main group.",
+          "default": ""
+        },
+        "order": {
+          "$ref": "#/$defs/stringList",
+          "default": []
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^pattern:REPLACE$": {
+          "$ref": "#/$defs/groupOrdering/properties/pattern"
+        },
+        "^order:REPLACE$": {
+          "$ref": "#/$defs/groupOrdering/properties/order"
+        }
+      }
+    },
+    "copyFiles": {
+      "type": "object",
+      "description": "Copy Files phase settings.",
+      "properties": {
+        "destination": {
+          "description": "Copy phase destination.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "absolutePath",
+                "productsDirectory",
+                "wrapper",
+                "executables",
+                "resources",
+                "javaResources",
+                "frameworks",
+                "sharedFrameworks",
+                "sharedSupport",
+                "plugins"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        "subpath": {
+          "type": "string",
+          "description": "Path inside the destination.",
+          "default": ""
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "destination"
+                  ]
+                },
+                {
+                  "required": [
+                    "destination:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^destination:REPLACE$": {
+          "$ref": "#/$defs/copyFiles/properties/destination"
+        },
+        "^subpath:REPLACE$": {
+          "$ref": "#/$defs/copyFiles/properties/subpath"
+        }
+      }
+    },
+    "buildPhase": {
+      "oneOf": [
+        {
+          "description": "Build phase override.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "sources",
+                "headers",
+                "resources",
+                "none"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "description": "Explicit Copy Files phase.",
+          "properties": {
+            "copyFiles": {
+              "$ref": "#/$defs/copyFiles"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "copyFiles"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "copyFiles:REPLACE"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "patternProperties": {
+            "^copyFiles:REPLACE$": {
+              "$ref": "#/$defs/buildPhase/oneOf/1/properties/copyFiles"
+            }
+          }
+        }
+      ]
+    },
+    "fileType": {
+      "type": "object",
+      "description": "Default source options for a file extension.",
+      "properties": {
+        "file": {
+          "type": "boolean",
+          "description": "Treat the extension as a file.",
+          "default": true
+        },
+        "buildPhase": {
+          "$ref": "#/$defs/buildPhaseFragment"
+        },
+        "attributes": {
+          "$ref": "#/$defs/stringList"
+        },
+        "resourceTags": {
+          "$ref": "#/$defs/stringList"
+        },
+        "compilerFlags": {
+          "$ref": "#/$defs/stringList"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^file:REPLACE$": {
+          "$ref": "#/$defs/fileType/properties/file"
+        },
+        "^buildPhase:REPLACE$": {
+          "$ref": "#/$defs/fileType/properties/buildPhase"
+        },
+        "^attributes:REPLACE$": {
+          "$ref": "#/$defs/fileType/properties/attributes"
+        },
+        "^resourceTags:REPLACE$": {
+          "$ref": "#/$defs/fileType/properties/resourceTags"
+        },
+        "^compilerFlags:REPLACE$": {
+          "$ref": "#/$defs/fileType/properties/compilerFlags"
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "description": "Project generation options.",
+      "properties": {
+        "minimumXcodeGenVersion": {
+          "type": "string",
+          "description": "Minimum required XcodeGen version."
+        },
+        "carthageBuildPath": {
+          "type": "string",
+          "description": "Carthage build output directory.",
+          "default": "Carthage/Build"
+        },
+        "carthageExecutablePath": {
+          "type": "string",
+          "description": "Carthage executable.",
+          "default": "carthage"
+        },
+        "createIntermediateGroups": {
+          "type": "boolean",
+          "description": "Create groups for intermediate path components.",
+          "default": false
+        },
+        "bundleIdPrefix": {
+          "type": "string",
+          "description": "Prefix for generated bundle identifiers."
+        },
+        "settingPresets": {
+          "description": "Automatically applied build setting presets.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "all",
+                "project",
+                "targets",
+                "none"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "all"
+        },
+        "developmentLanguage": {
+          "type": "string",
+          "description": "Development language.",
+          "default": "en"
+        },
+        "usesTabs": {
+          "type": "boolean",
+          "description": "Override Xcode's tabs preference."
+        },
+        "indentWidth": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Indent width in spaces."
+        },
+        "tabWidth": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Tab width in spaces."
+        },
+        "xcodeVersion": {
+          "type": "string",
+          "description": "Version recorded in Xcode metadata.",
+          "examples": [
+            "0910",
+            "9.1"
+          ]
+        },
+        "projectFormat": {
+          "description": "Xcode project format.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "xcode16_3",
+                "xcode16_0",
+                "xcode15_3",
+                "xcode15_0",
+                "xcode14_0"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "xcode16_0"
+        },
+        "deploymentTarget": {
+          "$ref": "#/$defs/deploymentTargets"
+        },
+        "disabledValidations": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "missingConfigs",
+              "missingConfigFiles",
+              "missingTestPlans"
+            ]
+          },
+          "description": "XcodeGen validations to disable.",
+          "default": []
+        },
+        "defaultConfig": {
+          "type": "string",
+          "description": "Default build configuration. If omitted, the alphabetically first configuration is chosen."
+        },
+        "groupSortPosition": {
+          "description": "Position of groups relative to files.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "none",
+                "top",
+                "bottom"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "bottom"
+        },
+        "groupOrdering": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/groupOrdering"
+          },
+          "description": "Explicit group ordering rules."
+        },
+        "transitivelyLinkDependencies": {
+          "type": "boolean",
+          "description": "Link and, where appropriate, embed transitive dependencies.",
+          "default": false
+        },
+        "generateEmptyDirectories": {
+          "type": "boolean",
+          "description": "Include empty directories in the project.",
+          "default": false
+        },
+        "findCarthageFrameworks": {
+          "type": "boolean",
+          "description": "Discover individual Carthage frameworks.",
+          "default": false
+        },
+        "localPackagesGroup": {
+          "type": "string",
+          "description": "Group for local packages; an empty string means the root.",
+          "default": "Packages"
+        },
+        "fileTypes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/fileType"
+          },
+          "description": "Default source options keyed by extension."
+        },
+        "preGenCommand": {
+          "type": "string",
+          "description": "Shell command before generation; skipped on a cache hit."
+        },
+        "postGenCommand": {
+          "type": "string",
+          "description": "Shell command after generation; skipped on a cache hit."
+        },
+        "useBaseInternationalization": {
+          "type": "boolean",
+          "description": "Include Base internationalization.",
+          "default": true
+        },
+        "schemePathPrefix": {
+          "type": "string",
+          "description": "Prefix for relative scheme paths.",
+          "default": "../../"
+        },
+        "defaultSourceDirectoryType": {
+          "description": "Default source directory representation. The SourceType decoder also accepts file, although the documentation lists group, folder and syncedFolder. syncedFolder requires an Xcode 16 project format.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "group",
+                "folder",
+                "syncedFolder",
+                "file"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "group"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^minimumXcodeGenVersion:REPLACE$": {
+          "$ref": "#/$defs/options/properties/minimumXcodeGenVersion"
+        },
+        "^carthageBuildPath:REPLACE$": {
+          "$ref": "#/$defs/options/properties/carthageBuildPath"
+        },
+        "^carthageExecutablePath:REPLACE$": {
+          "$ref": "#/$defs/options/properties/carthageExecutablePath"
+        },
+        "^createIntermediateGroups:REPLACE$": {
+          "$ref": "#/$defs/options/properties/createIntermediateGroups"
+        },
+        "^bundleIdPrefix:REPLACE$": {
+          "$ref": "#/$defs/options/properties/bundleIdPrefix"
+        },
+        "^settingPresets:REPLACE$": {
+          "$ref": "#/$defs/options/properties/settingPresets"
+        },
+        "^developmentLanguage:REPLACE$": {
+          "$ref": "#/$defs/options/properties/developmentLanguage"
+        },
+        "^usesTabs:REPLACE$": {
+          "$ref": "#/$defs/options/properties/usesTabs"
+        },
+        "^indentWidth:REPLACE$": {
+          "$ref": "#/$defs/options/properties/indentWidth"
+        },
+        "^tabWidth:REPLACE$": {
+          "$ref": "#/$defs/options/properties/tabWidth"
+        },
+        "^xcodeVersion:REPLACE$": {
+          "$ref": "#/$defs/options/properties/xcodeVersion"
+        },
+        "^projectFormat:REPLACE$": {
+          "$ref": "#/$defs/options/properties/projectFormat"
+        },
+        "^deploymentTarget:REPLACE$": {
+          "$ref": "#/$defs/options/properties/deploymentTarget"
+        },
+        "^disabledValidations:REPLACE$": {
+          "$ref": "#/$defs/options/properties/disabledValidations"
+        },
+        "^defaultConfig:REPLACE$": {
+          "$ref": "#/$defs/options/properties/defaultConfig"
+        },
+        "^groupSortPosition:REPLACE$": {
+          "$ref": "#/$defs/options/properties/groupSortPosition"
+        },
+        "^groupOrdering:REPLACE$": {
+          "$ref": "#/$defs/options/properties/groupOrdering"
+        },
+        "^transitivelyLinkDependencies:REPLACE$": {
+          "$ref": "#/$defs/options/properties/transitivelyLinkDependencies"
+        },
+        "^generateEmptyDirectories:REPLACE$": {
+          "$ref": "#/$defs/options/properties/generateEmptyDirectories"
+        },
+        "^findCarthageFrameworks:REPLACE$": {
+          "$ref": "#/$defs/options/properties/findCarthageFrameworks"
+        },
+        "^localPackagesGroup:REPLACE$": {
+          "$ref": "#/$defs/options/properties/localPackagesGroup"
+        },
+        "^fileTypes:REPLACE$": {
+          "$ref": "#/$defs/options/properties/fileTypes"
+        },
+        "^preGenCommand:REPLACE$": {
+          "$ref": "#/$defs/options/properties/preGenCommand"
+        },
+        "^postGenCommand:REPLACE$": {
+          "$ref": "#/$defs/options/properties/postGenCommand"
+        },
+        "^useBaseInternationalization:REPLACE$": {
+          "$ref": "#/$defs/options/properties/useBaseInternationalization"
+        },
+        "^schemePathPrefix:REPLACE$": {
+          "$ref": "#/$defs/options/properties/schemePathPrefix"
+        },
+        "^defaultSourceDirectoryType:REPLACE$": {
+          "$ref": "#/$defs/options/properties/defaultSourceDirectoryType"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "Target source entry. Resource files belong here, optionally with buildPhase set to resources.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Source file or directory path.",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name; otherwise the last path component is used."
+        },
+        "group": {
+          "type": "string",
+          "description": "Parent group path, separated with slashes."
+        },
+        "compilerFlags": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/stringList"
+            }
+          ],
+          "description": "Space-separated compiler flags or a list.",
+          "default": []
+        },
+        "excludes": {
+          "$ref": "#/$defs/stringList",
+          "description": "Exclude glob patterns relative to path. Excludes take priority over includes."
+        },
+        "includes": {
+          "$ref": "#/$defs/stringList",
+          "description": "Include glob patterns relative to path."
+        },
+        "explicitFolders": {
+          "$ref": "#/$defs/stringList",
+          "description": "Child folder patterns treated as folder references within syncedFolder."
+        },
+        "destinationFilters": {
+          "$ref": "#/$defs/destinations"
+        },
+        "inferDestinationFiltersByPath": {
+          "type": "boolean",
+          "description": "Infer destination filters from path or filename; explicit destinationFilters takes priority."
+        },
+        "createIntermediateGroups": {
+          "type": "boolean",
+          "description": "Override the project intermediate-group setting."
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Allow this path to be absent.",
+          "default": false
+        },
+        "buildPhase": {
+          "$ref": "#/$defs/buildPhase"
+        },
+        "type": {
+          "description": "File, group, folder reference, or Xcode 16 synchronized folder.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "file",
+                "group",
+                "folder",
+                "syncedFolder"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        "headerVisibility": {
+          "description": "Header visibility.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "public",
+                "private",
+                "project"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "public"
+        },
+        "attributes": {
+          "$ref": "#/$defs/stringList"
+        },
+        "resourceTags": {
+          "$ref": "#/$defs/stringList"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "path"
+                  ]
+                },
+                {
+                  "required": [
+                    "path:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/source/properties/path"
+        },
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/source/properties/name"
+        },
+        "^group:REPLACE$": {
+          "$ref": "#/$defs/source/properties/group"
+        },
+        "^compilerFlags:REPLACE$": {
+          "$ref": "#/$defs/source/properties/compilerFlags"
+        },
+        "^excludes:REPLACE$": {
+          "$ref": "#/$defs/source/properties/excludes"
+        },
+        "^includes:REPLACE$": {
+          "$ref": "#/$defs/source/properties/includes"
+        },
+        "^explicitFolders:REPLACE$": {
+          "$ref": "#/$defs/source/properties/explicitFolders"
+        },
+        "^destinationFilters:REPLACE$": {
+          "$ref": "#/$defs/source/properties/destinationFilters"
+        },
+        "^inferDestinationFiltersByPath:REPLACE$": {
+          "$ref": "#/$defs/source/properties/inferDestinationFiltersByPath"
+        },
+        "^createIntermediateGroups:REPLACE$": {
+          "$ref": "#/$defs/source/properties/createIntermediateGroups"
+        },
+        "^optional:REPLACE$": {
+          "$ref": "#/$defs/source/properties/optional"
+        },
+        "^buildPhase:REPLACE$": {
+          "$ref": "#/$defs/source/properties/buildPhase"
+        },
+        "^type:REPLACE$": {
+          "$ref": "#/$defs/source/properties/type"
+        },
+        "^headerVisibility:REPLACE$": {
+          "$ref": "#/$defs/source/properties/headerVisibility"
+        },
+        "^attributes:REPLACE$": {
+          "$ref": "#/$defs/source/properties/attributes"
+        },
+        "^resourceTags:REPLACE$": {
+          "$ref": "#/$defs/source/properties/resourceTags"
+        }
+      }
+    },
+    "sources": {
+      "description": "One path, or a list containing paths and source objects. Although the prose mentions a single source object, the pinned Target decoder consumes only a string or an array.",
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "$ref": "#/$defs/source"
+              }
+            ]
+          },
+          "description": "Target source and resource entries."
+        }
+      ]
+    },
+    "dependency": {
+      "type": "object",
+      "description": "Target dependency. Selector precedence in the decoder is target, framework, carthage, sdk, package, bundle.",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Local target or ProjectReference/TargetName."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Framework or XCFramework path."
+        },
+        "carthage": {
+          "type": "string",
+          "description": "Carthage framework name."
+        },
+        "sdk": {
+          "type": "string",
+          "description": "SDK framework or library path."
+        },
+        "package": {
+          "type": "string",
+          "description": "Name in the project packages mapping."
+        },
+        "bundle": {
+          "type": "string",
+          "description": "Prebuilt resource bundle name."
+        },
+        "embed": {
+          "type": "boolean",
+          "description": "Embed the dependency; the default depends on target type."
+        },
+        "link": {
+          "type": "boolean",
+          "description": "Link the dependency; the default depends on target and dependency types."
+        },
+        "codeSign": {
+          "type": "boolean",
+          "description": "Sign embedded frameworks.",
+          "default": true
+        },
+        "removeHeaders": {
+          "type": "boolean",
+          "description": "Remove headers from copied frameworks.",
+          "default": true
+        },
+        "weak": {
+          "type": "boolean",
+          "description": "Weakly link the dependency.",
+          "default": false
+        },
+        "implicit": {
+          "type": "boolean",
+          "description": "Resolve an implicit framework dependency.",
+          "default": false
+        },
+        "platformFilter": {
+          "description": "Mac Catalyst dependency platform filter.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "all",
+                "iOS",
+                "macOS"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "all"
+        },
+        "destinationFilters": {
+          "$ref": "#/$defs/destinations"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/platform"
+          },
+          "description": "Platforms for which this dependency is included."
+        },
+        "copy": {
+          "$ref": "#/$defs/copyFiles"
+        },
+        "findFrameworks": {
+          "type": "boolean",
+          "description": "Carthage discovery override; otherwise inherit options.findCarthageFrameworks."
+        },
+        "linkType": {
+          "description": "Carthage framework linkage.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "dynamic",
+                "static"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "dynamic"
+        },
+        "root": {
+          "type": "string",
+          "description": "Root for an SDK framework path, for example DEVELOPER_DIR."
+        },
+        "product": {
+          "type": "string",
+          "description": "Single Swift package product; defaults to the package name."
+        },
+        "products": {
+          "$ref": "#/$defs/stringList",
+          "description": "Swift package products. The list takes precedence over product."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "target"
+                  ]
+                },
+                {
+                  "required": [
+                    "target:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "framework"
+                  ]
+                },
+                {
+                  "required": [
+                    "framework:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "carthage"
+                  ]
+                },
+                {
+                  "required": [
+                    "carthage:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "sdk"
+                  ]
+                },
+                {
+                  "required": [
+                    "sdk:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "package"
+                  ]
+                },
+                {
+                  "required": [
+                    "package:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "bundle"
+                  ]
+                },
+                {
+                  "required": [
+                    "bundle:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^target:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/target"
+        },
+        "^framework:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/framework"
+        },
+        "^carthage:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/carthage"
+        },
+        "^sdk:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/sdk"
+        },
+        "^package:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/package"
+        },
+        "^bundle:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/bundle"
+        },
+        "^embed:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/embed"
+        },
+        "^link:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/link"
+        },
+        "^codeSign:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/codeSign"
+        },
+        "^removeHeaders:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/removeHeaders"
+        },
+        "^weak:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/weak"
+        },
+        "^implicit:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/implicit"
+        },
+        "^platformFilter:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/platformFilter"
+        },
+        "^destinationFilters:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/destinationFilters"
+        },
+        "^platforms:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/platforms"
+        },
+        "^copy:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/copy"
+        },
+        "^findFrameworks:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/findFrameworks"
+        },
+        "^linkType:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/linkType"
+        },
+        "^root:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/root"
+        },
+        "^product:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/product"
+        },
+        "^products:REPLACE$": {
+          "$ref": "#/$defs/dependency/properties/products"
+        }
+      }
+    },
+    "plist": {
+      "type": "object",
+      "description": "Generated plist. path is required in the final merged target.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Generated plist or entitlements path."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Property-list keys and nested values. Contents are not limited to a fixed set of Apple keys."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/plist/properties/path"
+        },
+        "^properties:REPLACE$": {
+          "$ref": "#/$defs/plist/properties/properties"
+        }
+      }
+    },
+    "buildToolPlugin": {
+      "type": "object",
+      "description": "Swift package build tool plug-in.",
+      "properties": {
+        "plugin": {
+          "type": "string",
+          "description": "Build tool plug-in name."
+        },
+        "package": {
+          "type": "string",
+          "description": "Package containing the plug-in."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "plugin"
+                  ]
+                },
+                {
+                  "required": [
+                    "plugin:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "package"
+                  ]
+                },
+                {
+                  "required": [
+                    "package:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^plugin:REPLACE$": {
+          "$ref": "#/$defs/buildToolPlugin/properties/plugin"
+        },
+        "^package:REPLACE$": {
+          "$ref": "#/$defs/buildToolPlugin/properties/package"
+        }
+      }
+    },
+    "buildScript": {
+      "type": "object",
+      "description": "Run-script build phase. Provide path or script; script wins when both are present.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Script file path."
+        },
+        "script": {
+          "type": "string",
+          "description": "Inline shell script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Build phase name.",
+          "default": "Run Script"
+        },
+        "inputFiles": {
+          "$ref": "#/$defs/stringList"
+        },
+        "outputFiles": {
+          "$ref": "#/$defs/stringList"
+        },
+        "inputFileLists": {
+          "$ref": "#/$defs/stringList"
+        },
+        "outputFileLists": {
+          "$ref": "#/$defs/stringList"
+        },
+        "shell": {
+          "type": "string",
+          "description": "Shell executable.",
+          "default": "/bin/sh"
+        },
+        "showEnvVars": {
+          "type": "boolean",
+          "description": "Print environment variables in the build log.",
+          "default": true
+        },
+        "runOnlyWhenInstalling": {
+          "type": "boolean",
+          "description": "Run only during installation.",
+          "default": false
+        },
+        "basedOnDependencyAnalysis": {
+          "type": "boolean",
+          "description": "Skip when inputs, outputs, and context are unchanged.",
+          "default": true
+        },
+        "discoveredDependencyFile": {
+          "type": "string",
+          "description": "Discovered dependency .d file."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "path"
+                  ]
+                },
+                {
+                  "required": [
+                    "path:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "script"
+                  ]
+                },
+                {
+                  "required": [
+                    "script:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/path"
+        },
+        "^script:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/script"
+        },
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/name"
+        },
+        "^inputFiles:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/inputFiles"
+        },
+        "^outputFiles:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/outputFiles"
+        },
+        "^inputFileLists:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/inputFileLists"
+        },
+        "^outputFileLists:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/outputFileLists"
+        },
+        "^shell:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/shell"
+        },
+        "^showEnvVars:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/showEnvVars"
+        },
+        "^runOnlyWhenInstalling:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/runOnlyWhenInstalling"
+        },
+        "^basedOnDependencyAnalysis:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/basedOnDependencyAnalysis"
+        },
+        "^discoveredDependencyFile:REPLACE$": {
+          "$ref": "#/$defs/buildScript/properties/discoveredDependencyFile"
+        }
+      }
+    },
+    "buildRule": {
+      "type": "object",
+      "description": "Custom build rule. fileType takes precedence over filePattern; compilerSpec takes precedence over script.",
+      "properties": {
+        "filePattern": {
+          "type": "string",
+          "description": "Glob pattern for processed files."
+        },
+        "fileType": {
+          "type": "string",
+          "description": "Xcode file type identifier."
+        },
+        "script": {
+          "type": "string",
+          "description": "Script run for each input."
+        },
+        "compilerSpec": {
+          "type": "string",
+          "description": "Apple compiler specification identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Build rule name.",
+          "default": "Build Rule"
+        },
+        "outputFiles": {
+          "$ref": "#/$defs/stringList"
+        },
+        "outputFilesCompilerFlags": {
+          "$ref": "#/$defs/stringList"
+        },
+        "runOncePerArchitecture": {
+          "type": "boolean",
+          "description": "Run separately for each architecture.",
+          "default": true
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "filePattern"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "filePattern:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "fileType"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "fileType:REPLACE"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "script"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "script:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "compilerSpec"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "compilerSpec:REPLACE"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^filePattern:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/filePattern"
+        },
+        "^fileType:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/fileType"
+        },
+        "^script:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/script"
+        },
+        "^compilerSpec:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/compilerSpec"
+        },
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/name"
+        },
+        "^outputFiles:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/outputFiles"
+        },
+        "^outputFilesCompilerFlags:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/outputFilesCompilerFlags"
+        },
+        "^runOncePerArchitecture:REPLACE$": {
+          "$ref": "#/$defs/buildRule/properties/runOncePerArchitecture"
+        }
+      }
+    },
+    "legacy": {
+      "type": "object",
+      "description": "Legacy external build target. toolPath is required after merging.",
+      "properties": {
+        "toolPath": {
+          "type": "string",
+          "description": "External build tool path."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Build tool arguments."
+        },
+        "passSettings": {
+          "type": "boolean",
+          "description": "Pass build settings to the external tool.",
+          "default": false
+        },
+        "workingDirectory": {
+          "type": "string",
+          "description": "External build working directory."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^toolPath:REPLACE$": {
+          "$ref": "#/$defs/legacy/properties/toolPath"
+        },
+        "^arguments:REPLACE$": {
+          "$ref": "#/$defs/legacy/properties/arguments"
+        },
+        "^passSettings:REPLACE$": {
+          "$ref": "#/$defs/legacy/properties/passSettings"
+        },
+        "^workingDirectory:REPLACE$": {
+          "$ref": "#/$defs/legacy/properties/workingDirectory"
+        }
+      }
+    },
+    "executionAction": {
+      "type": "object",
+      "description": "Scheme execution script.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Inline shell script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Action name.",
+          "default": "Run Script"
+        },
+        "settingsTarget": {
+          "type": "string",
+          "description": "Build or test target supplying settings to the environment."
+        },
+        "shell": {
+          "type": "string",
+          "description": "Shell executable; supported by the source decoder."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "script"
+                  ]
+                },
+                {
+                  "required": [
+                    "script:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^script:REPLACE$": {
+          "$ref": "#/$defs/executionAction/properties/script"
+        },
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/executionAction/properties/name"
+        },
+        "^settingsTarget:REPLACE$": {
+          "$ref": "#/$defs/executionAction/properties/settingsTarget"
+        },
+        "^shell:REPLACE$": {
+          "$ref": "#/$defs/executionAction/properties/shell"
+        }
+      }
+    },
+    "executionActions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/executionAction"
+      },
+      "description": "Ordered scripts before or after a scheme action."
+    },
+    "commandLineArguments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "description": "Command-line argument to enabled flag."
+    },
+    "environmentVariable": {
+      "type": "object",
+      "description": "Explicit environment variable.",
+      "properties": {
+        "variable": {
+          "type": "string",
+          "description": "Environment variable name."
+        },
+        "value": {
+          "description": "Variable value. XcodeGen stringifies values and converts booleans to YES or NO."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Enable this environment variable.",
+          "default": true
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "variable"
+                  ]
+                },
+                {
+                  "required": [
+                    "variable:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "value"
+                  ]
+                },
+                {
+                  "required": [
+                    "value:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^variable:REPLACE$": {
+          "$ref": "#/$defs/environmentVariable/properties/variable"
+        },
+        "^value:REPLACE$": {
+          "$ref": "#/$defs/environmentVariable/properties/value"
+        },
+        "^isEnabled:REPLACE$": {
+          "$ref": "#/$defs/environmentVariable/properties/isEnabled"
+        }
+      }
+    },
+    "environmentVariables": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Environment names to values. Entries are enabled, and values are stringified."
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/environmentVariable"
+          },
+          "description": "Environment variables with explicit enabled flags."
+        }
+      ]
+    },
+    "management": {
+      "type": "object",
+      "description": "Scheme management.",
+      "properties": {
+        "shared": {
+          "type": "boolean",
+          "description": "Share this scheme.",
+          "default": true
+        },
+        "orderHint": {
+          "type": "integer",
+          "description": "Scheme sorting order."
+        },
+        "isShown": {
+          "type": "boolean",
+          "description": "Show this scheme in the scheme list."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^shared:REPLACE$": {
+          "$ref": "#/$defs/management/properties/shared"
+        },
+        "^orderHint:REPLACE$": {
+          "$ref": "#/$defs/management/properties/orderHint"
+        },
+        "^isShown:REPLACE$": {
+          "$ref": "#/$defs/management/properties/isShown"
+        }
+      }
+    },
+    "simulateLocation": {
+      "type": "object",
+      "description": "Run-action location simulation. allow is required after merging.",
+      "properties": {
+        "allow": {
+          "type": "boolean",
+          "description": "Enable location simulation."
+        },
+        "defaultLocation": {
+          "type": "string",
+          "description": "Predefined location name or relative GPX path. Add a custom GPX file to project fileGroups.",
+          "examples": [
+            "London, England",
+            "./location.gpx"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^allow:REPLACE$": {
+          "$ref": "#/$defs/simulateLocation/properties/allow"
+        },
+        "^defaultLocation:REPLACE$": {
+          "$ref": "#/$defs/simulateLocation/properties/defaultLocation"
+        }
+      }
+    },
+    "testPlan": {
+      "type": "object",
+      "description": "Referenced test plan. XcodeGen does not create test-plan contents.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to an existing xctestplan file."
+        },
+        "defaultPlan": {
+          "type": "boolean",
+          "description": "Choose this as the default; otherwise the first plan becomes default.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "path"
+                  ]
+                },
+                {
+                  "required": [
+                    "path:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/testPlan/properties/path"
+        },
+        "^defaultPlan:REPLACE$": {
+          "$ref": "#/$defs/testPlan/properties/defaultPlan"
+        }
+      }
+    },
+    "testPlans": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/testPlan"
+      },
+      "description": "Existing test plans."
+    },
+    "referenceString": {
+      "type": "string",
+      "description": "Target name, or ProjectReference/TargetName.",
+      "pattern": "^/*[^/]+(?:/+[^/]+)?/*$"
+    },
+    "qualifiedReference": {
+      "description": "Project or local package name followed by target name. Template expressions are resolved later.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^/*[^/]+/+[^/]+/*$"
+        },
+        {
+          "$ref": "#/$defs/variable"
+        }
+      ]
+    },
+    "testableTargetReference": {
+      "type": "object",
+      "description": "Explicit target reference. Decoder precedence is project, package, local.",
+      "properties": {
+        "local": {
+          "type": "string",
+          "description": "Local target name."
+        },
+        "project": {
+          "$ref": "#/$defs/qualifiedReference"
+        },
+        "package": {
+          "$ref": "#/$defs/qualifiedReference"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "local"
+                  ]
+                },
+                {
+                  "required": [
+                    "local:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "project"
+                  ]
+                },
+                {
+                  "required": [
+                    "project:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "package"
+                  ]
+                },
+                {
+                  "required": [
+                    "package:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^local:REPLACE$": {
+          "$ref": "#/$defs/testableTargetReference/properties/local"
+        },
+        "^project:REPLACE$": {
+          "$ref": "#/$defs/testableTargetReference/properties/project"
+        },
+        "^package:REPLACE$": {
+          "$ref": "#/$defs/testableTargetReference/properties/package"
+        }
+      }
+    },
+    "coverageTargets": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/referenceString"
+          },
+          {
+            "$ref": "#/$defs/testableTargetReference"
+          }
+        ]
+      },
+      "description": "Coverage targets, including local package tests."
+    },
+    "testTarget": {
+      "type": "object",
+      "description": "Test target and options. Selector precedence is name, local, project, package, target.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/referenceString"
+        },
+        "target": {
+          "$ref": "#/$defs/testableTargetReference"
+        },
+        "local": {
+          "type": "string",
+          "description": "Local target name."
+        },
+        "project": {
+          "$ref": "#/$defs/qualifiedReference"
+        },
+        "package": {
+          "$ref": "#/$defs/qualifiedReference"
+        },
+        "parallelizable": {
+          "type": "boolean",
+          "description": "Run tests in parallel.",
+          "default": false
+        },
+        "randomExecutionOrder": {
+          "type": "boolean",
+          "description": "Randomize test execution order.",
+          "default": false
+        },
+        "location": {
+          "type": "string",
+          "description": "Predefined location or GPX file."
+        },
+        "skipped": {
+          "type": "boolean",
+          "description": "Skip this entire test target.",
+          "default": false
+        },
+        "skippedTests": {
+          "$ref": "#/$defs/stringList",
+          "default": []
+        },
+        "selectedTests": {
+          "$ref": "#/$defs/stringList",
+          "description": "Selected tests; takes precedence over skippedTests.",
+          "default": []
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "name"
+                  ]
+                },
+                {
+                  "required": [
+                    "name:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "target"
+                  ]
+                },
+                {
+                  "required": [
+                    "target:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "local"
+                  ]
+                },
+                {
+                  "required": [
+                    "local:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "project"
+                  ]
+                },
+                {
+                  "required": [
+                    "project:REPLACE"
+                  ]
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "package"
+                  ]
+                },
+                {
+                  "required": [
+                    "package:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/name"
+        },
+        "^target:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/target"
+        },
+        "^local:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/local"
+        },
+        "^project:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/project"
+        },
+        "^package:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/package"
+        },
+        "^parallelizable:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/parallelizable"
+        },
+        "^randomExecutionOrder:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/randomExecutionOrder"
+        },
+        "^location:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/location"
+        },
+        "^skipped:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/skipped"
+        },
+        "^skippedTests:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/skippedTests"
+        },
+        "^selectedTests:REPLACE$": {
+          "$ref": "#/$defs/testTarget/properties/selectedTests"
+        }
+      }
+    },
+    "testTargets": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/referenceString"
+          },
+          {
+            "$ref": "#/$defs/testTarget"
+          }
+        ]
+      },
+      "description": "Test targets."
+    },
+    "buildArchitectures": {
+      "description": "Scheme architecture override.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "matchRunDestination",
+            "universal",
+            "useTargetSettings"
+          ]
+        },
+        {
+          "$ref": "#/$defs/variable"
+        }
+      ],
+      "default": "matchRunDestination"
+    },
+    "run": {
+      "type": "object",
+      "description": "Scheme Run action. Only fields consumed by the Run decoder are exposed.",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "Build configuration. Defaults to debug for run/test/analyze and release for profile/archive."
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "commandLineArguments": {
+          "$ref": "#/$defs/commandLineArguments"
+        },
+        "environmentVariables": {
+          "$ref": "#/$defs/environmentVariables"
+        },
+        "enableAddressSanitizer": {
+          "type": "boolean",
+          "description": "Enable Address Sanitizer.",
+          "default": false
+        },
+        "enableASanStackUseAfterReturn": {
+          "type": "boolean",
+          "description": "Detect stack use after return.",
+          "default": false
+        },
+        "enableThreadSanitizer": {
+          "type": "boolean",
+          "description": "Enable Thread Sanitizer.",
+          "default": false
+        },
+        "enableUBSanitizer": {
+          "type": "boolean",
+          "description": "Enable Undefined Behavior Sanitizer.",
+          "default": false
+        },
+        "disableMainThreadChecker": {
+          "type": "boolean",
+          "description": "Disable Main Thread Checker.",
+          "default": false
+        },
+        "language": {
+          "type": "string",
+          "description": "Application language."
+        },
+        "region": {
+          "type": "string",
+          "description": "Application region."
+        },
+        "debugEnabled": {
+          "type": "boolean",
+          "description": "Attach the debugger.",
+          "default": true
+        },
+        "customLLDBInit": {
+          "type": "string",
+          "description": "Custom LLDB initialization file."
+        },
+        "macroExpansion": {
+          "type": "string",
+          "description": "Target providing macro expansion settings."
+        },
+        "enableGPUFrameCaptureMode": {
+          "description": "GPU frame capture mode.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "autoEnabled",
+                "metal",
+                "openGL",
+                "disabled"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "autoEnabled"
+        },
+        "enableGPUValidationMode": {
+          "description": "Metal API validation. Legacy enabled, extended, and disabled strings remain supported.",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "enum": [
+                "enabled",
+                "extended",
+                "disabled"
+              ]
+            }
+          ],
+          "default": true
+        },
+        "stopOnEveryMainThreadCheckerIssue": {
+          "type": "boolean",
+          "description": "Stop at each Main Thread Checker issue.",
+          "default": false
+        },
+        "disableThreadPerformanceChecker": {
+          "type": "boolean",
+          "description": "Disable Thread Performance Checker.",
+          "default": false
+        },
+        "askForAppToLaunch": {
+          "type": "boolean",
+          "description": "Ask which application to launch.",
+          "default": false
+        },
+        "launchAutomaticallySubstyle": {
+          "type": [
+            "string",
+            "integer"
+          ],
+          "description": "Launch substyle; extensions commonly use 2."
+        },
+        "simulateLocation": {
+          "$ref": "#/$defs/simulateLocation"
+        },
+        "executable": {
+          "type": "string",
+          "description": "Target to launch. Defaults to the first runnable build target, or the first build target."
+        },
+        "storeKitConfiguration": {
+          "type": "string",
+          "description": "StoreKit configuration path."
+        },
+        "customWorkingDirectory": {
+          "type": "string",
+          "description": "Working directory for the launched executable."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^config:REPLACE$": {
+          "$ref": "#/$defs/run/properties/config"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/run/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/run/properties/postActions"
+        },
+        "^commandLineArguments:REPLACE$": {
+          "$ref": "#/$defs/run/properties/commandLineArguments"
+        },
+        "^environmentVariables:REPLACE$": {
+          "$ref": "#/$defs/run/properties/environmentVariables"
+        },
+        "^enableAddressSanitizer:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableAddressSanitizer"
+        },
+        "^enableASanStackUseAfterReturn:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableASanStackUseAfterReturn"
+        },
+        "^enableThreadSanitizer:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableThreadSanitizer"
+        },
+        "^enableUBSanitizer:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableUBSanitizer"
+        },
+        "^disableMainThreadChecker:REPLACE$": {
+          "$ref": "#/$defs/run/properties/disableMainThreadChecker"
+        },
+        "^language:REPLACE$": {
+          "$ref": "#/$defs/run/properties/language"
+        },
+        "^region:REPLACE$": {
+          "$ref": "#/$defs/run/properties/region"
+        },
+        "^debugEnabled:REPLACE$": {
+          "$ref": "#/$defs/run/properties/debugEnabled"
+        },
+        "^customLLDBInit:REPLACE$": {
+          "$ref": "#/$defs/run/properties/customLLDBInit"
+        },
+        "^macroExpansion:REPLACE$": {
+          "$ref": "#/$defs/run/properties/macroExpansion"
+        },
+        "^enableGPUFrameCaptureMode:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableGPUFrameCaptureMode"
+        },
+        "^enableGPUValidationMode:REPLACE$": {
+          "$ref": "#/$defs/run/properties/enableGPUValidationMode"
+        },
+        "^stopOnEveryMainThreadCheckerIssue:REPLACE$": {
+          "$ref": "#/$defs/run/properties/stopOnEveryMainThreadCheckerIssue"
+        },
+        "^disableThreadPerformanceChecker:REPLACE$": {
+          "$ref": "#/$defs/run/properties/disableThreadPerformanceChecker"
+        },
+        "^askForAppToLaunch:REPLACE$": {
+          "$ref": "#/$defs/run/properties/askForAppToLaunch"
+        },
+        "^launchAutomaticallySubstyle:REPLACE$": {
+          "$ref": "#/$defs/run/properties/launchAutomaticallySubstyle"
+        },
+        "^simulateLocation:REPLACE$": {
+          "$ref": "#/$defs/run/properties/simulateLocation"
+        },
+        "^executable:REPLACE$": {
+          "$ref": "#/$defs/run/properties/executable"
+        },
+        "^storeKitConfiguration:REPLACE$": {
+          "$ref": "#/$defs/run/properties/storeKitConfiguration"
+        },
+        "^customWorkingDirectory:REPLACE$": {
+          "$ref": "#/$defs/run/properties/customWorkingDirectory"
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "description": "Scheme Test action.",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "Build configuration. Defaults to debug for run/test/analyze and release for profile/archive."
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "commandLineArguments": {
+          "$ref": "#/$defs/commandLineArguments"
+        },
+        "environmentVariables": {
+          "$ref": "#/$defs/environmentVariables"
+        },
+        "enableAddressSanitizer": {
+          "type": "boolean",
+          "description": "Enable Address Sanitizer.",
+          "default": false
+        },
+        "enableASanStackUseAfterReturn": {
+          "type": "boolean",
+          "description": "Detect stack use after return.",
+          "default": false
+        },
+        "enableThreadSanitizer": {
+          "type": "boolean",
+          "description": "Enable Thread Sanitizer.",
+          "default": false
+        },
+        "enableUBSanitizer": {
+          "type": "boolean",
+          "description": "Enable Undefined Behavior Sanitizer.",
+          "default": false
+        },
+        "disableMainThreadChecker": {
+          "type": "boolean",
+          "description": "Disable Main Thread Checker.",
+          "default": false
+        },
+        "language": {
+          "type": "string",
+          "description": "Application language."
+        },
+        "region": {
+          "type": "string",
+          "description": "Application region."
+        },
+        "debugEnabled": {
+          "type": "boolean",
+          "description": "Attach the debugger.",
+          "default": true
+        },
+        "customLLDBInit": {
+          "type": "string",
+          "description": "Custom LLDB initialization file."
+        },
+        "macroExpansion": {
+          "type": "string",
+          "description": "Target providing macro expansion settings."
+        },
+        "gatherCoverageData": {
+          "type": "boolean",
+          "description": "Gather code coverage.",
+          "default": false
+        },
+        "coverageTargets": {
+          "$ref": "#/$defs/coverageTargets"
+        },
+        "targets": {
+          "$ref": "#/$defs/testTargets"
+        },
+        "captureScreenshotsAutomatically": {
+          "type": "boolean",
+          "description": "Automatically capture UI test screenshots.",
+          "default": true
+        },
+        "deleteScreenshotsWhenEachTestSucceeds": {
+          "type": "boolean",
+          "description": "Delete screenshots after successful tests.",
+          "default": true
+        },
+        "testPlans": {
+          "$ref": "#/$defs/testPlans"
+        },
+        "preferredScreenCaptureFormat": {
+          "description": "UI test screen capture format.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "screenshots",
+                "screenRecording"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "screenRecording"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^config:REPLACE$": {
+          "$ref": "#/$defs/test/properties/config"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/test/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/test/properties/postActions"
+        },
+        "^commandLineArguments:REPLACE$": {
+          "$ref": "#/$defs/test/properties/commandLineArguments"
+        },
+        "^environmentVariables:REPLACE$": {
+          "$ref": "#/$defs/test/properties/environmentVariables"
+        },
+        "^enableAddressSanitizer:REPLACE$": {
+          "$ref": "#/$defs/test/properties/enableAddressSanitizer"
+        },
+        "^enableASanStackUseAfterReturn:REPLACE$": {
+          "$ref": "#/$defs/test/properties/enableASanStackUseAfterReturn"
+        },
+        "^enableThreadSanitizer:REPLACE$": {
+          "$ref": "#/$defs/test/properties/enableThreadSanitizer"
+        },
+        "^enableUBSanitizer:REPLACE$": {
+          "$ref": "#/$defs/test/properties/enableUBSanitizer"
+        },
+        "^disableMainThreadChecker:REPLACE$": {
+          "$ref": "#/$defs/test/properties/disableMainThreadChecker"
+        },
+        "^language:REPLACE$": {
+          "$ref": "#/$defs/test/properties/language"
+        },
+        "^region:REPLACE$": {
+          "$ref": "#/$defs/test/properties/region"
+        },
+        "^debugEnabled:REPLACE$": {
+          "$ref": "#/$defs/test/properties/debugEnabled"
+        },
+        "^customLLDBInit:REPLACE$": {
+          "$ref": "#/$defs/test/properties/customLLDBInit"
+        },
+        "^macroExpansion:REPLACE$": {
+          "$ref": "#/$defs/test/properties/macroExpansion"
+        },
+        "^gatherCoverageData:REPLACE$": {
+          "$ref": "#/$defs/test/properties/gatherCoverageData"
+        },
+        "^coverageTargets:REPLACE$": {
+          "$ref": "#/$defs/test/properties/coverageTargets"
+        },
+        "^targets:REPLACE$": {
+          "$ref": "#/$defs/test/properties/targets"
+        },
+        "^captureScreenshotsAutomatically:REPLACE$": {
+          "$ref": "#/$defs/test/properties/captureScreenshotsAutomatically"
+        },
+        "^deleteScreenshotsWhenEachTestSucceeds:REPLACE$": {
+          "$ref": "#/$defs/test/properties/deleteScreenshotsWhenEachTestSucceeds"
+        },
+        "^testPlans:REPLACE$": {
+          "$ref": "#/$defs/test/properties/testPlans"
+        },
+        "^preferredScreenCaptureFormat:REPLACE$": {
+          "$ref": "#/$defs/test/properties/preferredScreenCaptureFormat"
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "description": "Scheme Profile action.",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "Build configuration. Defaults to debug for run/test/analyze and release for profile/archive."
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "commandLineArguments": {
+          "$ref": "#/$defs/commandLineArguments"
+        },
+        "environmentVariables": {
+          "$ref": "#/$defs/environmentVariables"
+        },
+        "askForAppToLaunch": {
+          "type": "boolean",
+          "description": "Ask which application to profile.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^config:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/config"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/postActions"
+        },
+        "^commandLineArguments:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/commandLineArguments"
+        },
+        "^environmentVariables:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/environmentVariables"
+        },
+        "^askForAppToLaunch:REPLACE$": {
+          "$ref": "#/$defs/profile/properties/askForAppToLaunch"
+        }
+      }
+    },
+    "analyze": {
+      "type": "object",
+      "description": "Scheme Analyze action. The pinned decoder consumes only config.",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "Build configuration. Defaults to debug for run/test/analyze and release for profile/archive."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^config:REPLACE$": {
+          "$ref": "#/$defs/analyze/properties/config"
+        }
+      }
+    },
+    "archive": {
+      "type": "object",
+      "description": "Scheme Archive action.",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "Build configuration. Defaults to debug for run/test/analyze and release for profile/archive."
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "customArchiveName": {
+          "type": "string",
+          "description": "Custom archive name."
+        },
+        "revealArchiveInOrganizer": {
+          "type": "boolean",
+          "description": "Reveal the finished archive in Organizer.",
+          "default": true
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^config:REPLACE$": {
+          "$ref": "#/$defs/archive/properties/config"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/archive/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/archive/properties/postActions"
+        },
+        "^customArchiveName:REPLACE$": {
+          "$ref": "#/$defs/archive/properties/customArchiveName"
+        },
+        "^revealArchiveInOrganizer:REPLACE$": {
+          "$ref": "#/$defs/archive/properties/revealArchiveInOrganizer"
+        }
+      }
+    },
+    "buildTypes": {
+      "description": "Build selection. String presets are all, none, testing, and indexing; the pinned decoder treats other strings as all. Arrays and maps select individual actions.",
+      "oneOf": [
+        {
+          "type": "string",
+          "examples": [
+            "all",
+            "none",
+            "testing",
+            "indexing"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "run",
+              "running",
+              "test",
+              "testing",
+              "profile",
+              "profiling",
+              "analyze",
+              "analyzing",
+              "archive",
+              "archiving"
+            ]
+          },
+          "description": "Enabled build actions."
+        },
+        {
+          "type": "object",
+          "patternProperties": {
+            "^(run|running|test|testing|profile|profiling|analyze|analyzing|archive|archiving)(:REPLACE)?$": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "build": {
+      "type": "object",
+      "description": "Scheme Build action. targets is required after merging.",
+      "properties": {
+        "targets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/buildTypes"
+          },
+          "description": "Target name to enabled build actions."
+        },
+        "parallelizeBuild": {
+          "type": "boolean",
+          "description": "Build targets in parallel.",
+          "default": true
+        },
+        "buildImplicitDependencies": {
+          "type": "boolean",
+          "description": "Build implicit dependencies.",
+          "default": true
+        },
+        "runPostActionsOnFailure": {
+          "type": "boolean",
+          "description": "Run post-actions even after a build failure.",
+          "default": false
+        },
+        "buildArchitectures": {
+          "$ref": "#/$defs/buildArchitectures"
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^targets:REPLACE$": {
+          "$ref": "#/$defs/build/properties/targets"
+        },
+        "^parallelizeBuild:REPLACE$": {
+          "$ref": "#/$defs/build/properties/parallelizeBuild"
+        },
+        "^buildImplicitDependencies:REPLACE$": {
+          "$ref": "#/$defs/build/properties/buildImplicitDependencies"
+        },
+        "^runPostActionsOnFailure:REPLACE$": {
+          "$ref": "#/$defs/build/properties/runPostActionsOnFailure"
+        },
+        "^buildArchitectures:REPLACE$": {
+          "$ref": "#/$defs/build/properties/buildArchitectures"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/build/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/build/properties/postActions"
+        }
+      }
+    },
+    "scheme": {
+      "type": "object",
+      "description": "Scheme or reusable scheme fragment. Required fields are checked on standalone non-template schemes.",
+      "properties": {
+        "templates": {
+          "$ref": "#/$defs/stringList"
+        },
+        "templateAttributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Scheme template substitutions, including scheme_name."
+        },
+        "build": {
+          "$ref": "#/$defs/build"
+        },
+        "run": {
+          "$ref": "#/$defs/run"
+        },
+        "test": {
+          "$ref": "#/$defs/test"
+        },
+        "profile": {
+          "$ref": "#/$defs/profile"
+        },
+        "analyze": {
+          "$ref": "#/$defs/analyze"
+        },
+        "archive": {
+          "$ref": "#/$defs/archive"
+        },
+        "management": {
+          "$ref": "#/$defs/management"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^templates:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/templates"
+        },
+        "^templateAttributes:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/templateAttributes"
+        },
+        "^build:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/build"
+        },
+        "^run:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/run"
+        },
+        "^test:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/test"
+        },
+        "^profile:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/profile"
+        },
+        "^analyze:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/analyze"
+        },
+        "^archive:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/archive"
+        },
+        "^management:REPLACE$": {
+          "$ref": "#/$defs/scheme/properties/management"
+        }
+      }
+    },
+    "targetScheme": {
+      "type": "object",
+      "description": "Convenience scheme generation for a target.",
+      "properties": {
+        "configVariants": {
+          "$ref": "#/$defs/stringList",
+          "description": "Configuration name variants. Despite the documentation's required marker, the decoder defaults to an empty list.",
+          "default": []
+        },
+        "testTargets": {
+          "$ref": "#/$defs/testTargets"
+        },
+        "gatherCoverageData": {
+          "type": "boolean",
+          "description": "Gather code coverage.",
+          "default": false
+        },
+        "coverageTargets": {
+          "$ref": "#/$defs/coverageTargets"
+        },
+        "disableMainThreadChecker": {
+          "type": "boolean",
+          "description": "Disable Main Thread Checker.",
+          "default": false
+        },
+        "stopOnEveryMainThreadCheckerIssue": {
+          "type": "boolean",
+          "description": "Stop at each Main Thread Checker issue.",
+          "default": false
+        },
+        "disableThreadPerformanceChecker": {
+          "type": "boolean",
+          "description": "Disable Thread Performance Checker.",
+          "default": false
+        },
+        "buildImplicitDependencies": {
+          "type": "boolean",
+          "description": "Build implicit dependencies.",
+          "default": true
+        },
+        "buildArchitectures": {
+          "$ref": "#/$defs/buildArchitectures"
+        },
+        "language": {
+          "type": "string",
+          "description": "Run and test language."
+        },
+        "region": {
+          "type": "string",
+          "description": "Run and test region."
+        },
+        "commandLineArguments": {
+          "$ref": "#/$defs/commandLineArguments"
+        },
+        "environmentVariables": {
+          "$ref": "#/$defs/environmentVariables"
+        },
+        "testPlans": {
+          "$ref": "#/$defs/testPlans"
+        },
+        "preActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "postActions": {
+          "$ref": "#/$defs/executionActions"
+        },
+        "management": {
+          "$ref": "#/$defs/management"
+        },
+        "storeKitConfiguration": {
+          "type": "string",
+          "description": "StoreKit configuration path."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^configVariants:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/configVariants"
+        },
+        "^testTargets:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/testTargets"
+        },
+        "^gatherCoverageData:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/gatherCoverageData"
+        },
+        "^coverageTargets:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/coverageTargets"
+        },
+        "^disableMainThreadChecker:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/disableMainThreadChecker"
+        },
+        "^stopOnEveryMainThreadCheckerIssue:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/stopOnEveryMainThreadCheckerIssue"
+        },
+        "^disableThreadPerformanceChecker:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/disableThreadPerformanceChecker"
+        },
+        "^buildImplicitDependencies:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/buildImplicitDependencies"
+        },
+        "^buildArchitectures:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/buildArchitectures"
+        },
+        "^language:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/language"
+        },
+        "^region:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/region"
+        },
+        "^commandLineArguments:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/commandLineArguments"
+        },
+        "^environmentVariables:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/environmentVariables"
+        },
+        "^testPlans:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/testPlans"
+        },
+        "^preActions:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/preActions"
+        },
+        "^postActions:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/postActions"
+        },
+        "^management:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/management"
+        },
+        "^storeKitConfiguration:REPLACE$": {
+          "$ref": "#/$defs/targetScheme/properties/storeKitConfiguration"
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "description": "Native target or target template. Resources use sources; target dependencies use dependencies.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Override the target name."
+        },
+        "productName": {
+          "type": "string",
+          "description": "Product filename; otherwise use the resolved target name."
+        },
+        "type": {
+          "$ref": "#/$defs/productType"
+        },
+        "platform": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/platform"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/platform"
+              },
+              "description": "Generate one target per platform."
+            }
+          ]
+        },
+        "supportedDestinations": {
+          "$ref": "#/$defs/destinations"
+        },
+        "platformPrefix": {
+          "type": "string",
+          "description": "Generated multiplatform target-name prefix.",
+          "default": ""
+        },
+        "platformSuffix": {
+          "type": "string",
+          "description": "Generated multiplatform target-name suffix.",
+          "default": "_${platform}"
+        },
+        "deploymentTarget": {
+          "description": "Scalar native-target version, or platform map for expanded multiplatform targets. A destination map is documented for supportedDestinations but the pinned native-target decoder does not consume it.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/version"
+            },
+            {
+              "$ref": "#/$defs/deploymentTargets"
+            }
+          ]
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        },
+        "configFiles": {
+          "$ref": "#/$defs/configFiles"
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dependency"
+          },
+          "description": "Target dependencies."
+        },
+        "info": {
+          "$ref": "#/$defs/plist"
+        },
+        "entitlements": {
+          "$ref": "#/$defs/plist"
+        },
+        "templates": {
+          "$ref": "#/$defs/stringList"
+        },
+        "templateAttributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Target template substitutions, including target_name."
+        },
+        "transitivelyLinkDependencies": {
+          "type": "boolean",
+          "description": "Override transitive dependency linking."
+        },
+        "directlyEmbedCarthageDependencies": {
+          "type": "boolean",
+          "description": "Embed Carthage frameworks directly. Default depends on target platform and type."
+        },
+        "requiresObjCLinking": {
+          "type": "boolean",
+          "description": "Add -ObjC to dependents; defaults to true for static libraries."
+        },
+        "onlyCopyFilesOnInstall": {
+          "type": "boolean",
+          "description": "Copy embedded frameworks and extensions only during installation.",
+          "default": false
+        },
+        "buildToolPlugins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildToolPlugin"
+          },
+          "description": "Swift package build tool plug-ins."
+        },
+        "preBuildScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Scripts before other build phases."
+        },
+        "postCompileScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Scripts after the Compile Sources phase."
+        },
+        "postBuildScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Scripts after other build phases."
+        },
+        "prebuildScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Compatibility spelling; preBuildScripts takes precedence."
+        },
+        "postbuildScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Compatibility spelling; postBuildScripts takes precedence."
+        },
+        "buildRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildRule"
+          },
+          "description": "Custom build rules."
+        },
+        "scheme": {
+          "$ref": "#/$defs/targetScheme"
+        },
+        "legacy": {
+          "$ref": "#/$defs/legacy"
+        },
+        "attributes": {
+          "$ref": "#/$defs/attributes"
+        },
+        "putResourcesBeforeSourcesBuildPhase": {
+          "type": "boolean",
+          "description": "Place Copy Resources before Compile Sources.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/target/properties/name"
+        },
+        "^productName:REPLACE$": {
+          "$ref": "#/$defs/target/properties/productName"
+        },
+        "^type:REPLACE$": {
+          "$ref": "#/$defs/target/properties/type"
+        },
+        "^platform:REPLACE$": {
+          "$ref": "#/$defs/target/properties/platform"
+        },
+        "^supportedDestinations:REPLACE$": {
+          "$ref": "#/$defs/target/properties/supportedDestinations"
+        },
+        "^platformPrefix:REPLACE$": {
+          "$ref": "#/$defs/target/properties/platformPrefix"
+        },
+        "^platformSuffix:REPLACE$": {
+          "$ref": "#/$defs/target/properties/platformSuffix"
+        },
+        "^deploymentTarget:REPLACE$": {
+          "$ref": "#/$defs/target/properties/deploymentTarget"
+        },
+        "^sources:REPLACE$": {
+          "$ref": "#/$defs/target/properties/sources"
+        },
+        "^configFiles:REPLACE$": {
+          "$ref": "#/$defs/target/properties/configFiles"
+        },
+        "^settings:REPLACE$": {
+          "$ref": "#/$defs/target/properties/settings"
+        },
+        "^dependencies:REPLACE$": {
+          "$ref": "#/$defs/target/properties/dependencies"
+        },
+        "^info:REPLACE$": {
+          "$ref": "#/$defs/target/properties/info"
+        },
+        "^entitlements:REPLACE$": {
+          "$ref": "#/$defs/target/properties/entitlements"
+        },
+        "^templates:REPLACE$": {
+          "$ref": "#/$defs/target/properties/templates"
+        },
+        "^templateAttributes:REPLACE$": {
+          "$ref": "#/$defs/target/properties/templateAttributes"
+        },
+        "^transitivelyLinkDependencies:REPLACE$": {
+          "$ref": "#/$defs/target/properties/transitivelyLinkDependencies"
+        },
+        "^directlyEmbedCarthageDependencies:REPLACE$": {
+          "$ref": "#/$defs/target/properties/directlyEmbedCarthageDependencies"
+        },
+        "^requiresObjCLinking:REPLACE$": {
+          "$ref": "#/$defs/target/properties/requiresObjCLinking"
+        },
+        "^onlyCopyFilesOnInstall:REPLACE$": {
+          "$ref": "#/$defs/target/properties/onlyCopyFilesOnInstall"
+        },
+        "^buildToolPlugins:REPLACE$": {
+          "$ref": "#/$defs/target/properties/buildToolPlugins"
+        },
+        "^preBuildScripts:REPLACE$": {
+          "$ref": "#/$defs/target/properties/preBuildScripts"
+        },
+        "^postCompileScripts:REPLACE$": {
+          "$ref": "#/$defs/target/properties/postCompileScripts"
+        },
+        "^postBuildScripts:REPLACE$": {
+          "$ref": "#/$defs/target/properties/postBuildScripts"
+        },
+        "^prebuildScripts:REPLACE$": {
+          "$ref": "#/$defs/target/properties/prebuildScripts"
+        },
+        "^postbuildScripts:REPLACE$": {
+          "$ref": "#/$defs/target/properties/postbuildScripts"
+        },
+        "^buildRules:REPLACE$": {
+          "$ref": "#/$defs/target/properties/buildRules"
+        },
+        "^scheme:REPLACE$": {
+          "$ref": "#/$defs/target/properties/scheme"
+        },
+        "^legacy:REPLACE$": {
+          "$ref": "#/$defs/target/properties/legacy"
+        },
+        "^attributes:REPLACE$": {
+          "$ref": "#/$defs/target/properties/attributes"
+        },
+        "^putResourcesBeforeSourcesBuildPhase:REPLACE$": {
+          "$ref": "#/$defs/target/properties/putResourcesBeforeSourcesBuildPhase"
+        }
+      }
+    },
+    "aggregateTarget": {
+      "type": "object",
+      "description": "Aggregate target.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Override the aggregate target name."
+        },
+        "targets": {
+          "$ref": "#/$defs/stringList",
+          "description": "Target dependencies. The pinned decoder permits omission.",
+          "default": []
+        },
+        "configFiles": {
+          "$ref": "#/$defs/configFiles"
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        },
+        "buildToolPlugins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildToolPlugin"
+          },
+          "description": "Swift package build tool plug-ins."
+        },
+        "buildScripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/buildScript"
+          },
+          "description": "Aggregate target scripts."
+        },
+        "scheme": {
+          "$ref": "#/$defs/targetScheme"
+        },
+        "attributes": {
+          "$ref": "#/$defs/attributes"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/name"
+        },
+        "^targets:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/targets"
+        },
+        "^configFiles:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/configFiles"
+        },
+        "^settings:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/settings"
+        },
+        "^buildToolPlugins:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/buildToolPlugins"
+        },
+        "^buildScripts:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/buildScripts"
+        },
+        "^scheme:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/scheme"
+        },
+        "^attributes:REPLACE$": {
+          "$ref": "#/$defs/aggregateTarget/properties/attributes"
+        }
+      }
+    },
+    "package": {
+      "type": "object",
+      "description": "Local or remote Swift package. Remote requirement precedence: exactVersion, version, revision, branch, minVersion+maxVersion, minorVersion, majorVersion, from.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Remote Git URL, including HTTPS or SSH."
+        },
+        "github": {
+          "type": "string",
+          "description": "GitHub owner/repository shortcut; takes precedence over url."
+        },
+        "path": {
+          "type": "string",
+          "description": "Local package directory containing Package.swift; selects a local package."
+        },
+        "group": {
+          "type": "string",
+          "description": "Local package group; an empty string means the project root."
+        },
+        "excludeFromProject": {
+          "type": "boolean",
+          "description": "Exclude a local package from the generated project.",
+          "default": false
+        },
+        "traits": {
+          "$ref": "#/$defs/stringList"
+        },
+        "majorVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "from": {
+          "$ref": "#/$defs/version"
+        },
+        "minorVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "exactVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "minVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "maxVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "branch": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "description": "Git branch. The decoder also converts numeric YAML values to strings."
+        },
+        "revision": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "description": "Git revision. The decoder also converts numeric YAML values to strings."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^url:REPLACE$": {
+          "$ref": "#/$defs/package/properties/url"
+        },
+        "^github:REPLACE$": {
+          "$ref": "#/$defs/package/properties/github"
+        },
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/package/properties/path"
+        },
+        "^group:REPLACE$": {
+          "$ref": "#/$defs/package/properties/group"
+        },
+        "^excludeFromProject:REPLACE$": {
+          "$ref": "#/$defs/package/properties/excludeFromProject"
+        },
+        "^traits:REPLACE$": {
+          "$ref": "#/$defs/package/properties/traits"
+        },
+        "^majorVersion:REPLACE$": {
+          "$ref": "#/$defs/package/properties/majorVersion"
+        },
+        "^from:REPLACE$": {
+          "$ref": "#/$defs/package/properties/from"
+        },
+        "^minorVersion:REPLACE$": {
+          "$ref": "#/$defs/package/properties/minorVersion"
+        },
+        "^exactVersion:REPLACE$": {
+          "$ref": "#/$defs/package/properties/exactVersion"
+        },
+        "^version:REPLACE$": {
+          "$ref": "#/$defs/package/properties/version"
+        },
+        "^minVersion:REPLACE$": {
+          "$ref": "#/$defs/package/properties/minVersion"
+        },
+        "^maxVersion:REPLACE$": {
+          "$ref": "#/$defs/package/properties/maxVersion"
+        },
+        "^branch:REPLACE$": {
+          "$ref": "#/$defs/package/properties/branch"
+        },
+        "^revision:REPLACE$": {
+          "$ref": "#/$defs/package/properties/revision"
+        }
+      }
+    },
+    "projectReference": {
+      "type": "object",
+      "description": "Referenced Xcode project.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to an existing xcodeproj."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/projectReference/properties/path"
+        }
+      }
+    },
+    "breakpointAction": {
+      "type": "object",
+      "description": "Breakpoint action.",
+      "properties": {
+        "type": {
+          "description": "Breakpoint action type.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "DebuggerCommand",
+                "Log",
+                "ShellCommand",
+                "GraphicsTrace",
+                "AppleScript",
+                "Sound",
+                "Xcode.BreakpointAction.DebuggerCommand",
+                "Xcode.BreakpointAction.Log",
+                "Xcode.BreakpointAction.ShellCommand",
+                "Xcode.BreakpointAction.GraphicsTrace",
+                "Xcode.BreakpointAction.AppleScript",
+                "Xcode.BreakpointAction.Sound"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        "command": {
+          "type": "string",
+          "description": "Debugger command."
+        },
+        "message": {
+          "type": "string",
+          "description": "Log message."
+        },
+        "conveyanceType": {
+          "type": "string",
+          "pattern": "^([cC][oO][nN][sS][oO][lL][eE]|[sS][pP][eE][aA][kK])$",
+          "default": "console",
+          "description": "Log conveyance; case-insensitive console or speak."
+        },
+        "path": {
+          "type": "string",
+          "description": "Shell command path."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Shell command arguments."
+        },
+        "waitUntilDone": {
+          "type": "boolean",
+          "description": "Wait for the shell command to finish.",
+          "default": false
+        },
+        "script": {
+          "type": "string",
+          "description": "AppleScript source."
+        },
+        "sound": {
+          "description": "Sound name.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Basso",
+                "Blow",
+                "Bottle",
+                "Frog",
+                "Funk",
+                "Glass",
+                "Hero",
+                "Morse",
+                "Ping",
+                "Pop",
+                "Purr",
+                "Sosumi",
+                "Submarine",
+                "Tink"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ],
+          "default": "Basso"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "type"
+                  ]
+                },
+                {
+                  "required": [
+                    "type:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "patternProperties": {
+        "^type:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/type"
+        },
+        "^command:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/command"
+        },
+        "^message:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/message"
+        },
+        "^conveyanceType:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/conveyanceType"
+        },
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/path"
+        },
+        "^arguments:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/arguments"
+        },
+        "^waitUntilDone:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/waitUntilDone"
+        },
+        "^script:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/script"
+        },
+        "^sound:REPLACE$": {
+          "$ref": "#/$defs/breakpointAction/properties/sound"
+        }
+      }
+    },
+    "breakpoint": {
+      "type": "object",
+      "description": "Shared breakpoint.",
+      "properties": {
+        "type": {
+          "description": "Breakpoint type. Use Exception, not the invalid ExceptionBreakpoint shorthand in the documentation example.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "File",
+                "Exception",
+                "SwiftError",
+                "OpenGLError",
+                "Symbolic",
+                "IDEConstraintError",
+                "IDETestFailure",
+                "RuntimeIssue",
+                "Xcode.Breakpoint.FileBreakpoint",
+                "Xcode.Breakpoint.ExceptionBreakpoint",
+                "Xcode.Breakpoint.SwiftErrorBreakpoint",
+                "Xcode.Breakpoint.OpenGLErrorBreakpoint",
+                "Xcode.Breakpoint.SymbolicBreakpoint",
+                "Xcode.Breakpoint.IDEConstraintErrorBreakpoint",
+                "Xcode.Breakpoint.IDETestFailureBreakpoint",
+                "Xcode.Breakpoint.RuntimeIssueBreakpoint"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the breakpoint.",
+          "default": true
+        },
+        "ignoreCount": {
+          "type": "integer",
+          "description": "Number of hits to ignore.",
+          "default": 0
+        },
+        "continueAfterRunningActions": {
+          "type": "boolean",
+          "description": "Continue after executing breakpoint actions.",
+          "default": false
+        },
+        "path": {
+          "type": "string",
+          "description": "File breakpoint path."
+        },
+        "line": {
+          "type": "integer",
+          "description": "File breakpoint line number."
+        },
+        "column": {
+          "type": "integer",
+          "description": "Optional file breakpoint column."
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Symbolic breakpoint symbol."
+        },
+        "module": {
+          "type": "string",
+          "description": "Symbolic breakpoint module."
+        },
+        "scope": {
+          "type": "string",
+          "pattern": "^([aA][lL][lL]|[oO][bB][jJ][eE][cC][tT][iI][vV][eE]-[cC]|[cC]\\+\\+)$",
+          "description": "Exception scope, case-insensitive.",
+          "default": "Objective-C"
+        },
+        "stopOnStyle": {
+          "type": "string",
+          "pattern": "^([tT][hH][rR][oO][wW]|[cC][aA][tT][cC][hH])$",
+          "description": "Exception event, case-insensitive.",
+          "default": "throw"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Breakpoint condition."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/breakpointAction"
+          },
+          "description": "Breakpoint actions."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "type"
+                  ]
+                },
+                {
+                  "required": [
+                    "type:REPLACE"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "required": [
+                  "type"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "File",
+                      "Xcode.Breakpoint.FileBreakpoint"
+                    ]
+                  }
+                }
+              },
+              {
+                "required": [
+                  "type:REPLACE"
+                ],
+                "properties": {
+                  "type:REPLACE": {
+                    "enum": [
+                      "File",
+                      "Xcode.Breakpoint.FileBreakpoint"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "path:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "line"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "line:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "patternProperties": {
+        "^type:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/type"
+        },
+        "^enabled:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/enabled"
+        },
+        "^ignoreCount:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/ignoreCount"
+        },
+        "^continueAfterRunningActions:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/continueAfterRunningActions"
+        },
+        "^path:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/path"
+        },
+        "^line:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/line"
+        },
+        "^column:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/column"
+        },
+        "^symbol:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/symbol"
+        },
+        "^module:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/module"
+        },
+        "^scope:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/scope"
+        },
+        "^stopOnStyle:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/stopOnStyle"
+        },
+        "^condition:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/condition"
+        },
+        "^actions:REPLACE$": {
+          "$ref": "#/$defs/breakpoint/properties/actions"
+        }
+      }
+    },
+    "projectFragment": {
+      "type": "object",
+      "description": "Project fragment. Bind #/$defs/projectFragment for an included file that intentionally omits required project fields. Known field types are still checked.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Generated project name."
+        },
+        "include": {
+          "$ref": "#/$defs/include"
+        },
+        "options": {
+          "$ref": "#/$defs/options"
+        },
+        "attributes": {
+          "$ref": "#/$defs/attributes"
+        },
+        "breakpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/breakpoint"
+          },
+          "description": "Shared project breakpoints."
+        },
+        "configs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Configuration name to debug, release, or another string for no presets.",
+          "default": {
+            "Debug": "debug",
+            "Release": "release"
+          },
+          "examples": [
+            {
+              "Debug": "debug",
+              "Release": "release",
+              "Custom": "none"
+            }
+          ]
+        },
+        "configFiles": {
+          "$ref": "#/$defs/configFiles"
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        },
+        "settingGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/settings"
+          },
+          "description": "Reusable named settings."
+        },
+        "targets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/target"
+          },
+          "description": "Native targets by name."
+        },
+        "aggregateTargets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/aggregateTarget"
+          },
+          "description": "Aggregate targets by name."
+        },
+        "fileGroups": {
+          "$ref": "#/$defs/stringList",
+          "description": "Files displayed in the project hierarchy without target membership."
+        },
+        "schemes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/scheme"
+          },
+          "description": "Schemes by name."
+        },
+        "schemeTemplates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/scheme"
+          },
+          "description": "Partial scheme templates by name."
+        },
+        "targetTemplates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/target"
+          },
+          "description": "Partial target templates by name."
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/package"
+          },
+          "description": "Swift packages by name."
+        },
+        "localPackages": {
+          "$ref": "#/$defs/stringList",
+          "description": "Legacy local package paths. Use packages for traits, group, and exclusion options."
+        },
+        "projectReferences": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/projectReference"
+          },
+          "description": "External Xcode projects by name."
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^name:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/name"
+        },
+        "^include:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/include"
+        },
+        "^options:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/options"
+        },
+        "^attributes:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/attributes"
+        },
+        "^breakpoints:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/breakpoints"
+        },
+        "^configs:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/configs"
+        },
+        "^configFiles:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/configFiles"
+        },
+        "^settings:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/settings"
+        },
+        "^settingGroups:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/settingGroups"
+        },
+        "^targets:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/targets"
+        },
+        "^aggregateTargets:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/aggregateTargets"
+        },
+        "^fileGroups:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/fileGroups"
+        },
+        "^schemes:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/schemes"
+        },
+        "^schemeTemplates:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/schemeTemplates"
+        },
+        "^targetTemplates:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/targetTemplates"
+        },
+        "^packages:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/packages"
+        },
+        "^localPackages:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/localPackages"
+        },
+        "^projectReferences:REPLACE$": {
+          "$ref": "#/$defs/projectFragment/properties/projectReferences"
+        }
+      }
+    },
+    "copyFilesFragment": {
+      "type": "object",
+      "description": "Copy Files phase settings.",
+      "properties": {
+        "destination": {
+          "description": "Copy phase destination.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "absolutePath",
+                "productsDirectory",
+                "wrapper",
+                "executables",
+                "resources",
+                "javaResources",
+                "frameworks",
+                "sharedFrameworks",
+                "sharedSupport",
+                "plugins"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        "subpath": {
+          "type": "string",
+          "description": "Path inside the destination.",
+          "default": ""
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^destination:REPLACE$": {
+          "$ref": "#/$defs/copyFilesFragment/properties/destination"
+        },
+        "^subpath:REPLACE$": {
+          "$ref": "#/$defs/copyFilesFragment/properties/subpath"
+        }
+      }
+    },
+    "buildPhaseFragment": {
+      "oneOf": [
+        {
+          "description": "Build phase override.",
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "sources",
+                "headers",
+                "resources",
+                "none"
+              ]
+            },
+            {
+              "$ref": "#/$defs/variable"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "description": "Explicit Copy Files phase.",
+          "properties": {
+            "copyFiles": {
+              "$ref": "#/$defs/copyFilesFragment"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "copyFiles"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "copyFiles:REPLACE"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "patternProperties": {
+            "^copyFiles:REPLACE$": {
+              "$ref": "#/$defs/buildPhaseFragment/oneOf/1/properties/copyFiles"
+            }
+          }
+        }
+      ]
+    },
+    "completePackage": {
+      "description": "Required fields for a standalone package. Includes may supply these fields in project fragments.",
+      "if": {
+        "anyOf": [
+          {
+            "required": [
+              "path"
+            ]
+          },
+          {
+            "required": [
+              "path:REPLACE"
+            ]
+          }
+        ]
+      },
+      "then": {},
+      "else": {
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "url"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "url:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "github"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "github:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "exactVersion"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "exactVersion:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "version"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "version:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "revision"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "revision:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "branch"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "branch:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "minorVersion"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "minorVersion:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "majorVersion"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "majorVersion:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "from"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "from:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "minVersion"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "minVersion:REPLACE"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "maxVersion"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "maxVersion:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "completeScheme": {
+      "description": "Requirements for a standalone scheme without inherited templates.",
+      "if": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "templates"
+              ],
+              "properties": {
+                "templates": {
+                  "type": "array",
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": [
+                "templates:REPLACE"
+              ],
+              "properties": {
+                "templates:REPLACE": {
+                  "type": "array",
+                  "minItems": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "build"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "build:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "properties": {
+              "build": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "targets"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "targets:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "build:REPLACE": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "targets"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "targets:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "run": {
+                "properties": {
+                  "simulateLocation": {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "allow"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "allow:REPLACE"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "simulateLocation:REPLACE": {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "allow"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "allow:REPLACE"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "run:REPLACE": {
+                "properties": {
+                  "simulateLocation": {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "allow"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "allow:REPLACE"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "simulateLocation:REPLACE": {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "allow"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "allow:REPLACE"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "completeTarget": {
+      "description": "Required fields and local consistency checks for a standalone target without inherited templates.",
+      "if": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "templates"
+              ],
+              "properties": {
+                "templates": {
+                  "type": "array",
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": [
+                "templates:REPLACE"
+              ],
+              "properties": {
+                "templates:REPLACE": {
+                  "type": "array",
+                  "minItems": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "type"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "type:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "legacy"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "legacy:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "platform"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "platform:REPLACE"
+                    ]
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "required": [
+                      "supportedDestinations"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "supportedDestinations:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "properties": {
+              "info": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "path:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "info:REPLACE": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "path:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "entitlements": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "path:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "entitlements:REPLACE": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "path:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "legacy": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "toolPath"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "toolPath:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "legacy:REPLACE": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "toolPath"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "toolPath:REPLACE"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "required": [
+                    "platform"
+                  ],
+                  "properties": {
+                    "platform": {
+                      "type": "array"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "platform:REPLACE"
+                  ],
+                  "properties": {
+                    "platform:REPLACE": {
+                      "type": "array"
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "supportedDestinations"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "supportedDestinations:REPLACE"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "required": [
+                    "platform"
+                  ],
+                  "properties": {
+                    "platform": {
+                      "enum": [
+                        "auto",
+                        ""
+                      ]
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "platform:REPLACE"
+                  ],
+                  "properties": {
+                    "platform:REPLACE": {
+                      "enum": [
+                        "auto",
+                        ""
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "supportedDestinations"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "supportedDestinations:REPLACE"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "required": [
+                    "supportedDestinations"
+                  ]
+                },
+                {
+                  "required": [
+                    "supportedDestinations:REPLACE"
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "allOf": [
+                {
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "platform"
+                        ],
+                        "properties": {
+                          "platform": {
+                            "const": "watchOS"
+                          }
+                        }
+                      },
+                      {
+                        "required": [
+                          "platform:REPLACE"
+                        ],
+                        "properties": {
+                          "platform:REPLACE": {
+                            "const": "watchOS"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "supportedDestinations"
+                        ],
+                        "properties": {
+                          "supportedDestinations": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "macOS"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "macCatalyst"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "required": [
+                          "supportedDestinations:REPLACE"
+                        ],
+                        "properties": {
+                          "supportedDestinations:REPLACE": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "macOS"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "macCatalyst"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "required": [
+                    "supportedDestinations"
+                  ],
+                  "properties": {
+                    "supportedDestinations": {
+                      "contains": {
+                        "const": "macCatalyst"
+                      }
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "supportedDestinations:REPLACE"
+                  ],
+                  "properties": {
+                    "supportedDestinations:REPLACE": {
+                      "contains": {
+                        "const": "macCatalyst"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "platform": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "iOS",
+                        "auto",
+                        ""
+                      ]
+                    },
+                    {
+                      "$ref": "#/$defs/variable"
+                    }
+                  ]
+                },
+                "platform:REPLACE": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "iOS",
+                        "auto",
+                        ""
+                      ]
+                    },
+                    {
+                      "$ref": "#/$defs/variable"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "anyOf": [
+                {
+                  "required": [
+                    "type"
+                  ],
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "application",
+                        "application.messages",
+                        "application.watchapp",
+                        "application.watchapp2",
+                        "application.watchapp2-container",
+                        "application.on-demand-install-capable",
+                        "com.apple.product-type.application",
+                        "com.apple.product-type.application.messages",
+                        "com.apple.product-type.application.watchapp",
+                        "com.apple.product-type.application.watchapp2",
+                        "com.apple.product-type.application.watchapp2-container",
+                        "com.apple.product-type.application.on-demand-install-capable"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "type:REPLACE"
+                  ],
+                  "properties": {
+                    "type:REPLACE": {
+                      "enum": [
+                        "application",
+                        "application.messages",
+                        "application.watchapp",
+                        "application.watchapp2",
+                        "application.watchapp2-container",
+                        "application.on-demand-install-capable",
+                        "com.apple.product-type.application",
+                        "com.apple.product-type.application.messages",
+                        "com.apple.product-type.application.watchapp",
+                        "com.apple.product-type.application.watchapp2",
+                        "com.apple.product-type.application.watchapp2-container",
+                        "com.apple.product-type.application.on-demand-install-capable"
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "then": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "supportedDestinations"
+                    ],
+                    "properties": {
+                      "supportedDestinations": {
+                        "contains": {
+                          "const": "watchOS"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "supportedDestinations:REPLACE"
+                    ],
+                    "properties": {
+                      "supportedDestinations:REPLACE": {
+                        "contains": {
+                          "const": "watchOS"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "supportedDestinations"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "supportedDestinations:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "platform"
+                      ],
+                      "properties": {
+                        "platform": {
+                          "const": "iOS"
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "platform:REPLACE"
+                      ],
+                      "properties": {
+                        "platform:REPLACE": {
+                          "const": "iOS"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "supportedDestinations": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "iOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "const": "macCatalyst"
+                      }
+                    }
+                  ]
+                },
+                "supportedDestinations:REPLACE": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "iOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "const": "macCatalyst"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "supportedDestinations"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "supportedDestinations:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "platform"
+                      ],
+                      "properties": {
+                        "platform": {
+                          "const": "tvOS"
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "platform:REPLACE"
+                      ],
+                      "properties": {
+                        "platform:REPLACE": {
+                          "const": "tvOS"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "supportedDestinations": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "tvOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                },
+                "supportedDestinations:REPLACE": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "tvOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "supportedDestinations"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "supportedDestinations:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "platform"
+                      ],
+                      "properties": {
+                        "platform": {
+                          "const": "macOS"
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "platform:REPLACE"
+                      ],
+                      "properties": {
+                        "platform:REPLACE": {
+                          "const": "macOS"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "supportedDestinations": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "macOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                },
+                "supportedDestinations:REPLACE": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "macOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "supportedDestinations"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "supportedDestinations:REPLACE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "platform"
+                      ],
+                      "properties": {
+                        "platform": {
+                          "const": "visionOS"
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "platform:REPLACE"
+                      ],
+                      "properties": {
+                        "platform:REPLACE": {
+                          "const": "visionOS"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "supportedDestinations": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "visionOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                },
+                "supportedDestinations:REPLACE": {
+                  "anyOf": [
+                    {
+                      "contains": {
+                        "const": "visionOS"
+                      }
+                    },
+                    {
+                      "contains": {
+                        "$ref": "#/$defs/variable"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

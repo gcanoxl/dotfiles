@@ -1,0 +1,6 @@
+vim.api.nvim_create_autocmd($1, {
+  group = ${2:group},
+  callback = function()
+    $0
+  end,
+})

@@ -1,10 +1,13 @@
-require("core")
-require("utils")
-require("installer")
-require("keymaps")
-
-vim.api.nvim_command([[colorscheme tokyonight-moon]])
--- vim.cmd("colorscheme catppuccin-frappe")
-
--- loading configs
-require("configs")
+require('config')
+require('options')
+require('auto_complete')
+require('ai')
+require('lsp')
+require('flutter')
+require('ui')
+require('editor')
+require('competitive')
+require('keybindings')
+require('lilyponds')
+if vim.g.neovide then require('neovide') end
+require('autocmds')
