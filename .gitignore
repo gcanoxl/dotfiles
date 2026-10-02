@@ -1,8 +1,8 @@
 .*
-emacs.d/*
-!emacs.d/init.el
-!emacs.d/elisp
-!emacs.d/snippets
+emacs/*
+!emacs/init.el
+!emacs/elisp
+!emacs/snippets
 hammerspoon/Spoons/EmmyLua.spoon/annotations/*
 !.neoconf.json
 zshrc.zwc
